@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fragment Scripts</title>
+</head>
+<body>
+<script th:inline="javascript">
+    function togglePasswordVisibility(fieldId) {
+        var passwordInput = document.getElementById(fieldId);
+        var fieldType = passwordInput.type;
+        passwordInput.type = fieldType === "text" ? "password" : "text";
+    }
+</script>
+<script th:inline="javascript">
+    function validateAge() {
+        var dobInput = document.getElementById("dob");
+        var enteredDate = new Date(dobInput.value);
+        var currentDate = new Date();
+
+        var age = currentDate.getFullYear() - enteredDate.getFullYear();
+
+        if (age < 15) {
+            alert("You must be at least 15 years old to register.");
+            return false;
+        }
+
+        return true;
+    }
+</script>
+</body>
+</html>
