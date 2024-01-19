@@ -1,7 +1,10 @@
 package org.launchcode.roomranger.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +15,9 @@ public class Manager extends AbstractEntity{
     private String lastName;
    @OneToMany(mappedBy = "manager")
     private List<RoomAttendant> roomAttendants = new ArrayList<>();
+    @OneToOne(cascade = CascadeType.ALL)
+    @NotNull
+    private ManagerUser managerUser;
 
    @OneToMany(mappedBy = "managerCreator")
     private List<Room> rooms = new ArrayList<>();
@@ -19,10 +25,11 @@ public class Manager extends AbstractEntity{
     public Manager() {
     }
 
-    public Manager(String firstName, String lastName, List<RoomAttendant> roomAttendants, List<Room> rooms) {
+    public Manager(String firstName, String lastName, List<RoomAttendant> roomAttendants, ManagerUser managerUser, List<Room> rooms) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.roomAttendants = roomAttendants;
+        this.managerUser = managerUser;
         this.rooms = rooms;
     }
 
@@ -48,6 +55,14 @@ public class Manager extends AbstractEntity{
 
     public void setRoomAttendants(List<RoomAttendant> roomAttendants) {
         this.roomAttendants = roomAttendants;
+    }
+
+    public ManagerUser getManagerUser() {
+        return managerUser;
+    }
+
+    public void setManagerUser(ManagerUser managerUser) {
+        this.managerUser = managerUser;
     }
 
     public List<Room> getRooms() {
