@@ -12,7 +12,7 @@ public class RoomAttendant extends AbstractEntity{
     @ManyToOne
     private Manager manager;
     @OneToOne(cascade = CascadeType.ALL)
-    private RoomAttendant userAccount;
+    private AttendantUser attendantUser;
     @OneToMany(mappedBy = "roomAttendantAssigned")
     private List<Room> roomsAssigned = new ArrayList<>();
     private String email;
@@ -22,11 +22,11 @@ public class RoomAttendant extends AbstractEntity{
     public RoomAttendant() {
     }
 
-    public RoomAttendant(String firstName, String lastName, Manager manager, RoomAttendant userAccount, List<Room> roomsAssigned, String email, int phoneNumber, List<WorkingDays> workingDays) {
+    public RoomAttendant(String firstName, String lastName, Manager manager, AttendantUser attendantUser, List<Room> roomsAssigned, String email, int phoneNumber, List<WorkingDays> workingDays) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.manager = manager;
-        this.userAccount = userAccount;
+        this.attendantUser = attendantUser;
         this.roomsAssigned = roomsAssigned;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -57,12 +57,12 @@ public class RoomAttendant extends AbstractEntity{
         this.manager = manager;
     }
 
-    public RoomAttendant getUserAccount() {
-        return userAccount;
+    public AttendantUser getAttendantUser() {
+        return attendantUser;
     }
 
-    public void setUserAccount(RoomAttendant userAccount) {
-        this.userAccount = userAccount;
+    public void setAttendantUser(AttendantUser attendantUser) {
+        this.attendantUser = attendantUser;
     }
 
     public List<Room> getRoomsAssigned() {

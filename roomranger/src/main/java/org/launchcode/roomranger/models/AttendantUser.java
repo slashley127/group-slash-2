@@ -5,7 +5,7 @@ import jakarta.persistence.OneToOne;
 
 @Entity
 public class AttendantUser extends User{
-    @OneToOne(mappedBy = "userAccount")
+    @OneToOne(mappedBy = "attendantUser")
     private RoomAttendant roomAttendant;
 
     public AttendantUser() {}

@@ -14,14 +14,14 @@ public class Room extends AbstractEntity{
 
     @NotBlank
     private String roomNumber;
-    private String roomType;
+    private RoomType roomType;
     @ManyToOne
     private RoomAttendant roomAttendantAssigned;
     @ManyToOne
     private Manager managerCreator;
-    private String roomOccupancy;
+    private Occupancy roomOccupancy;
     private String cleaningTask;
-    private String status;
+    private Status status;
     private String note;
     private String guest;
     private int numberOfGuests;
@@ -31,7 +31,7 @@ public class Room extends AbstractEntity{
     public Room() {
     }
 
-    public Room(String roomNumber, String roomType, RoomAttendant roomAttendantAssigned, Manager managerCreator, String roomOccupancy, String cleaningTask, String status, String note, String guest, int numberOfGuests, LocalDate checkinDate, LocalDate checkoutDate) {
+    public Room(String roomNumber, RoomType roomType, RoomAttendant roomAttendantAssigned, Manager managerCreator, Occupancy roomOccupancy, String cleaningTask, Status status, String note, String guest, int numberOfGuests, LocalDate checkinDate, LocalDate checkoutDate) {
         this.roomNumber = roomNumber;
         this.roomType = roomType;
         this.roomAttendantAssigned = roomAttendantAssigned;
@@ -58,11 +58,11 @@ public class Room extends AbstractEntity{
         this.roomNumber = roomNumber;
     }
 
-    public String getRoomType() {
+    public RoomType getRoomType() {
         return roomType;
     }
 
-    public void setRoomType(String roomType) {
+    public void setRoomType(RoomType roomType) {
         this.roomType = roomType;
     }
 
@@ -82,11 +82,11 @@ public class Room extends AbstractEntity{
         this.managerCreator = managerCreator;
     }
 
-    public String getRoomOccupancy() {
+    public Occupancy getRoomOccupancy() {
         return roomOccupancy;
     }
 
-    public void setRoomOccupancy(String roomOccupancy) {
+    public void setRoomOccupancy(Occupancy roomOccupancy) {
         this.roomOccupancy = roomOccupancy;
     }
 
@@ -98,11 +98,11 @@ public class Room extends AbstractEntity{
         this.cleaningTask = cleaningTask;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

@@ -10,4 +10,8 @@ public enum Occupancy {
     Occupancy(String displayName) {
         this.displayName = displayName;
     }
+
+    public String getDisplayName() {
+        return displayName;
+    }
 }
