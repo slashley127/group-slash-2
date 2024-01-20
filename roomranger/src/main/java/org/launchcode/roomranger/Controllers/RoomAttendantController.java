@@ -70,7 +70,7 @@ public String displayAddRoomAttendant(Model model){
         User existingUser = userRepository.findByUsername(AddRoomAttendantDTO.getUsername());
 
         if (existingUser != null) {
-            errors.rejectValue("username", "username.alreadyexists", "A crew member with that username already exists");
+            errors.rejectValue("username", "username.alreadyexists", "A Room Attendant with that username already exists");
             model.addAttribute("title", "Add a Room Attendant");
             return "RoomAttendants/add";
         }
@@ -78,8 +78,8 @@ public String displayAddRoomAttendant(Model model){
        RoomAttendantUser newRoomAttendantUser = new RoomAttendantUser(AddRoomAttendantDTO.getUsername(), AddRoomAttendantDTO.getPassword());
        userRepository.save(newRoomAttendantUser);
        RoomAttendant newRoomAttendant = new RoomAttendant(AddRoomAttendantDTO.getUsername(), AddRoomAttendantDTO.getLastName(), newRoomAttendantUser);
-        roomAttendantRepository.save(newRoomAttendant);
-      return "redirect:";
+       roomAttendantRepository.save(newRoomAttendant);
+       return "redirect:";
     }
 
 }
