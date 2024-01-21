@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/group-slash-2.iml" filepath="$PROJECT_DIR$/.idea/group-slash-2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/roomranger.iml" filepath="$PROJECT_DIR$/.idea/modules/roomranger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/roomranger.main.iml" filepath="$PROJECT_DIR$/.idea/modules/roomranger.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/roomranger.test.iml" filepath="$PROJECT_DIR$/.idea/modules/roomranger.test.iml" />
     </modules>
   </component>
 </project>
