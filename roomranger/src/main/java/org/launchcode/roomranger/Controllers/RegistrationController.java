@@ -77,18 +77,19 @@ public class RegistrationController {
     }
 
     private boolean isAnyFieldEmpty(RegistrationFormDTO registrationForm) {
-            // Check if any field is left empty
-            return registrationForm.getFirstName().isEmpty() ||
-                    registrationForm.getLastName().isEmpty() ||
-                    registrationForm.getDob().isEmpty() ||
-                    registrationForm.getUsername().isEmpty() ||
-                    registrationForm.getPassword().isEmpty() ||
-                    registrationForm.getConfirmPassword().isEmpty();
-        }
+        // Check if any field is left empty
+        return registrationForm.getFirstName().isEmpty() ||
+                registrationForm.getLastName().isEmpty() ||
+                registrationForm.getDob().isEmpty() ||
+                registrationForm.getUsername().isEmpty() ||
+                registrationForm.getPassword().isEmpty() ||
+                registrationForm.getConfirmPassword().isEmpty();
+    }
 
     private boolean isUsernameUnique(String username) {
         //Check if the username is unique in the database
-        return userRepository.findByUsername(username) == null;
+        User user = userRepository.findByUsername(username);
+        return user == null;
 
     }
 
@@ -106,3 +107,5 @@ public class RegistrationController {
         // userService.save(userData);
     }
 }
+
+
