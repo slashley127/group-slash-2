@@ -4,11 +4,15 @@
 <body class="container">
 
 <!--<header th:replace="fragments :: header"></header>-->
+<h2 th:text="${title}">Room Ranger</h2>
 
 <table class="table table-striped">
     <thead>
     <tr>
         <th>Room Number</th>
+        <th>Guest</th>
+        <th>Check In Date</th>
+        <th>Check Out Date</th>
         <th>Room Attendant Assigned</th>
         <th>Occupancy</th>
         <th>Cleaning Task</th>
@@ -18,9 +22,13 @@
     </thead>
     <tr th:each="room : ${rooms}">
         <td th:text="${room.roomNumber}"></td>
+        <td th:text="${room.guest}"></td>
+        <td th:text="${room.checkinDate}"></td>
+        <td th:text="${room.checkoutDate}"></td>
         <td th:text="${room.roomAttendantAssigned}"></td>
         <td th:text="${room.roomOccupancy.displayName}"></td>
         <td th:text="${room.cleaningTask}"></td>
+        <td th:text="${room.status}"></td>
         <td th:text="${room.note}"></td>
     </tr>
 </table>

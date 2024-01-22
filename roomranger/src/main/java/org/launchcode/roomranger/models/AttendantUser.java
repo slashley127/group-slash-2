@@ -10,8 +10,9 @@ public class AttendantUser extends User{
 
     public AttendantUser() {}
 
-    public AttendantUser(String username, String password) {
+    public AttendantUser(String username, String password, RoomAttendant roomAttendant) {
         super(username, password);
+        this.roomAttendant = roomAttendant;
     }
 
     public RoomAttendant getRoomAttendant() {

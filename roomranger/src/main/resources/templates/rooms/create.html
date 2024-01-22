@@ -36,7 +36,12 @@
     </div>
     <div>
         <label> Cleaning Task
-            <input th:field="${room.cleaningTask}">
+            <select th:field="${room.cleaningTask}">
+                <option th:each="cleaningTask: ${tasks}"
+                        th:value="${cleaningTask}"
+                        th:text="${cleaningTask.displayName}"
+                ></option>
+            </select>
         </label>
     </div>
     <div>

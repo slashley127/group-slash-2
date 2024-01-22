@@ -6,10 +6,14 @@ import org.launchcode.roomranger.data.RoomRepository;
 import org.launchcode.roomranger.data.UserRepository;
 import org.launchcode.roomranger.models.Room;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("attendant")
@@ -24,7 +28,18 @@ public class RoomAttendantController {
     @Autowired
     private RoomAttendantRepository roomAttendantRepository;
     @GetMapping
-    public String displayRoomsAssigned(Model model, HttpSession session){
+    @Query("from Room a join a.roomAttendantAssigned RoomAttendant" +
+            "where RoomAttendant.id=:")
+    public String displayAllRooms(@RequestParam(required = false) Integer attendantId, Model model, HttpSession session){
+        model.addAttribute("today", LocalDate.now());
+        model.addAttribute("title", "All Rooms");
+        model.addAttribute("rooms", roomRepository.findAll());
         return "attendant/index";
+    }
+
+    //apply leave system
+    @GetMapping("leave")
+    public String displayLeaveForm(Model model){
+        return "attendant/leaverequest";
     }
 }

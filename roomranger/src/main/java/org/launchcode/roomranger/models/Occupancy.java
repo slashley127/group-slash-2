@@ -3,7 +3,7 @@ package org.launchcode.roomranger.models;
 public enum Occupancy {
     VACANT("Vacant"),
     OCCUPIED("Occupied"),
-    NOTAVALABLE("Not Available"),
+    OUTOFORDER("Out of Order/Maintenance"),
     RESERVED("Reserved");
     private final String displayName;
 

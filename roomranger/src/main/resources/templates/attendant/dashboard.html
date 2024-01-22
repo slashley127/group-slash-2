@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments::head"></head>
+<head>
+    <title th:text="${title}">
+    </title>
+    <script src = "script.js">
+        console.log("the page title:", document.title);
+    </script>
+</head>
+<body>
+<h2 th:text="${title}">Room Ranger</h2>
+
+</body>
+</html>
