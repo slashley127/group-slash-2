@@ -25,13 +25,7 @@ public class User {
         // Default constructor
     }
 
-    public User(String firstName, String lastName, String dob, String username, String password, String confirmPassword) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.dob = dob;
-        this.username = username;
-        this.password = password;
-        this.confirmPassword = confirmPassword;
+    public User(String username, String password) {
     }
 
     // Getters and setters for each field
