@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ManagerHomepageController {
 
 
-    @GetMapping("index")
+    @GetMapping
     public String renderManagerHomepage(Model model){
         return "manager/index";
     }
