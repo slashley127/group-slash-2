@@ -74,7 +74,7 @@ public class RoomAttendant extends AbstractEntity {
     @OneToOne(cascade = CascadeType.ALL)
     private RoomAttendantUser roomAttendantUser;
 
-    public RoomAttendant( int ID, String firstName, String lastName, String email, String phoneNumber, List<WorkingDays> workingDays, char username, char password, RoomAttendantUser roomAttendantUser) {
+    public RoomAttendant ( int ID, String firstName, String lastName, String email, String phoneNumber, List<WorkingDays> workingDays, char username, char password, RoomAttendantUser roomAttendantUser) {
         super();
         this.ID = ID;
         this.firstName = firstName;
