@@ -18,10 +18,8 @@ public class Manager extends AbstractEntity{
     @OneToOne(cascade = CascadeType.ALL)
     @NotNull
     private ManagerUser managerUser;
-
     @OneToMany(mappedBy = "managerCreator")
     private List<Room> rooms = new ArrayList<>();
-
     public Manager() {
     }
 

@@ -1,7 +1,6 @@
 package org.launchcode.roomranger.models;
 
 public enum RoomStatus {
-
         WORKING("In Progress"),
         DIRTY("Dirty"),
         CLEANED("Cleaned"),

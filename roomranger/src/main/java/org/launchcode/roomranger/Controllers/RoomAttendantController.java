@@ -18,67 +18,47 @@ package org.launchcode.roomranger.Controllers;
         import java.util.Optional;
 
 @Controller
-@RequestMapping("RoomAttendants")
+@RequestMapping(value = "roomAttendants")
 public class RoomAttendantController {
 
     @Autowired
     private RoomAttendantRepository roomAttendantRepository;
-
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ManagerRepository managerRepository;
 
-  @Autowired
-  private ManagerRepository managerRepository;
-
-    private static final String userSessionKey = "user";
-
-    public ManagerUser getManagerFromSession(HttpSession session) {
-        Integer ManagerId = (Integer) session.getAttribute(userSessionKey);
-        if (ManagerId == null) {
-            return null;
-        }
-
-        Optional<User> manager = userRepository.findById(ManagerId);
-
-        if (manager.isEmpty()) {
-            return null;
-        }
-        return(ManagerUser)manager.get();
-    }
-
-    @GetMapping("")
-    public String displayAllRoomAttendants(Model model, HttpSession session) {
+    @GetMapping
+    public String displayAllRoomAttendants(Model model) {
         model.addAttribute("title","All Room Attendants");
         model.addAttribute("Room Attendant", roomAttendantRepository.findAll());
-        return "RoomAttendants/index";
-    };
-
-@GetMapping("add")
-public String displayAddRoomAttendant(Model model){
+        return "roomattendants/index";
+    }
+    @GetMapping(value = "/add")
+    public String displayAddRoomAttendant(Model model){
     model.addAttribute("title","Add New Room Attendant");
     model.addAttribute(new AddRoomAttendantDTO());
-    return "RoomAttendants_form";
-}
-
-    @PostMapping("add")
-    public String processAddRoomAttendantForm(@ModelAttribute @Valid AddRoomAttendantDTO addRoomAttendantDTO, Errors errors, HttpServletRequest request, Model model) {
+    return "roomattendants/add";
+    }
+    @PostMapping(value = "/add")
+    public String processRoomAttendantForm(@ModelAttribute @Valid AddRoomAttendantDTO addRoomAttendantDTO, Errors errors,  Model model) {
+        //HttpServletRequest request,
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add a Room Attendant");
-            return "RoomAttendants/add";
+            return "/roomattendants/add";
         }
 
         User existingUser = userRepository.findByUsername(AddRoomAttendantDTO.getUsername());
-
         if (existingUser != null) {
             errors.rejectValue("username", "username.alreadyexists", "A Room Attendant with that username already exists");
             model.addAttribute("title", "Add a Room Attendant");
-            return "RoomAttendants/add";
+            return "/roomattendants/add";
         }
 
-       RoomAttendantUser newRoomAttendantUser = new RoomAttendantUser(AddRoomAttendantDTO.getUsername(), AddRoomAttendantDTO.getPassword());
-       userRepository.save(newRoomAttendantUser);
-       RoomAttendant newRoomAttendant = new RoomAttendant(AddRoomAttendantDTO.getUsername(), AddRoomAttendantDTO.getLastName(), newRoomAttendantUser);
-       roomAttendantRepository.save(newRoomAttendant);
+//       RoomAttendantUser newRoomAttendantUser = new RoomAttendantUser(AddRoomAttendantDTO.getUsername(), AddRoomAttendantDTO.getPassword());
+//       userRepository.save(newRoomAttendantUser);
+//       RoomAttendant newRoomAttendant = new RoomAttendant(AddRoomAttendantDTO.getUsername(), AddRoomAttendantDTO.getLastName(), newRoomAttendantUser);
+//       roomAttendantRepository.save(newRoomAttendant);
        return "redirect:";
     }
 

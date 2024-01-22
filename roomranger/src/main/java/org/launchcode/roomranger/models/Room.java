@@ -98,7 +98,6 @@ public class Room extends AbstractEntity{
         this.cleaningTask = cleaningTask;
     }
 
-
     public RoomStatus getRoomStatus() {
         return roomStatus;
     }

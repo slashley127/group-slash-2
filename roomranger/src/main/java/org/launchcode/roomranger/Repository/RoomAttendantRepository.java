@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface RoomAttendantRepository extends CrudRepository<RoomAttendant, Integer> {
 
-    //List<RoomAttendant> findAllByManager(Manager manager);
+    List<RoomAttendant> findAllByManager(Manager manager);
 
 }
 

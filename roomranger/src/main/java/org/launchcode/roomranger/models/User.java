@@ -6,9 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
     @Entity
     public class User extends AbstractEntity {
-        public void setUsername(String username) {
-            this.username = username;
-        }
+        public void setUsername(String username) {this.username = username;}
 
         public String getPwHash() {
             return pwHash;
