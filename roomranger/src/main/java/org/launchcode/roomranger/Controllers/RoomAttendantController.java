@@ -14,7 +14,7 @@ package org.launchcode.roomranger.Controllers;
         import org.launchcode.roomranger.models.User;
 
    @Controller
-   @RequestMapping(value = "roomAttendants")
+  @RequestMapping(value = "roomAttendant")
    public class RoomAttendantController {
 
     @Autowired
@@ -28,32 +28,31 @@ package org.launchcode.roomranger.Controllers;
     public String displayAllRoomAttendants(Model model) {
         model.addAttribute("title","All Room Attendants");
         model.addAttribute("Room Attendant", roomAttendantRepository.findAll());
-        return "roomattendants/index";
+        return "roomattendant/index";
     }
-    @GetMapping(value = "/add")
+    @GetMapping(value = "add")
     public String displayAddRoomAttendant(Model model){
     model.addAttribute("title","Add New Room Attendant");
     model.addAttribute(new AddRoomAttendantDTO());
-    return "roomattendants/add";
+    return "roomattendant/add";
     }
-    @PostMapping(value = "/add")
+    @PostMapping(value = "add")
     public String processRoomAttendantForm(@ModelAttribute @Valid RoomAttendant newRoomAttendant, Errors errors,  Model model) {
         //HttpServletRequest request,
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add a Room Attendant");
-            return "roomattendants/add";
+            return "roomAttendant";
         }
 
         User existingUser = userRepository.findByUsername(AddRoomAttendantDTO.getUsername());
         if (existingUser != null) {
             errors.rejectValue("username", "username.alreadyexists", "A Room Attendant with that username already exists");
             model.addAttribute("title", "Add a Room Attendant");
-            return "roomattendants/add";
+            return "roomAttendant";
        }
       roomAttendantRepository.save(newRoomAttendant);
-       return "redirect:";
+       return "redirect:/roomattendant";
     }
-
-}
+   }
 
 
