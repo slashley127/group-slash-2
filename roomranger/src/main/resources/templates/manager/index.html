@@ -8,7 +8,8 @@
 <body>
 <nav th:replace = "~{fragments :: manager-nav}"></nav>
 <h1>HOMEPAGE FOR MANAGER</h1>
-<table>
+<th:block>
+<table class="table table-striped">
 <thead>
     <tr>
     <th>ROOM NB</th>
@@ -19,7 +20,16 @@
     <th>NOTES</th>
 </tr>
 </thead>
+    <tr th:each = "room : ${rooms}">
+        <td th:text="${room.roomNumber}"></td>
+        <td>IN PROGRESS</td>
+        <td>IN PROGRESS</td>
+        <td>IN PROGRESS</td>
+        <td>IN PROGRESS</td>
+        <td>IN PROGRESS</td>
+    </tr>
 </table>
-
+</th:block>
+<button type="submit">ASSIGN ROOM</button>
 </body>
 </html>
