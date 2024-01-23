@@ -3,15 +3,15 @@
 <head th:replace="fragments::head"></head>
 <body>
 <h2 th:text="${title}">Room Ranger</h2>
-<form method="post">
+<form method="post" th:object="${room}">
     <div>
         <label> Room Number
-            <input th:field="${room.roomNumber}">
+            <input th:field="*{roomNumber}">
         </label>
     </div>
     <div>
         <label> Room Type
-            <select th:field="${room.roomType}">
+            <select th:field="*{roomType}">
                 <option th:each="roomType: ${types}"
                         th:value="${roomType}"
                         th:text="${roomType.displayName}">
@@ -19,14 +19,14 @@
             </select>
         </label>
     </div>
-    <div>
-        <label> Room Attendant
-            <input th:field="${room.roomAttendantAssigned}">
-        </label>
-    </div>
+<!--    <div>-->
+<!--        <label> Room Attendant-->
+<!--            <input th:field="*{roomAttendantAssigned}">-->
+<!--        </label>-->
+<!--    </div>-->
     <div>
         <label> Occupancy
-            <select th:field="${room.roomOccupancy}">
+            <select th:field="*{roomOccupancy}">
                 <option th:each="roomOccupancy: ${occupancy}"
                         th:value="${roomOccupancy}"
                         th:text="${roomOccupancy.displayName}"
@@ -34,46 +34,46 @@
             </select>
         </label>
     </div>
-    <div>
-        <label> Cleaning Task
-            <select th:field="${room.cleaningTask}">
-                <option th:each="cleaningTask: ${tasks}"
-                        th:value="${cleaningTask}"
-                        th:text="${cleaningTask.displayName}"
-                ></option>
-            </select>
-        </label>
-    </div>
-    <div>
-        <label> Room Status
-            <select th:field="${room.status}">
-                <option th:each="roomStatus: ${status}"
-                        th:value="${roomStatus}"
-                        th:text="${roomStatus.displayName}"
-                ></option>
-            </select>
-        </label>
-    </div>
-    <div>
-        <label> Guest Name
-            <input th:field="${room.guest}">
-        </label>
-    </div>
-    <div>
-        <label> Number Of Guest
-            <input th:field="${room.numberOfGuests}">
-        </label>
-    </div>
-    <div>
-        <label> Check In Date
-            <input type="date" th:field="${room.checkinDate}">
-        </label>
-    </div>
-    <div>
-        <label> Check Out Date
-            <input type="date" th:field="${room.checkoutDate}">
-        </label>
-    </div>
+<!--    <div>-->
+<!--        <label> Cleaning Task-->
+<!--            <select th:field="*{cleaningTask}">-->
+<!--                <option th:each="cleaningTask: ${tasks}"-->
+<!--                        th:value="${cleaningTask}"-->
+<!--                        th:text="${cleaningTask.displayName}"-->
+<!--                ></option>-->
+<!--            </select>-->
+<!--        </label>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <label> Room Status-->
+<!--            <select th:field="*{status}">-->
+<!--                <option th:each="roomStatus: ${status}"-->
+<!--                        th:value="${roomStatus}"-->
+<!--                        th:text="${roomStatus.displayName}"-->
+<!--                ></option>-->
+<!--            </select>-->
+<!--        </label>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <label> Guest Name-->
+<!--            <input th:field="*{guest}">-->
+<!--        </label>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <label> Number Of Guest-->
+<!--            <input th:field="*{numberOfGuests}">-->
+<!--        </label>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <label> Check In Date-->
+<!--            <input type="date" th:field="*{checkinDate}">-->
+<!--        </label>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <label> Check Out Date-->
+<!--            <input type="date" th:field="*{checkoutDate}">-->
+<!--        </label>-->
+<!--    </div>-->
     <div>
         <input type="submit" value="Create Room">
     </div>

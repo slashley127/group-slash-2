@@ -28,8 +28,6 @@ public class RoomAttendantController {
     @Autowired
     private RoomAttendantRepository roomAttendantRepository;
     @GetMapping
-    @Query("from Room a join a.roomAttendantAssigned RoomAttendant" +
-            "where RoomAttendant.id=:")
     public String displayAllRooms(@RequestParam(required = false) Integer attendantId, Model model, HttpSession session){
         model.addAttribute("today", LocalDate.now());
         model.addAttribute("title", "All Rooms");

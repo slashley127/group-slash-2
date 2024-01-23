@@ -10,6 +10,7 @@
     <thead>
     <tr>
         <th>Room Number</th>
+        <th>Room Type</th>
         <th>Guest</th>
         <th>Check In Date</th>
         <th>Check Out Date</th>
@@ -22,15 +23,17 @@
     </thead>
     <tr th:each="room : ${rooms}">
         <td th:text="${room.roomNumber}"></td>
+        <td th:text="${room.roomType.displayName != null ? room.roomType.displayName : null}"></td>
         <td th:text="${room.guest}"></td>
         <td th:text="${room.checkinDate}"></td>
         <td th:text="${room.checkoutDate}"></td>
         <td th:text="${room.roomAttendantAssigned}"></td>
-        <td th:text="${room.roomOccupancy.displayName}"></td>
-        <td th:text="${room.cleaningTask}"></td>
-        <td th:text="${room.status}"></td>
+        <td th:text="${room.roomOccupancy.displayName != null ? room.roomOccupancy.displayName : null}"></td>
+        <td th:text="${room.cleaningTask != null ? room.cleaningTask.displayName : null}"></td>
+        <td th:text="${room.status != null ? room.status.displayName : null}"></td>
         <td th:text="${room.note}"></td>
     </tr>
+
 </table>
 
 </body>

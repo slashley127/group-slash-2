@@ -1,9 +1,9 @@
 package org.launchcode.roomranger.models;
 
-public enum RoomType {
+public enum Type {
     STANDARD("Standard Room"),
     DOUBLE("Double Room"),
-    SUIT("SUIT"),
+    SUIT("Suit"),
     DELUXE("Deluxe Rom"),
     EXECUTIVE("Executive Room"),
     CONNECTING("Connecting Rooms"),
@@ -16,7 +16,7 @@ public enum RoomType {
 
     private final String displayName;
 
-    RoomType(String displayName)
+    Type(String displayName)
     {this.displayName = displayName;
     }
 
