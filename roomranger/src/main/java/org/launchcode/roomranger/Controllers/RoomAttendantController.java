@@ -33,6 +33,7 @@ package org.launchcode.roomranger.Controllers;
         return "roomAttendant/index";
     }
 
+
     @GetMapping("add")
     public String addRoomAttendant(Model model) {
         model.addAttribute("title", "Add Room Attendant");
@@ -48,7 +49,8 @@ package org.launchcode.roomranger.Controllers;
             model.addAttribute("title", "Add a Room Attendant");
         redirectAttributes.addFlashAttribute("message", "The user has been saved successfully.");
         roomAttendantRepository.save(newRoomAttendant);
-            return "redirect:/roomattendant";
+            System.out.println("Successfully saved entity");
+            return "redirect:";
              }
 
 
