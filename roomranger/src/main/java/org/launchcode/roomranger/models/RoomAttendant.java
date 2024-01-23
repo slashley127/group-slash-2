@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "RoomAttendantTable")
 public class RoomAttendant extends AbstractEntity {
 
     @Id
@@ -23,18 +22,28 @@ public class RoomAttendant extends AbstractEntity {
 
     @NotBlank(message = "Last name is required")
     private String lastName;
-
+    @Column(unique = true, length = 15)
+    private String username;
+    @Column(unique = true, length = 15)
+    private String password;
+    @ManyToOne
+    private Manager manager;
+    @OneToOne(cascade = CascadeType.ALL)
+    private RoomAttendantUser roomAttendantUser;
     private String gender;
-
     private String phoneNumber;
-
-
+    private List<WorkingDays> workingDays = new ArrayList<>();
     public String getGender() {return gender;}
 
     public void setGender(String gender) { this.gender = gender; }
 
     @Column(unique = true)
     private String email;
+
+    public RoomAttendant() {
+
+    }
+
 
     public String getFirstName() {return firstName;}
 
@@ -60,21 +69,9 @@ public class RoomAttendant extends AbstractEntity {
         this.workingDays = workingDays;
     }
 
-    @Column(unique = true, length = 15)
-    private char username;
 
-    @Column(unique = true, length = 15)
-    private char password;
 
-    private List<WorkingDays> workingDays = new ArrayList<>();
-
-    @ManyToOne
-    private Manager manager;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private RoomAttendantUser roomAttendantUser;
-
-    public RoomAttendant ( int ID, String firstName, String lastName, String email, String phoneNumber, List<WorkingDays> workingDays, char username, char password, RoomAttendantUser roomAttendantUser) {
+    public RoomAttendant ( int ID, String firstName, String lastName, String email, String phoneNumber, List<WorkingDays> workingDays, String username, String password, RoomAttendantUser roomAttendantUser) {
         super();
         this.ID = ID;
         this.firstName = firstName;
@@ -88,17 +85,18 @@ public class RoomAttendant extends AbstractEntity {
         this.roomAttendantUser=roomAttendantUser;
 
     }
-    public RoomAttendant() {
+
+    public RoomAttendantUser getRoomAttendantUser() {
+        return roomAttendantUser;
     }
 
 
-    public char getusername() {return username;}
 
-    public void setusername(char username) {this.username = username;}
+    public String getusername() {return username;}
 
-    public char getpassword() {return password;}
+    public void setusername(String username) {this.username = username;}
 
-    public void setpassword(char password) {password = password;}
+    public void setpassword(String password) {this.password = password;}
 
     public Manager getManager() {return manager;}
 

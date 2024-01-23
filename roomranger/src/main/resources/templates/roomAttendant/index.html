@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+
+<head>
+    <meta charset="UTF-8 /">
+    <title>Room Attendant Home Page</title>
+<!--    <script></script>-->
+</head>
+<body class="container">
+<!--/</div>-->
+<div>
+<a class="h4" th:href="@{roomattendant/add}">Add Room Attendant</a>
+</div>
+<div th:if="${message}" class="alert alert-success text-center">
+    [[${message}]]
+</div>
+
+<div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>SCHEDULE</th>
+            <th>NOTES</th>
+        </tr>
+        </thead>
+        <tbody>
+<!--        <tr>-->
+<!--            <th scope="row">1</th>-->
+<!--            <td>sam</td>-->
+<!--            <td>sunday</td>-->
+<!--            <td>Please Work!!</td>-->
+<!--        </tr>-->
+
+        <tr th:each="addRoomAttendantDTO : ${roomattendant}">
+            <td th:text="${addRoomAttendantDTO.ID}"></td>
+            <td th:text="${addRoomAttendantDTO.firstName}"></td>
+            <td th:text="${addRoomAttendantDTO.workingDays}"></td>
+            <td th:text="${addRoomAttendantDTO.notes}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -4,7 +4,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.launchcode.roomranger.models.WorkingDays;
 import org.springframework.data.annotation.Id;
+
+import java.util.List;
 
 
 public class AddRoomAttendantDTO {
@@ -13,10 +16,19 @@ public class AddRoomAttendantDTO {
     private int ID;
     @NotBlank(message = "First name is required")
     @Column(length = 30)
-    private String firstName;
+    private  String firstName;
     @NotBlank(message = "Last name is required")
-    private static String lastName;
-    private String workingDays;
+    private String lastName;
+
+    public void setWorkingDays(List<WorkingDays> workingDays) {
+        this.workingDays = workingDays;
+    }
+
+    public List<WorkingDays> getWorkingDays() {
+        return workingDays;
+    }
+
+    private List<WorkingDays> workingDays;
     private String gender;
     private String phoneNumber;
     private String notes;
@@ -33,9 +45,6 @@ public class AddRoomAttendantDTO {
     public String getNote() {
         return notes;
     }
-    public void setNote(String note) {
-        this.notes = notes;
-    }
     public int getID() {
         return ID;
     }
@@ -48,18 +57,12 @@ public class AddRoomAttendantDTO {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-    public static String getLastName() {
+    public  String getLastName() {
         return lastName;
     }
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-    public String getWorkingDays() {
-        return workingDays;
-    }
-    public void setWorkingDays(String workingDays) {
-        this.workingDays = workingDays;
-    }
+    public void setLastName(String lastName) {this.lastName = lastName;}
+    public void setNotes(String notes) {this.notes = notes;}
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -78,17 +81,20 @@ public class AddRoomAttendantDTO {
     public void setGender(String gender) {
         this.gender = gender;
     }
-    public static String getUsername() {
-        return username;
-    }
+
     public void setUsername(String username) {
         this.username = username;
     }
-    public static String getPassword() {
-        return password;
-    }
+
     public void setPassword(String password) {
         this.password = password;
     }
 
+    public String getpassword() {
+        return password;
+    }
+
+    public static String getusername() {
+        return username;
+    }
 }

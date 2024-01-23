@@ -1,20 +1,22 @@
 package org.launchcode.roomranger.Controllers;
 
+        import jakarta.validation.Valid;
         import org.launchcode.roomranger.Repository.ManagerRepository;
         import org.launchcode.roomranger.Repository.RoomAttendantRepository;
         import org.launchcode.roomranger.models.DTO.AddRoomAttendantDTO;
+        import org.launchcode.roomranger.models.User;
         import org.springframework.stereotype.Controller;
         import org.springframework.web.bind.annotation.*;
         import org.launchcode.roomranger.Repository.UserRepository;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.ui.Model;
         import org.springframework.validation.Errors;
-        import jakarta.validation.Valid;
         import org.launchcode.roomranger.models.RoomAttendant;
-        import org.launchcode.roomranger.models.User;
+        import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-   @Controller
-  @RequestMapping(value = "roomAttendant")
+
+@Controller
+  @RequestMapping(value = "roomattendant")
    public class RoomAttendantController {
 
     @Autowired
@@ -24,35 +26,47 @@ package org.launchcode.roomranger.Controllers;
     @Autowired
     private ManagerRepository managerRepository;
 
-    @GetMapping("")
+    @GetMapping
     public String displayAllRoomAttendants(Model model) {
-        model.addAttribute("title","All Room Attendants");
+        model.addAttribute("title", "All Room Attendants");
         model.addAttribute("Room Attendant", roomAttendantRepository.findAll());
-        return "roomattendant/index";
+        return "roomAttendant/index";
     }
-    @GetMapping(value = "add")
-    public String displayAddRoomAttendant(Model model){
-    model.addAttribute("title","Add New Room Attendant");
-    model.addAttribute(new AddRoomAttendantDTO());
-    return "roomattendant/add";
-    }
-    @PostMapping(value = "add")
-    public String processRoomAttendantForm(@ModelAttribute @Valid RoomAttendant newRoomAttendant, Errors errors,  Model model) {
-        //HttpServletRequest request,
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Add a Room Attendant");
-            return "roomAttendant";
-        }
 
-        User existingUser = userRepository.findByUsername(AddRoomAttendantDTO.getUsername());
-        if (existingUser != null) {
-            errors.rejectValue("username", "username.alreadyexists", "A Room Attendant with that username already exists");
-            model.addAttribute("title", "Add a Room Attendant");
-            return "roomAttendant";
-       }
-      roomAttendantRepository.save(newRoomAttendant);
-       return "redirect:/roomattendant";
+    @GetMapping("add")
+    public String addRoomAttendant(Model model) {
+        model.addAttribute("title", "Add Room Attendant");
+        model.addAttribute(new AddRoomAttendantDTO());
+        return "roomAttendant/add";
     }
-   }
+
+    @PostMapping("add")
+    public String processRoomAttendantForm(@ModelAttribute @Valid RoomAttendant newRoomAttendant, Errors errors, Model model, RedirectAttributes redirectAttributes) {
+        if (errors.hasErrors()) {
+            return "roomAttendant/add";
+        }else{
+            model.addAttribute("title", "Add a Room Attendant");
+        redirectAttributes.addFlashAttribute("message", "The user has been saved successfully.");
+        roomAttendantRepository.save(newRoomAttendant);
+            return "redirect:/roomattendant";
+             }
+
+
+//        User existingUser = userRepository.findByUsername(AddRoomAttendantDTO.getusername());
+//        if (existingUser != null) {
+//            errors.rejectValue("username", "username.alreadyexists", "A Room Attendant with that username already exists");
+//            model.addAttribute("title", "Add a Room Attendant");
+//            return "roomAttendant";
+//        }
+//        RoomAttendant newRoomAttendant = new RoomAttendant(addRoomAttendantDTO.getID(), addRoomAttendantDTO.getFirstName(), AddRoomAttendantDTO.getLastName(), addRoomAttendantDTO.getEmail(), addRoomAttendantDTO.getPhoneNumber(), addRoomAttendantDTO.getWorkingDays(), addRoomAttendantDTO.getGender(), addRoomAttendantDTO.getNote());
+//        RoomAttendant newRoomAttendant = new RoomAttendant();
+//        roomAttendantRepository.save(newRoomAttendant);
+        //return "redirect:";
+
+    }
+}
+
+
+
 
 

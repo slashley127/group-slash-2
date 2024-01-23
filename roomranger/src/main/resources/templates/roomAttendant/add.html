@@ -5,14 +5,16 @@
   <title>Add Room Attendant</title>
 </head>
 <body>
-<form method="post">
+<form  method="post" >
+<!--    th:action="@{add}"-->
 
-    <div class="form-group">
-        <label>ID:
-            <input th:field="${addRoomAttendantDTO.ID}" class="form-control">
-        </label>
-        <p class="error" th:errors="${addRoomAttendantDTO.ID}"></p>
-    </div>
+
+<!--    <div class="form-group">-->
+<!--        <label>ID:-->
+<!--            <input th:field="${addRoomAttendantDTO.ID}" class="form-control">-->
+<!--        </label>-->
+<!--        <p class="error" th:errors="${addRoomAttendantDTO.ID}"></p>-->
+<!--    </div>-->
     <div class="form-group">
         <label>First Name:
             <input th:field="${addRoomAttendantDTO.firstName}" class="form-control">
@@ -42,9 +44,9 @@
     <div class="form-group">
         <label>Gender:</label>
             <input type="radio" id="male" name="male" value="Male">
-            <label for="male">Male</label><br>
+            <label for="male">Male</label>
             <input type="radio" id="female" name="female" value="Female">
-            <label for="female">Female</label><br>
+            <label for="female">Female</label>
             <input type="radio" id="others" name="others" value="others">
             <label for="others">Others</label>
         <p class="error" th:errors="${addRoomAttendantDTO.gender}"></p>
@@ -61,11 +63,31 @@
         </label>
         <p class="error" th:errors="${addRoomAttendantDTO.password}"></p>
     </div>
-    <div>
-        <label>Upload Picture</label>
-    <input type="image" src="img_submit.gif" alt="Submit" width="48" height="48">
+    <div class="form-group">
+        <label>Working Days:
+            </label>
+            <input type="checkbox" id="sunday" name="sunday" value="Sunday">
+            <label for="male">Sunday</label>
+            <input type="checkbox" id="monday" name="monday" value="Monday">
+            <label for="female">Monday</label>
+            <input type="checkbox" id="tuesday" name="tuesday" value="Tuesday">
+            <label for="others">Tuesday</label>
+            <input type="checkbox" id="wednesday" name="wednesday" value="Wednesday">
+            <label for="others">Wednesday</label>
+            <input type="checkbox" id="thursday" name="thursday" value="Thursday">
+            <label for="others">Thursday</label>
+            <input type="checkbox" id="friday" name="friday" value="Friday">
+            <label for="others">Friday</label>
+            <input type="checkbox" id="saturday" name="saturday" value="Saturday">
+            <label for="others">Saturday</label>
+        <p class="error" th:errors="${addRoomAttendantDTO.workingDays}"></p>
     </div>
-    <input type="submit" value="Submit"> <input type="reset" value="Reset">
+<!--    <div>-->
+<!--        <label>Upload Picture</label>-->
+<!--    <input type="image" src="img_submit.gif" alt="Submit" width="48" height="48">-->
+<!--    </div>-->
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
     <input type="button" value="Back">
 </form>
 </body>
