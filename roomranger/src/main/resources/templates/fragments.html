@@ -1,76 +1,51 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
-<!--<head th:fragment="head">-->
-<!--    <meta charset="UTF-8"/>-->
-<!--    <title>Room Ranger System</title>-->
-<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">-->
-<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>-->
-<!--    <link rel="stylesheet" th:href="@{/styles.css}">-->
-<!--</head>-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <title>Room Ranger System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
 
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--    <title>Fragment Scripts</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<script th:inline="javascript">-->
-<!--    function togglePasswordVisibility(fieldId) {-->
-<!--        var passwordInput = document.getElementById(fieldId);-->
-<!--        var fieldType = passwordInput.type;-->
-<!--        passwordInput.type = fieldType === "text" ? "password" : "text";-->
-<!--    }-->
-<!--</script>-->
-<!--<script th:inline="javascript">-->
-<!--    function validateAge() {-->
-<!--        var dobInput = document.getElementById("dob");-->
-<!--        var enteredDate = new Date(dobInput.value);-->
-<!--        var currentDate = new Date();-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fragment Scripts</title>
+</head>
+<body>
+<script th:inline="javascript">
+    function togglePasswordVisibility(fieldId) {
+        var passwordInput = document.getElementById(fieldId);
+        var fieldType = passwordInput.type;
+        passwordInput.type = fieldType === "text" ? "password" : "text";
+    }
+</script>
+<script th:inline="javascript">
+    function validateAge() {
+        var dobInput = document.getElementById("dob");
+        var enteredDate = new Date(dobInput.value);
+        var currentDate = new Date();
 
-<!--        var age = currentDate.getFullYear() - enteredDate.getFullYear();-->
+        var age = currentDate.getFullYear() - enteredDate.getFullYear();
 
-<!--        if (age < 15) {-->
-<!--            alert("You must be at least 15 years old to register.");-->
-<!--            return false;-->
-<!--        }-->
+        if (age < 15) {
+            alert("You must be at least 15 years old to register.");
+            return false;
+        }
 
-<!--        return true;-->
-<!--    }-->
-<!--</script>-->
+        return true;
+    }
+</script>
 
-<!--<nav th:fragment="manager-nav">-->
-<!--    <h1 th:text="${title}">Room Ranger</h1>-->
-<!--    <ul class="nav">-->
-<!--        <li class="nav-item"><a class="nav-link" th:href="@{/manager}">DASHBOARD </a></li>-->
-<!--        <li class="nav-item"><a class="nav-link" th:href="@{/manager/roomattendantlist}">ROOM ATTENDANTS </a></li>-->
-<!--    </ul>-->
-<!--</nav>-->
+<nav th:fragment="manager-nav">
+    <h1 th:text="${title}">Room Ranger</h1>
+    <ul class="nav">
+        <li class="nav-item"><a class="nav-link" th:href="@{/manager}">DASHBOARD</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/manager/assignroom}">ASSIGN ROOM</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/manager/roomattendantlist}">ROOM ATTENDANTS </a></li>
+    </ul>
+</nav>
 
-<!--<div th:fragment="comment">-->
-<!--    <div class="comment-area">-->
-<!--        <h2 class="text-center">Leave Comments</h2>-->
-<!--    </div>-->
-<!--    <div class="comment-area" th:each="comment : ${room.comments}">-->
-<!--        <div class="comment-box">-->
-<!--            <p class="comments" th:text= "${comment.text}"></p>-->
-<!--            <div class="comment-attribution">-->
-<!--                <p th:if="${comment.createdBy instanceof T(org.launchcode.roomranger.models.ManagerUser)}" th:text="${'Comment by Manager ' + comment.createdBy.getManager.firstName + ' ' + comment.createdBy.getManager.lastName}"></p>-->
-<!--                <p th:if="${comment.createdBy instanceof T(org.launchcode.roomranger.models.AttendantUser)}" th:text="${'Comment by Room Attendant ' + comment.createdBy.getRoomAttendant.firstName + ' ' + comment.createdBy.getRoomAttendant.lastName}"></p>-->
-<!--                <p th:text="${'Created on ' +  #temporals.format(comment.createdDate, 'MM-dd-yyyy')} "></p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="comment-area">-->
-<!--        <form th:action="@{/rooms/comment}" method="post">-->
-<!--            <input type="hidden" name="roomId" th:value="${room.id}" />-->
-<!--            <input type="hidden" name="createdBy" th:value="${user.id}" />-->
-<!--            <div class="form-group">-->
-<!--                <input class="form-control" type="text" th:field="${newComment.text}"/>-->
-<!--            </div>-->
-<!--            <button type="submit" class="btn btn-outline-dark">Add Comment</button>-->
-<!--        </form>-->
-<!--    </div>-->
-<!--</div>-->
-
-<!--</body>-->
-<!--</html>-->
+</body>
+</html>
