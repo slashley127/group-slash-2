@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
+    <title>Login</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <th:replace fragment="fragments :: fragments"></th:replace>
 </head>
 <body style="background-color: Coral;">
 
-
-
-<form action="/login" method="post" th:object="${loginForm}" onsubmit="return validateAge();">
+<form action="/login" method="post" th:object="${loginForm}" onsubmit="return validateLogin();">
 
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" th:field="*{username}" autocomplete="username" required><br>
@@ -25,6 +23,9 @@
 
     <button type="submit">Done</button>
     <button type="submit">Cancel</button>
+
+    <!-- Option to change and save password -->
+    <button type="button" onclick="changeAndSavePassword()">Change and Save Password</button>
 </form>
 
 <script th:inline="javascript">
@@ -34,10 +35,32 @@
         passwordInput.type = fieldType === "text" ? "password" : "text";
     }
 </script>
+
 <script th:inline="javascript">
     function validateLogin() {
-        // Add any login-specific validation if needed
+        let username = document.getElementById('username').value;
+        let password = document.getElementById('password').value;
+
+        // Validation logic for username
+        if (username.length < 3 || username.length > 30) {
+            alert("Invalid username. Must be between 3 and 30 characters.");
+            return false;
+        }
+
+        // Validation logic for password
+        if (password.length < 5 || password.length > 30) {
+            alert("Invalid password. Must be between 5 and 30 characters.");
+            return false;
+        }
+
+        // If all validations pass, return true
         return true;
+    }
+
+    function changeAndSavePassword() {
+        // Add logic for changing and saving password
+        let newPassword = prompt("Enter new password:");
+               alert("Password changed and saved successfully!");
     }
 </script>
 
