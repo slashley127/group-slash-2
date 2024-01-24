@@ -54,18 +54,6 @@ package org.launchcode.roomranger.Controllers;
             return "redirect:/roomAttendant";
              }
 
-
-//        User existingUser = userRepository.findByUsername(AddRoomAttendantDTO.getusername());
-//        if (existingUser != null) {
-//            errors.rejectValue("username", "username.alreadyexists", "A Room Attendant with that username already exists");
-//            model.addAttribute("title", "Add a Room Attendant");
-//            return "roomAttendant";
-//        }
-//        RoomAttendant newRoomAttendant = new RoomAttendant(addRoomAttendantDTO.getID(), addRoomAttendantDTO.getFirstName(), AddRoomAttendantDTO.getLastName(), addRoomAttendantDTO.getEmail(), addRoomAttendantDTO.getPhoneNumber(), addRoomAttendantDTO.getWorkingDays(), addRoomAttendantDTO.getGender(), addRoomAttendantDTO.getNote());
-//        RoomAttendant newRoomAttendant = new RoomAttendant();
-//        roomAttendantRepository.save(newRoomAttendant);
-        //return "redirect:";
-
     }
 }
 
