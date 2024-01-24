@@ -20,13 +20,6 @@ public class Room extends AbstractEntity{
     @ManyToOne
     private Manager managerCreator;
     private Occupancy roomOccupancy;
-    private String cleaningTask;
-    private Status status;
-    private String note;
-    private String guest;
-    private int numberOfGuests;
-    private LocalDate checkinDate;
-    private LocalDate checkoutDate;
 
     public Room() {
     }
@@ -37,13 +30,6 @@ public class Room extends AbstractEntity{
         this.roomAttendantAssigned = roomAttendantAssigned;
         this.managerCreator = managerCreator;
         this.roomOccupancy = roomOccupancy;
-        this.cleaningTask = cleaningTask;
-        this.status = status;
-        this.note = note;
-        this.guest = guest;
-        this.numberOfGuests = numberOfGuests;
-        this.checkinDate = checkinDate;
-        this.checkoutDate = checkoutDate;
     }
 
     public Room(String roomNumber) {
@@ -90,61 +76,6 @@ public class Room extends AbstractEntity{
         this.roomOccupancy = roomOccupancy;
     }
 
-    public String getCleaningTask() {
-        return cleaningTask;
-    }
-
-    public void setCleaningTask(String cleaningTask) {
-        this.cleaningTask = cleaningTask;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public String getGuest() {
-        return guest;
-    }
-
-    public void setGuest(String guest) {
-        this.guest = guest;
-    }
-
-    public int getNumberOfGuests() {
-        return numberOfGuests;
-    }
-
-    public void setNumberOfGuests(int numberOfGuests) {
-        this.numberOfGuests = numberOfGuests;
-    }
-
-    public LocalDate getCheckinDate() {
-        return checkinDate;
-    }
-
-    public void setCheckinDate(LocalDate checkinDate) {
-        this.checkinDate = checkinDate;
-    }
-
-    public LocalDate getCheckoutDate() {
-        return checkoutDate;
-    }
-
-    public void setCheckoutDate(LocalDate checkoutDate) {
-        this.checkoutDate = checkoutDate;
-    }
 }
 
 
