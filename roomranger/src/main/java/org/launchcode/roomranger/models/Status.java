@@ -1,9 +1,10 @@
 package org.launchcode.roomranger.models;
 
 public enum Status {
-    WORKING("Cleaning in Progress"),
-    DIRTY("Dirty"),
-    CLEANED("Cleaned/Ready"),
+    NOT_STARTED("Not Started"),
+    IN_PROGRESS("In progress"),
+    CLEANED("Cleaned"),
+    SERVICE_REFUSED("Service Refused"),
     INSPECTED("Inspected");
 
     private final String displayName;
