@@ -1,5 +1,6 @@
 package org.launchcode.roomranger.models.DTO;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -27,6 +28,12 @@ public class RegistrationFormDTO {
 
     @NotBlank(message = "Role is required")
     private String role;
+
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email format")
+    private String email;
+
+    // Getters and setters...
 
     public String getFirstName() {
         return firstName;
@@ -82,5 +89,13 @@ public class RegistrationFormDTO {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

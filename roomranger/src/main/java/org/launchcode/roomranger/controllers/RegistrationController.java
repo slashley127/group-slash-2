@@ -31,7 +31,6 @@ public class RegistrationController {
         // Check if registration is successful
         if (performRegistration(registrationForm, model)) {
             redirectAttributes.addFlashAttribute("message", "Registration successful!");
-
             return "redirect:/";
         } else {
             return "Registration";
@@ -92,22 +91,21 @@ public class RegistrationController {
         user.setDob(registrationForm.getDob());
         user.setUsername(registrationForm.getUsername());
         user.setPassword(registrationForm.getPassword());
-
-        // Set the role (assuming 'role' is a property of RegistrationFormDTO)
         user.setRole(registrationForm.getRole());
+        user.setEmail(registrationForm.getEmail()); // Add the email field
 
         return user;
     }
 
-
     private boolean isAnyFieldEmpty(RegistrationFormDTO registrationForm) {
-                return registrationForm.getFirstName().isEmpty() ||
+        return registrationForm.getFirstName().isEmpty() ||
                 registrationForm.getLastName().isEmpty() ||
                 registrationForm.getDob().isEmpty() ||
                 registrationForm.getUsername().isEmpty() ||
                 registrationForm.getPassword().isEmpty() ||
-                registrationForm.getConfirmPassword().isEmpty()||
-                registrationForm.getRole().isEmpty();
+                registrationForm.getConfirmPassword().isEmpty() ||
+                registrationForm.getRole().isEmpty() ||
+                registrationForm.getEmail().isEmpty();
     }
 
     private boolean isPasswordValid(String password) {
@@ -118,6 +116,5 @@ public class RegistrationController {
     private void storeUserInformation(User user) {
         userRepository.save(user);
         logger.info("User {} registered successfully.", user.getUsername());
-
     }
 }

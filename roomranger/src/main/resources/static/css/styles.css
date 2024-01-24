@@ -7,7 +7,7 @@ body {
   margin: 0;
   height: 100vh;
   position: relative;
-  background-color: purple;
+  background-color: Black;
   color: ForestGreen;
   transition: background-color 0.1s ease, color 0.1s ease;
 }
@@ -106,7 +106,7 @@ body::before {
 }
 
 .error-message {
-  color: red;
+  color: Blue;
   font-size: 12px;
   margin-top: 5px;
   display: block;

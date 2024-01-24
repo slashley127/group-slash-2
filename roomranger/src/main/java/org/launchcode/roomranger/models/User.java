@@ -15,6 +15,8 @@ public class User {
     private String lastName;
     private String dob;
 
+    private String email;
+
     @Column(nullable = false)
     @Basic(optional = false)
     private String password;
@@ -44,7 +46,13 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
     public String getUsername() {
         return username;
     }
@@ -84,8 +92,7 @@ public class User {
     public void setDob(String dob) {
         this.dob = dob;
     }
-
-    public String getRole() {
+        public String getRole() {
         return role;
     }
 

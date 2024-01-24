@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-        <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
@@ -17,7 +17,6 @@
     <input type="text" id="firstName" name="firstName" th:field="*{firstName}" required><br>
     <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error-message"></span><br>
 
-
     <label for="lastName">Last Name:</label>
     <input type="text" id="lastName" name="lastName" th:field="*{lastName}" required><br>
     <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error-message"></span><br>
@@ -25,21 +24,21 @@
     <label for="dob">Date of Birth:</label>
     <input type="date" id="dob" name="dob" th:field="*{dob}" required><br>
     <span th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}" class="error-message"></span><br>
+
     <label for="role">Role:</label>
-    <select id="role" name="role" th:value="${registrationForm.role}" required>
+    <select id="role" name="role" th:field="*{role}" required>
         <option value="RoomAttendant">Room Attendant</option>
         <option value="Manager">Manager</option>
     </select><br>
-
-    </select><br>
-
-
 
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" th:field="*{username}" required><br>
     <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error-message"></span>
     <span th:if="${message}" th:text="${message}" class="error-message"></span><br>
 
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" th:field="*{email}" required><br>
+    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-message"></span><br>
 
     <label for="password">Password:</label>
     <div class="password-container">
@@ -49,8 +48,6 @@
     <small class="form-text text-muted">
         Password must contain at least one capital letter, one small letter, one number (0-9), and one special character.
     </small><br>
-
-    </div><br>
 
     <label for="confirmPassword">Confirm Password:</label>
     <div class="password-container">
