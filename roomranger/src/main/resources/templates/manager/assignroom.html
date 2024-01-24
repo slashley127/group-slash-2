@@ -10,7 +10,8 @@
 <form action="/manager/assignroom" method="POST">
     <div class="form-item">
         <div>
-       <label>Room Number</label>
+            <label th:for="roomNumber">Room Number
+            </label>
         </div>
         <div>
         <label>Room Attendant</label>
@@ -45,7 +46,6 @@
             </select>
         </div>
         <div>
-            <div>
                 <label th:for="status">Status
                 </label>
                 <select th:field="${roomAssigning.status}">
@@ -55,7 +55,6 @@
                             th:text = "${status.displayName}">
                     </option>
                 </select>
-            </div>
         </div>
         <div>
         <label>Notes</label>
