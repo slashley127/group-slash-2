@@ -9,7 +9,7 @@ public class Leave extends AbstractEntity{
     private String firstName;
     private String lastName;
     private int employeeId;
-    private int initialDays = 10; //initial 10 days for every employee
+    private final int initialDays = 20; //initial 10 days for every employee
     private int remainingDays;
     private LocalDate startDate;
     private LocalDate endDate;

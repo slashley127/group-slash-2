@@ -39,10 +39,10 @@ public class RoomController {
     @GetMapping("create")
     public String displayCreateRoomForm(Model model, HttpSession session){
         model.addAttribute("title","New Room");
-        model.addAttribute( "types", Type.values()); //display the room type list
-        model.addAttribute("occupancy",Occupancy.values()); //display room occupancy list
-        model.addAttribute("status", Status.values()); //display room status list
-        model.addAttribute("tasks", CleaningTask.values());
+//        model.addAttribute( "types", Type.values()); //display the room type list
+//        model.addAttribute("occupancy",Occupancy.values()); //display room occupancy list
+//        model.addAttribute("status", Status.values()); //display room status list
+//        model.addAttribute("tasks", CleaningTask.values());
         model.addAttribute(new Room());
         return "rooms/create";
     }
@@ -65,6 +65,6 @@ public class RoomController {
         newComment.setRoom(room);
         newComment.setCreatedDate(LocalDate.now());
         commentRepository.save(newComment);
-        return "";
+        return "redirect:/rooms";
     }
 }
