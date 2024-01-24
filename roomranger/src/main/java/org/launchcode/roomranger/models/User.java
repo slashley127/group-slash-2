@@ -4,8 +4,20 @@ import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+
 @Entity
 public class User extends AbstractEntity {
+       public void setUsername(String username) {
+       this.username = username;
+        }
+
+        public String getPwHash() {
+            return pwHash;
+        }
+
+        public void setPwHash(String pwHash) {
+            this.pwHash = pwHash;
+        }
 
     @NotNull
     private String username;

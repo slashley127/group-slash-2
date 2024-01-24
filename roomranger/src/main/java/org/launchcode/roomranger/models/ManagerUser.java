@@ -22,4 +22,7 @@ public class ManagerUser extends User{
     public void setManager(Manager manager) {
         this.manager = manager;
     }
+
+
 }
+

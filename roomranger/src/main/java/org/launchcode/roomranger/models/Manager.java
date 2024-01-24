@@ -13,15 +13,13 @@ import java.util.List;
 public class Manager extends AbstractEntity{
     private String firstName;
     private String lastName;
-   @OneToMany(mappedBy = "manager")
+    @OneToMany(mappedBy = "manager")
     private List<RoomAttendant> roomAttendants = new ArrayList<>();
     @OneToOne(cascade = CascadeType.ALL)
     @NotNull
     private ManagerUser managerUser;
-
-   @OneToMany(mappedBy = "managerCreator")
+    @OneToMany(mappedBy = "managerCreator")
     private List<Room> rooms = new ArrayList<>();
-
     public Manager() {
     }
 
@@ -72,4 +70,6 @@ public class Manager extends AbstractEntity{
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
     }
+
 }
+

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+
+<head>
+    <meta charset="UTF-8 /">
+    <title>Room Attendant Home Page</title>
+<!--    <script></script>-->
+</head>
+<body class="container">
+<!--/</div>-->
+<div>
+<a class="h4" th:href="@{roomAttendant/add}">Add Room Attendant</a>
+</div>
+<div th:if="${message}" class="alert alert-success text-center">
+    [[${message}]]
+</div>
+
+<div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>EMAIL ADDRESS</th>
+            <th>NOTES</th>
+
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="roomAttendant : ${roomAttendant}">
+            <td th:text="${roomAttendant.id}"></td>
+            <td th:text="${roomAttendant.firstName}"></td>
+            <td th:text="${roomAttendant.email}"></td>
+            <td th:text="${roomAttendant.notes}"></td>
+            <td>
+                <a  th:href="@{'roomAttendant/edit' + ${roomAttendant.id}}">Edit</a>
+                <a  th:href="@{'roomAttendant/delete' + ${roomAttendant.id}}">Delete</a>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

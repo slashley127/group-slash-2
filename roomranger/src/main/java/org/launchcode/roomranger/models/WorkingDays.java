@@ -1,6 +1,7 @@
 package org.launchcode.roomranger.models;
 
 public enum WorkingDays {
+
         SUNDAY("Sunday"),
         MONDAY("Monday"),
         TUESDAY("Tuesday"),
