@@ -38,13 +38,12 @@
     }
 </script>
 
-
-<nav th:fragment="header">
-    <h1 th:text="${title}">Coding Events</h1>
+<nav th:fragment="manager-nav">
+    <h1 th:text="${title}">Room Ranger</h1>
     <ul class="nav">
-        <li class="nav-item"><a class="nav-link" href="/events">All Events</a></li>
-        <li class="nav-item"><a class="nav-link" href="/events/create">Create Event</a></li>
-        <li class="nav-item"><a class="nav-link" href="/events/delete">Delete Events</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/manager}">DASHBOARD</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/manager/assignroom}">ASSIGN ROOM</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/manager/roomattendantlist}">ROOM ATTENDANTS </a></li>
     </ul>
 </nav>
 
