@@ -4,16 +4,12 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 public class RoomAttendant extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(insertable=false, updatable=false)
+    @Column(insertable = false, updatable = false)
     private int id;
 
     @NotBlank(message = "First name is required")
@@ -30,15 +26,12 @@ public class RoomAttendant extends AbstractEntity {
     private Manager manager;
     @OneToOne(cascade = CascadeType.ALL)
     private RoomAttendantUser roomAttendantUser;
-    private String gender;
+    public String pronoun;
+    private String workingDays;
     private String phoneNumber;
-    private List<WorkingDays> workingDays = new ArrayList<>();
-    public String getGender() {return gender;}
-
-    public void setGender(String gender) { this.gender = gender; }
-
     @Column(unique = true)
     private String email;
+    private String notes;
 
     public int getId() {
         return id;
@@ -64,10 +57,6 @@ public class RoomAttendant extends AbstractEntity {
         return phoneNumber;
     }
 
-    public List<WorkingDays> getWorkingDays() {
-        return workingDays;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -80,13 +69,6 @@ public class RoomAttendant extends AbstractEntity {
         this.notes = notes;
     }
 
-    private String notes;
-
-    public RoomAttendant() {
-
-    }
-
-
     public String getFirstName() {return firstName;}
 
     public void setFirstName(String firstName) {this.firstName = firstName;}
@@ -95,60 +77,48 @@ public class RoomAttendant extends AbstractEntity {
 
     public void setLastName(String lastName) {this.lastName = lastName;}
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-
-
     }
+
+    public void setId(int id) {this.id = id;}
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setWorkingDays(List<WorkingDays> workingDays) {
-        this.workingDays = workingDays;
-    }
+    public String getPronoun() {return pronoun;}
 
-    public RoomAttendant ( int id, String firstName, String lastName, String email, String phoneNumber, List<WorkingDays> workingDays, String username, String password, RoomAttendantUser roomAttendantUser, String notes) {
-        super();
+    public void setPronoun(String pronoun) {
+        this.pronoun = pronoun;
+    }
+    public RoomAttendantUser getRoomAttendantUser() {return roomAttendantUser;}
+    public String getWorkingDays() {return workingDays;}
+    public void setWorkingDays(String workingDays) {this.workingDays = workingDays;}
+    public String getusername() {return username;}
+    public void setusername(String username) {this.username = username;}
+    public void setpassword(String password) {this.password = password;}
+    public Manager getManager() {return manager;}
+    public void setManager(Manager manager) {this.manager = manager;}
+    public RoomAttendantUser roomAttendantUser() {return roomAttendantUser();}
+    public void setRoomAttendantUser(RoomAttendantUser roomAttendantUser) {
+        this.roomAttendantUser = roomAttendantUser;
+    }
+    public RoomAttendant() {}
+    public RoomAttendant(int id, String firstName, String lastName, String email, String phoneNumber, String username, String workingDays, String password, RoomAttendantUser roomAttendantUser, String notes, String pronoun) {
+        // super();
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email= email;
-        this.phoneNumber= phoneNumber;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
         this.manager = manager;
         this.workingDays = workingDays;
-        this.username= username;
-        this.password=password;
-        this.roomAttendantUser=roomAttendantUser;
-        this.notes=notes;
-
-    }
-
-    public RoomAttendantUser getRoomAttendantUser() {
-        return roomAttendantUser;
-    }
-
-
-
-    public String getusername() {return username;}
-
-    public void setusername(String username) {this.username = username;}
-
-    public void setpassword(String password) {this.password = password;}
-
-    public Manager getManager() {return manager;}
-
-    public void setManager(Manager manager) {this.manager = manager;}
-
-    public RoomAttendantUser roomAttendantUser() {return roomAttendantUser();}
-
-    public void setRoomAttendantUser(RoomAttendantUser roomAttendantUser) {
+        this.username = username;
+        this.password = password;
         this.roomAttendantUser = roomAttendantUser;
+        this.notes = notes;
+        this.pronoun = pronoun;
     }
 }
 

@@ -3,12 +3,13 @@
 
 
 <head>
-    <meta charset="UTF-8 /">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Room Attendant Home Page</title>
 <!--    <script></script>-->
 </head>
 <body class="container">
-<!--/</div>-->
+<h1>Add Room Attendant</h1>
+    <table class="table table-striped">
 <div>
 <a class="h4" th:href="@{roomAttendant/add}">Add Room Attendant</a>
 </div>
@@ -34,6 +35,7 @@
             <td th:text="${roomAttendant.firstName}"></td>
             <td th:text="${roomAttendant.email}"></td>
             <td th:text="${roomAttendant.notes}"></td>
+<!--            <td th:text="${roomAttendant.workingDays}"></td>-->
             <td>
                 <a  th:href="@{'roomAttendant/edit' + ${roomAttendant.id}}">Edit</a>
                 <a  th:href="@{'roomAttendant/delete' + ${roomAttendant.id}}">Delete</a>
