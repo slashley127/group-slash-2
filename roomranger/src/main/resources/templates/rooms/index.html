@@ -15,9 +15,7 @@
         <th>Check In Date</th>
         <th>Check Out Date</th>
         <th>Room Attendant Assigned</th>
-        <th>Occupancy</th>
-        <th>Cleaning Task</th>
-        <th>Status</th>
+        <th>Room is Available</th>
         <th>notes</th>
     </tr>
     </thead>
@@ -28,9 +26,7 @@
         <td th:text="${room.checkinDate}"></td>
         <td th:text="${room.checkoutDate}"></td>
         <td th:text="${room.roomAttendantAssigned}"></td>
-        <td th:text="${room.roomOccupancy.displayName != null ? room.roomOccupancy.displayName : null}"></td>
-        <td th:text="${room.cleaningTask != null ? room.cleaningTask.displayName : null}"></td>
-        <td th:text="${room.status != null ? room.status.displayName : null}"></td>
+        <td th:text="${room.available ? 'Yes' : 'No' }"></td>
         <td th:text="${room.note}"></td>
     </tr>
 

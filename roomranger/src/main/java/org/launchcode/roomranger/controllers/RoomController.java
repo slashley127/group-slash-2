@@ -39,7 +39,7 @@ public class RoomController {
     @GetMapping("create")
     public String displayCreateRoomForm(Model model, HttpSession session){
         model.addAttribute("title","New Room");
-//        model.addAttribute( "types", Type.values()); //display the room type list
+        model.addAttribute( "types", Type.values()); //display the room type list
 //        model.addAttribute("occupancy",Occupancy.values()); //display room occupancy list
 //        model.addAttribute("status", Status.values()); //display room status list
 //        model.addAttribute("tasks", CleaningTask.values());
@@ -55,6 +55,9 @@ public class RoomController {
         }
         //need authentication logic here
         roomRepository.save(newRoom);
+        if (newRoom.isAvailable()){
+            System.out.println("true");
+        }
         return "redirect:/rooms";
     }
 

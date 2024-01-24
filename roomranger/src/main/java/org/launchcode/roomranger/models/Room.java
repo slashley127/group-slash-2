@@ -19,7 +19,7 @@ public class Room extends AbstractEntity{
     private RoomAttendant roomAttendantAssigned;
     @ManyToOne
     private Manager managerCreator;
-    private boolean isAvailable;
+    private boolean available;
     private CleaningTask cleaningTask;
     private Status status;
     private String note;
@@ -33,12 +33,12 @@ public class Room extends AbstractEntity{
     public Room() {
     }
 
-    public Room(String roomNumber, Type roomType, RoomAttendant roomAttendantAssigned, Manager managerCreator, boolean isAvailable, CleaningTask cleaningTask, Status status, String note, String guest, int numberOfGuests, LocalDate checkinDate, LocalDate checkoutDate, List<Comment> comments) {
+    public Room(String roomNumber, Type roomType, RoomAttendant roomAttendantAssigned, Manager managerCreator, boolean available, CleaningTask cleaningTask, Status status, String note, String guest, int numberOfGuests, LocalDate checkinDate, LocalDate checkoutDate, List<Comment> comments) {
         this.roomNumber = roomNumber;
         this.roomType = roomType;
         this.roomAttendantAssigned = roomAttendantAssigned;
         this.managerCreator = managerCreator;
-        this.isAvailable = isAvailable;
+        this.available = available;
         this.cleaningTask = cleaningTask;
         this.status = status;
         this.note = note;
@@ -86,11 +86,11 @@ public class Room extends AbstractEntity{
     }
 
     public boolean isAvailable() {
-        return isAvailable;
+        return available;
     }
 
     public void setAvailable(boolean available) {
-        isAvailable = available;
+        this.available = available;
     }
 
     public CleaningTask getCleaningTask() {

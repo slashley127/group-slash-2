@@ -3,8 +3,8 @@ package org.launchcode.roomranger.models;
 public enum Type {
     STANDARD("Standard Room"),
     DOUBLE("Double Room"),
-    SUIT("Suit"),
-    DELUXE("Deluxe Rom"),
+    SUITE("Suite"),
+    DELUXE("Deluxe Room"),
     EXECUTIVE("Executive Room"),
     CONNECTING("Connecting Rooms"),
     ADJOINING("Adjoining Rooms"),
