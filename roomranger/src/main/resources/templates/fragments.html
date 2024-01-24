@@ -41,7 +41,8 @@
 <nav th:fragment="manager-nav">
     <h1 th:text="${title}">Room Ranger</h1>
     <ul class="nav">
-        <li class="nav-item"><a class="nav-link" th:href="@{/manager}">DASHBOARD </a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/manager}">DASHBOARD</a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/manager/assignroom}">ASSIGN ROOM</a></li>
         <li class="nav-item"><a class="nav-link" th:href="@{/manager/roomattendantlist}">ROOM ATTENDANTS </a></li>
     </ul>
 </nav>

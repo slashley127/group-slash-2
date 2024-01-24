@@ -31,7 +31,7 @@ public class ManagerHomepageController {
     }
 
     @GetMapping("assignroom")
-    public String renderAssignRoomForm() {
+    public String renderAssignRoomForm(Model model) {
         return "manager/assignroom";
     }
 }
