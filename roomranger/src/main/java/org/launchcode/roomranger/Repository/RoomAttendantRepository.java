@@ -11,6 +11,7 @@ import java.util.List;
 
 public interface RoomAttendantRepository extends CrudRepository<RoomAttendant, Integer> {
 
+    List<RoomAttendant> findAll();
     List<RoomAttendant> findAllByManager(Manager manager);
 
 

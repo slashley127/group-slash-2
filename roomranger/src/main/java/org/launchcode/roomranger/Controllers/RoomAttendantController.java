@@ -3,7 +3,7 @@ package org.launchcode.roomranger.Controllers;
         import jakarta.validation.Valid;
         import org.launchcode.roomranger.Repository.ManagerRepository;
         import org.launchcode.roomranger.Repository.RoomAttendantRepository;
-        import org.launchcode.roomranger.models.DTO.AddRoomAttendantDTO;
+        //import org.launchcode.roomranger.models.DTO.AddRoomAttendantDTO;
         import org.launchcode.roomranger.models.User;
         import org.springframework.stereotype.Controller;
         import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,7 @@ package org.launchcode.roomranger.Controllers;
 
 
 @Controller
-  @RequestMapping(value = "roomattendant")
+  @RequestMapping(value = "roomAttendant")
    public class RoomAttendantController {
 
     @Autowired
@@ -29,7 +29,8 @@ package org.launchcode.roomranger.Controllers;
     @GetMapping
     public String displayAllRoomAttendants(Model model) {
         model.addAttribute("title", "All Room Attendants");
-        model.addAttribute("Room Attendant", roomAttendantRepository.findAll());
+        model.addAttribute("roomAttendant", roomAttendantRepository.findAll());
+        //System.out.println("Room attendant list size:"+roomAttendantRepository.findAll().size());
         return "roomAttendant/index";
     }
 
@@ -37,7 +38,7 @@ package org.launchcode.roomranger.Controllers;
     @GetMapping("add")
     public String addRoomAttendant(Model model) {
         model.addAttribute("title", "Add Room Attendant");
-        model.addAttribute(new AddRoomAttendantDTO());
+        model.addAttribute(new RoomAttendant());
         return "roomAttendant/add";
     }
 
@@ -50,7 +51,7 @@ package org.launchcode.roomranger.Controllers;
         redirectAttributes.addFlashAttribute("message", "The user has been saved successfully.");
         roomAttendantRepository.save(newRoomAttendant);
             System.out.println("Successfully saved entity");
-            return "redirect:";
+            return "redirect:/roomAttendant";
              }
 
 

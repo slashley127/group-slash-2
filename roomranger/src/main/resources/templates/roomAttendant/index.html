@@ -10,7 +10,7 @@
 <body class="container">
 <!--/</div>-->
 <div>
-<a class="h4" th:href="@{roomattendant/add}">Add Room Attendant</a>
+<a class="h4" th:href="@{roomAttendant/add}">Add Room Attendant</a>
 </div>
 <div th:if="${message}" class="alert alert-success text-center">
     [[${message}]]
@@ -22,8 +22,8 @@
         <tr>
             <th>ID</th>
             <th>NAME</th>
-            <th>SCHEDULE</th>
-            <th>NOTES</th>
+            <th>EMAIL ADDRESS</th>
+
         </tr>
         </thead>
         <tbody>
@@ -34,12 +34,12 @@
 <!--            <td>Please Work!!</td>-->
 <!--        </tr>-->
 
-        <tr th:each="addRoomAttendantDTO : ${roomattendant}">
-            <td th:text="${addRoomAttendantDTO.ID}"></td>
+        <tr th:each="addRoomAttendantDTO : ${roomAttendant}">
+            <td th:text="${addRoomAttendantDTO.id}"></td>
             <td th:text="${addRoomAttendantDTO.firstName}"></td>
-            <td th:text="${addRoomAttendantDTO.workingDays}"></td>
-            <td th:text="${addRoomAttendantDTO.notes}"></td>
+            <td th:text="${addRoomAttendantDTO.email}"></td>
         </tr>
+
         </tbody>
     </table>
 </div>

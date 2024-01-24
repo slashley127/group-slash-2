@@ -14,7 +14,7 @@ public class RoomAttendant extends AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(insertable=false, updatable=false)
-    private int ID;
+    private int id;
 
     @NotBlank(message = "First name is required")
     @Column(length = 30)
@@ -40,6 +40,48 @@ public class RoomAttendant extends AbstractEntity {
     @Column(unique = true)
     private String email;
 
+    public int getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public List<WorkingDays> getWorkingDays() {
+        return workingDays;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    private String notes;
+
     public RoomAttendant() {
 
     }
@@ -53,8 +95,8 @@ public class RoomAttendant extends AbstractEntity {
 
     public void setLastName(String lastName) {this.lastName = lastName;}
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setPhoneNumber(String phoneNumber) {
@@ -71,9 +113,9 @@ public class RoomAttendant extends AbstractEntity {
 
 
 
-    public RoomAttendant ( int ID, String firstName, String lastName, String email, String phoneNumber, List<WorkingDays> workingDays, String username, String password, RoomAttendantUser roomAttendantUser) {
+    public RoomAttendant ( int id, String firstName, String lastName, String email, String phoneNumber, List<WorkingDays> workingDays, String username, String password, RoomAttendantUser roomAttendantUser) {
         super();
-        this.ID = ID;
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email= email;
