@@ -33,7 +33,6 @@ public class ManagerHomepageController {
 
     @GetMapping("assignroom")
     public String renderAssignRoomForm(Model model) {
-        model.addAttribute("title", "Assign Room");
         model.addAttribute("status", Status.values());
         model.addAttribute("task", Task.values());
         model.addAttribute(new RoomAssigning());
