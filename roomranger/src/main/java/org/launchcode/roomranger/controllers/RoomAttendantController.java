@@ -25,6 +25,7 @@ public class RoomAttendantController {
 
     @Autowired
     private RoomAttendantRepository roomAttendantRepository;
+
     @GetMapping
     public String displayAllRooms(@RequestParam(required = false) Integer attendantId, Model model, HttpSession session){
         model.addAttribute("today", LocalDate.now());
@@ -33,9 +34,5 @@ public class RoomAttendantController {
         return "attendant/index";
     }
 
-    //apply leave system
-    @GetMapping("leave")
-    public String displayLeaveForm(Model model){
-        return "attendant/leaverequest";
-    }
+
 }
