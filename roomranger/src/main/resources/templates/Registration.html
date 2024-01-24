@@ -29,12 +29,18 @@
 
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" th:field="*{username}" required><br>
-    <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error-message"></span><br>
+    <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error-message"></span>
+    <span th:if="${message}" th:text="${message}" class="error-message"></span><br>
+
 
     <label for="password">Password:</label>
     <div class="password-container">
         <input type="password" id="password" name="password" th:field="*{password}" required>
         <span class="eye-icon" onclick="togglePasswordVisibility('password')" alt="Toggle Password Visibility">👁️</span>
+    </div>
+    <small class="form-text text-muted">
+        Password must contain at least one capital letter, one small letter, one number (0-9), and one special character.
+    </small><br>
 
     </div><br>
 

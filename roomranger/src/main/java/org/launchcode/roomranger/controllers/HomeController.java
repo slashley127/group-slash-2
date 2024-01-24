@@ -14,7 +14,7 @@ public class HomeController {
     @GetMapping
     public String index(Model model) {
         model.addAttribute(new LoginFormDTO());
-        return "index";
+        return "frontpage";
     }
 }
 

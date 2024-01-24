@@ -1,4 +1,4 @@
-package org.launchcode.roomranger.Controllers;
+package org.launchcode.roomranger.controllers;
 
 import org.launchcode.roomranger.models.DTO.LoginFormDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.launchcode.roomranger.data.UserRepository;
 import org.launchcode.roomranger.models.User;
 
+import java.util.Set;
+import jakarta.validation.Valid;
 
-import java.util.Optional;
 
 @Controller
 public class LoginController {
@@ -33,23 +34,32 @@ public class LoginController {
             return "login";
         }
 
-        // Check credentials directly using UserRepository
-        User user = userRepository.findByUsername(loginForm.getUsername());
-
+         User user = userRepository.findByUsername(loginForm.getUsername());
         if (user != null && user.getPassword().equals(loginForm.getPassword())) {
-            // If login is successful, redirect to the user page
-            return "redirect:/user-page";
+            // Authentication successful
+            Set<String> roles = user.getRoles();
+            if (roles.contains("manager")) {
+                return "redirect:/manager-page";
+            } else if (roles.contains("room_attendant")) {
+                return "redirect:/room-attendant-page";
+            } else {
+                return "redirect:/user-page";
+            }
+        } else {
+            // Invalid username or password
+            bindingResult.rejectValue("password", "error.loginForm", "Invalid username or password");
+            return "login";
         }
 
-        // If credentials are not valid, add an error message
-        bindingResult.rejectValue("password", "error.loginForm", "Invalid username or password");
-        return "login";
+}
+
+    @GetMapping("/manager-page")
+    public String showManagerPage() {
+         return "manager";
     }
 
-
-    @GetMapping("/user-page")
-    public String showUserPage() {
-        // Display user page after successful authentication
-        return "user";
+    @GetMapping("/room-attendant-page")
+    public String showRoomAttendantPage() {
+        return "room_attendant";
     }
 }

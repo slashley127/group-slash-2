@@ -24,6 +24,8 @@ dependencies {
 	implementation 'org.springframework.security:spring-security-crypto'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+
 }
 
 tasks.named('test') {

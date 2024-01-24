@@ -6,14 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <th:replace fragment="fragments :: fragments"></th:replace>
+    <script th:src="@{/js/script.js}" defer></script>
+
 </head>
 
+<body th:class="${mode}" id="modeToggle">
 
-<body>
 <header class="header">
     <h1>RoomRanger</h1>
-    <div class="top-right">
 
+    <div class="top-right">
         <div class="role-dropdown">
             <label for="role">Select Your Role:</label>
             <select id="role" name="role">
@@ -24,9 +26,7 @@
         <div class="login-button">
             <a href="/login">login</a>
         </div>
-        <div class="registration-link" id="registration-link">
-
-        </div>
+        <div class="registration-link" id="registration-link"></div>
     </div>
 </header>
 
@@ -39,21 +39,28 @@
         <a href="/about">About Us</a>
         <a href="/contact">Contact</a>
     </nav>
+    <button id="themeToggle" onclick="Mode()" class="mode">Mode</button>
 </main>
 
-
-
 <script>
-    document.getElementById('role').addEventListener('change', function () {
-        let registrationLink = document.getElementById('registration-link');
-        let selectedRole = this.value;
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('role').addEventListener('change', function () {
+            let registrationLink = document.getElementById('registration-link');
+            let selectedRole = this.value;
 
-        if (selectedRole === 'HousekeepingManager') {
-            registrationLink.innerHTML = '<a href="/Registration">Registration</a>';
-        } else {
-            registrationLink.innerHTML = '';
-        }
+            if (selectedRole === 'HousekeepingManager') {
+                registrationLink.innerHTML = '<a href="/Registration">Registration</a>';
+            } else {
+                registrationLink.innerHTML = '';
+            }
+        });
     });
+
+    function Mode() {
+        let body = document.body;
+        body.classList.toggle('dark-mode');
+        body.classList.toggle('light-mode');
+    }
 </script>
 
 </body>
