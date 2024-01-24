@@ -25,6 +25,14 @@
     <label for="dob">Date of Birth:</label>
     <input type="date" id="dob" name="dob" th:field="*{dob}" required><br>
     <span th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}" class="error-message"></span><br>
+    <label for="role">Role:</label>
+    <select id="role" name="role" th:value="${registrationForm.role}" required>
+        <option value="RoomAttendant">Room Attendant</option>
+        <option value="Manager">Manager</option>
+    </select><br>
+
+    </select><br>
+
 
 
     <label for="username">Username:</label>
@@ -56,18 +64,18 @@
 
 <script th:inline="javascript">
     function togglePasswordVisibility(fieldId) {
-        var passwordInput = document.getElementById(fieldId);
-        var fieldType = passwordInput.type;
+        let passwordInput = document.getElementById(fieldId);
+        let fieldType = passwordInput.type;
         passwordInput.type = fieldType === "text" ? "password" : "text";
     }
 </script>
 <script th:inline="javascript">
     function validateAge() {
-        var dobInput = document.getElementById("dob");
-        var enteredDate = new Date(dobInput.value);
-        var currentDate = new Date();
+        let dobInput = document.getElementById("dob");
+        let enteredDate = new Date(dobInput.value);
+        let currentDate = new Date();
 
-        var age = currentDate.getFullYear() - enteredDate.getFullYear();
+        let age = currentDate.getFullYear() - enteredDate.getFullYear();
 
         if (age < 15) {
             alert("You must be at least 15 years old to register.");

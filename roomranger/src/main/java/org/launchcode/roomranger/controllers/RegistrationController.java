@@ -77,12 +77,10 @@ public class RegistrationController {
         User user = userRepository.findByUsername(username);
 
         if (user != null) {
-            // Log that the username is not unique
             logger.info("Username {} is already in use.", username);
             return false;
         }
 
-        // Log that the username is unique
         logger.info("Username {} is unique.", username);
         return true;
     }
@@ -95,22 +93,24 @@ public class RegistrationController {
         user.setUsername(registrationForm.getUsername());
         user.setPassword(registrationForm.getPassword());
 
+        // Set the role (assuming 'role' is a property of RegistrationFormDTO)
+        user.setRole(registrationForm.getRole());
+
         return user;
     }
 
+
     private boolean isAnyFieldEmpty(RegistrationFormDTO registrationForm) {
-        // Check if any field is left empty
-        return registrationForm.getFirstName().isEmpty() ||
+                return registrationForm.getFirstName().isEmpty() ||
                 registrationForm.getLastName().isEmpty() ||
                 registrationForm.getDob().isEmpty() ||
                 registrationForm.getUsername().isEmpty() ||
                 registrationForm.getPassword().isEmpty() ||
-                registrationForm.getConfirmPassword().isEmpty();
+                registrationForm.getConfirmPassword().isEmpty()||
+                registrationForm.getRole().isEmpty();
     }
 
     private boolean isPasswordValid(String password) {
-        // Validate the password based on security requirements
-        // At least one capital, one small letter, one number (0-9), and one special character
         String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
         return password.matches(passwordRegex);
     }

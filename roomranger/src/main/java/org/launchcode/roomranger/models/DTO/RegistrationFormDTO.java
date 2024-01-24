@@ -25,6 +25,9 @@ public class RegistrationFormDTO {
     @NotBlank(message = "Confirm Password is required")
     private String confirmPassword;
 
+    @NotBlank(message = "Role is required")
+    private String role;
+
     public String getFirstName() {
         return firstName;
     }
@@ -71,5 +74,13 @@ public class RegistrationFormDTO {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

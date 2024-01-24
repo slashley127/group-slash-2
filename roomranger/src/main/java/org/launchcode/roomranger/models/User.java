@@ -1,7 +1,6 @@
 package org.launchcode.roomranger.models;
 
 import jakarta.persistence.*;
-
 import java.util.Set;
 
 @Entity
@@ -12,20 +11,20 @@ public class User {
     private Long id;
 
     private String username;
-
     private String firstName;
     private String lastName;
     private String dob;
+
     @Column(nullable = false)
     @Basic(optional = false)
     private String password;
 
+    private String role; // New field for a single role
+
     @ElementCollection
-    private Set<String> roles;
+    private Set<String> roles; // Set of roles
 
     private String confirmPassword;
-
-
 
     public User() {
         // Default constructor
@@ -35,6 +34,8 @@ public class User {
         this.username = username;
         this.password = password;
     }
+
+    // Getters and setters...
 
     public Long getId() {
         return id;
@@ -82,6 +83,14 @@ public class User {
 
     public void setDob(String dob) {
         this.dob = dob;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public Set<String> getRoles() {
