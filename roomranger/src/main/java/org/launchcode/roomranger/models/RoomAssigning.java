@@ -1,14 +1,19 @@
 package org.launchcode.roomranger.models;
 
 import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
 @Entity
 public class RoomAssigning extends AbstractEntity {
 
+    @NotBlank(message="Name is required")
     private String guest;
+    @NotBlank(message="Number of guests is required")
     private int numberOfGuests;
+    @NotBlank(message="Number of guests is required")
     private Status status;
     private LocalDate checkIn;
     private LocalDate checkOut;
