@@ -16,16 +16,46 @@
         <label>Room Attendant</label>
         </div>
         <div>
-        <label>Guest</label>
+        <label>Guest Name</label>
         </div>
         <div>
-        <label>Check In</label>
+            <label>Number of guests</label>
+        </div>
+
+        <div>
+        <label>Check In
+        <input type="date" th:field="${roomAssigning.checkIn}">
+        </label>
+        </div>
+
+        <div>
+        <label>Check Out
+        <input type="date" th:field="${roomAssigning.checkOut}">
+        </label>
         </div>
         <div>
-        <label>Check Out</label>
+            <label th:for="task">Cleaning Task
+            </label>
+            <select th:field="${roomAssigning.task}">
+                <option value =""></option>
+                <option th:each = "task : ${task}"
+                    th:value = "${task}"
+                    th:text = "${task.displayName}">
+                </option>
+            </select>
         </div>
         <div>
-            <label>Cleaning task</label>
+            <div>
+                <label th:for="status">Status
+                </label>
+                <select th:field="${roomAssigning.status}">
+                    <option value =""></option>
+                    <option th:each = "status : ${status}"
+                            th:value = "${status}"
+                            th:text = "${status.displayName}">
+                    </option>
+                </select>
+            </div>
         </div>
         <div>
         <label>Notes</label>

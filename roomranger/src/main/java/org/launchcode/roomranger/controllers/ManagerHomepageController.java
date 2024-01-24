@@ -1,13 +1,14 @@
 package org.launchcode.roomranger.controllers;
 import org.launchcode.roomranger.data.RoomAttendantRepository;
 import org.launchcode.roomranger.data.RoomRepository;
+import org.launchcode.roomranger.models.Task;
+import org.launchcode.roomranger.models.RoomAssigning;
+import org.launchcode.roomranger.models.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("manager")
@@ -32,6 +33,11 @@ public class ManagerHomepageController {
 
     @GetMapping("assignroom")
     public String renderAssignRoomForm(Model model) {
+        model.addAttribute("title", "Assign Room");
+        model.addAttribute("status", Status.values());
+        model.addAttribute("task", Task.values());
+        model.addAttribute(new RoomAssigning());
         return "manager/assignroom";
+
     }
 }

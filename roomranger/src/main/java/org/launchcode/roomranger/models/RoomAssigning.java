@@ -10,20 +10,20 @@ public class RoomAssigning extends AbstractEntity {
     private String guest;
     private int numberOfGuests;
     private Status status;
-    private LocalDate checkInDate;
-    private LocalDate checkOutDate;
-    private CleaningTask cleaningTask;
+    private LocalDate checkIn;
+    private LocalDate checkOut;
+    private Task task;
     private String note;
 
     public RoomAssigning() {}
 
-    public RoomAssigning(String guest, int numberOfGuests, Status status, LocalDate checkInDate, LocalDate checkOutDate, CleaningTask cleaningTask, String note) {
+    public RoomAssigning(String guest, int numberOfGuests, Status status, LocalDate checkIn, LocalDate checkOut, Task task, String note) {
         this.guest = guest;
         this.numberOfGuests = numberOfGuests;
         this.status = status;
-        this.checkInDate = checkInDate;
-        this.checkOutDate = checkOutDate;
-        this.cleaningTask = cleaningTask;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.task = task;
         this.note = note;
     }
 
@@ -51,28 +51,28 @@ public class RoomAssigning extends AbstractEntity {
         this.status = status;
     }
 
-    public LocalDate getCheckInDate() {
-        return checkInDate;
+    public LocalDate getCheckIn() {
+        return checkIn;
     }
 
-    public void setCheckInDate(LocalDate checkInDate) {
-        this.checkInDate = checkInDate;
+    public void setCheckIn(LocalDate checkIn) {
+        this.checkIn = checkIn;
     }
 
-    public LocalDate getCheckOutDate() {
-        return checkOutDate;
+    public LocalDate getCheckOut() {
+        return checkOut;
     }
 
-    public void setCheckOutDate(LocalDate checkOutDate) {
-        this.checkOutDate = checkOutDate;
+    public void setCheckOut(LocalDate checkOut) {
+        this.checkOut = checkOut;
     }
 
-    public CleaningTask getCleaningTask() {
-        return cleaningTask;
+    public Task getTask() {
+        return task;
     }
 
-    public void setCleaningTask(CleaningTask cleaningTask) {
-        this.cleaningTask = cleaningTask;
+    public void setTask(Task task) {
+        this.task = task;
     }
 
     public String getNote() {
