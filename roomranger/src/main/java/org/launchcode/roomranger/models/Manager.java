@@ -70,4 +70,6 @@ public class Manager extends AbstractEntity{
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
     }
+
 }
+

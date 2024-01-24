@@ -2,8 +2,8 @@ package org.launchcode.roomranger.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-//import org.apache.catalina.Manager;
 import org.springframework.data.annotation.Id;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,6 +101,8 @@ public class RoomAttendant extends AbstractEntity {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+
+
     }
 
     public void setEmail(String email) {
@@ -110,8 +112,6 @@ public class RoomAttendant extends AbstractEntity {
     public void setWorkingDays(List<WorkingDays> workingDays) {
         this.workingDays = workingDays;
     }
-
-
 
     public RoomAttendant ( int id, String firstName, String lastName, String email, String phoneNumber, List<WorkingDays> workingDays, String username, String password, RoomAttendantUser roomAttendantUser, String notes) {
         super();
@@ -154,3 +154,4 @@ public class RoomAttendant extends AbstractEntity {
 
 
 
+   

@@ -1,17 +1,20 @@
 package org.launchcode.roomranger.models;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
 
 @Entity
-public class ManagerUser extends User {
+public class ManagerUser extends User{
     @OneToOne(mappedBy = "managerUser")
     private Manager manager;
 
-    public ManagerUser(String username, String password) {
-        super(username, password);
+    public ManagerUser() {
     }
+
+    public ManagerUser(Manager manager) {
+        this.manager = manager;
+    }
+
     public Manager getManager() {
         return manager;
     }
@@ -19,6 +22,7 @@ public class ManagerUser extends User {
     public void setManager(Manager manager) {
         this.manager = manager;
     }
+
 
 }
 
