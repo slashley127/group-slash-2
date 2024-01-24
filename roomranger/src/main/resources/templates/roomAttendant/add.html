@@ -82,10 +82,16 @@
             <label for="others">Saturday</label>
         <p class="error" th:errors="${roomAttendant.workingDays}"></p>
     </div>
-<!--    <div>-->
-<!--        <label>Upload Picture</label>-->
-<!--    <input type="image" src="img_submit.gif" alt="Submit" width="48" height="48">-->
-<!--    </div>-->
+    <div>
+        <label>Upload Picture</label>
+    <input type="image" src="img_submit.gif" alt="Submit" width="48" height="48">
+    </div>
+    <div class="form-group">
+        <label>Notes
+            <input th:field="${roomAttendant.notes}" class="form-control">
+        </label>
+        <p class="error" th:errors="${roomAttendant.notes}"></p>
+    </div>
     <input type="submit" value="Submit">
     <input type="reset" value="Reset">
     <input type="button" value="Back">

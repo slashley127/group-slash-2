@@ -113,7 +113,7 @@ public class RoomAttendant extends AbstractEntity {
 
 
 
-    public RoomAttendant ( int id, String firstName, String lastName, String email, String phoneNumber, List<WorkingDays> workingDays, String username, String password, RoomAttendantUser roomAttendantUser) {
+    public RoomAttendant ( int id, String firstName, String lastName, String email, String phoneNumber, List<WorkingDays> workingDays, String username, String password, RoomAttendantUser roomAttendantUser, String notes) {
         super();
         this.id = id;
         this.firstName = firstName;
@@ -125,6 +125,7 @@ public class RoomAttendant extends AbstractEntity {
         this.username= username;
         this.password=password;
         this.roomAttendantUser=roomAttendantUser;
+        this.notes=notes;
 
     }
 

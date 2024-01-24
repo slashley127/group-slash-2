@@ -23,21 +23,21 @@
             <th>ID</th>
             <th>NAME</th>
             <th>EMAIL ADDRESS</th>
+            <th>NOTES</th>
 
         </tr>
         </thead>
         <tbody>
-<!--        <tr>-->
-<!--            <th scope="row">1</th>-->
-<!--            <td>sam</td>-->
-<!--            <td>sunday</td>-->
-<!--            <td>Please Work!!</td>-->
-<!--        </tr>-->
 
-        <tr th:each="addRoomAttendantDTO : ${roomAttendant}">
-            <td th:text="${addRoomAttendantDTO.id}"></td>
-            <td th:text="${addRoomAttendantDTO.firstName}"></td>
-            <td th:text="${addRoomAttendantDTO.email}"></td>
+        <tr th:each="roomAttendant : ${roomAttendant}">
+            <td th:text="${roomAttendant.id}"></td>
+            <td th:text="${roomAttendant.firstName}"></td>
+            <td th:text="${roomAttendant.email}"></td>
+            <td th:text="${roomAttendant.notes}"></td>
+            <td>
+                <a  th:href="@{'roomAttendant/edit' + ${roomAttendant.id}}">Edit</a>
+                <a  th:href="@{'roomAttendant/delete' + ${roomAttendant.id}}">Delete</a>
+            </td>
         </tr>
 
         </tbody>
