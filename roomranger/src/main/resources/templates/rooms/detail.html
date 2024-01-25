@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments::head"></head>
+<body class="container">
+<h2 th:text="${title}">Room Ranger</h2>
+<table class="table table-striped" th:object="${room}">
+    <tr>
+        <th>Room Number</th>
+        <td th:text="*{roomNumber}"></td>
+    </tr>
+    <tr>
+        <th>Room Type</th>
+        <td th:text="*{roomType}"></td>
+    </tr>
+    <tr>
+        <th>Status</th>
+        <td th:text="*{status}"></td>
+    </tr>
+    <tr>
+        <th>Cleaning Task</th>
+        <td th:text="*{cleaningTask}"></td>
+    </tr>
+    <tr>
+        <th>Guest</th>
+        <td th:text="*{guest}"></td>
+    </tr>
+    <tr>
+        <th>Check In Date</th>
+        <td th:text="*{checkinDate}"></td>
+    </tr>
+    <tr>
+        <th>Check Out Date</th>
+        <td th:text="*{checkoutDate}"></td>
+    </tr>
+    <tr>
+        <th>Note</th>
+        <td th:text="*{note}"></td>
+    </tr>
+</table>
+</body>
+</html>

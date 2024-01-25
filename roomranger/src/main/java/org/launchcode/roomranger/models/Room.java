@@ -2,25 +2,28 @@ package org.launchcode.roomranger.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @Entity
 public class Room extends AbstractEntity{
 
-    @NotBlank
+    @NotBlank(message = "Give a Room number!")
     private String roomNumber;
-    private RoomType roomType;
+    private Type roomType;
     @ManyToOne
     private RoomAttendant roomAttendantAssigned;
     @ManyToOne
     private Manager managerCreator;
+
     private Occupancy roomOccupancy;
-    private String cleaningTask;
+
+    private boolean available;
+    private CleaningTask cleaningTask;
 
     private Status status;
 
@@ -29,18 +32,18 @@ public class Room extends AbstractEntity{
     private int numberOfGuests;
     private LocalDate checkinDate;
     private LocalDate checkoutDate;
+    @OneToMany(mappedBy = "room")
+    private List<Comment> comments = new ArrayList<>();
 
     public Room() {
     }
 
-
-    public Room(String roomNumber, RoomType roomType, RoomAttendant roomAttendantAssigned, Manager managerCreator, Occupancy roomOccupancy, String cleaningTask, Status status, String note, String guest, int numberOfGuests, LocalDate checkinDate, LocalDate checkoutDate) {
-
+    public Room(String roomNumber, Type roomType, RoomAttendant roomAttendantAssigned, Manager managerCreator, boolean available, CleaningTask cleaningTask, Status status, String note, String guest, int numberOfGuests, LocalDate checkinDate, LocalDate checkoutDate, List<Comment> comments) {
         this.roomNumber = roomNumber;
         this.roomType = roomType;
         this.roomAttendantAssigned = roomAttendantAssigned;
         this.managerCreator = managerCreator;
-        this.roomOccupancy = roomOccupancy;
+        this.available = available;
         this.cleaningTask = cleaningTask;
 
         this.status = status;
@@ -50,6 +53,7 @@ public class Room extends AbstractEntity{
         this.numberOfGuests = numberOfGuests;
         this.checkinDate = checkinDate;
         this.checkoutDate = checkoutDate;
+        this.comments = comments;
     }
 
     public Room(String roomNumber) {
@@ -64,11 +68,11 @@ public class Room extends AbstractEntity{
         this.roomNumber = roomNumber;
     }
 
-    public RoomType getRoomType() {
+    public Type getRoomType() {
         return roomType;
     }
 
-    public void setRoomType(RoomType roomType) {
+    public void setRoomType(Type roomType) {
         this.roomType = roomType;
     }
 
@@ -88,19 +92,19 @@ public class Room extends AbstractEntity{
         this.managerCreator = managerCreator;
     }
 
-    public Occupancy getRoomOccupancy() {
-        return roomOccupancy;
+    public boolean isAvailable() {
+        return available;
     }
 
-    public void setRoomOccupancy(Occupancy roomOccupancy) {
-        this.roomOccupancy = roomOccupancy;
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
-    public String getCleaningTask() {
+    public CleaningTask getCleaningTask() {
         return cleaningTask;
     }
 
-    public void setCleaningTask(String cleaningTask) {
+    public void setCleaningTask(CleaningTask cleaningTask) {
         this.cleaningTask = cleaningTask;
     }
 
@@ -151,5 +155,18 @@ public class Room extends AbstractEntity{
 
     public void setCheckoutDate(LocalDate checkoutDate) {
         this.checkoutDate = checkoutDate;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    @Override
+    public String toString() {
+        return roomNumber;
     }
 }
