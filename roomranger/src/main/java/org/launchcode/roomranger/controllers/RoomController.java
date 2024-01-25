@@ -40,19 +40,23 @@ public class RoomController {
     public String displayCreateRoomForm(Model model, HttpSession session){
         model.addAttribute("title","New Room");
         model.addAttribute( "types", Type.values()); //display the room type list
-//        model.addAttribute("occupancy",Occupancy.values()); //display room occupancy list
-//        model.addAttribute("status", Status.values()); //display room status list
-//        model.addAttribute("tasks", CleaningTask.values());
         model.addAttribute(new Room());
         return "rooms/create";
     }
 
+    public void validateRoomNumber(String roomNumber){
+        if (roomRepository.findByRoomNumber(roomNumber).isPresent()){
+//            throw new RoomNumberNoticUniqueException("Room number is already in use");
+            throw new RuntimeException("Room number is already in use");
+        }
+    }
     @PostMapping("create")
     public String processCreateRoomForm(@ModelAttribute @Valid Room newRoom, Errors errors, Model model, HttpSession session){
         if (errors.hasErrors()){
             model.addAttribute("title", "Add New Room");
             return "rooms/create";
         }
+        validateRoomNumber(newRoom.getRoomNumber());
         //need authentication logic here
         roomRepository.save(newRoom);
         if (newRoom.isAvailable()){

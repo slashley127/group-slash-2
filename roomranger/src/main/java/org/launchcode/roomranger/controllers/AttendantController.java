@@ -15,7 +15,7 @@ import java.time.LocalDate;
 
 @Controller
 @RequestMapping("attendant")
-public class RoomAttendantController {
+public class AttendantController {
 
     @Autowired
     private RoomRepository roomRepository;
@@ -29,10 +29,15 @@ public class RoomAttendantController {
     @GetMapping
     public String displayAllRooms(@RequestParam(required = false) Integer attendantId, Model model, HttpSession session){
         model.addAttribute("today", LocalDate.now());
-        model.addAttribute("title", "All Rooms");
+        model.addAttribute("title", "Next");
         model.addAttribute("rooms", roomRepository.findAll());
+//        model.addAttribute("rooms", roomRepository.findByRoomAttendantAssigned(attendantId).get());
         return "attendant/index";
     }
 
-
+    @GetMapping("detail")
+    public String displayRoomDeatil(Model model){
+//        model.addAttribute("room",);
+        return "room/detail";
+    }
 }
