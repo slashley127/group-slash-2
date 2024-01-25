@@ -18,8 +18,8 @@ body {
 }
 
 .light-mode #themeToggle {
-  background-color: transparent;
-  color: ForestGreen;
+  background-color: White;
+  color: Black;
 }
 
 body::before {
