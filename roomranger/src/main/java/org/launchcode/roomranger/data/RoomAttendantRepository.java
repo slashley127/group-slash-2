@@ -9,5 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface RoomAttendantRepository extends CrudRepository<RoomAttendant, Integer> {
-//    List<RoomAttendant> finaAllByManager(Manager manager);
+    List<RoomAttendant> findAll();
+    List<RoomAttendant> findAllByManager(Manager manager);
 }
