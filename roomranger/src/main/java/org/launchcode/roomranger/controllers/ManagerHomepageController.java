@@ -31,6 +31,12 @@ public class ManagerHomepageController {
         return "manager/roomattendantlist";
     }
 
+    @GetMapping("roomslist")
+    public String renderListOfRooms(Model model){
+        model.addAttribute("rooms", roomRepository.findAll());
+        return "manager/roomslist";
+    }
+
     @GetMapping("assignroom")
     public String renderAssignRoomForm(Model model) {
         model.addAttribute("status", Status.values());

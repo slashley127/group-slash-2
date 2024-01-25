@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="//www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of Rooms</title>
+</head>
+<body>
+<nav th:replace = "~{fragments :: manager-nav}"></nav>
+<h1>ROOM LIST</h1>
+<th:block>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ROOM NB</th>
+            <th>ROOM AVAILABILITY</th>
+        </tr>
+        </thead>
+        <tr th:each = "room : ${rooms}">
+            <td th:text="${room.roomNumber}"></td>
+            <td>IN PROGRESS</td>
+            <td>IN PROGRESS</td>
+        </tr>
+    </table>
+</th:block>
+</body>
+</html>
