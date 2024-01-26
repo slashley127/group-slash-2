@@ -1,34 +1,49 @@
 package org.launchcode.roomranger.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-public class RoomAssigning extends AbstractEntity {
+public class RoomAssigned extends AbstractEntity {
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Room room;
 
     @Size(min = 2, max = 30, message = "Name of Guest must be 2-30 characters long")
     private String guest;
+
     @Min(value = 1, message = "Number of Guests must be between 1-5")
     @Max(value = 5, message = "Number of Guests must be between 1-5")
     private int numberOfGuests;
+
     @NotNull(message = "Status is Required")
     private Status status;
+
     @NotNull(message = "CheckIn Date is Required")
     private LocalDate checkIn;
+
     @NotNull(message = "CheckOut Date is Required")
     private LocalDate checkOut;
+
     @NotNull(message = "Task is Required")
     private Task task;
     private String note;
 
-    public RoomAssigning() {
+    public RoomAssigned() {
+        this.room = room;
         this.status = status;
         this.task = task;
     }
 
-    public RoomAssigning(String guest, int numberOfGuests, Status status, LocalDate checkIn, LocalDate checkOut, Task task, String note) {
+    public RoomAssigned(Room room, String guest, int numberOfGuests, Status status, LocalDate checkIn, LocalDate checkOut, Task task, String note) {
+        this.room = room;
         this.guest = guest;
         this.numberOfGuests = numberOfGuests;
         this.status = status;
@@ -36,6 +51,14 @@ public class RoomAssigning extends AbstractEntity {
         this.checkOut = checkOut;
         this.task = task;
         this.note = note;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     public String getGuest() {
@@ -93,4 +116,6 @@ public class RoomAssigning extends AbstractEntity {
     public void setNote(String note) {
         this.note = note;
     }
+
+
 }

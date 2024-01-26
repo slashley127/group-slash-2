@@ -1,11 +1,11 @@
 package org.launchcode.roomranger.controllers;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-import org.launchcode.roomranger.data.RoomAssigningRepository;
+import org.launchcode.roomranger.data.RoomAssignedRepository;
 import org.launchcode.roomranger.data.RoomAttendantRepository;
 import org.launchcode.roomranger.data.RoomRepository;
+import org.launchcode.roomranger.models.Room;
 import org.launchcode.roomranger.models.Task;
-import org.launchcode.roomranger.models.RoomAssigning;
+import org.launchcode.roomranger.models.RoomAssigned;
 import org.launchcode.roomranger.models.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -27,12 +27,12 @@ public class ManagerHomepageController {
     private RoomRepository roomRepository;
 
     @Autowired
-    private RoomAssigningRepository roomAssigningRepository;
+    private RoomAssignedRepository roomAssignedRepository;
 
     @GetMapping
     public String renderManagerHomepage(Model model) {
-        Iterable<RoomAssigning> roomAssignings = roomAssigningRepository.findAll();
-        model.addAttribute("roomAssigning", roomAssignings);
+        Iterable<RoomAssigned> roomsAssigned = roomAssignedRepository.findAll();
+        model.addAttribute("roomAssigned", roomsAssigned);
         return "manager/index";
     }
 
@@ -50,20 +50,22 @@ public class ManagerHomepageController {
 
     @GetMapping("assignroom")
     public String renderAssignRoomForm(Model model) {
-        model.addAttribute(new RoomAssigning());
+        model.addAttribute(new RoomAssigned());
+        model.addAttribute("rooms", roomRepository.findAll());
         model.addAttribute("status", Status.values());
         model.addAttribute("task", Task.values());
         return "manager/assignroom";
     }
 
     @PostMapping("assignroom")
-    public String processAssigningForm(@ModelAttribute("roomAssigning") @Valid RoomAssigning RoomAssigning, Errors errors, Model model) {
+    public String processAssigningForm(@ModelAttribute("roomAssigned") @Valid RoomAssigned RoomAssigned, Errors errors, Model model) {
         if (errors.hasErrors()) {
+            model.addAttribute("rooms", roomRepository.findAll());
             model.addAttribute("status", Status.values());
             model.addAttribute("task", Task.values());
             return "manager/assignroom";
         }
-        roomAssigningRepository.save(RoomAssigning);
+        roomAssignedRepository.save(RoomAssigned);
         return "redirect:/manager";
     }
 }

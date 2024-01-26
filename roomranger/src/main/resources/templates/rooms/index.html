@@ -9,19 +9,13 @@
     <thead>
     <tr>
         <th>Room Number</th>
-        <th>Room Attendant Assigned</th>
         <th>Occupancy</th>
-        <th>Cleaning Task</th>
-        <th>Status</th>
-        <th>notes</th>
+        <th>Notes</th>
     </tr>
     </thead>
     <tr th:each="room : ${rooms}">
         <td th:text="${room.roomNumber}"></td>
-        <td th:text="${room.roomAttendantAssigned}"></td>
         <td th:text="${room.roomOccupancy.displayName}"></td>
-        <td th:text="${room.cleaningTask}"></td>
-        <td th:text="${room.note}"></td>
     </tr>
 </table>
 

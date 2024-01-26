@@ -23,16 +23,16 @@
     <th>STATUS</th>
 </tr>
 </thead>
-    <tr th:each = "roomAssigning : ${roomAssigning}">
+    <tr th:each = "roomAssigned : ${roomAssigned}">
+        <td th:text="${roomAssigned.room.roomNumber}"></td>
         <td>IN PROGRESS</td>
-        <td>IN PROGRESS</td>
-        <td th:text="${roomAssigning.guest}"></td>
-        <td th:text="${roomAssigning.numberOfGuests}"></td>
-        <td th:text="${roomAssigning.checkIn}"></td>
-        <td th:text="${roomAssigning.checkOut}"></td>
-        <td th:text="${roomAssigning.task?.displayName}"></td>
-        <td th:text="${roomAssigning.note}"></td>
-        <td th:text="${roomAssigning.status.displayName}"></td>
+        <td th:text="${roomAssigned.guest}"></td>
+        <td th:text="${roomAssigned.numberOfGuests}"></td>
+        <td th:text="${roomAssigned.checkIn}"></td>
+        <td th:text="${roomAssigned.checkOut}"></td>
+        <td th:text="${roomAssigned.task?.displayName}"></td>
+        <td th:text="${roomAssigned.note}"></td>
+        <td th:text="${roomAssigned.status.displayName}"></td>
     </tr>
 </table>
 </th:block>
