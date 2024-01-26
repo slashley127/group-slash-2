@@ -2,37 +2,40 @@
 <html lang="en" xmlns:th="//www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8"/>
-    <title></title>
+    <title>Assign Room</title>
 </head>
 <body>
 <nav th:replace = "~{fragments :: manager-nav}"></nav>
 <h1>ASSIGN ROOMS</h1>
-<form action="/manager/assignroom" method="POST">
+<form action="assignroom" method="post">
     <div class="form-item">
         <div>
-            <label th:for="roomNumber">Room Number
+            <label>Room Number
             </label>
         </div>
         <div>
         <label>Room Attendant</label>
         </div>
         <div>
-        <label>Guest Name</label>
-            <input type="text">
+        <label th:for="guestName">Guest Name</label>
+            <input type="text" th:field="${roomAssigning.guest}">
+            <p class="error" th:errors="${roomAssigning.guest}"></p>
         </div>
         <div>
            <label th:for="guestNumber">Number of Guests</label>
-            <input type="number" min="1" max="6">
+            <input type="number" th:field="${roomAssigning.numberOfGuests}">
+            <p class="error" th:errors="${roomAssigning.numberOfGuests}"></p>
         </div>
         <div>
-        <label>Check In
+        <label th:for="checkIn">Check In
         <input type="date" th:field="${roomAssigning.checkIn}">
+            <p class="error" th:errors="${roomAssigning.checkIn}"></p>
         </label>
         </div>
-
         <div>
-        <label>Check Out
+        <label th:for="checkOut">Check Out
         <input type="date" th:field="${roomAssigning.checkOut}">
+            <p class="error" th:errors="${roomAssigning.checkOut}"></p>
         </label>
         </div>
         <div>
@@ -45,6 +48,7 @@
                     th:text = "${task.displayName}">
                 </option>
             </select>
+            <p class="error" th:errors="${roomAssigning.task}"></p>
         </div>
         <div>
                 <label th:for="status">Status
@@ -55,10 +59,11 @@
                             th:text = "${status.displayName}">
                     </option>
                 </select>
+            <p class="error" th:errors="${roomAssigning.status}"></p>
         </div>
         <div>
-        <label>Notes</label>
-            <input type="text">
+        <label th:for="note">Notes</label>
+            <input type="text" th:field="${roomAssigning.note}">
     </div>
     </div>
     <input type="submit" value="Assign Room">
