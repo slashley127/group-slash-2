@@ -17,8 +17,8 @@
         </thead>
         <tr th:each = "room : ${rooms}">
             <td th:text="${room.roomNumber}"></td>
-            <td>IN PROGRESS</td>
-            <td>IN PROGRESS</td>
+            <td th:text="${room.roomOccupancy}"></td>
+            <td th:text="${room.roomType}"></td>
         </tr>
     </table>
 </th:block>
