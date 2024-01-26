@@ -19,11 +19,11 @@
             </select>
         </label>
     </div>
-    <div>
-        <label> Room Attendant
-            <input th:field="${room.roomAttendantAssigned}">
-        </label>
-    </div>
+<!--    <div>-->
+<!--        <label> Room Attendant-->
+<!--            <input th:field="${room.roomAttendantAssigned}">-->
+<!--        </label>-->
+<!--    </div>-->
     <div>
         <label> Occupancy
             <select th:field="${room.roomOccupancy}">
@@ -34,40 +34,6 @@
             </select>
         </label>
     </div>
-    <div>
-        <label> Cleaning Task
-            <input th:field="${room.cleaningTask}">
-        </label>
-    </div>
-    <div>
-        <label> Room Status
-            <select th:field="${room.status}">
-                <option th:each="roomStatus: ${status}"
-                        th:value="${roomStatus}"
-                        th:text="${roomStatus.displayName}"
-                ></option>
-            </select>
-        </label>
-    </div>
-    <div>
-        <label> Guest Name
-            <input th:field="${room.guest}">
-        </label>
-    </div>
-    <div>
-        <label> Number Of Guest
-            <input th:field="${room.numberOfGuests}">
-        </label>
-    </div>
-    <div>
-        <label> Check In Date
-            <input type="date" th:field="${room.checkinDate}">
-        </label>
-    </div>
-    <div>
-        <label> Check Out Date
-            <input type="date" th:field="${room.checkoutDate}">
-        </label>
     </div>
     <div>
         <input type="submit" value="Create Room">

@@ -24,7 +24,7 @@ public class Room extends AbstractEntity{
     public Room() {
     }
 
-    public Room(String roomNumber, RoomType roomType, RoomAttendant roomAttendantAssigned, Manager managerCreator, Occupancy roomOccupancy, String cleaningTask, Status status, String note, String guest, int numberOfGuests, LocalDate checkinDate, LocalDate checkoutDate) {
+    public Room(String roomNumber, RoomType roomType, RoomAttendant roomAttendantAssigned, Manager managerCreator, Occupancy roomOccupancy) {
         this.roomNumber = roomNumber;
         this.roomType = roomType;
         this.roomAttendantAssigned = roomAttendantAssigned;
