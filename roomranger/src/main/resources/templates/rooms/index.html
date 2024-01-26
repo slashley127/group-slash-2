@@ -10,12 +10,13 @@
     <tr>
         <th>Room Number</th>
         <th>Occupancy</th>
-        <th>Notes</th>
+        <th>Type</th>
     </tr>
     </thead>
     <tr th:each="room : ${rooms}">
         <td th:text="${room.roomNumber}"></td>
         <td th:text="${room.roomOccupancy.displayName}"></td>
+        <td th:text="${room.roomType.displayName}"></td>
     </tr>
 </table>
 
