@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <th:replace fragment="fragments :: fragments"></th:replace>
+  <script th:src="@{/js/script.js}" defer></script>
+
+</head>
+
+<body th:class="${mode}" id="modeToggle">
+
+<header class="header">
+  <h1>RoomRanger</h1>
+
+  <div class="top-right">
+    <div class="role-dropdown">
+      <label for="role">Select Your Role:</label>
+      <select id="role" name="role">
+        <option value="RoomAttendant">RoomAttendant</option>
+        <option value="HousekeepingManager">Housekeeping Manager</option>
+      </select>
+    </div>
+    <div class="login-button">
+      <a href="/login">login</a>
+    </div>
+    <div class="registration-link" id="registration-link"></div>
+  </div>
+</header>
+
+<main class="container">
+  <div class="animated-picture">
+    <img th:src="@{/images/Roomranger-transparent.png}" alt="Animated Picture">
+  </div>
+
+  <nav class="navigation">
+    <a href="/about">About Us</a>
+    <a href="/contact">Contact</a>
+  </nav>
+  <button id="themeToggle" onclick="Mode()" class="mode">Mode</button>
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      document.getElementById('role').addEventListener('change', function () {
+          let registrationLink = document.getElementById('registration-link');
+          let selectedRole = this.value;
+
+          if (selectedRole === 'HousekeepingManager') {
+              registrationLink.innerHTML = '<a href="/Registration">Registration</a>';
+          } else {
+              registrationLink.innerHTML = '';
+          }
+      });
+  });
+
+  function Mode() {
+      let body = document.body;
+      body.classList.toggle('dark-mode');
+      body.classList.toggle('light-mode');
+  }
+</script>
+
+</body>
+<footer class="footer">
+  <p>&copy; 2024 RoomRanger. All rights reserved.</p>
+</footer>
+</html>
