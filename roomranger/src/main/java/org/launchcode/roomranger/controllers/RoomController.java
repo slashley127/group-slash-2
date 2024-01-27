@@ -24,6 +24,9 @@ public class RoomController {
     @Autowired
     private RoomAttendantRepository roomAttendantRepository;
 
+    public RoomController() {
+    }
+
     @GetMapping
     public String displayAllRooms(Model model){
         model.addAttribute("title", "All Rooms");

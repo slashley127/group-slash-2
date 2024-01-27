@@ -1,5 +1,6 @@
 package org.launchcode.roomranger.data;
 
+import org.jetbrains.annotations.NotNull;
 import org.launchcode.roomranger.models.Manager;
 import org.launchcode.roomranger.models.RoomAttendant;
 import org.springframework.data.repository.CrudRepository;
@@ -11,4 +12,11 @@ import java.util.List;
 public interface RoomAttendantRepository extends CrudRepository<RoomAttendant, Integer> {
     List<RoomAttendant> findAll();
     List<RoomAttendant> findAllByManager(Manager manager);
+//    List<RoomAttendant>findbyId();
+//
+//    void update(RoomAttendant roomAttendant);
+//    RoomAttendant getRoomAttendant(long id);
+//    void deleteRoomAttendantbyId(long id);
+
+
 }

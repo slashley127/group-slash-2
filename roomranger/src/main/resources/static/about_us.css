@@ -1,7 +1,7 @@
 .card-ab {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background-color: #FFFFFF;
-    border: 5px solid #FFFFFF; /* Add a border */
+    background-color: #FFF-FFF;
+    border: 5px solid #FFF-FFF; /* Add a border */
     transition: transform 0.3s, box-shadow 0.3s;
     height: 600px; /* Adjust this height as needed */
     overflow: hidden; /* Ensure that the overflow content doesn't affect the shadow */

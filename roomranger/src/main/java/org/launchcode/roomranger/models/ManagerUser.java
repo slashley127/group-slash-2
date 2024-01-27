@@ -6,7 +6,7 @@ import jakarta.persistence.OneToOne;
 @Entity
 public class ManagerUser extends User{
     @OneToOne(mappedBy = "managerUser")
-    private Manager manager;
+    private static Manager manager;
 
     public ManagerUser() {
     }
@@ -15,7 +15,7 @@ public class ManagerUser extends User{
         this.manager = manager;
     }
 
-    public Manager getManager() {
+    public static Manager getManager() {
         return manager;
     }
 
