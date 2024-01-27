@@ -5,13 +5,14 @@
 <head>
     <meta charset="UTF-8 /">
     <title>Room Attendant Home Page</title>
-<!--    <script></script>-->
+    <!--    <script></script>-->
 </head>
-<body class="container">
-<!--/</div>-->
-<div>
-<a class="h4" th:href="@{roomAttendant/add}">Add Room Attendant</a>
+
+<div style="text-align: center; margin-top: 2rem; margin-bottom: 2rem;">
+    <h2>Room Attendants</h2>
 </div>
+
+<body class="container">
 <div th:if="${message}" class="alert alert-success text-center">
     [[${message}]]
 </div>
@@ -42,6 +43,9 @@
 
         </tbody>
     </table>
+</div>
+<div>
+    <a class="h4" th:href="@{roomAttendant/add}"><button type="submit">Add Room Attendant</button></a>
 </div>
 </body>
 </html>
