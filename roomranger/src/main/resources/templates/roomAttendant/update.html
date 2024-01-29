@@ -1,0 +1,233 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--  <meta charset="UTF-8" method="POST">-->
+<!--  <title>Update Room Attendant</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<form  th:object="${roomAttendant}" method="post">-->
+
+<!--&lt;!&ndash;  <label for="name">Name</label>&ndash;&gt;-->
+<!--&lt;!&ndash;  <input type="text" th:field="${roomAttendant.firstName}" id="name" placeholder="Name">&ndash;&gt;-->
+<!--&lt;!&ndash;  <span th:if="${#fields.hasErrors('name')}" th:errors="${roomAttendant.firstName}"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;  <label for="email">Email</label>&ndash;&gt;-->
+<!--&lt;!&ndash;  <input type="text" th:field="${roomAttendant.email}" id="email" placeholder="Email">&ndash;&gt;-->
+<!--&lt;!&ndash;  <span th:if="${#fields.hasErrors('email')}" th:errors="${roomAttendant.email}"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;  <input type="submit" value="Update">&ndash;&gt;-->
+<!--  <div class="form-group col-md-6">-->
+<!--    <label for="username">Username</label>-->
+<!--    <p class="error" th:errors="${roomAttendant.username}"></p>-->
+<!--    <input  th:field="${roomAttendant.username}" type="text" class="form-control" id="username">-->
+<!--  </div>-->
+<!--</form>-->
+
+<!--</body>-->
+<!--</html>-->
+
+<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
+<!--&lt;!&ndash;<html lang="en" xmlns:th="http://www.thymeleaf.org">&ndash;&gt;-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;  <meta charset="UTF-8">&ndash;&gt;-->
+<!--&lt;!&ndash;  <title>Update a Room Attendant</title>&ndash;&gt;-->
+
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+<!--&lt;!&ndash;<form  method="POST">&ndash;&gt;-->
+<!--&lt;!&ndash;  <div  class="form-row align-items-center">&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;      <label>First Name:&ndash;&gt;-->
+<!--&lt;!&ndash;        <input th:field="${roomAttendant.firstName}" class="form-control">&ndash;&gt;-->
+<!--&lt;!&ndash;      </label>&ndash;&gt;-->
+<!--&lt;!&ndash;      <p class="error" th:errors="${roomAttendant.firstName}"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;      <label>Last Name:&ndash;&gt;-->
+<!--&lt;!&ndash;        <input th:field="${roomAttendant.lastName}" class="form-control">&ndash;&gt;-->
+<!--&lt;!&ndash;      </label>&ndash;&gt;-->
+<!--&lt;!&ndash;      <p class="error" th:errors="${roomAttendant.lastName}"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;      <label >Pronoun:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;      <select name="pronoun">&ndash;&gt;-->
+<!--&lt;!&ndash;        <option value="Choose" >choose</option>&ndash;&gt;-->
+<!--&lt;!&ndash;        <option value="He/Him" >He/Him</option>&ndash;&gt;-->
+<!--&lt;!&ndash;        <option value="She/Her" >She/Her</option>&ndash;&gt;-->
+<!--&lt;!&ndash;        <option value="They/Them" >They/Them</option>&ndash;&gt;-->
+<!--&lt;!&ndash;      </select>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="form-group col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;      <label for="email">Email</label>&ndash;&gt;-->
+<!--&lt;!&ndash;      <input  th:field="${roomAttendant.email}" type="email" class="form-control" id="email" >&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;      <label for="phoneNumber">Phone Number:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;      <input  th:field="${roomAttendant.phoneNumber}" type="tel" class="form-control" id="phoneNumber" placeholder="1234567890">&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div class="form-row">&ndash;&gt;-->
+<!--&lt;!&ndash;      <label>Working Days:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;      <input type="checkbox" value="Sunday" id="sunday">&ndash;&gt;-->
+<!--&lt;!&ndash;      <label for="sunday">Sunday</label>&ndash;&gt;-->
+<!--&lt;!&ndash;      <label for="monday"></label><input type="checkbox" value="Monday" id="monday">&ndash;&gt;-->
+<!--&lt;!&ndash;      <label for="sunday">Monday</label>&ndash;&gt;-->
+<!--&lt;!&ndash;      <input type="checkbox" value="Tuesday" id="tuesday">&ndash;&gt;-->
+<!--&lt;!&ndash;      <label for="tuesday">Tuesday</label>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+<!--&lt;!&ndash;  <div class="form-group col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;    <label for="username">Username</label>&ndash;&gt;-->
+<!--&lt;!&ndash;    <p class="error" th:errors="${roomAttendant.username}"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;    <input  th:field="${roomAttendant.username}" type="text" class="form-control" id="username">&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;  <div class="form-group col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;    <label for="password">Password</label>&ndash;&gt;-->
+<!--&lt;!&ndash;    <p class="error" th:errors="${roomAttendant.password}"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;    <input  th:field="${roomAttendant.password}" type="password" class="form-control" id="password">&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;  &lt;!&ndash;            <div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;  &lt;!&ndash;                <label>Upload Picture</label>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;  &lt;!&ndash;                <input type="image" src="templates/images" alt="Submit" width="48" height="48">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;  &lt;!&ndash;            </div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;  <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;    <label>Notes&ndash;&gt;-->
+<!--&lt;!&ndash;      <input th:field="${roomAttendant.notes}" class="form-control">&ndash;&gt;-->
+<!--&lt;!&ndash;    </label>&ndash;&gt;-->
+<!--&lt;!&ndash;    <p class="error" th:errors="${roomAttendant.notes}"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+<!--&lt;!&ndash;  <div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="submit" value="SUBMIT">&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+<!--&lt;!&ndash;  <div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="reset" value="RESET">&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+<!--&lt;!&ndash;  <div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="button" value="BACK" onclick="history.back()">&ndash;&gt;-->
+
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;</form>&ndash;&gt;-->
+<!--&lt;!&ndash;<div>&ndash;&gt;-->
+<!--&lt;!&ndash;<form>&ndash;&gt;-->
+
+<!--&lt;!&ndash;<div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <form class="p-2"  th:object="${roomAttendant}" method="post">&ndash;&gt;-->
+<!--&lt;!&ndash;        &lt;!&ndash; Alert message &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        <div th:if="${alertMessage}" class="alert alert-danger">&ndash;&gt;-->
+<!--&lt;!&ndash;            <p th:text="${alertMessage}"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <h4 style="font-family: 'Times New Roman', Times, serif;">Delete RoomAttendant</h4>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="row p-2">&ndash;&gt;-->
+<!--&lt;!&ndash;            <label class="p-1" for="id">Employee ID</label>&ndash;&gt;-->
+<!--&lt;!&ndash;            <input type="text" th:field="roomAttendant.id" class="form-control" id="id">&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <button type="submit" class="btn btn-danger mt-3 mb-2">Delete RoomAttendant</button>&ndash;&gt;-->
+<!--&lt;!&ndash;    </form>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;</form>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;<div>&ndash;&gt;-->
+<!--&lt;!&ndash;<form class="p-2" th:action="@{/update}" th:object="${employee}" method="post">&ndash;&gt;-->
+<!--&lt;!&ndash;    &lt;!&ndash; Check if errorMessage is present in the model and display it &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">&ndash;&gt;-->
+<!--&lt;!&ndash;        <p th:text="${errorMessage}"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <center>&ndash;&gt;-->
+<!--&lt;!&ndash;        <h4 style="font-family: 'Times New Roman', Times, serif;">Update Employee</h4>&ndash;&gt;-->
+<!--&lt;!&ndash;    </center>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div class="row p-1">&ndash;&gt;-->
+<!--&lt;!&ndash;        <label class="p-1" for="id">Employee ID</label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input type="text" th:field="*{id}" class="form-control" placeholder="employee id" required>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div class="row p-1">&ndash;&gt;-->
+<!--&lt;!&ndash;        <label class="p-1" for="employeeName">Employee Name</label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input type="text" th:field="*{employeeName}" class="form-control"&ndash;&gt;-->
+<!--&lt;!&ndash;               placeholder="employee name" required>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div class="row p-1">&ndash;&gt;-->
+<!--&lt;!&ndash;        <label class="p-1" for="employeeEmail">Email</label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input type="text" th:field="*{employeeEmail}" class="form-control"&ndash;&gt;-->
+<!--&lt;!&ndash;               placeholder="email address" required>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div class="row p-1">&ndash;&gt;-->
+<!--&lt;!&ndash;        <label class="p-1" for="employeePhone">Phone</label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input type="tel" th:field="*{employeePhone}" class="form-control"&ndash;&gt;-->
+<!--&lt;!&ndash;               placeholder="phone number" required>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div class="row p-1">&ndash;&gt;-->
+<!--&lt;!&ndash;        <label class="p-1">Gender</label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <select th:field="*{employeeGender}" class="form-select" required>&ndash;&gt;-->
+<!--&lt;!&ndash;            <option value="" selected>select option</option>&ndash;&gt;-->
+<!--&lt;!&ndash;            <option value="Male">Male</option>&ndash;&gt;-->
+<!--&lt;!&ndash;            <option value="Female">Female</option>&ndash;&gt;-->
+<!--&lt;!&ndash;        </select>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div class="row p-1">&ndash;&gt;-->
+<!--&lt;!&ndash;        <label class="p-1" for="employeeSalary">Phone</label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input type="number" th:field="*{employeeSalary}" class="form-control" placeholder="salary"&ndash;&gt;-->
+<!--&lt;!&ndash;               required>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div class="row p-1">&ndash;&gt;-->
+<!--&lt;!&ndash;        <label class="p-1" for="employeeRole">Employee Role</label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <select th:field="*{employeeRole}" class="form-select" required>&ndash;&gt;-->
+<!--&lt;!&ndash;            <option value="" selected>select option</option>&ndash;&gt;-->
+<!--&lt;!&ndash;            <option value="Java">Java Developer</option>&ndash;&gt;-->
+<!--&lt;!&ndash;            <option value="Python">Python Developer</option>&ndash;&gt;-->
+<!--&lt;!&ndash;            <option value="Web">Web Developer</option>&ndash;&gt;-->
+<!--&lt;!&ndash;            <option value="Android">Android Developer</option>&ndash;&gt;-->
+<!--&lt;!&ndash;            <option value="UI">UI Developer</option>&ndash;&gt;-->
+<!--&lt;!&ndash;        </select>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <button type="submit" class="btn btn-primary mt-3 mb-2">Update Employee</button>&ndash;&gt;-->
+<!--&lt;!&ndash;</form>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Employee Management System</title>
+</head>
+<body>
+<div class="container">
+  <h1>Employee Management System</h1>
+  <hr>
+  <h2>Update Employee</h2>
+
+  <form  th:object="${roomAttendant}"
+        method="POST">
+
+    <!-- Add hidden form field to handle update -->
+    <input type="hidden" th:field="*{id}" />
+
+    <input type="text" th:field="*{firstName}" class="form-control mb-4 col-4">
+
+    <input type="text" th:field="*{lastName}" class="form-control mb-4 col-4">
+
+    <input type="text" th:field="*{email}" class="form-control mb-4 col-4">
+
+    <button type="submit" class="btn btn-info col-2"> Update Employee</button>
+  </form>
+  <hr>
+
+  <a th:href = "@{/}"> ROOM A</a>
+</div>
+</body>
+</html>

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.launchcode.roomranger.models.RoomAttendant;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.launchcode.roomranger.models.RoomAttendantProfile;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +28,7 @@ public class RoomAttendantController {
     private UserRepository userRepository;
     @Autowired
     private ManagerRepository managerRepository;
+
 
     @GetMapping
     public String displayAllRoomAttendants(Model model) {
@@ -61,23 +63,23 @@ public class RoomAttendantController {
     }
 
 
-    @GetMapping("update/{id}")
-    public String  updateRoomAttendant(@PathVariable int id) {
-        RoomAttendant roomAttendant = roomAttendantRepository.findById(id);
-        return "roomAttendant/update";
-    }
+//    @GetMapping("update/{id}")
+//    public String updateRoomAttendant(@PathVariable int id) {
+//        RoomAttendant roomAttendant = roomAttendantRepository.findById(id);
+//        return "roomAttendant/update";
+//    }
 
-    @PostMapping ("update/{id}")
-    public String updateForm(@ModelAttribute @Valid RoomAttendant roomAttendant, @PathVariable int id,Errors errors, Model model, RedirectAttributes redirectAttributes) {
-        model.addAttribute("title", "Update a Room Attendant");
-        if (errors.hasErrors()) {
-            return "roomAttendant/update";
-        } else {
-            redirectAttributes.addFlashAttribute("message", "The user has been saved successfully.");
-            roomAttendantRepository.save(roomAttendant);
-            System.out.println("Successfully saved entity");
-            return "redirect:/roomAttendant";
-        }
+//    @PostMapping("update/{id}")
+//    public String updateForm(@ModelAttribute @Valid RoomAttendant roomAttendant, @PathVariable int id, Errors errors, Model model, RedirectAttributes redirectAttributes) {
+//        model.addAttribute("title", "Update a Room Attendant");
+//        if (errors.hasErrors()) {
+//            return "roomAttendant/update";
+//        } else {
+//            redirectAttributes.addFlashAttribute("message", "The user has been saved successfully.");
+//            roomAttendantRepository.save(roomAttendant);
+//            System.out.println("Successfully saved entity");
+//            return "redirect:/roomAttendant";
+//        }
 //        if (result.hasErrors()) {
 //            roomAttendant.setId(id);
 //            return "roomAttendant/update";
@@ -86,24 +88,45 @@ public class RoomAttendantController {
 //
 //        roomAttendantRepository.save(roomAttendant);
 //        return "redirect:/roomAttendant";
+   // }
+
+    @GetMapping ("delete/{id}")
+    public String processDelete(@PathVariable int id,RedirectAttributes redirectAttributes) {
+        System.out.println("ID to be deletreturn \"redirect:/roomAttendant\";ed:"+id);
+        RoomAttendant roomAttendant = roomAttendantRepository.findById(id);
+        System.out.println("Room attendant ID:"+roomAttendant.getId());
+        try{
+        roomAttendantRepository.delete(roomAttendant);
+       // redirectAttributes.addFlashAttribute("message", "The user has been saved successfully.");
+        redirectAttributes.addFlashAttribute("message", "The attendant with id=" + id + " has been deleted successfully!");
+    } catch (Exception e) {
+        redirectAttributes.addFlashAttribute("message", e.getMessage());
+    }
+        return "redirect:/roomAttendant";
     }
 
-        @GetMapping("delete/{id}")
-        public String processDelete ( @PathVariable int id, RedirectAttributes redirectAttributes){
-            System.out.println("ID to be deletreturn \"redirect:/roomAttendant\";ed:" + id);
-            RoomAttendant roomAttendant = roomAttendantRepository.findById(id);
-                  // .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-
-            //System.out.println("Room attendant ID:" + roomAttendant.getId());
-            roomAttendantRepository.delete(roomAttendant);
-
-            redirectAttributes.addFlashAttribute("message", "The user has been deleted successfully.");
-
-
-            return "redirect:/roomAttendant";
-        }
+    @GetMapping("profile")
+    public String getProfile(Model model) {
+        model.addAttribute("title", "Add Room Attendant");
+        model.addAttribute(new RoomAttendant());
+        return "roomAttendant/profile";
     }
 
+    @PostMapping("/profile/{id}")
+    public String viewProfile(@PathVariable("id") int id, Model model)
+    {
+        RoomAttendant roomAttendant = roomAttendantRepository.findById(id);
+        //List<RoomAttendant> courses = roomAttendant.getRoomAttendant();
+//        if(roomAttendant.isEmpty()) {
+//            return "redirect:/students/" + id + "/addCourses";
+//        }
+       // model.addAttribute("remove_id", id);
+        roomAttendantRepository.save(roomAttendant);
+        model.addAttribute("roomAttendant", roomAttendant);
+        return "profile";
+    }
+
+}
     
 
 

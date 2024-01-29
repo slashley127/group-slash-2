@@ -13,8 +13,7 @@ import java.util.List;
 public interface RoomAttendantRepository extends CrudRepository<RoomAttendant, Integer> {
     @NotNull List<RoomAttendant> findAll();
     List<RoomAttendant> findAllByManager(Manager manager);
-    //@NotNull List<RoomAttendant>findById(int id);
-
-
     RoomAttendant findById(int id);
+
+    //RoomAttendant findByFirstName(int id);
 }
