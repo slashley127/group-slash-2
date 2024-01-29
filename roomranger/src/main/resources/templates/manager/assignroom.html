@@ -18,7 +18,7 @@
             <select th:field="${roomAssigned.room.roomNumber}">
                 <option th:each="room : ${rooms}"
                         th:value="${room.roomNumber}"
-                        th:text="${room.roomNumber}">
+                        th:text="${room.roomNumber + ' | ' + room.roomType.displayName}">
                 </option>
             </select>
         </div>
