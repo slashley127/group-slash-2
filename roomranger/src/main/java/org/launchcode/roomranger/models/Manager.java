@@ -27,7 +27,7 @@ public class Manager extends AbstractEntity{
         this.firstName = firstName;
         this.lastName = lastName;
         this.roomAttendants = roomAttendants;
-        this.managerUser = managerUser;
+        this.managerUser= managerUser;
         this.rooms = rooms;
     }
 

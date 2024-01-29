@@ -8,15 +8,13 @@ import org.springframework.stereotype.Repository;
 //import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
+
 @Repository
 public interface RoomAttendantRepository extends CrudRepository<RoomAttendant, Integer> {
-    List<RoomAttendant> findAll();
+    @NotNull List<RoomAttendant> findAll();
     List<RoomAttendant> findAllByManager(Manager manager);
-//    List<RoomAttendant>findbyId();
-//
-//    void update(RoomAttendant roomAttendant);
-//    RoomAttendant getRoomAttendant(long id);
-//    void deleteRoomAttendantbyId(long id);
+    //@NotNull List<RoomAttendant>findById(int id);
 
 
+    RoomAttendant findById(int id);
 }

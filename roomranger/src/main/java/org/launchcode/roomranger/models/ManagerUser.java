@@ -12,7 +12,7 @@ public class ManagerUser extends User{
     }
 
     public ManagerUser(Manager manager) {
-        this.manager = manager;
+        ManagerUser.manager = manager;
     }
 
     public static Manager getManager() {
@@ -20,7 +20,7 @@ public class ManagerUser extends User{
     }
 
     public void setManager(Manager manager) {
-        this.manager = manager;
+        ManagerUser.manager = manager;
     }
 
 

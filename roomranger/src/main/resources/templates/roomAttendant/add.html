@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Room Attendant</title>
+
 </head>
 <body>
 <form  method="POST">
@@ -60,10 +61,10 @@
             <input  th:field="${roomAttendant.password}" type="password" class="form-control" id="password">
         </div>
 
-            <div>
-                <label>Upload Picture</label>
-                <input type="image" src="img_submit.gif" alt="Submit" width="48" height="48">
-            </div>
+<!--            <div>-->
+<!--                <label>Upload Picture</label>-->
+<!--                <input type="image" src="templates/images" alt="Submit" width="48" height="48">-->
+<!--            </div>-->
             <div class="form-group">
                 <label>Notes
                     <input th:field="${roomAttendant.notes}" class="form-control">
@@ -82,5 +83,92 @@
             </div>
 
 </form>
+<!--<div>-->
+<!--<form>-->
+
+<!--<div>-->
+<!--    <form class="p-2"  th:object="${roomAttendant}" method="post">-->
+<!--        &lt;!&ndash; Alert message &ndash;&gt;-->
+<!--        <div th:if="${alertMessage}" class="alert alert-danger">-->
+<!--            <p th:text="${alertMessage}"></p>-->
+<!--        </div>-->
+<!--            <h4 style="font-family: 'Times New Roman', Times, serif;">Delete RoomAttendant</h4>-->
+<!--        <div class="row p-2">-->
+<!--            <label class="p-1" for="id">Employee ID</label>-->
+<!--            <input type="text" th:field="roomAttendant.id" class="form-control" id="id">-->
+<!--        </div>-->
+
+<!--        <button type="submit" class="btn btn-danger mt-3 mb-2">Delete RoomAttendant</button>-->
+<!--    </form>-->
+<!--</div>-->
+<!--</form>-->
+<!--</div>-->
+
+<!--<div>-->
+<!--<form class="p-2" th:action="@{/update}" th:object="${employee}" method="post">-->
+<!--    &lt;!&ndash; Check if errorMessage is present in the model and display it &ndash;&gt;-->
+<!--    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">-->
+<!--        <p th:text="${errorMessage}"></p>-->
+<!--    </div>-->
+
+<!--    <center>-->
+<!--        <h4 style="font-family: 'Times New Roman', Times, serif;">Update Employee</h4>-->
+<!--    </center>-->
+
+<!--    <div class="row p-1">-->
+<!--        <label class="p-1" for="id">Employee ID</label>-->
+<!--        <input type="text" th:field="*{id}" class="form-control" placeholder="employee id" required>-->
+<!--    </div>-->
+
+<!--    <div class="row p-1">-->
+<!--        <label class="p-1" for="employeeName">Employee Name</label>-->
+<!--        <input type="text" th:field="*{employeeName}" class="form-control"-->
+<!--               placeholder="employee name" required>-->
+<!--    </div>-->
+
+<!--    <div class="row p-1">-->
+<!--        <label class="p-1" for="employeeEmail">Email</label>-->
+<!--        <input type="text" th:field="*{employeeEmail}" class="form-control"-->
+<!--               placeholder="email address" required>-->
+<!--    </div>-->
+
+<!--    <div class="row p-1">-->
+<!--        <label class="p-1" for="employeePhone">Phone</label>-->
+<!--        <input type="tel" th:field="*{employeePhone}" class="form-control"-->
+<!--               placeholder="phone number" required>-->
+<!--    </div>-->
+
+<!--    <div class="row p-1">-->
+<!--        <label class="p-1">Gender</label>-->
+<!--        <select th:field="*{employeeGender}" class="form-select" required>-->
+<!--            <option value="" selected>select option</option>-->
+<!--            <option value="Male">Male</option>-->
+<!--            <option value="Female">Female</option>-->
+<!--        </select>-->
+<!--    </div>-->
+
+<!--    <div class="row p-1">-->
+<!--        <label class="p-1" for="employeeSalary">Phone</label>-->
+<!--        <input type="number" th:field="*{employeeSalary}" class="form-control" placeholder="salary"-->
+<!--               required>-->
+<!--    </div>-->
+
+<!--    <div class="row p-1">-->
+<!--        <label class="p-1" for="employeeRole">Employee Role</label>-->
+<!--        <select th:field="*{employeeRole}" class="form-select" required>-->
+<!--            <option value="" selected>select option</option>-->
+<!--            <option value="Java">Java Developer</option>-->
+<!--            <option value="Python">Python Developer</option>-->
+<!--            <option value="Web">Web Developer</option>-->
+<!--            <option value="Android">Android Developer</option>-->
+<!--            <option value="UI">UI Developer</option>-->
+<!--        </select>-->
+<!--    </div>-->
+
+<!--    <button type="submit" class="btn btn-primary mt-3 mb-2">Update Employee</button>-->
+<!--</form>-->
+<!--</div>-->
+
+
 </body>
 </html>

@@ -33,6 +33,16 @@ public class RoomAttendant extends AbstractEntity {
     @Column(unique = true)
     private String email;
     private String notes;
+
+    private String profilePic;
+
+    public String getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
+    }
     public String getFirstName() {return firstName;}
 
     public void setFirstName(String firstName) {this.firstName = firstName;}

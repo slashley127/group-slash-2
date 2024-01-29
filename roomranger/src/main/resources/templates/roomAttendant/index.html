@@ -19,38 +19,69 @@
 
 <div>
     <table class="table table-striped">
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <th>ID</th>-->
-<!--            <th>FULL NAME</th>-->
-<!--            <th>EMAIL ADDRESS</th>-->
-<!--            <th>NOTES</th>-->
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>EMAIL ADDRESS</th>
+            <th>NOTES</th>
+            <th>ACTION</th>
 
-<!--        </tr>-->
-<!--        </thead>-->
+        </tr>
+        </thead>
         <tbody>
 
         <tr th:each="roomAttendant : ${roomAttendant}">
-            <td th:text="${roomAttendant.id}">ID</td>
-            <td th:text="${roomAttendant.firstname} + ' ' + ${roomAttendant.lastname}">Full Name</td>
-            <td th:text="${roomAttendant.email}">EMAIL</td>
-            <td th:text="${roomAttendant.notes}">NOTES</td>
-<!--            <td>-->
-<!--                <a  th:href="@{'roomAttendant/edit' + ${roomAttendant.id}}">Edit</a>-->
-<!--                <a  th:href="@{'roomAttendant/delete' + ${roomAttendant.id}}">Delete</a>-->
-<!--            </td>-->
+            <td th:text="${roomAttendant.id}"></td>
+            <td th:text="${roomAttendant.firstName}"></td>
+            <td th:text="${roomAttendant.email}"></td>
+            <td th:text="${roomAttendant.notes}"></td>
+
             <td>
-            <div class="btn-group">
-                <a class="btn btn-primary" id="editButton" th:href="@{/roomAttendant/findById/(id=${roomAttendant.id})}"><i class="icon_pencil-edit"></i></a>
-                <a class="btn btn-success" id="detailsButton" th:href="@{/roomAttendant/findById/(id=${roomAttendant.id})}"><i class="icon_document_alt"></i></a>
-                <a class="btn btn-danger" id="deleteButton" th:href="@{/roomAttendant/delete/(id=${roomAttendant.id})}"><i class="icon_close_alt2"></i></a>
-            </div>
+<!--                <a class="h4" th:href="@{roomAttendant/add}"><button type="submit">Add Room Attendant</button></a>-->
+
+                <a class="h4" th:href="@{roomAttendant/update/{id}(id=${roomAttendant.id})}"><button type="submit">Update</button></a>
+                <a class="h4" th:href="@{roomAttendant/delete/{id}(id=${roomAttendant.id})}"><button type="submit">Delete</button></a>
             </td>
         </tr>
 
         </tbody>
     </table>
+    <div class="modal fade text-center" id="confirmModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Confirmation</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <span id="confirmText"></span>
+                </div>
+
+                <div class="modal-footer">
+                    <a type="button" id="yesBtn" class="btn btn-danger">Yes</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+      $(".btn-delete").on("click", function (e) {
+        e.preventDefault();
+        link = $(this);
+
+        roomAttendant = link.attr("roomAttendant");
+        $("#yesBtn").attr("href", link.attr("href"));
+        $("#confirmText").html("Do you want to delete the File: \<strong\>" + roomAttendant + "\<\/strong\>?");
+        $("#confirmModal").modal();
+      });
+    });
+</script>
 <div>
     <a class="h4" th:href="@{roomAttendant/add}"><button type="submit">Add Room Attendant</button></a>
 </div>
