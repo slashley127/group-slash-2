@@ -1,4 +1,5 @@
 package org.launchcode.roomranger.controllers;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.launchcode.roomranger.data.RoomAssignedRepository;
 import org.launchcode.roomranger.data.RoomAttendantRepository;
@@ -11,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("manager")
@@ -60,7 +58,7 @@ public class ManagerHomepageController {
     @PostMapping("assignroom")
     public String processAssigningForm(@ModelAttribute("roomAssigned") @Valid RoomAssigned RoomAssigned, Errors errors, Model model) {
         if (errors.hasErrors()) {
-            model.addAttribute("rooms", roomRepository.findAll());
+            model.addAttribute("rooms", roomRepository.findAll());;
             model.addAttribute("status", Status.values());
             model.addAttribute("task", Task.values());
             return "manager/assignroom";
@@ -68,4 +66,19 @@ public class ManagerHomepageController {
         roomAssignedRepository.save(RoomAssigned);
         return "redirect:/manager";
     }
+
+    @GetMapping("/delete")
+    public String displayDeleteForm(Model model, HttpSession session) {
+        model.addAttribute("roomAssigned", roomAssignedRepository.findAll());
+        return "manager/delete";
+    }
+
+    @PostMapping("/delete")
+        public String processDeleteForm(@RequestParam(required = false) int[] assignedRoomId) {
+        for(int id : assignedRoomId) {
+            roomAssignedRepository.deleteById(id);
+        }
+        return "redirect:/manager";
+        }
+
 }

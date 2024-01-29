@@ -14,7 +14,10 @@ import java.util.List;
 public class RoomAssigned extends AbstractEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
-    private Room room;
+    private Room room; //this is actually oneToMany???
+
+    //@ManyToOne
+    //RoomAttendant
 
     @Size(min = 2, max = 30, message = "Name of Guest must be 2-30 characters long")
     private String guest;
@@ -116,6 +119,4 @@ public class RoomAssigned extends AbstractEntity {
     public void setNote(String note) {
         this.note = note;
     }
-
-
 }
