@@ -8,7 +8,9 @@
 
 <body class="container">
 <h1>HOMEPAGE FOR MANAGER</h1>
-<th:block>
+<p th:unless="${roomAssigned} and ${roomAssigned.size()}">No rooms assigned!</p>
+
+<th:block th:if="${roomAssigned} and ${roomAssigned.size()}">
 <table class="table table-striped">
 <thead>
     <tr>

@@ -2,11 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <meta charset="UTF-8 /">
 <head th:replace="fragments :: head"></head>
-<body>
 <nav th:replace = "~{fragments :: manager-nav}"></nav>
+</head>
+<body class = "container">
+
 <main>
+    <h1>DELETE ASSIGNED ROOMS</h1>
 <form action="/manager/delete" method="post">
-    <h3>Delete Assigned Room</h3>
     <table class="table table-striped">
         <tr th:each="roomAssigned : ${roomAssigned}">
             <td>

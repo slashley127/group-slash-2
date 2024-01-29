@@ -2,10 +2,11 @@
 <html lang="en" xmlns:th="//www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8"/>
+    <head th:replace="fragments :: head"></head>
+    <nav th:replace = "~{fragments :: manager-nav}"></nav>
     <title>List of Rooms</title>
 </head>
-<body>
-<nav th:replace = "~{fragments :: manager-nav}"></nav>
+<body class="container">
 <h1>ROOM LIST</h1>
 <th:block>
     <table class="table table-striped">
@@ -13,6 +14,7 @@
         <tr>
             <th>ROOM NB</th>
             <th>ROOM AVAILABILITY</th>
+            <th>ROOM TYPE</th>
         </tr>
         </thead>
         <tr th:each = "room : ${rooms}">
