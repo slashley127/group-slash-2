@@ -4,98 +4,58 @@
 
 <head>
   <meta charset="UTF-8 /">
-  <title>View Profile</title>
+  <title>Room Attendant Home Page</title>
   <!--    <script></script>-->
+
 </head>
 
 <div style="text-align: center; margin-top: 2rem; margin-bottom: 2rem;">
-  <h2>Profile</h2>
+  <h2>Room Attendants</h2>
 </div>
+
 <body class="container">
-<!--<div>-->
-<!--  <label>Name-->
-<!--    <input th:text=" ${roomAttendant.firstName}" class="form-control">-->
-<!--  </label>-->
-<!--</div>-->
-<!--<div>-->
-<!--<label>Last Name:-->
-<!--  <input th:text="${roomAttendant.lastName}" class="form-control">-->
-<!--</label>-->
-<!--</div>-->
-<!--<div class="form-group">-->
-<!--  <label >Pronoun:-->
-<!--  <input th:text="${roomAttendant.pronoun}" class="form-control">-->
-<!--  </label>-->
-<!--</div>-->
-<!--<div class="form-group col-md-6">-->
-<!--  <label for="email">Email</label>-->
-<!--  <input  th:text="${roomAttendant.email}" type="email" class="form-control" id="email" >-->
-<!--</div>-->
-<!--<div class="form-group">-->
-<!--  <label for="phoneNumber">Phone Number:</label>-->
-<!--  <input  th:field="${roomAttendant.phoneNumber}" type="tel" class="form-control" id="phoneNumber" placeholder="1234567890">-->
-<!--</div>-->
+<div th:if="${message}" class="alert alert-success text-center">
+  [[${message}]]
+</div>
 
-<!--<div class="form-row">-->
-<!--  <label>Working Days:</label>-->
-<!--  <input type="checkbox" value="Sunday" id="sunday">-->
-<!--  <label for="sunday">Sunday</label>-->
-<!--  <label for="monday"></label><input type="checkbox" value="Monday" id="monday">-->
-<!--  <label for="sunday">Monday</label>-->
-<!--  <input type="checkbox" value="Tuesday" id="tuesday">-->
-<!--  <label for="tuesday">Tuesday</label>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="form-group col-md-6">-->
-<!--  <label for="username">Username</label>-->
-<!--  <p class="error" th:errors="${roomAttendant.username}"></p>-->
-<!--  <input  th:field="${roomAttendant.username}" type="text" class="form-control" id="username">-->
-<!--</div>-->
-
-<!--<div class="form-group col-md-6">-->
-<!--  <label for="password">Password</label>-->
-<!--  <p class="error" th:errors="${roomAttendant.password}"></p>-->
-<!--  <input  th:field="${roomAttendant.password}" type="password" class="form-control" id="password">-->
-<!--</div>-->
-
-<!--&lt;!&ndash;            <div>&ndash;&gt;-->
-<!--&lt;!&ndash;                <label>Upload Picture</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                <input type="image" src="templates/images" alt="Submit" width="48" height="48">&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--<div>-->
-
-<!--  <label>Photos: </label>-->
-<!--  <input type="file" name="image" accept="image/png, image/jpeg" />-->
-
-<!--</div>-->
-<!--<div class="form-group">-->
-<!--  <label>Notes-->
-<!--    <input th:field="${roomAttendant.notes}" class="form-control">-->
-<!--  </label>-->
-<!--  <p class="error" th:errors="${roomAttendant.notes}"></p>-->
-<!--</div>-->
-<div class="pl-lg-4">
-  <div class="row">
-    <div class="col-lg-6">
-      <div class="form-group focused">
-        <label class="form-control-label" for="input-username">Username</label>
-        <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Username" value="lucky.jesse">
-      </div>
-    </div>
-    <div class="col-lg-6">
-      <div class="form-group">
-        <label class="form-control-label" for="input-email">Email address</label>
-        <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="jesse@example.com">
-      </div>
-    </div>
-  </div>
 <div>
-  <input type="button" value="BACK" onclick="history.back()">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>NAME</th>
+      <th>EMAIL</th>
+      <th>NOTES</th>
 
+
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="roomAttendant : ${roomAttendant}">
+      <td th:text="${roomAttendant.id}"></td>
+      <!--            <td th:text="${roomAttendant.firstName}"></td>-->
+      <td><a th:href="'/roomAttendant/profile?id=' + ${roomAttendant.id}" th:text="${roomAttendant.firstName}"></a></td>
+
+      <td th:text="${roomAttendant.email}"></td>
+      <td th:text="${roomAttendant.notes}"></td>
+
+<!--      <td>-->
+<!--        &lt;!&ndash;                <a class="h4" th:href="@{roomAttendant/add}"><button type="submit">Add Room Attendant</button></a>&ndash;&gt;-->
+
+<!--        <a class="h4" th:href="@{roomAttendant/update/{id}(id=${roomAttendant.id})}"><button type="submit">Update</button></a>-->
+<!--        <a class="h4" th:href="@{roomAttendant/delete/{id}(id=${roomAttendant.id})}"><button type="submit">Delete</button></a>-->
+<!--      </td>-->
+    </tr>
+
+    </tbody>
+  </table>
 </div>
-</div>
-
-
-
 </body>
+<footer class="py-3">
+  <ul class="nav justify-content-center pb-3">
+    <li><a href="/aboutUs" class="nav-link pl-3">About US</a></li>
+  </ul>
+  <p class="text-center text-body-secondary mb-0" style="font-family: 'Pirata One', cursive !important; color: white !important">Copyright &copy; RoomRangers | <a href="https://www.vecteezy.com/free-vector" target="_blank"> Vectors by Vecteezy</a></p>
+</footer>
 </html>
