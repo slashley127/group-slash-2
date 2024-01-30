@@ -34,14 +34,16 @@
 
         <tr th:each="roomAttendant : ${roomAttendant}">
             <td th:text="${roomAttendant.id}"></td>
-            <td th:text="${roomAttendant.firstName}"></td>
+<!--            <td th:text="${roomAttendant.firstName}"></td>-->
+            <td><a th:href="'/roomAttendant/profile?id=' + ${roomAttendant.id}" th:text="${roomAttendant.firstName}"></a></td>
+
             <td th:text="${roomAttendant.email}"></td>
             <td th:text="${roomAttendant.notes}"></td>
 
             <td>
 <!--                <a class="h4" th:href="@{roomAttendant/add}"><button type="submit">Add Room Attendant</button></a>-->
 
-                <a class="h4" th:href="@{roomAttendant/update/{id}(id=${roomAttendant.id})}"><button type="submit">Update</button></a>
+                <a class="h4" th:href="@{roomAttendant/update?id='+${roomAttendant.id})}"><button type="submit">Update</button></a>
                 <a class="h4" th:href="@{roomAttendant/delete/{id}(id=${roomAttendant.id})}"><button type="submit">Delete</button></a>
             </td>
         </tr>
@@ -89,4 +91,11 @@
     <a class="h4" th:href="@{roomAttendant/add}"><button type="submit">Add Room Attendant</button></a>
 </div>
 </body>
+<footer class="py-3">
+    <ul class="nav justify-content-center pb-3">
+        <li><a href="/aboutUs" class="nav-link pl-3">About US</a></li>
+    </ul>
+    <p class="text-center text-body-secondary mb-0" style="font-family: 'Pirata One', cursive !important; color: white !important">Copyright &copy; RoomRangers | <a href="https://www.vecteezy.com/free-vector" target="_blank"> Vectors by Vecteezy</a></p>
+
+</footer>
 </html>

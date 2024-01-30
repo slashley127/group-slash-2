@@ -18,7 +18,7 @@ public class AboutUsController {
 
         authors.add(new Author(
                 "Samata Karka ",
-                "/images/creators/pic-of-darren.jpeg",
+                "/images/creators/developerimg1.jpeg",
                 "Backend, User Role Configuration, Creating Crew Members and Chores" ,
                 "Music theorist turned developer. Links below to say hello!",
                 "https://www.linkedin.com/in/darrenlacour/",

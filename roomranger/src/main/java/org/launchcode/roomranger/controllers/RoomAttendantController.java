@@ -1,5 +1,6 @@
 package org.launchcode.roomranger.controllers;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.launchcode.roomranger.data.ManagerRepository;
 import org.launchcode.roomranger.data.RoomAttendantRepository;
@@ -62,33 +63,32 @@ public class RoomAttendantController {
 
     }
 
+    @GetMapping("update/{id}")
+    public String updateRoomAttendant(Model model) {
+        model.addAttribute("title", "Update Room Attendant");
+        model.addAttribute(new RoomAttendant());
+        return "roomAttendant/update";
+    }
 
-//    @GetMapping("update/{id}")
-//    public String updateRoomAttendant(@PathVariable int id) {
-//        RoomAttendant roomAttendant = roomAttendantRepository.findById(id);
-//        return "roomAttendant/update";
-//    }
+    @PostMapping("update/{id}")
+    public String updateForm(@ModelAttribute @Valid RoomAttendant roomAttendant, @PathVariable int id, Model model, RedirectAttributes redirectAttributes) {
+        model.addAttribute("title", "Update a Room Attendant");
+        RoomAttendant updatedroomAttendant = roomAttendantRepository.findById(id);
 
-//    @PostMapping("update/{id}")
-//    public String updateForm(@ModelAttribute @Valid RoomAttendant roomAttendant, @PathVariable int id, Errors errors, Model model, RedirectAttributes redirectAttributes) {
-//        model.addAttribute("title", "Update a Room Attendant");
-//        if (errors.hasErrors()) {
-//            return "roomAttendant/update";
-//        } else {
-//            redirectAttributes.addFlashAttribute("message", "The user has been saved successfully.");
-//            roomAttendantRepository.save(roomAttendant);
-//            System.out.println("Successfully saved entity");
-//            return "redirect:/roomAttendant";
-//        }
-//        if (result.hasErrors()) {
-//            roomAttendant.setId(id);
-//            return "roomAttendant/update";
-//        }
-//        redirectAttributes.addFlashAttribute("message", "The user has been saved successfully.");
-//
-//        roomAttendantRepository.save(roomAttendant);
-//        return "redirect:/roomAttendant";
-   // }
+        updatedroomAttendant.setFirstName(roomAttendant.getFirstName());
+        updatedroomAttendant.setFirstName(roomAttendant.getLastName());
+        updatedroomAttendant.setPronoun(roomAttendant.getPronoun());
+        updatedroomAttendant.setPhoneNumber(roomAttendant.getPhoneNumber());
+        updatedroomAttendant.setEmail(roomAttendant.getEmail());
+        updatedroomAttendant.setWorkingDays(roomAttendant.getWorkingDays());
+        updatedroomAttendant.setUsername(roomAttendant.getUsername());
+        updatedroomAttendant.setPassword(roomAttendant.getPassword());
+        updatedroomAttendant.setNotes(roomAttendant.getNotes());
+
+        redirectAttributes.addFlashAttribute("message", "The user has been saved successfully.");
+        roomAttendantRepository.save(updatedroomAttendant);
+        return "redirect:/roomAttendant";
+    }
 
     @GetMapping ("delete/{id}")
     public String processDelete(@PathVariable int id,RedirectAttributes redirectAttributes) {
@@ -121,7 +121,7 @@ public class RoomAttendantController {
 //            return "redirect:/students/" + id + "/addCourses";
 //        }
        // model.addAttribute("remove_id", id);
-        roomAttendantRepository.save(roomAttendant);
+        //roomAttendantRepository.save(roomAttendant);
         model.addAttribute("roomAttendant", roomAttendant);
         return "profile";
     }
