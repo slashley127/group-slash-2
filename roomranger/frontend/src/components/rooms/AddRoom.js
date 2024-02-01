@@ -21,7 +21,7 @@ export default function AddRoom() {
     }
     // get the types
     const fetchTypes = async () => {
-        const typesResponse = await axios.get('http://localhost:8080/types');
+        const typesResponse = await axios.get('http://localhost:8080/rooms/types');
         const typesArray = Object.entries(typesResponse.data);
         setTypes(typesArray);
     };
@@ -30,7 +30,7 @@ export default function AddRoom() {
     const onFormSubmit = async (e) => {
         e.preventDefault();
 
-        await axios.post("http://localhost:8080/room", room);
+        await axios.post("http://localhost:8080/rooms/room", room);
         // let error = AxiosError.response.data;
         // console.log(error);
         navigate("/");  //navigate to the home page
@@ -77,7 +77,7 @@ export default function AddRoom() {
                             </label>
                         </div>
                         <button type='submit' className='btn btn-outline-primary'>Submit</button>
-                        <Link className='btn btn-outline-danger mx-2' to='/'>Cancel</Link>
+                        <Link className='btn btn-outline-danger mx-2' to='/rooms'>Cancel</Link>
                     </form>
                 </div>
             </div>

@@ -15,7 +15,7 @@ export default function Home() {
   //Fetch rooms and typeName from backend
   const loadRooms = async () => {
     // try{
-    const typesResponse = await axios.get('http://localhost:8080/types');
+    const typesResponse = await axios.get('http://localhost:8080/rooms/types');
     setTypes(typesResponse.data);
     const roomsResponse = await axios.get("http://localhost:8080/rooms")
     setRooms(roomsResponse.data);
@@ -27,7 +27,7 @@ export default function Home() {
   }
 
   const deletRoom = async(id) =>{
-    await axios.delete(`http://localhost:8080/room/${id}`)
+    await axios.delete(`http://localhost:8080/rooms/room/${id}`)
     loadRooms();
   }
 
@@ -35,7 +35,7 @@ export default function Home() {
     <div className="container">
       <div className="py-4">
         {/* Here to give to link to addRoom */}
-        <Link className='btn btn-primary' to='/addroom'>Add Room</Link>
+        <Link className='btn btn-primary' to='/rooms/addroom'>Add Room</Link>
         <table className="table boder shadow">
           <thead>
             <tr>
@@ -56,8 +56,8 @@ export default function Home() {
                   <td>{types[room.roomType]}</td>
                   <td>{room.available ? "Yes" : "No"}</td>
                   <td>
-                    <Link className='btn btn-primary mx-2' to={`/viewroom/${room.id}`}>View</Link>
-                    <Link className='btn btn-outline-primary mx-2' to={`/editroom/${room.id}`}>Edit</Link>
+                    <Link className='btn btn-primary mx-2' to={`/rooms/viewroom/${room.id}`}>View</Link>
+                    <Link className='btn btn-outline-primary mx-2' to={`/rooms/editroom/${room.id}`}>Edit</Link>
                     <button className='btn btn-danger mx-2' onClick={()=> deletRoom(room.id)}>Delete</button>
                   </td>
                 </tr>

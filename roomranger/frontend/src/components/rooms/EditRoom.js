@@ -23,20 +23,20 @@ export default function EditRoom() {
     }
     // get the types
     const fetchTypes = async () => {
-        const typesResponse = await axios.get('http://localhost:8080/types');
+        const typesResponse = await axios.get('http://localhost:8080/rooms/types');
         const typesArray = Object.entries(typesResponse.data);
         setTypes(typesArray);
     };
     //fetch room
     const loadRoom = async () => {
-        const result = await axios.get(`http://localhost:8080/room/${id}`)
+        const result = await axios.get(`http://localhost:8080/rooms/room/${id}`)
         setRoom(result.data);
     }
 
     //form submit event handler
     const onFormSubmit = async (e) => {
         e.preventDefault();
-        await axios.put(`http://localhost:8080/room/${id}`, room);
+        await axios.put(`http://localhost:8080/rooms/room/${id}`, room);
         navigate("/");  //navigate to the home page
     }
 
@@ -81,7 +81,7 @@ export default function EditRoom() {
                             </label>
                         </div>
                         <button type='submit' className='btn btn-outline-primary'>Submit</button>
-                        <Link className='btn btn-outline-danger mx-2' to='/'>Cancel</Link>
+                        <Link className='btn btn-outline-danger mx-2' to='/rooms'>Cancel</Link>
                     </form>
                 </div>
             </div>

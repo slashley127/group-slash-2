@@ -17,12 +17,12 @@ export default function ViewRooms() {
     })
 
     const fetchTypes = async () => {
-        const typeResponse = await axios.get(`http://localhost:8080/type/${id}`);
+        const typeResponse = await axios.get(`http://localhost:8080/rooms/type/${id}`);
         console.log(typeResponse.data);
         setType(typeResponse.data);
     };
     const loadRoom = async () => {
-        const result = await axios.get(`http://localhost:8080/room/${id}`);
+        const result = await axios.get(`http://localhost:8080/rooms/room/${id}`);
         setRoom(result.data)
     }
     return (
@@ -49,7 +49,7 @@ export default function ViewRooms() {
                             </ul>
                         </div>
                     </div>
-                    <Link className='btn btn-primary my-2' to={'/'}>Back to Home</Link>
+                    <Link className='btn btn-primary my-2' to={'/rooms'}>Back to Home</Link>
                 </div>
             </div>
         </div>

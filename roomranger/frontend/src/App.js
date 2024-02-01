@@ -14,10 +14,10 @@ function App() {
         <NavBar />
         <Routes>
           {/* give path /addroom to the AddRoom page */}
-          <Route exact path="/addroom" element={<AddRoom />} />
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="editroom/:id" element={<EditRoom/>} />
-          <Route exact path="viewroom/:id" element={<ViewRoom/>} />
+          <Route exact path="/rooms/addroom" element={<AddRoom />} />
+          <Route exact path="/rooms" element={<Home />} />
+          <Route exact path="/rooms/editroom/:id" element={<EditRoom/>} />
+          <Route exact path="/rooms/viewroom/:id" element={<ViewRoom/>} />
         </Routes>
       </Router>
     </div>
