@@ -22,7 +22,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
-
+@RequestMapping("rooms")
 public class RoomsController {
 
     @Autowired
@@ -41,7 +41,7 @@ public class RoomsController {
         return new ResponseEntity<>(roomRepository.save(newRoom),HttpStatus.OK);
     }
 
-    @GetMapping("/rooms")
+    @GetMapping()
     public List<Room> getAllRoomsSortByNumber(){
         Sort sortByNumber = Sort.by(Sort.Order.asc("roomNumber"));
         return roomRepository.findAll(sortByNumber);
