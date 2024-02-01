@@ -18,38 +18,38 @@ public class AboutUsController {
 
         authors.add(new Author(
                 "Samata Karka ",
-                "/images/creators/developerimg1.jpeg",
-                "Backend, User Role Configuration, Creating Crew Members and Chores" ,
-                "Music theorist turned developer. Links below to say hello!",
-                "https://www.linkedin.com/in/darrenlacour/",
-                "https://github.com/lacourd"
+                "/images/",
+                "In Progress" ,
+                "In Progress",
+                "In Progress",
+                "In Progress"
         ));
 
         authors.add(new Author(
                 "Francesca",
-                "/images/creators/pic-of-Marcie.jpeg",
-                "Front-End Development, Reward MVC, User Authentication",
-                "Client-Facing Project Manager and Developer",
-                "https://www.linkedin.com/in/marcie-defonce/",
-                "https://github.com/mdefonce"
+                "/images/",
+                "In Progress",
+                "In Progress",
+                "In Progress",
+                "In Progress"
         ));
         authors.add(new Author(
                 "Luna Liu",
-                "/images/creators/pic-of-audra.jpeg",
-                "User Authorization, About the Creators, Rewards Page",
-                "Former teacher turned coder. Check my links to learn more.",
-                "https://www.linkedin.com/in/audra-hartwell-252a66113/",
-                "https://github.com/AudraHartwell"
+                "/images/",
+                "In Progress",
+                "In Progress",
+                "In Progress",
+                "In Progress"
         ));
 
 
         authors.add(new Author(
                 "Sonal",
                 "/images/creators/pic-of-Mike.jpeg",
-                "Backend, Creating Chore Details Page",
-                "Current cook and coder.",
-                "https://www.linkedin.com/in/michael-zanger-ba8b1a287/",
-                "https://github.com/mikezanger"
+                "In Progress",
+                "In Progress",
+                "In Progress",
+                "In Progress"
         ));
 
 

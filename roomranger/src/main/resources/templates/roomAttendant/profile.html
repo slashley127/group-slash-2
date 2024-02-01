@@ -4,52 +4,78 @@
 
 <head>
   <meta charset="UTF-8 /">
-  <title>Room Attendant Home Page</title>
+  <title>Room Attendant Profile</title>
   <!--    <script></script>-->
 
 </head>
 
 <div style="text-align: center; margin-top: 2rem; margin-bottom: 2rem;">
-  <h2>Room Attendants</h2>
+  <h2>User Profile</h2>
 </div>
 
 <body class="container">
-<div th:if="${message}" class="alert alert-success text-center">
-  [[${message}]]
-</div>
 
 <div>
   <table class="table table-striped">
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>NAME</th>
-      <th>EMAIL</th>
-      <th>NOTES</th>
+<!--    <thead>-->
+<!--    <tr>-->
+<!--      <th scope="row">ID</th>-->
+<!--      <th scope="row">NAME</th>-->
+<!--      <th scope="row">EMAIL</th>-->
+<!--      <th scope="row">NOTES</th>-->
 
 
-    </tr>
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+
+<!--    <tr th:each="roomAttendant : ${roomAttendant}">-->
+<!--      <td th:text="${roomAttendant.id}"></td>-->
+<!--      &lt;!&ndash;            <td th:text="${roomAttendant.firstName}"></td>&ndash;&gt;-->
+<!--      <td><a th:href="'/roomAttendant/profile?id=' + ${roomAttendant.id}" th:text="${roomAttendant.firstName}"></a></td>-->
+
+<!--      <td th:text="${roomAttendant.email}"></td>-->
+<!--      <td th:text="${roomAttendant.notes}"></td>-->
+
+<!--&lt;!&ndash;      <td>&ndash;&gt;-->
+<!--&lt;!&ndash;        &lt;!&ndash;                <a class="h4" th:href="@{roomAttendant/add}"><button type="submit">Add Room Attendant</button></a>&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <a class="h4" th:href="@{roomAttendant/update/{id}(id=${roomAttendant.id})}"><button type="submit">Update</button></a>&ndash;&gt;-->
+<!--&lt;!&ndash;        <a class="h4" th:href="@{roomAttendant/delete/{id}(id=${roomAttendant.id})}"><button type="submit">Delete</button></a>&ndash;&gt;-->
+<!--&lt;!&ndash;      </td>&ndash;&gt;-->
+<!--    </tr>-->
+
+<!--    </tbody>-->
+<!--  </table>-->
+      <thead  class="black white-text">
+      <!--<th scope="col" data-resizable-column-id="usernamename"        class="text-center" data-sortable="true" data-field="name"        data-filter-control="select">username</th>-->
+
     </thead>
     <tbody>
-
-    <tr th:each="roomAttendant : ${roomAttendant}">
-      <td th:text="${roomAttendant.id}"></td>
-      <!--            <td th:text="${roomAttendant.firstName}"></td>-->
-      <td><a th:href="'/roomAttendant/profile?id=' + ${roomAttendant.id}" th:text="${roomAttendant.firstName}"></a></td>
-
-      <td th:text="${roomAttendant.email}"></td>
-      <td th:text="${roomAttendant.notes}"></td>
-
-<!--      <td>-->
-<!--        &lt;!&ndash;                <a class="h4" th:href="@{roomAttendant/add}"><button type="submit">Add Room Attendant</button></a>&ndash;&gt;-->
-
-<!--        <a class="h4" th:href="@{roomAttendant/update/{id}(id=${roomAttendant.id})}"><button type="submit">Update</button></a>-->
-<!--        <a class="h4" th:href="@{roomAttendant/delete/{id}(id=${roomAttendant.id})}"><button type="submit">Delete</button></a>-->
-<!--      </td>-->
+    <tr th:each="roomAttendant :${roomAttendant}">
+      <td th:href=" @{/roomAttendant/profile}" th:text="Username" > Key </td>
+      <td><span Value> </span></td>
     </tr>
+    <tr th:each="roomAttendant :${roomAttendant}">
+      <td th:text="Email"> Key </td>
+      <td><span th:text="${roomAttendant.email}"> Value </span></td>
+    </tr>
+    <tr th:each="roomAttendant :${roomAttendant}">
+      <td th:text="ID"> Key </td>
+      <td><span th:text="${roomAttendant.id}"> Value </span></td>
+    </tr>
+    <tr th:each="roomAttendant :${roomAttendant}">
+      <td th:text="Notes"> Key </td>
+      <td><span th:text="${roomAttendant.notes}"> Value </span></td>
+    </tr>
+<!--    <tr th:each="roomAttendant :${roomAttendant}">-->
+<!--      <td th:text="Roles"> Key </td>-->
+<!--      <td><span th:text="${roomAttendant.roles}"> Value </span></td>-->
+<!--    </tr>-->
 
     </tbody>
   </table>
+
 </div>
 </body>
 <footer class="py-3">

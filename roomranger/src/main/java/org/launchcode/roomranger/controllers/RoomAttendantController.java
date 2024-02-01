@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping(value = "roomAttendant")
-public class AddAttendantController {
+public class RoomAttendantController {
 
     @Autowired
     private RoomAttendantRepository roomAttendantRepository;

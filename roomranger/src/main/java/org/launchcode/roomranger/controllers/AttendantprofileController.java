@@ -27,14 +27,14 @@ public class AttendantprofileController {
         return "roomAttendant/profile";
     }
 
-    @PostMapping("/profile/{id}")
-    public String viewProfile(@PathVariable("id") int id, Model model, RedirectAttributes redirectAttributes)
-    {
-        RoomAttendant roomAttendant = roomAttendantRepository.findById(id);
-        model.addAttribute("roomAttendant", roomAttendant);
-        redirectAttributes.addFlashAttribute("message", "The user has been saved successfully.");
-
-        return "profile";
-    }
+//    @PostMapping("/profile/{id}")
+//    public String viewProfile(@PathVariable("id") int id, Model model, RedirectAttributes redirectAttributes)
+//    {
+//        RoomAttendant roomAttendant = roomAttendantRepository.findById(id);
+//        model.addAttribute("roomAttendant", roomAttendant);
+//        redirectAttributes.addFlashAttribute("message", "The user has been saved successfully.");
+//
+//        return "profile";
+//    }
 
 }
