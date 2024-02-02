@@ -1,0 +1,56 @@
+Index: roomranger/src/main/java/org/launchcode/roomranger/Controllers/RoomAttendantController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.launchcode.roomranger.Controllers;\n\n        import org.launchcode.roomranger.Repository.ManagerRepository;\n        import org.launchcode.roomranger.Repository.RoomAttendantRepository;\n        import org.launchcode.roomranger.models.DTO.AddRoomAttendantDTO;\n        import org.springframework.stereotype.Controller;\n        import org.springframework.web.bind.annotation.*;\n        import org.launchcode.roomranger.Repository.UserRepository;\n        import org.springframework.beans.factory.annotation.Autowired;\n        import org.springframework.ui.Model;\n        import org.springframework.validation.Errors;\n        import jakarta.validation.Valid;\n        import org.launchcode.roomranger.models.RoomAttendant;\n        import org.launchcode.roomranger.models.User;\n\n   @Controller\n   @RequestMapping(value = \"roomAttendants\")\n   public class RoomAttendantController {\n\n    @Autowired\n    private RoomAttendantRepository roomAttendantRepository;\n    @Autowired\n    private UserRepository userRepository;\n    @Autowired\n    private ManagerRepository managerRepository;\n\n    @GetMapping(\"\")\n    public String displayAllRoomAttendants(Model model) {\n        model.addAttribute(\"title\",\"All Room Attendants\");\n        model.addAttribute(\"Room Attendant\", roomAttendantRepository.findAll());\n        return \"roomattendants/index\";\n    }\n    @GetMapping(value = \"/add\")\n    public String displayAddRoomAttendant(Model model){\n    model.addAttribute(\"title\",\"Add New Room Attendant\");\n    model.addAttribute(new AddRoomAttendantDTO());\n    return \"roomattendants/add\";\n    }\n    @PostMapping(value = \"/add\")\n    public String processRoomAttendantForm(@ModelAttribute @Valid RoomAttendant newRoomAttendant, Errors errors,  Model model) {\n        //HttpServletRequest request,\n        if (errors.hasErrors()) {\n            model.addAttribute(\"title\", \"Add a Room Attendant\");\n            return \"roomattendants/add\";\n        }\n\n        User existingUser = userRepository.findByUsername(AddRoomAttendantDTO.getUsername());\n        if (existingUser != null) {\n            errors.rejectValue(\"username\", \"username.alreadyexists\", \"A Room Attendant with that username already exists\");\n            model.addAttribute(\"title\", \"Add a Room Attendant\");\n            return \"roomattendants/add\";\n       }\n      roomAttendantRepository.save(newRoomAttendant);\n       return \"redirect:\";\n    }\n\n}\n\n\n
+===================================================================
+diff --git a/roomranger/src/main/java/org/launchcode/roomranger/Controllers/RoomAttendantController.java b/roomranger/src/main/java/org/launchcode/roomranger/Controllers/RoomAttendantController.java
+--- a/roomranger/src/main/java/org/launchcode/roomranger/Controllers/RoomAttendantController.java	
++++ b/roomranger/src/main/java/org/launchcode/roomranger/Controllers/RoomAttendantController.java	
+@@ -14,7 +14,7 @@
+         import org.launchcode.roomranger.models.User;
+ 
+    @Controller
+-   @RequestMapping(value = "roomAttendants")
++   @RequestMapping(value = "roomattendants")
+    public class RoomAttendantController {
+ 
+     @Autowired
+@@ -30,13 +30,13 @@
+         model.addAttribute("Room Attendant", roomAttendantRepository.findAll());
+         return "roomattendants/index";
+     }
+-    @GetMapping(value = "/add")
++    @GetMapping(value = "add")
+     public String displayAddRoomAttendant(Model model){
+     model.addAttribute("title","Add New Room Attendant");
+     model.addAttribute(new AddRoomAttendantDTO());
+     return "roomattendants/add";
+     }
+-    @PostMapping(value = "/add")
++    @PostMapping(value = "add")
+     public String processRoomAttendantForm(@ModelAttribute @Valid RoomAttendant newRoomAttendant, Errors errors,  Model model) {
+         //HttpServletRequest request,
+         if (errors.hasErrors()) {
+Index: roomranger/src/main/java/org/launchcode/roomranger/Repository/RoomAttendantRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.launchcode.roomranger.Repository;\n\n\nimport org.launchcode.roomranger.models.Manager;\nimport org.launchcode.roomranger.models.RoomAttendant;\nimport org.springframework.data.jpa.repository.JpaRepository;\nimport org.springframework.data.repository.CrudRepository;\nimport org.springframework.data.repository.PagingAndSortingRepository;\n\nimport java.util.List;\n\npublic interface RoomAttendantRepository extends CrudRepository<RoomAttendant, Integer> {\n\n    List<RoomAttendant> findAllByManager(Manager manager);\n\n}\n\n
+===================================================================
+diff --git a/roomranger/src/main/java/org/launchcode/roomranger/Repository/RoomAttendantRepository.java b/roomranger/src/main/java/org/launchcode/roomranger/Repository/RoomAttendantRepository.java
+--- a/roomranger/src/main/java/org/launchcode/roomranger/Repository/RoomAttendantRepository.java	
++++ b/roomranger/src/main/java/org/launchcode/roomranger/Repository/RoomAttendantRepository.java	
+@@ -3,14 +3,9 @@
+ 
+ import org.launchcode.roomranger.models.Manager;
+ import org.launchcode.roomranger.models.RoomAttendant;
+-import org.springframework.data.jpa.repository.JpaRepository;
+ import org.springframework.data.repository.CrudRepository;
+-import org.springframework.data.repository.PagingAndSortingRepository;
+-
+ import java.util.List;
+-
+ public interface RoomAttendantRepository extends CrudRepository<RoomAttendant, Integer> {
+-
+     List<RoomAttendant> findAllByManager(Manager manager);
+ 
+ }

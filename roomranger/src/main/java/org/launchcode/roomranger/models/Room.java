@@ -21,7 +21,9 @@ public class Room extends AbstractEntity{
     private Manager managerCreator;
     private Occupancy roomOccupancy;
     private String cleaningTask;
+
     private Status status;
+
     private String note;
     private String guest;
     private int numberOfGuests;
@@ -31,14 +33,18 @@ public class Room extends AbstractEntity{
     public Room() {
     }
 
+
     public Room(String roomNumber, RoomType roomType, RoomAttendant roomAttendantAssigned, Manager managerCreator, Occupancy roomOccupancy, String cleaningTask, Status status, String note, String guest, int numberOfGuests, LocalDate checkinDate, LocalDate checkoutDate) {
+
         this.roomNumber = roomNumber;
         this.roomType = roomType;
         this.roomAttendantAssigned = roomAttendantAssigned;
         this.managerCreator = managerCreator;
         this.roomOccupancy = roomOccupancy;
         this.cleaningTask = cleaningTask;
+
         this.status = status;
+
         this.note = note;
         this.guest = guest;
         this.numberOfGuests = numberOfGuests;
@@ -98,6 +104,7 @@ public class Room extends AbstractEntity{
         this.cleaningTask = cleaningTask;
     }
 
+
     public Status getStatus() {
         return status;
     }
@@ -146,5 +153,3 @@ public class Room extends AbstractEntity{
         this.checkoutDate = checkoutDate;
     }
 }
-
-
