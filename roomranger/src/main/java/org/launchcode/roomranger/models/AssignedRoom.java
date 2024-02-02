@@ -3,15 +3,12 @@ package org.launchcode.roomranger.models;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-public class RoomAssigned extends AbstractEntity {
+public class AssignedRoom extends AbstractEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Room room; //this is actually oneToMany???
@@ -39,13 +36,13 @@ public class RoomAssigned extends AbstractEntity {
     private Task task;
     private String note;
 
-    public RoomAssigned() {
+    public AssignedRoom() {
         this.room = room;
         this.status = status;
         this.task = task;
     }
 
-    public RoomAssigned(Room room, String guest, int numberOfGuests, Status status, LocalDate checkIn, LocalDate checkOut, Task task, String note) {
+    public AssignedRoom(Room room, String guest, int numberOfGuests, Status status, LocalDate checkIn, LocalDate checkOut, Task task, String note) {
         this.room = room;
         this.guest = guest;
         this.numberOfGuests = numberOfGuests;

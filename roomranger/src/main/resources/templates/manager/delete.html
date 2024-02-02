@@ -10,14 +10,14 @@
     <h1>DELETE ASSIGNED ROOMS</h1>
 <form action="/manager/delete" method="post">
     <table class="table table-striped">
-        <tr th:each="roomAssigned : ${roomAssigned}">
+        <tr th:each="assignedRoom : ${assignedRoom}">
             <td>
             <label>
-                <input type="checkbox" name="assignedRoomId" th:value="${roomAssigned.id}" />
-                    <span th:text="${roomAssigned.room.roomNumber} + ' |'"></span>
-                    <span th:text="${roomAssigned.guest} + ' |'"></span>
-                    <span th:text="${roomAssigned.status.displayName} + ' |'"></span>
-                    <span th:text="${roomAssigned.task.displayName} + ' |'"></span>
+                <input type="checkbox" name="assignedRoomId" th:value="${assignedRoom.id}" />
+                    <span th:text="${assignedRoom.room.roomNumber} + ' |'"></span>
+                    <span th:text="${assignedRoom.guest} + ' |'"></span>
+                    <span th:text="${assignedRoom.status.displayName} + ' |'"></span>
+                    <span th:text="${assignedRoom.task.displayName} + ' |'"></span>
             </label>
             </td>
         </tr>
