@@ -5,26 +5,14 @@ import java.util.Set;
 
 
 @Entity
-<<<<<<< HEAD
+
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-=======
-public class User extends AbstractEntity {
-       public void setUsername(String username) {
-       this.username = username;
-        }
 
-        public String getPwHash() {
-            return pwHash;
-        }
 
-        public void setPwHash(String pwHash) {
-            this.pwHash = pwHash;
-        }
->>>>>>> origin
 
     private String username;
     private String firstName;
