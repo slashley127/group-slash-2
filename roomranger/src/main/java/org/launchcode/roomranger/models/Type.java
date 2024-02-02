@@ -7,7 +7,6 @@ public enum Type {
     DELUXE("Deluxe Room"),
     EXECUTIVE("Executive Room"),
     CONNECTING("Connecting Rooms"),
-    ADJOINING("Adjoining Rooms"),
     JUNIOR("Junior Suite"),
     PRESIDENTIAL("Presidential Suite"),
     FAMILY("Family Room"),

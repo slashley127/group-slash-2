@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
-import { handleLogError } from '../misc/Helper';
 
 export default function Home() {
   const [rooms, setRooms] = useState([]);
@@ -14,16 +13,10 @@ export default function Home() {
 
   //Fetch rooms and typeName from backend
   const loadRooms = async () => {
-    // try{
     const typesResponse = await axios.get('http://localhost:8080/rooms/types');
     setTypes(typesResponse.data);
     const roomsResponse = await axios.get("http://localhost:8080/rooms")
     setRooms(roomsResponse.data);
-    // } catch (error){
-      
-      // handleLogError(error)
-      // setRooms([]);
-    // }
   }
 
   const deletRoom = async(id) =>{

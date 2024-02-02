@@ -18,7 +18,6 @@ export default function ViewRooms() {
 
     const fetchTypes = async () => {
         const typeResponse = await axios.get(`http://localhost:8080/rooms/type/${id}`);
-        console.log(typeResponse.data);
         setType(typeResponse.data);
     };
     const loadRoom = async () => {

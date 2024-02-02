@@ -10,6 +10,8 @@ export default function AddRoom() {
         roomType: "",
         available: false
     });
+    const [roomError, setRoomError] = useState("");
+
     useEffect(() => {
         fetchTypes();
     }, [])
@@ -29,11 +31,13 @@ export default function AddRoom() {
     //form submit event handler
     const onFormSubmit = async (e) => {
         e.preventDefault();
-
-        await axios.post("http://localhost:8080/rooms/room", room);
-        // let error = AxiosError.response.data;
-        // console.log(error);
-        navigate("/");  //navigate to the home page
+        try {
+            await axios.post("http://localhost:8080/rooms/room", room);
+            navigate("/rooms");  //navigate to the rooms home page
+        }
+        catch (error) {
+            setRoomError(error.response.data.roomNumber);  //get error message from Room table roomNumber
+        }
     }
 
     return (
@@ -46,6 +50,9 @@ export default function AddRoom() {
                             <label htmlFor='RoomNumber' className='form-label'>
                                 Room Number
                             </label>
+                            <div className='text-danger'>
+                                <span >{roomError}</span>
+                            </div>
                             <input type='text'
                                 className='form-control'
                                 placeholder='Enter the room number'

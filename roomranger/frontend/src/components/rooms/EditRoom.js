@@ -11,6 +11,7 @@ export default function EditRoom() {
         roomType: "",
         available: false
     });
+
     useEffect(() => {
         fetchTypes();
         loadRoom();
@@ -37,7 +38,7 @@ export default function EditRoom() {
     const onFormSubmit = async (e) => {
         e.preventDefault();
         await axios.put(`http://localhost:8080/rooms/room/${id}`, room);
-        navigate("/");  //navigate to the home page
+        navigate("/rooms");  //navigate to the rooms home page
     }
 
     return (
@@ -48,14 +49,15 @@ export default function EditRoom() {
                     <form onSubmit={onFormSubmit}>
                         <div className='mb-3'>
                             <label htmlFor='RoomNumber' className='form-label'>
-                                Room Number
+                                Room Number : {room.roomNumber}
                             </label>
-                            <input type='text'
-                                className='form-control'
-                                placeholder='Enter the room number'
-                                name='roomNumber'
-                                value={room.roomNumber}
-                                onChange={onInputChange} />
+                            {/* make room Number unable to be modified */}
+                            {/*  <input type='text' */}
+                            {/*      className='form-control' */}
+                            {/*      placeholder='Enter the room number' */}
+                            {/*      name='roomNumber' */}
+                            {/*      value={room.roomNumber} */}
+                            {/*      onChange={onInputChange} /> */}
                         </div>
                         <div className='mb-3'>
                             <label htmlFor='RoomType' className='form-label'>

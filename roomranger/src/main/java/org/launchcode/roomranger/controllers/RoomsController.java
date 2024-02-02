@@ -36,7 +36,9 @@ public class RoomsController {
     public ResponseEntity<?> addRoom(@RequestBody @Valid Room newRoom){
         String roomNumber = newRoom.getRoomNumber();
         if (roomService.isRoomNumberExists(roomNumber)) {
-            return ResponseEntity.badRequest().body("Room number already exists");
+            Map<String, String> errors = new HashMap<>();
+            errors.put("roomNumber", "Room number already exists");
+            return ResponseEntity.badRequest().body(errors);
         }
         return new ResponseEntity<>(roomRepository.save(newRoom),HttpStatus.OK);
     }
@@ -72,8 +74,8 @@ public class RoomsController {
     }
 
     @PutMapping("room/{id}")
-    public Room updateRoom(@RequestBody Room newRoom,@PathVariable int id){
-        return  roomRepository.findById(id)
+    public Room updateRoom(@RequestBody @Valid Room newRoom,@PathVariable int id){
+         return roomRepository.findById(id)
                 .map(room -> {
                     room.setRoomNumber(newRoom.getRoomNumber());
                     room.setRoomType(newRoom.getRoomType());
