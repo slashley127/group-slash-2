@@ -15,10 +15,10 @@
         <div>
             <label>Room Number
             </label>
-            <select th:field="${roomAssigned.room.roomNumber}">
+            <select th:field="${assignedRoom.room.roomNumber}">
                 <option th:each="room : ${rooms}"
                         th:value="${room.roomNumber}"
-                        th:text="${room.roomNumber + ' | ' + room.roomType.displayName}">
+                        th:text="${room.roomNumber} + ' | ' + ${room.roomType != null ? room.roomType.displayName : 'Unknown'}">
                 </option>
             </select>
         </div>
@@ -27,52 +27,52 @@
         </div>
         <div>
         <label th:for="guestName">Guest Name</label>
-            <input type="text" th:field="${roomAssigned.guest}">
-            <p class="error" th:errors="${roomAssigned.guest}"></p>
+            <input type="text" th:field="${assignedRoom.guest}">
+            <p class="error" th:errors="${assignedRoom.guest}"></p>
         </div>
         <div>
            <label th:for="guestNumber">Number of Guests</label>
-            <input type="number" th:field="${roomAssigned.numberOfGuests}">
-            <p class="error" th:errors="${roomAssigned.numberOfGuests}"></p>
+            <input type="number" th:field="${assignedRoom.numberOfGuests}">
+            <p class="error" th:errors="${assignedRoom.numberOfGuests}"></p>
         </div>
         <div>
         <label th:for="checkIn">Check In
-        <input type="date" th:field="${roomAssigned.checkIn}">
-            <p class="error" th:errors="${roomAssigned.checkIn}"></p>
+        <input type="date" th:field="${assignedRoom.checkIn}">
+            <p class="error" th:errors="${assignedRoom.checkIn}"></p>
         </label>
         </div>
         <div>
         <label th:for="checkOut">Check Out
-        <input type="date" th:field="${roomAssigned.checkOut}">
-            <p class="error" th:errors="${roomAssigned.checkOut}"></p>
+        <input type="date" th:field="${assignedRoom.checkOut}">
+            <p class="error" th:errors="${assignedRoom.checkOut}"></p>
         </label>
         </div>
         <div>
             <label th:for="task">Cleaning Task
             </label>
-            <select th:field="${roomAssigned.task}">
+            <select th:field="${assignedRoom.task}">
                 <option value =""></option>
                 <option th:each = "task : ${task}"
                     th:value = "${task}"
                     th:text = "${task.displayName}">
                 </option>
             </select>
-            <p class="error" th:errors="${roomAssigned.task}"></p>
+            <p class="error" th:errors="${assignedRoom.task}"></p>
         </div>
         <div>
                 <label th:for="status">Status
                 </label>
-                <select th:field="${roomAssigned.status}">
+                <select th:field="${assignedRoom.status}">
                     <option th:each = "status : ${status}"
                             th:value = "${status}"
                             th:text = "${status.displayName}">
                     </option>
                 </select>
-            <p class="error" th:errors="${roomAssigned.status}"></p>
+            <p class="error" th:errors="${assignedRoom.status}"></p>
         </div>
         <div>
         <label th:for="note">Notes</label>
-            <input type="text" th:field="${roomAssigned.note}">
+            <input type="text" th:field="${assignedRoom.note}">
     </div>
     </div>
     <input type="submit" value="Assign Room">

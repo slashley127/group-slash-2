@@ -8,9 +8,9 @@
 
 <body class="container">
 <h1>HOMEPAGE FOR MANAGER</h1>
-<p th:unless="${roomAssigned} and ${roomAssigned.size()}">No rooms assigned!</p>
+<p th:unless="${assignedRoom} and ${assignedRoom.size()}">No rooms assigned!</p>
 
-<th:block th:if="${roomAssigned} and ${roomAssigned.size()}">
+<th:block th:if="${assignedRoom} and ${assignedRoom.size()}">
 <table class="table table-striped">
 <thead>
     <tr>
@@ -25,16 +25,16 @@
     <th>STATUS</th>
 </tr>
 </thead>
-    <tr th:each = "roomAssigned : ${roomAssigned}">
-        <td th:text="${roomAssigned.room.roomNumber}"></td>
+    <tr th:each = "assignedRoom : ${assignedRoom}">
+        <td th:text="${assignedRoom.room.roomNumber}"></td>
         <td>IN PROGRESS</td>
-        <td th:text="${roomAssigned.guest}"></td>
-        <td th:text="${roomAssigned.numberOfGuests}"></td>
-        <td th:text="${roomAssigned.checkIn}"></td>
-        <td th:text="${roomAssigned.checkOut}"></td>
-        <td th:text="${roomAssigned.task?.displayName}"></td>
-        <td th:text="${roomAssigned.note}"></td>
-        <td th:text="${roomAssigned.status.displayName}"></td>
+        <td th:text="${assignedRoom.guest}"></td>
+        <td th:text="${assignedRoom.numberOfGuests}"></td>
+        <td th:text="${assignedRoom.checkIn}"></td>
+        <td th:text="${assignedRoom.checkOut}"></td>
+        <td th:text="${assignedRoom.task?.displayName}"></td>
+        <td th:text="${assignedRoom.note}"></td>
+        <td th:text="${assignedRoom.status.displayName}"></td>
     </tr>
 </table>
 </th:block>
