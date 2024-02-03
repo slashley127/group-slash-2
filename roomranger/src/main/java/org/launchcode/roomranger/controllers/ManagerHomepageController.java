@@ -40,18 +40,38 @@ public class ManagerHomepageController {
     }
 
 
-
-
-
-
-
-
-
-
-
+}
 
 //
+//package org.launchcode.roomranger.controllers;
+//import jakarta.servlet.http.HttpSession;
+//import jakarta.validation.Valid;
+//import org.launchcode.roomranger.data.AssignedRoomRepository;
+//import org.launchcode.roomranger.data.RoomAttendantRepository;
+//import org.launchcode.roomranger.data.RoomRepository;
+//import org.launchcode.roomranger.models.Task;
+//import org.launchcode.roomranger.models.AssignedRoom;
+//import org.launchcode.roomranger.models.Status;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.stereotype.Controller;
+//import org.springframework.ui.Model;
+//import org.springframework.validation.Errors;
+//import org.springframework.web.bind.annotation.*;
 //
+////@RestController
+////@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+//@Controller
+//@RequestMapping("manager")
+//public class ManagerHomepageController {
+//
+//    @Autowired
+//    private RoomAttendantRepository roomAttendantRepository;
+//
+//    @Autowired
+//    private RoomRepository roomRepository;
+//
+//    @Autowired
+//    private AssignedRoomRepository roomAssignedRepository;
 //
 //    @GetMapping
 //    public String renderManagerHomepage(Model model) {
@@ -100,17 +120,11 @@ public class ManagerHomepageController {
 //    }
 //
 //    @PostMapping("/delete")
-//        public String processDeleteForm(@RequestParam(required = false) int[] assignedRoomId) {
+//    public String processDeleteForm(@RequestParam(required = false) int[] assignedRoomId) {
 //        for(int id : assignedRoomId) {
 //            roomAssignedRepository.deleteById(id);
 //        }
 //        return "redirect:/manager";
-//        }
+//    }
 //
 //}
-//
-//
-//
-
-
-}
