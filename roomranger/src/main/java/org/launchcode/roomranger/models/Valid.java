@@ -1,5 +1,4 @@
 package org.launchcode.roomranger.models;
 
-public class RoomAttendantProfile {
-
+public class Valid {
 }
