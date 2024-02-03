@@ -4,10 +4,14 @@ import org.launchcode.roomranger.data.AssignedRoomRepository;
 import org.launchcode.roomranger.data.RoomAttendantRepository;
 import org.launchcode.roomranger.data.RoomRepository;
 import org.launchcode.roomranger.models.AssignedRoom;
+import org.launchcode.roomranger.models.Room;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
     @RestController
     @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
@@ -23,21 +27,20 @@ import org.springframework.web.bind.annotation.*;
         @Autowired
         private RoomAttendantRepository roomAttendantRepository;
 
-
         @GetMapping()
-        public Iterable<AssignedRoom> getAllAssignedRooms() {
-            return assignedRoomRepository.findAll();
+        public List<AssignedRoom> getAllAssignedRooms(){
+            return (List<AssignedRoom>) assignedRoomRepository.findAll();
         }
 
 
-        @PostMapping("/assignroom")
+//        @PostMapping("/assignroom")
+//
+//        public ResponseEntity<?> assignRoom(@RequestBody AssignedRoom newAssignedRoom){
+//            return new ResponseEntity<>(assignedRoomRepository.save(newAssignedRoom), HttpStatus.OK);
+//        }
+    }
 //        AssignedRoom newAssignedRoom(@RequestBody AssignedRoom newAssignedRoom) {
 //            return assignedRoomRepository.save(newAssignedRoom);
-        public ResponseEntity<?> assignRoom(@RequestBody AssignedRoom newAssignedRoom){
-            return new ResponseEntity<>(assignedRoomRepository.save(newAssignedRoom), HttpStatus.OK);
-        }
-    }
-
 //
 //package org.launchcode.roomranger.controllers;
 //import jakarta.servlet.http.HttpSession;
