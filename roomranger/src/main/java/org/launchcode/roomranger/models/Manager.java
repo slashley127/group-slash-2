@@ -15,20 +15,20 @@ public class Manager extends AbstractEntity{
     private String lastName;
     @OneToMany(mappedBy = "manager")
     private List<RoomAttendant> roomAttendants = new ArrayList<>();
-    @OneToOne(cascade = CascadeType.ALL)
-    @NotNull
-    private ManagerUser managerUser;
-    @OneToMany(mappedBy = "managerCreator")
-    private List<Room> rooms = new ArrayList<>();
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @NotNull
+//    private ManagerUser managerUser;
+//    @OneToMany(mappedBy = "managerCreator")
+//    private List<Room> rooms = new ArrayList<>();
     public Manager() {
     }
 
-    public Manager(String firstName, String lastName, List<RoomAttendant> roomAttendants, ManagerUser managerUser, List<Room> rooms) {
+    public Manager(String firstName, String lastName, List<RoomAttendant> roomAttendants) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.roomAttendants = roomAttendants;
-        this.managerUser = managerUser;
-        this.rooms = rooms;
+//        this.managerUser = managerUser;
+//        this.rooms = rooms;
     }
 
     public String getFirstName() {
@@ -55,21 +55,21 @@ public class Manager extends AbstractEntity{
         this.roomAttendants = roomAttendants;
     }
 
-    public ManagerUser getManagerUser() {
-        return managerUser;
-    }
+//    public ManagerUser getManagerUser() {
+//        return managerUser;
+//    }
+//
+//    public void setManagerUser(ManagerUser managerUser) {
+//        this.managerUser = managerUser;
+//    }
 
-    public void setManagerUser(ManagerUser managerUser) {
-        this.managerUser = managerUser;
-    }
-
-    public List<Room> getRooms() {
-        return rooms;
-    }
-
-    public void setRooms(List<Room> rooms) {
-        this.rooms = rooms;
-    }
+//    public List<Room> getRooms() {
+//        return rooms;
+//    }
+//
+//    public void setRooms(List<Room> rooms) {
+//        this.rooms = rooms;
+//    }
 
 }
 
