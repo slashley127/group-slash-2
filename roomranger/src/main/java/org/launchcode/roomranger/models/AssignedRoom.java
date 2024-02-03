@@ -1,8 +1,7 @@
 package org.launchcode.roomranger.models;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
@@ -10,11 +9,13 @@ import java.time.LocalDate;
 @Entity
 public class AssignedRoom extends AbstractEntity {
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Room room; //this is actually oneToMany???
+    @OneToOne(cascade = CascadeType.ALL)
+    @Valid
+    private Room room;
 
-    //@ManyToOne
-    //RoomAttendant
+    @OneToOne(cascade = CascadeType.ALL)
+    @Valid
+    private RoomAttendant roomAttendant;
 
     @Size(min = 2, max = 30, message = "Name of Guest must be 2-30 characters long")
     private String guest;
@@ -38,12 +39,14 @@ public class AssignedRoom extends AbstractEntity {
 
     public AssignedRoom() {
         this.room = room;
+        this.roomAttendant = roomAttendant;
         this.status = status;
         this.task = task;
     }
 
-    public AssignedRoom(Room room, String guest, int numberOfGuests, Status status, LocalDate checkIn, LocalDate checkOut, Task task, String note) {
+    public AssignedRoom(Room room, RoomAttendant roomAttendant, String guest, int numberOfGuests, Status status, LocalDate checkIn, LocalDate checkOut, Task task, String note) {
         this.room = room;
+        this.roomAttendant = roomAttendant;
         this.guest = guest;
         this.numberOfGuests = numberOfGuests;
         this.status = status;
@@ -59,6 +62,14 @@ public class AssignedRoom extends AbstractEntity {
 
     public void setRoom(Room room) {
         this.room = room;
+    }
+
+    public RoomAttendant getRoomAttendant() {
+        return roomAttendant;
+    }
+
+    public void setRoomAttendant(RoomAttendant roomAttendant) {
+        this.roomAttendant = roomAttendant;
     }
 
     public String getGuest() {
