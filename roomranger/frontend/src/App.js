@@ -2,7 +2,7 @@ import './App.css';
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import NavBar from './components/NavBar';
 import Home from './components/rooms/Home';
-import {Router, Routes, Route } from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import AddRoom from './components/rooms/AddRoom';
 import EditRoom from './components/rooms/EditRoom';
 import ViewRoom from './components/rooms/ViewRoom';

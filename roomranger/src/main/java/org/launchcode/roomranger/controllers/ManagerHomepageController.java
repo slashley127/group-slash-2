@@ -9,12 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-public class ManagerHomepageController {
-
     @RestController
     @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
     @RequestMapping("manager")
-    public class ApiManagerHomepageController {
+    public class ManagerHomepageController {
 
         @Autowired
         private AssignedRoomRepository assignedRoomRepository;
@@ -26,7 +24,6 @@ public class ManagerHomepageController {
         private RoomAttendantRepository roomAttendantRepository;
 
 
-
         @GetMapping()
         public Iterable<AssignedRoom> getAllAssignedRooms() {
             return assignedRoomRepository.findAll();
@@ -34,13 +31,12 @@ public class ManagerHomepageController {
 
 
         @PostMapping("/assignroom")
+//        AssignedRoom newAssignedRoom(@RequestBody AssignedRoom newAssignedRoom) {
+//            return assignedRoomRepository.save(newAssignedRoom);
         public ResponseEntity<?> assignRoom(@RequestBody AssignedRoom newAssignedRoom){
             return new ResponseEntity<>(assignedRoomRepository.save(newAssignedRoom), HttpStatus.OK);
         }
     }
-
-
-}
 
 //
 //package org.launchcode.roomranger.controllers;
