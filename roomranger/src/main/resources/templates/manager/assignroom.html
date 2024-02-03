@@ -1,40 +1,82 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="//www.thymeleaf.org/">
-<head>
+
     <meta charset="UTF-8"/>
-    <title></title>
+    <head th:replace="fragments :: head"></head>
+    <nav th:replace = "~{fragments :: manager-nav}"></nav>
+    <title>Assign Room</title>
 </head>
-<body>
-<nav th:replace = "~{fragments :: manager-nav}"></nav>
+<body class="container">
+
+<main>
 <h1>ASSIGN ROOMS</h1>
-<form action="/manager/assignroom" method="POST">
+<form action="assignroom" method="post">
     <div class="form-item">
         <div>
-       <label>Room Number</label>
+            <label>Room Number
+            </label>
+            <select th:field="${assignedRoom.room.roomNumber}">
+                <option th:each="room : ${rooms}"
+                        th:value="${room.roomNumber}"
+                        th:text="${room.roomNumber} + ' | ' + ${room.roomType != null ? room.roomType.displayName : 'Unknown'}">
+                </option>
+            </select>
         </div>
         <div>
         <label>Room Attendant</label>
         </div>
         <div>
-        <label>Room Type</label>
+        <label th:for="guestName">Guest Name</label>
+            <input type="text" th:field="${assignedRoom.guest}">
+            <p class="error" th:errors="${assignedRoom.guest}"></p>
         </div>
         <div>
-        <label>Guest</label>
+           <label th:for="guestNumber">Number of Guests</label>
+            <input type="number" th:field="${assignedRoom.numberOfGuests}">
+            <p class="error" th:errors="${assignedRoom.numberOfGuests}"></p>
         </div>
         <div>
-        <label>Check In</label>
+        <label th:for="checkIn">Check In
+        <input type="date" th:field="${assignedRoom.checkIn}">
+            <p class="error" th:errors="${assignedRoom.checkIn}"></p>
+        </label>
         </div>
         <div>
-        <label>Check Out</label>
+        <label th:for="checkOut">Check Out
+        <input type="date" th:field="${assignedRoom.checkOut}">
+            <p class="error" th:errors="${assignedRoom.checkOut}"></p>
+        </label>
         </div>
         <div>
-            <label>Cleaning task</label>
+            <label th:for="task">Cleaning Task
+            </label>
+            <select th:field="${assignedRoom.task}">
+                <option value =""></option>
+                <option th:each = "task : ${task}"
+                    th:value = "${task}"
+                    th:text = "${task.displayName}">
+                </option>
+            </select>
+            <p class="error" th:errors="${assignedRoom.task}"></p>
         </div>
         <div>
-        <label>Notes</label>
+                <label th:for="status">Status
+                </label>
+                <select th:field="${assignedRoom.status}">
+                    <option th:each = "status : ${status}"
+                            th:value = "${status}"
+                            th:text = "${status.displayName}">
+                    </option>
+                </select>
+            <p class="error" th:errors="${assignedRoom.status}"></p>
+        </div>
+        <div>
+        <label th:for="note">Notes</label>
+            <input type="text" th:field="${assignedRoom.note}">
     </div>
     </div>
     <input type="submit" value="Assign Room">
 </form>
+</main>
 </body>
 </html>

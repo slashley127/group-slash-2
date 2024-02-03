@@ -9,6 +9,7 @@
     <thead>
     <tr>
         <th>Room Number</th>
+<<<<<<< HEAD
         <th>Room Type</th>
         <th>Guest</th>
         <th>Check In Date</th>
@@ -31,6 +32,16 @@
         <td th:text="${room.roomAttendantAssigned}"></td>
         <td th:text="${room.available ? 'Yes' : 'No' }"></td>
         <td th:text="${room.note}"></td>
+=======
+        <th>Occupancy</th>
+        <th>Type</th>
+    </tr>
+    </thead>
+    <tr th:each="room : ${rooms}">
+        <td th:text="${room.roomNumber}"></td>
+        <td th:text="${room.roomOccupancy.displayName}"></td>
+        <td th:text="${room.roomType.displayName}"></td>
+>>>>>>> room-assigning-francesca
     </tr>
 </table>
 

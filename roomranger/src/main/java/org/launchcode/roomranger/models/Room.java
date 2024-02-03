@@ -37,7 +37,6 @@ public class Room extends AbstractEntity{
 //    private LocalDate checkoutDate;
 //    @OneToMany(mappedBy = "room")
 //    private List<Comment> comments = new ArrayList<>();
-
     public Room() {
     }
 
@@ -58,6 +57,7 @@ public class Room extends AbstractEntity{
 //        this.checkoutDate = checkoutDate;
 //        this.comments = comments;
 //    }
+
 
     public Room(String roomNumber) {
         this.roomNumber = roomNumber;
@@ -178,4 +178,5 @@ public class Room extends AbstractEntity{
     public String toString() {
         return roomNumber;
     }
+
 }

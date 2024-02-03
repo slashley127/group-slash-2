@@ -19,6 +19,7 @@
             </select>
         </label>
     </div>
+<<<<<<< HEAD
     <div class="mb-3 form-check">
         <label> Is Available
             <input type="checkbox" th:field="*{available}"/>
@@ -26,6 +27,26 @@
     </div>
     <div class="mb-3">
         <input type="submit" value="Add Room">
+=======
+<!--    <div>-->
+<!--        <label> Room Attendant-->
+<!--            <input th:field="${room.roomAttendantAssigned}">-->
+<!--        </label>-->
+<!--    </div>-->
+    <div>
+        <label> Occupancy
+            <select th:field="${room.roomOccupancy}">
+                <option th:each="roomOccupancy: ${occupancy}"
+                        th:value="${roomOccupancy}"
+                        th:text="${roomOccupancy.displayName}"
+                        ></option>
+            </select>
+        </label>
+    </div>
+    </div>
+    <div>
+        <input type="submit" value="Create Room">
+>>>>>>> room-assigning-francesca
     </div>
 </form>
 
