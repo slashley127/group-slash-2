@@ -1,19 +1,20 @@
 package org.launchcode.roomranger.controllers;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-import org.launchcode.roomranger.data.RoomAssignedRepository;
+import org.launchcode.roomranger.data.AssignedRoomRepository;
 import org.launchcode.roomranger.data.RoomAttendantRepository;
 import org.launchcode.roomranger.data.RoomRepository;
-import org.launchcode.roomranger.models.Room;
 import org.launchcode.roomranger.models.Task;
-import org.launchcode.roomranger.models.RoomAssigned;
+import org.launchcode.roomranger.models.AssignedRoom;
 import org.launchcode.roomranger.models.Status;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+//@RestController
+//@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @Controller
 @RequestMapping("manager")
 public class ManagerHomepageController {
@@ -25,12 +26,12 @@ public class ManagerHomepageController {
     private RoomRepository roomRepository;
 
     @Autowired
-    private RoomAssignedRepository roomAssignedRepository;
+    private AssignedRoomRepository roomAssignedRepository;
 
     @GetMapping
     public String renderManagerHomepage(Model model) {
-        Iterable<RoomAssigned> roomsAssigned = roomAssignedRepository.findAll();
-        model.addAttribute("roomAssigned", roomsAssigned);
+        Iterable<AssignedRoom> assignedRooms = roomAssignedRepository.findAll();
+        model.addAttribute("assignedRoom", assignedRooms);
         return "manager/index";
     }
 
@@ -48,7 +49,7 @@ public class ManagerHomepageController {
 
     @GetMapping("assignroom")
     public String renderAssignRoomForm(Model model) {
-        model.addAttribute(new RoomAssigned());
+        model.addAttribute(new AssignedRoom());
         model.addAttribute("rooms", roomRepository.findAll());
         model.addAttribute("status", Status.values());
         model.addAttribute("task", Task.values());
@@ -56,20 +57,20 @@ public class ManagerHomepageController {
     }
 
     @PostMapping("assignroom")
-    public String processAssigningForm(@ModelAttribute("roomAssigned") @Valid RoomAssigned RoomAssigned, Errors errors, Model model) {
+    public String processAssigningForm(@ModelAttribute("roomAssigned") @Valid AssignedRoom AssignedRoom, Errors errors, Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("rooms", roomRepository.findAll());;
             model.addAttribute("status", Status.values());
             model.addAttribute("task", Task.values());
             return "manager/assignroom";
         }
-        roomAssignedRepository.save(RoomAssigned);
+        roomAssignedRepository.save(AssignedRoom);
         return "redirect:/manager";
     }
 
     @GetMapping("/delete")
     public String displayDeleteForm(Model model, HttpSession session) {
-        model.addAttribute("roomAssigned", roomAssignedRepository.findAll());
+        model.addAttribute("assignedRoom", roomAssignedRepository.findAll());
         return "manager/delete";
     }
 
@@ -82,3 +83,35 @@ public class ManagerHomepageController {
         }
 
 }
+
+
+
+//
+//@RestController
+//@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+//@RequestMapping("manager")
+//public class ApiManagerHomepageController {
+//
+////    @Autowired
+////    private AssignedRoomRepository assignedRoomRepository;
+////
+////    @Autowired
+////    private RoomRepository roomRepository;
+////
+////    @Autowired
+////    private RoomAttendantRepository roomAttendantRepository;
+////
+////
+////
+////    @GetMapping()
+////    public Iterable<AssignedRoom> getAllAssignedRooms() {
+////        return assignedRoomRepository.findAll();
+////    }
+////
+////
+////    @PostMapping("/assignroom")
+////    public ResponseEntity<?> assignRoom(@RequestBody AssignedRoom newAssignedRoom){
+////        return new ResponseEntity<>(assignedRoomRepository.save(newAssignedRoom), HttpStatus.OK);
+////    }
+//}
+
