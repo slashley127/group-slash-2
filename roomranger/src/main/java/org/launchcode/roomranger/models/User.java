@@ -2,29 +2,40 @@ package org.launchcode.roomranger.models;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
-import java.util.Set;
 
 
 @Entity
+
 public class User {
 
     @Id
     @GeneratedValue
-    private Integer id;
+   private Integer id;
     private String username;
     private String name;
     private String email;
-    private Date dob;
-    private String password;
 
-    public Date getDob() {
+
+    private String dob;
+    private String password;
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
+
 
     public String getPassword() {
         return password;

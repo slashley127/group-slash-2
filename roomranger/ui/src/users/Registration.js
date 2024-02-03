@@ -6,14 +6,16 @@ export default function Registration() {
   let navigate = useNavigate();
 
   const [user, setUser] = useState({
-    name: "",
+    
     username: "",
+    name: "",
     email: "",
     dob: "",
-    password: ""
+    password: "",
+    role: "",
   });
 
-  const { name, username, email, dob, password } = user;
+  const {username, name, email, dob, password, role } = user;
 
   const onInputChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -21,16 +23,9 @@ export default function Registration() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    try {
-      // Make a POST request to your backend endpoint using Axios
-      await axios.post("http://localhost:8080/user", user);
-      navigate("/");
-    } catch (error) {
-      // Handle errors, e.g., display an error message
-      console.error('Registration failed:', error.message);
-    }
+    await axios.post("http://localhost:8080/user", user);
+    navigate("/");
   };
-
   return (
     <div className="container mt-5">
       <h2>Registration Form</h2>
@@ -62,6 +57,23 @@ export default function Registration() {
             onChange={onInputChange}
             required
           />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="role" className="form-label">
+            Role
+          </label>
+          <select
+            className="form-control"
+            id="role"
+            name="role"
+            value={role}
+            onChange={onInputChange}
+            required
+          >
+            <option value="">Select Role</option>
+            <option value="manager">Manager</option>
+            <option value="roomattendant">Room Attendant</option>
+          </select>
         </div>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
@@ -109,9 +121,9 @@ export default function Registration() {
           Register
         </button>
         <Link className="btn btn-outline-danger mx-2" to="/">
-              Cancel
-            </Link>
+          Cancel
+        </Link>
       </form>
     </div>
   );
-};
+}

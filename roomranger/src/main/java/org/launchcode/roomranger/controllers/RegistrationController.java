@@ -1,6 +1,6 @@
 package org.launchcode.roomranger.controllers;
+
 import org.launchcode.roomranger.data.UserRepository;
-import org.launchcode.roomranger.exception.UserNotFoundException;
 import org.launchcode.roomranger.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,12 +21,6 @@ public class RegistrationController {
     @GetMapping("/users")
     Iterable<User> getAllUsers() {
         return userRepository.findAll();
-    }
-
-    @GetMapping("/user/{id}")
-    User getUserById(@PathVariable Long id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(id));
     }
 
 }
