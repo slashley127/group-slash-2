@@ -13,7 +13,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fragment Scripts</title>
 </head>
-<head
 <body>
 <script th:inline="javascript">
     function togglePasswordVisibility(fieldId) {
@@ -42,11 +41,36 @@
 <nav th:fragment="manager-nav">
     <h1 th:text="${title}">Room Ranger</h1>
     <ul class="nav">
-        <li class="nav-item"><a class="nav-link" th:href="@{/manager}">DASHBOARD</a></li>
-        <li class="nav-item"><a class="nav-link" th:href="@{/manager/assignroom}">ASSIGN ROOM</a></li>
-        <li class="nav-item"><a class="nav-link" th:href="@{/manager/roomAttendant}">ROOM ATTENDANTS </a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/manager}">DASHBOARD </a></li>
+        <li class="nav-item"><a class="nav-link" th:href="@{/manager/roomattendantlist}">ROOM ATTENDANTS </a></li>
     </ul>
 </nav>
+
+<div th:fragment="comment">
+    <div class="comment-area">
+        <h2 class="text-center">Leave Comments</h2>
+    </div>
+    <div class="comment-area" th:each="comment : ${room.comments}">
+        <div class="comment-box">
+            <p class="comments" th:text= "${comment.text}"></p>
+            <div class="comment-attribution">
+                <p th:if="${comment.createdBy instanceof T(org.launchcode.roomranger.models.ManagerUser)}" th:text="${'Comment by Manager ' + comment.createdBy.getManager.firstName + ' ' + comment.createdBy.getManager.lastName}"></p>
+                <p th:if="${comment.createdBy instanceof T(org.launchcode.roomranger.models.AttendantUser)}" th:text="${'Comment by Room Attendant ' + comment.createdBy.getRoomAttendant.firstName + ' ' + comment.createdBy.getRoomAttendant.lastName}"></p>
+                <p th:text="${'Created on ' +  #temporals.format(comment.createdDate, 'MM-dd-yyyy')} "></p>
+            </div>
+        </div>
+    </div>
+    <div class="comment-area">
+        <form th:action="@{/rooms/comment}" method="post">
+            <input type="hidden" name="roomId" th:value="${room.id}" />
+            <input type="hidden" name="createdBy" th:value="${user.id}" />
+            <div class="form-group">
+                <input class="form-control" type="text" th:field="${newComment.text}"/>
+            </div>
+            <button type="submit" class="btn btn-outline-dark">Add Comment</button>
+        </form>
+    </div>
+</div>
 
 </body>
 </html>
