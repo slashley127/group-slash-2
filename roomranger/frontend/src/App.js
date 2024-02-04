@@ -1,24 +1,55 @@
-import './App.css';
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
-import NavBar from './components/NavBar';
-import Home from './components/rooms/Home';
-import {Router, Routes, Route } from 'react-router-dom';
-import AddRoom from './components/rooms/AddRoom';
-import EditRoom from './components/rooms/EditRoom';
-import ViewRoom from './components/rooms/ViewRoom';
+import "./App.css";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import Navbar from "./layout/Navbar";
+import Home from "./pages/Home";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Registration from "./users/Registration";
+import Login from "./users/Login";
+import Contact from "./users/Contact Us";
+import About from "./users/About Us";
+import AddRoom from "./components/rooms/AddRoom";
+import EditRoom from "./components/rooms/EditRoom";
+import ViewRoom from "./components/rooms/ViewRoom";
+import Manager from "./components/rooms/Manager";
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 
 function App() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    document.body.className = isDarkMode ? 'dark-theme' : 'light-theme';
+  }, [isDarkMode]);
+
+  const toggleTheme = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  };
+
   return (
     <div className="App">
+      <button onClick={toggleTheme}>Toggle Theme</button>
       <Router>
-        <NavBar />
-        <Routes>
-          {/* give path /addroom to the AddRoom page */}
-          <Route exact path="/rooms/addroom" element={<AddRoom />} />
-          <Route exact path="/rooms" element={<Home />} />
-          <Route exact path="/rooms/editroom/:id" element={<EditRoom/>} />
-          <Route exact path="/rooms/viewroom/:id" element={<ViewRoom/>} />
-        </Routes>
+        <Navbar />
+        <Container fluid>
+          <Row>
+            <Col md={6}>
+              <Routes>
+                <Route exact path="/" element={<Home />} />
+                <Route exact path="/registration" element={<Registration />} />
+                <Route exact path="/login" element={<Login />} />
+                <Route exact path="/about" element={<About/>} />
+                <Route exact path="/components/rooms/addRoom" element={<AddRoom/>} />
+                <Route exact path="/components/rooms/editRoom" element={<EditRoom/>} />
+                <Route exact path="/components/rooms/viewRoom" element={<ViewRoom/>} />
+                <Route exact path="/components/rooms/manager" element={<Manager/>} />
+                <Route exact path="/users/contact" element={<Contact/>} />
+              </Routes>
+            </Col>
+            <Col md={6}>
+              {/* Content for the second column */}
+            </Col>
+          </Row>
+        </Container>
       </Router>
     </div>
   );

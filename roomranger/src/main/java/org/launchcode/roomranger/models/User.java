@@ -1,44 +1,85 @@
 package org.launchcode.roomranger.models;
 
-import jakarta.persistence.Entity;
-import jakarta.validation.constraints.NotNull;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import jakarta.persistence.*;
+
 
 
 @Entity
-public class User extends AbstractEntity {
-       public void setUsername(String username) {
-       this.username = username;
-        }
 
-        public String getPwHash() {
-            return pwHash;
-        }
+public class User {
 
-        public void setPwHash(String pwHash) {
-            this.pwHash = pwHash;
-        }
-
-    @NotNull
+    @Id
+    @GeneratedValue
+    private Integer id;
     private String username;
+    private String name;
+    private String email;
 
-    @NotNull
-    private String pwHash;
-    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public User() {}
+    private String dob;
+    private String password;
+    private String role;
 
-    public User(String username, String password) {
-        this.username = username;
-        this.pwHash = encoder.encode(password);
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public boolean isMatchingPassword(String password) {
-        return encoder.matches(password, pwHash);
+    public void setUsername(String username) {
+        this.username = username;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+
+    }
 }

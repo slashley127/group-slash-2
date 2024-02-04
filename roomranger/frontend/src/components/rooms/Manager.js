@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
+import Navbar from "./NavBar";
 
-export default function Home() {
+export default function Manager() {
   const [rooms, setRooms] = useState([]);
   const [types, setTypes] = useState({});
   const {id} = useParams();
@@ -25,7 +26,9 @@ export default function Home() {
   }
 
   return (
+    
     <div className="container">
+      <Navbar/>
       <div className="py-4">
         {/* Here to give to link to addRoom */}
         <Link className='btn btn-primary' to='/rooms/addroom'>Add Room</Link>
