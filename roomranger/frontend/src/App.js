@@ -38,10 +38,10 @@ function App() {
                 <Route exact path="/registration" element={<Registration />} />
                 <Route exact path="/login" element={<Login />} />
                 <Route exact path="/about" element={<About/>} />
-                <Route exact path="/components/rooms/addRoom" element={<AddRoom/>} />
-                <Route exact path="/components/rooms/editRoom" element={<EditRoom/>} />
-                <Route exact path="/components/rooms/viewRoom" element={<ViewRoom/>} />
-                <Route exact path="/components/rooms/manager" element={<Manager/>} />
+                <Route exact path="/rooms/addRoom" element={<AddRoom/>} />
+                <Route exact path="/rooms/editRoom" element={<EditRoom/>} />
+                <Route exact path="/rooms/viewRoom" element={<ViewRoom/>} />
+                <Route exact path="/rooms/manager" element={<Manager/>} />
                 <Route exact path="/users/contact" element={<Contact/>} />
               </Routes>
             </Col>

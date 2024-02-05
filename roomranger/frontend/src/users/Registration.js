@@ -20,7 +20,15 @@ export default function Registration() {
 
   // Add the 'authenticated' state variable and its setter
   const [authenticated, setAuthenticated] = useState(false);
-
+  const isUsernameUnique = async (username) => {
+    try {
+      const response = await axios.get(`http://localhost:8080/user/exists/${username}`);
+      return !response.data; // Assuming the response is a boolean indicating uniqueness
+    } catch (error) {
+      console.error("Error checking username uniqueness:", error);
+      return false; // Return false in case of an error
+    }
+  };
   const { username, name, email, dob, password, role } = user;
   const { password: loginPassword } = loginCredentials;
 
@@ -46,13 +54,48 @@ export default function Registration() {
       alert("Incorrect password. Access denied.");
     }
   };
+  
+
+      
+  
 
   const onRegistrationSubmit = async (e) => {
     e.preventDefault();
+    // Calculate age based on the entered date of birth
+  const currentDate = new Date();
+  const enteredDob = new Date(dob);
+  const userAge = currentDate.getFullYear() - enteredDob.getFullYear();
+
+  if (userAge < 15) {
+    // Display an error message or take appropriate action
+    alert("Sorry, you must be at least 15 years old to register.");
+    return;
+  }
+  // Call the isUsernameUnique function with the actual username
+  
+  
+
+  // Check for password complexity
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+  if (!passwordRegex.test(password)) {
+    // Display an error message for password complexity
+    alert("Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 digit, 1 special character, and be at least 8 characters long.");
+    return;
+  }
+  // Check if the username is unique
+  const isUnique = await isUsernameUnique(username);
+
+  if (!isUnique) {
+    // Display an error message for non-unique username
+    alert("Username is already taken. Please choose a different one.");
+    return;
+  }
 
       await axios.post("http://localhost:8080/user", user);
       navigate("/");
-    };
+    
+  };
   return (
     <div className="container mt-5">
       {!authenticated && (
