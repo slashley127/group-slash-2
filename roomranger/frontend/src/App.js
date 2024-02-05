@@ -7,6 +7,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import AddRoom from './components/rooms/AddRoom';
 import EditRoom from './components/rooms/EditRoom';
 import ViewRoom from './components/rooms/ViewRoom';
+import AssignRoom from './components/manager/AssignRoomForm';
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
         <Routes>
           {/* give path /addroom to the AddRoom page */}
           <Route exact path="/rooms/addroom" element={<AddRoom />} />
-          <Route exact path="/manager" element={<HomeManager />} />
+          <Route exact path="manager" element={<HomeManager />} />
+          <Route exact path="manager/assignroom" element={<AssignRoom />} />
           <Route exact path="/rooms" element={<Home />} />
           <Route exact path="/rooms/editroom/:id" element={<EditRoom/>} />
           <Route exact path="/rooms/viewroom/:id" element={<ViewRoom/>} />

@@ -13,7 +13,7 @@ export default function NavBar() {
                         <Link class="nav-link active" aria-current="page" to="/rooms">Rooms</Link>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Assign Room</a>
+                    <Link class="nav-link active" aria-current="page" to="manager/assignroom">Assign Room</Link>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Room Attendant</a>
