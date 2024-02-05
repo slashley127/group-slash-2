@@ -7,6 +7,7 @@ export default function Registration() {
 
   const [loginCredentials, setLoginCredentials] = useState({
     password: "",
+    showPassword: false, 
   });
 
   const [user, setUser] = useState({
@@ -30,7 +31,7 @@ export default function Registration() {
     }
   };
   const { username, name, email, dob, password, role } = user;
-  const { password: loginPassword } = loginCredentials;
+  const { password: loginPassword, showPassword } = loginCredentials;
 
   const onLoginChange = (e) => {
     setLoginCredentials({ ...loginCredentials, [e.target.name]: e.target.value });
@@ -38,6 +39,9 @@ export default function Registration() {
 
   const onInputChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
+  };
+  const togglePasswordVisibility = () => {
+    setLoginCredentials({ ...loginCredentials, showPassword: !showPassword });
   };
 
   const onLoginSubmit = (e) => {
@@ -194,7 +198,7 @@ export default function Registration() {
                 Password
               </label>
               <input
-                type="password"
+                type="password" type={showPassword ? "text" : "password"}
                 className="form-control"
                 id="password"
                 name="password"
@@ -202,6 +206,9 @@ export default function Registration() {
                 onChange={onInputChange}
                 required
               />
+               <button type="button" onClick={togglePasswordVisibility}>
+                  {showPassword ? "Hide" : "Show"}
+                  </button>
             </div>
             <button type="submit" className="btn btn-primary">
               Register
