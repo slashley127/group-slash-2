@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function HomeManager() {
 
@@ -48,10 +49,12 @@ return (
                            <td>{assignedRoom.notes}</td>
                            <td>{assignedRoom.status}</td>
                            <td>
-                               <button className='btn btn-primary mx-2'>View</button>
-                               <button className='btn btn-outline-primary mx-2'>Edit</button>
-                               <button className='btn btn-danger mx-2'>Cancel</button>
+                           {/* <Link className='btn btn-primary mx-2' to={`assignedrooms/viewassignedroom/${assignedRoom.id}`}>View</Link>
+                            <Link className='btn btn-outline-primary mx-2' to={`assignedrooms/editassignedroom/${assignedRoom.id}`}>Edit</Link>
+                             <button className='btn btn-danger mx-2' onClick={()=> deleteRoom(assignedRoom.id)}>Delete</button> */}
                            </td>
+
+                           {/* to do tomorrow: link buttons to pages and implement logic */}
                        </tr>
                        ))}
                    </tbody>
