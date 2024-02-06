@@ -35,7 +35,7 @@ export default function Home() {
               <th scope="col">#</th>
               <th scope="col">Room Number</th>
               <th scope="col">Room Type</th>
-              <th scope="col">Is Available</th>
+              {/* <th scope="col">Is Available</th> */}
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -47,7 +47,7 @@ export default function Home() {
                   <td>{room.roomNumber}</td>
                   {/* types is an object after passing from spring boot */}
                   <td>{types[room.roomType]}</td>
-                  <td>{room.available ? "Yes" : "No"}</td>
+                  {/* <td>{room.available ? "Yes" : "No"}</td> */}
                   <td>
                     <Link className='btn btn-primary mx-2' to={`/rooms/viewroom/${room.id}`}>View</Link>
                     <Link className='btn btn-outline-primary mx-2' to={`/rooms/editroom/${room.id}`}>Edit</Link>
