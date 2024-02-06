@@ -17,6 +17,9 @@ public class RoomAttendant  extends AbstractEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(insertable=false, updatable=false)
     private int id;
+//
+//    @OneToOne(mappedBy = "roomAttendant")
+//    private AssignedRoom assignedRoom;
 
     @NotBlank(message = "First name is required")
     @Column(length = 30)

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function AssignRoom() {
     let navigate = useNavigate()
@@ -12,7 +13,7 @@ export default function AssignRoom() {
         room: "",
         roomAttendant: "",
         guest: "",
-        numberOfGuests: "",
+        numberOfGuests: 0,
         checkIn: "",
         checkOut: "",
         task: "",
@@ -39,13 +40,13 @@ export default function AssignRoom() {
     }
 
     const fetchTasks = async () => {
-        const tasksResponse = await axios.get('http://localhost:8080/manager/tasks')
+        const tasksResponse = await axios.get('http://localhost:8080/assignedrooms/tasks')
         const tasksArray = Object.entries(tasksResponse.data);
         setTasks(tasksArray)
     }
 
     const fetchStatuses = async () => {
-        const statusesResponse = await axios.get('http://localhost:8080/manager/statuses')
+        const statusesResponse = await axios.get('http://localhost:8080/assignedrooms/statuses')
         const statusesArray = Object.entries(statusesResponse.data);
         setStatuses(statusesArray)
     }
@@ -74,13 +75,26 @@ export default function AssignRoom() {
     const onFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post("http://localhost:8080/manager/assignedroom", assignedRoom)
-            navigate("/assignedroom")
+            const response = await axios.post(
+                "http://localhost:8080/assignedrooms/assignroomform",
+                JSON.stringify(assignedRoom),
+                {
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                }
+              );
+          if (response && response.data) {
+            navigate("/assignedrooms");
+          } else {
+            console.error("Unexpected response format:", response);
+          }
+        } catch (error) {
+          console.error("Error submitting the form:", error);
+          console.log("Error response data:", error.response?.data);
+          setAssignedRoomError(error.response?.data || "An error occurred");
         }
-        catch (error) {
-            setAssignedRoomError(error.response.data)
-        }
-    }
+      };
 
 
     return (
@@ -214,7 +228,7 @@ export default function AssignRoom() {
                             </select>
                         </div>
                         <button type='submit' className='btn btn-outline-primary'>Submit</button>
-                        <button type='button' className='btn btn-outline-danger mx-2'>Cancel</button>
+                        <Link className='btn btn-outline-danger mx-2' to="/manager">Cancel</Link>
                     </form>
                 </div>
             </div>

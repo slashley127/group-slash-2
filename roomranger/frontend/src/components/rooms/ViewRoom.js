@@ -6,7 +6,7 @@ export default function ViewRooms() {
     const [room, setRoom] = useState({
         roomNumber: "",
         roomType: "",
-        available: false
+        // available: false
     });
     const { id } = useParams();
     const [type, setType] = useState([]);
@@ -41,10 +41,10 @@ export default function ViewRooms() {
                                     <b> Room Type: </b>
                                     {type}
                                 </li>
-                                <li className='list-group-item'>
+                                {/* <li className='list-group-item'>
                                     <b> Room Available: </b>
                                     {room.available ? "Yes" : "No"}
-                                </li>
+                                </li> */}
                             </ul>
                         </div>
                     </div>

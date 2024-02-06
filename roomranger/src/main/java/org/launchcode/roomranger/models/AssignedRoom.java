@@ -10,43 +10,45 @@ import java.time.LocalDate;
 public class AssignedRoom extends AbstractEntity {
 
     @OneToOne(cascade = CascadeType.ALL)
-    @Valid
+    @JoinColumn(name = "room_id")
+//    @Valid
     private Room room;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @Valid
-    private RoomAttendant roomAttendant;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "room_attendant_id")
+////    @Valid
+//    private RoomAttendant roomAttendant;
 
-    @Size(min = 2, max = 30, message = "Name of Guest must be 2-30 characters long")
+//    @Size(min = 2, max = 30, message = "Name of Guest must be 2-30 characters long")
     private String guest;
 
-    @Min(value = 1, message = "Number of Guests must be between 1-5")
-    @Max(value = 5, message = "Number of Guests must be between 1-5")
+//    @Min(value = 1, message = "Number of Guests must be between 1-5")
+//    @Max(value = 5, message = "Number of Guests must be between 1-5")
     private int numberOfGuests;
 
-    @NotNull(message = "Status is Required")
+//    @NotNull(message = "Status is Required")
     private Status status;
 
-    @NotNull(message = "CheckIn Date is Required")
+//    @NotNull(message = "CheckIn Date is Required")
     private LocalDate checkIn;
 
-    @NotNull(message = "CheckOut Date is Required")
+//    @NotNull(message = "CheckOut Date is Required")
     private LocalDate checkOut;
 
-    @NotNull(message = "Task is Required")
+//    @NotNull(message = "Task is Required")
     private Task task;
     private String note;
 
     public AssignedRoom() {
         this.room = room;
-        this.roomAttendant = roomAttendant;
+//        this.roomAttendant = roomAttendant;
         this.status = status;
         this.task = task;
     }
 
-    public AssignedRoom(Room room, RoomAttendant roomAttendant, String guest, int numberOfGuests, Status status, LocalDate checkIn, LocalDate checkOut, Task task, String note) {
+    public AssignedRoom(Room room, String guest, int numberOfGuests, Status status, LocalDate checkIn, LocalDate checkOut, Task task, String note) {
         this.room = room;
-        this.roomAttendant = roomAttendant;
+//        this.roomAttendant = roomAttendant;
         this.guest = guest;
         this.numberOfGuests = numberOfGuests;
         this.status = status;
@@ -63,14 +65,14 @@ public class AssignedRoom extends AbstractEntity {
     public void setRoom(Room room) {
         this.room = room;
     }
-
-    public RoomAttendant getRoomAttendant() {
-        return roomAttendant;
-    }
-
-    public void setRoomAttendant(RoomAttendant roomAttendant) {
-        this.roomAttendant = roomAttendant;
-    }
+//
+//    public RoomAttendant getRoomAttendant() {
+//        return roomAttendant;
+//    }
+//
+//    public void setRoomAttendant(RoomAttendant roomAttendant) {
+//        this.roomAttendant = roomAttendant;
+//    }
 
     public String getGuest() {
         return guest;

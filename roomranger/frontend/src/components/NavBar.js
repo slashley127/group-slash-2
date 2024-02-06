@@ -11,13 +11,13 @@ export default function NavBar() {
                     </div>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                    <Link class="nav-link active" aria-current="page" to="manager">Homepage</Link>
+                    <Link class="nav-link active" aria-current="page" to="/assignedrooms">Homepage</Link>
                     </li>
                     <li class="nav-item">
                         <Link class="nav-link active" aria-current="page" to="/rooms">Rooms</Link>
                     </li>
                     <li class="nav-item">
-                    <Link class="nav-link active" aria-current="page" to="manager/assignroom">Assign Room</Link>
+                    <Link class="nav-link active" aria-current="page" to="/assignedrooms/assignroomform">Assign Room</Link>
                     </li>
                     <li class="nav-item">
                     <Link class="nav-link active" aria-current="page" to="/attendantListComponent">Room Attendant</Link>
