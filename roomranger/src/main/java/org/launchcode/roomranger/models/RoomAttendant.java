@@ -9,11 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class RoomAttendant extends AbstractEntity {
+public class RoomAttendant  extends AbstractEntity{
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(insertable=false, updatable=false)
     private int id;
+
     @NotBlank(message = "First name is required")
     @Column(length = 30)
     private String firstName;
@@ -108,9 +111,8 @@ public class RoomAttendant extends AbstractEntity {
     public RoomAttendant() {
 
     }
-    public RoomAttendant ( int id, String firstName, String lastName, String email, String phoneNumber, List<WorkingDays> workingDays, String username, String password, RoomAttendantUser roomAttendantUser, String notes) {
+    public RoomAttendant (  String firstName, String lastName, String email, String phoneNumber, List<WorkingDays> workingDays, String username, String password, RoomAttendantUser roomAttendantUser, String notes) {
         super();
-        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email= email;
@@ -121,6 +123,8 @@ public class RoomAttendant extends AbstractEntity {
         this.roomAttendantUser=roomAttendantUser;
         this.notes=notes;
     }
+
+
 }
 
 

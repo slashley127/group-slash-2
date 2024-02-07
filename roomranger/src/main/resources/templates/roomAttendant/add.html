@@ -6,7 +6,7 @@
 
 </head>
 <body>
-<form  method="POST">
+<form  th:action="@{/roomAttendant/attendants}" method="POST">
     <div  class="form-row align-items-center">
 
         <div class="form-group">
@@ -21,15 +21,7 @@
             </label>
             <p class="error" th:errors="${roomAttendant.lastName}"></p>
         </div>
-        <div class="form-group">
-            <label >Pronoun:</label>
-            <select name="pronoun">
-                <option value="Choose" >choose</option>
-                <option value="He/Him" >He/Him</option>
-                <option value="She/Her" >She/Her</option>
-                <option value="They/Them" >They/Them</option>
-            </select>
-        </div>
+
         <div class="form-group col-md-6">
             <label for="email">Email</label>
             <input  th:field="${roomAttendant.email}" type="email" class="form-control" id="email" >

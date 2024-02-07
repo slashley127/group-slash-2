@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <NavBar />
+        {/* <NavBar /> */}
         <Routes>
           {/* give path /addroom to the AddRoom page */}
           <Route exact path="/rooms/addroom" element={<AddRoom />} />
