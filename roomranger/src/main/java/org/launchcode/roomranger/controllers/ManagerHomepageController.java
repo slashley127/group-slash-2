@@ -34,12 +34,6 @@ import java.util.Optional;
             return (List<AssignedRoom>) assignedRoomRepository.findAll();
         }
 
-//        @GetMapping("/{id}")
-//        Optional<AssignedRoom> getAssignedRoomById(@PathVariable Integer id) {
-//            return assignedRoomRepository.findById(id);
-//        }
-//
-//        @PutMapping("/{id}")
 
     @GetMapping("/tasks")
     public Map<String, String> getTasks() {
