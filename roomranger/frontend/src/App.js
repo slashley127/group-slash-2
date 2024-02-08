@@ -8,12 +8,14 @@ import AddRoom from './components/rooms/AddRoom';
 import EditRoom from './components/rooms/EditRoom';
 import ViewRoom from './components/rooms/ViewRoom';
 import AssignRoom from './components/manager/AssignRoomForm';
-
+import Footer
+ from './components/Footer';
 function App() {
   return (
     <div className="App">
       <Router>
         <NavBar />
+
         <Routes>
           {/* give path /addroom to the AddRoom page */}
           <Route exact path="/rooms/addroom" element={<AddRoom />} />
@@ -24,6 +26,7 @@ function App() {
           <Route exact path="/rooms/viewroom/:id" element={<ViewRoom/>} />
         </Routes>
       </Router>
+      <Footer/>
     </div>
   );
 }
