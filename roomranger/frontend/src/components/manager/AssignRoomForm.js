@@ -80,6 +80,7 @@ export default function AssignRoom() {
                 JSON.stringify(assignedRoom),
                 {
                   headers: {
+                    'Access-Control-Allow-Origin': '*',
                     'Content-Type': 'application/json',
                   },
                 }
