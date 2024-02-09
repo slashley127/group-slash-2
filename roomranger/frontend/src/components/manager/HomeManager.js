@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 export default function HomeManager() {
 
-       const [assignedRooms, setAssignedRooms] = useState([])
+        const [assignedRooms, setAssignedRooms] = useState([])
+        const [statuses, setStatuses] = useState({});
+        const [tasks, setTasks] =  useState({});
+        const {id} = useParams();
+
 
        useEffect(()=>{
            loadAssignedRooms();
        }, []);
 
        const loadAssignedRooms=async()=>{
+            const statusesResponse = await axios.get('http://localhost:8080/assignedrooms/statuses');
+            setStatuses(statusesResponse.data);
+            const tasksResponse = await axios.get('http://localhost:8080/assignedrooms/tasks');
+            setTasks(tasksResponse.data);
            const result=await axios.get("http://localhost:8080/assignedrooms")
            setAssignedRooms(result.data);
        }
@@ -45,9 +53,9 @@ return (
                            <td>{assignedRoom.numberOfGuests}</td>
                            <td>{assignedRoom.checkIn}</td>
                            <td>{assignedRoom.checkOut}</td>
-                           <td>{assignedRoom.task}</td>
+                           <td>{tasks[assignedRoom.task]}</td>
                            <td>{assignedRoom.notes}</td>
-                           <td>{assignedRoom.status}</td>
+                           <td>{statuses[assignedRoom.status]}</td>
                            <td>
                            {/* <Link className='btn btn-primary mx-2' to={`assignedrooms/viewassignedroom/${assignedRoom.id}`}>View</Link>
                             <Link className='btn btn-outline-primary mx-2' to={`assignedrooms/editassignedroom/${assignedRoom.id}`}>Edit</Link>
