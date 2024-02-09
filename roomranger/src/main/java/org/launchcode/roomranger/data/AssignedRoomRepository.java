@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AssignedRoomRepository extends JpaRepository<AssignedRoom, Integer> {
+public interface AssignedRoomRepository extends CrudRepository<AssignedRoom, Integer> {
 }
