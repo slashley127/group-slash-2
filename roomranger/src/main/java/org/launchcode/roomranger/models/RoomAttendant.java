@@ -2,6 +2,7 @@ package org.launchcode.roomranger.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 
 
@@ -31,21 +32,31 @@ public class RoomAttendant  extends AbstractEntity{
     @OneToOne(cascade = CascadeType.ALL)
     private RoomAttendantUser roomAttendantUser;
     private String pronoun;
+    @Size(max=10)
     private String phoneNumber;
-    private List<WorkingDays> workingDays = new ArrayList<>();
+
+    public void setWorkingDays(String workingDays) {
+        this.workingDays = workingDays;
+    }
+
+    public String getWorkingDays() {
+        return workingDays;
+    }
+
+    private String workingDays ;
     @Column(unique = true)
     private String email;
     private String notes;
 
-    private String profilePic;
+//    private String profilePic;
 
-    public String getProfilePic() {
-        return profilePic;
-    }
+//    public String getProfilePic() {
+//        return profilePic;
+//    }
 
-    public void setProfilePic(String profilePic) {
-        this.profilePic = profilePic;
-    }
+//    public void setProfilePic(String profilePic) {
+//        this.profilePic = profilePic;
+//    }
     public String getFirstName() {return firstName;}
 
     public void setFirstName(String firstName) {this.firstName = firstName;}
@@ -77,9 +88,6 @@ public class RoomAttendant  extends AbstractEntity{
     public String getPhoneNumber() {
         return phoneNumber;
     }
-    public List<WorkingDays> getWorkingDays() {
-        return workingDays;
-    }
     public String getEmail() {
         return email;
     }
@@ -91,9 +99,6 @@ public class RoomAttendant  extends AbstractEntity{
     }
     public void setEmail(String email) {
         this.email = email;
-    }
-    public void setWorkingDays(List<WorkingDays> workingDays) {
-        this.workingDays = workingDays;
     }
     public Manager getManager() {return manager;}
 
@@ -111,7 +116,7 @@ public class RoomAttendant  extends AbstractEntity{
     public RoomAttendant() {
 
     }
-    public RoomAttendant (  String firstName, String lastName, String email, String phoneNumber, List<WorkingDays> workingDays, String username, String password, RoomAttendantUser roomAttendantUser, String notes) {
+    public RoomAttendant (  String firstName, String lastName, String email, String phoneNumber, String workingDays, String username, String password, RoomAttendantUser roomAttendantUser, String notes) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;

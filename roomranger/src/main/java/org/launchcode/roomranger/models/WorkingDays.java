@@ -10,6 +10,10 @@ public enum WorkingDays {
         FRIDAY("Friday"),
         SATURDAY("Saturday");
 
+        public String getDisplayName() {
+                return displayName;
+        }
+
         private final String displayName;
 
         WorkingDays(String displayName) {
