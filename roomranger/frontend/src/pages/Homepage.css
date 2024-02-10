@@ -1,0 +1,58 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+.home-page-container {
+  background-color: DarkSlateGray;
+  min-height: 100vh;
+  width: 100vw;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-page-content {
+  flex-grow: 1;
+}
+
+.home-page-footer {
+  background-color: #333333;
+  color: #ffffff;
+  text-align: center;
+  padding: 10px;
+  margin-top: auto; /* Push the footer to the bottom of the container */
+}
+
+h1 {
+  text-align: center; /* Center text horizontally */
+  font-family: Algerian, sans-serif; /* Set font to Algerian */
+  font-size: 2.5em; /* Adjust font size as needed */
+  padding: 20px;
+  background-color: Black;
+  color: White;
+}
+
+/* Style for Dropdown Menu */
+.dropdown-menu {
+  background-color: White;
+}
+
+/* Style for Dropdown Items */
+.dropdown-item {
+  color: Black;
+}
+
+/* Center the Dropdown */
+.dropdown {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 20px; /* Add margin bottom to create space for the links */
+}
+
+.dropdown-toggle {
+  font-size: 2em; /* Increase font size */
+  font-weight: bold; /* Make text bold */
+  text-align: center;
+}

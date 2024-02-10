@@ -1,0 +1,96 @@
+.wrapper{
+    width:500px;
+    /* background: rgb(25, 148, 197); */
+    color:white;
+    border-radius: 40px;
+;
+}
+
+.wrapper h1{
+    font: 36px;
+   text-align: center;
+   color: white;
+
+}
+
+.wrapper .input-box{
+    position:relative;
+    height: 50px;
+    width: 100%;
+    margin: 30px 0;
+    /* text-align: center; */
+    color: white;
+}
+
+.input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 40px;
+    font-size: 20px;
+    padding: 20px 45px 20px 40px;
+    color: aliceblue;
+}
+
+/* :-ms-input-placeholder:focus; */
+.input-box  .icon{
+    font-size: medium;
+    position:absolute;
+    left: 20px ;
+    top:50%;
+    transform: translateY(-50%);
+
+}
+.design{
+    font-family: 'poppins', sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    min-height: 70vh;
+
+}
+*{
+    margin: 0;
+   padding: 0;
+   /* box-sizing: border-box; */
+}
+
+.wrapper .remember-forgot{
+    display: flex;
+    justify-content: space-between;
+    font-size: 14.5px;
+margin: -15px 0 15px;
+color: white;
+}
+.remember-forgot label input{
+    accent-color: white;
+    margin-right: 4px;
+}
+.wrapper .register-link{
+    color: white;
+    
+}
+.wrapper button{
+    background-color: rgb(250, 250, 250);
+    position:relative;
+    height: 50px;
+    width: 100%;
+    margin: 30px 0;
+    text-align: center;
+    color: rgb(4, 0, 0);
+    border-radius: 20px solid white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 40px;
+    }
+    .wrapper .successMessage{
+        color: white;
+        font-size: 25px;
+    
+    }
+    .wrapper .errorMessage{
+        color: white;
+        font-size: 25px;
+    }

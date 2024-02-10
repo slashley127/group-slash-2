@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'org.launchcode'
-version = '0.0.1-SNAPSHOT'
+
 
 java {
 	sourceCompatibility = '17'
@@ -15,30 +15,13 @@ java {
 repositories {
 	mavenCentral()
 }
-//node {
-//	// Version of node to use.
-//	version = '20.11.0'
-//	// Base URL for fetching node distributions (change if you have a mirror).
-////    distBaseUrl = 'https://nodejs.org/dist'
-//	// If true, it will download node using above parameters.
-//	// If false, it will try to use globally installed node.
-//	download = true
-//	// Set the work directory for unpacking node
-//	workDir = file("${project.projectDir}/src/main/frontend/nodejs")
-//	// Set the work directory for NPM
-//	npmWorkDir = file("${project.projectDir}/src/main/frontend/npm")
-//	// Set the work directory where node_modules should be located
-//	nodeModulesDir = file("${project.projectDir}/src/main/frontend")
-//}
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'com.mysql:mysql-connector-j'
 	implementation 'org.springframework.security:spring-security-crypto'
-	implementation 'org.jetbrains:annotations:24.0.0'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

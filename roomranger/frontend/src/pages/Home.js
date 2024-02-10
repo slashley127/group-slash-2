@@ -1,74 +1,55 @@
-import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Dropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import roomrangerImage from './roomranger.jpg';
+import './Homepage.css'; 
+
+
 const HomePage = () => {
+  const [selectedRole, setSelectedRole] = useState('');
+
+  const handleRoleSelect = (role) => {
+    console.log('Selected Role:', role);
+    setSelectedRole(role);
+  };
+
   return (
-    <div className="d-flex flex-column min-vh-100">
-      {/* Main content */}
-      <div className="container mt-4 flex-grow-1">
-        {/* Image in the center */}
-        <img
-          src={roomrangerImage} 
-          alt="RoomRanger"
-          style={{ maxWidth: '600px', maxHeight: '400px' }} 
-          className="img-fluid rounded mx-auto d-block mb-4"
-        />
+    <div className="home-page-container">
+      <h1>RoomRanger</h1>
+      <div className="container mt-4 d-flex justify-content-center align-items-center">
+        <Dropdown>
+          <Dropdown.Toggle variant="Black" id="dropdown-basic">
+            I am: {selectedRole} 
+          </Dropdown.Toggle>
 
-        {/* Cards for Registration, Login, About Us, Contact Us */}
-        <div className="row mt-4">
-          <div className="col-md-6">
-            <Card>
-              <Card.Body>
-                <Card.Title>Registration</Card.Title>
-                <Button as={Link} to="/registration" variant="primary">
-                  Go to Registration
-                </Button>
-              </Card.Body>
-            </Card>
-          </div>
-          <div className="col-md-6">
-            <Card>
-              <Card.Body>
-                <Card.Title>Login</Card.Title>
-                <Button as={Link} to="/login" variant="primary">
-                  Go to Login
-                </Button>
-              </Card.Body>
-            </Card>
-          </div>
-        </div>
+          <Dropdown.Menu>
+            <Dropdown.Item onClick={() => handleRoleSelect('RoomAttendant')}>
+              Room Attendant
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleRoleSelect('Manager')}>
+              Manager
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
 
-        <div className="row mt-4">
-          <div className="col-md-6">
-            <Card>
-              <Card.Body>
-                <Card.Title>About Us</Card.Title>
-                <Button as={Link} to="/about" variant="primary">
-                  Learn More
-                </Button>
-              </Card.Body>
-            </Card>
-          </div>
-          <div className="col-md-6">
-            <Card>
-              <Card.Body>
-                <Card.Title>Contact Us</Card.Title>
-                <Button as={Link} to="/contact" variant="primary">
-                  Contact
-                </Button>
-              </Card.Body>
-            </Card>
-          </div>
-        </div>
+        {selectedRole === 'RoomAttendant' && (
+          <Link to="/login" className="dropdown-item">Login</Link>
+        )}
+
+        {selectedRole === 'Manager' && (
+          <ul className="dropdown-item">
+            <Link to="/registration" className="dropdown-item">Registration</Link>
+            <Link to="/login" className="dropdown-item">Login</Link>
+          </ul>
+        )}
       </div>
 
-      {/* Footer */}
-      <footer className="bg-dark text-light text-center p-3 mt-4">
+      <footer className="home-page-footer">
         © 2024 RoomRanger. All Rights Reserved.
       </footer>
     </div>
   );
 };
 
+
 export default HomePage;
+ 

@@ -17,7 +17,7 @@ public class RegistrationController {
 
     @PostMapping("/user")
     ResponseEntity<String> newUser(@RequestBody User newUser) {
-             // Check for unique username
+        // Check for unique username
         if (userRepository.existsByUsername(newUser.getUsername())) {
             return new ResponseEntity<>("Username is already taken. Please choose a different one.", HttpStatus.BAD_REQUEST);
         }
@@ -27,7 +27,10 @@ public class RegistrationController {
         if (!newUser.getPassword().matches(passwordRegex)) {
             return new ResponseEntity<>("Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 digit, 1 special character, and be at least 8 characters long.", HttpStatus.BAD_REQUEST);
         }
-
+       // Check if confirmPassword matches password
+        if (!newUser.getPassword().equals(newUser.getConfirmPassword())) {
+            return new ResponseEntity<>("Password and confirm password do not match.", HttpStatus.BAD_REQUEST);
+        }
         // Save the new user if both checks pass
         userRepository.save(newUser);
         return new ResponseEntity<>("User registered successfully!", HttpStatus.OK);
