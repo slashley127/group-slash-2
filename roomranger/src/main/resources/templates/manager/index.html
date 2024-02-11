@@ -1,37 +1,37 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org/">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8 /">-->
-<!--    <title>Manager homepage</title>-->
-<!--    <script></script>-->
-<!--</head>-->
-<!--<body>-->
-<!--<nav th:replace = "~{fragments :: manager-nav}"></nav>-->
-<!--<h1>HOMEPAGE FOR MANAGER</h1>-->
-<!--<th:block>-->
-<!--<table class="table table-striped">-->
-<!--<thead>-->
-<!--    <tr>-->
-<!--    <th>ROOM NB</th>-->
-<!--    <th>ROOM ATTENDANT</th>-->
-<!--    <th>ROOM OCCUPANCY</th>-->
-<!--    <th>CLEANING TASK</th>-->
-<!--    <th>CLEANING STATUS</th>-->
-<!--    <th>NOTES</th>-->
-<!--</tr>-->
-<!--</thead>-->
-<!--    <tr th:each = "room : ${rooms}">-->
-<!--        <td th:text="${room.roomNumber}"></td>-->
-<!--        <td>IN PROGRESS</td>-->
-<!--        <td>IN PROGRESS</td>-->
-<!--        <td>IN PROGRESS</td>-->
-<!--        <td>IN PROGRESS</td>-->
-<!--        <td>IN PROGRESS</td>-->
-<!--    </tr>-->
-<!--</table>-->
-<!--</th:block>-->
-<!--<div>-->
-<!--<button type="submit">CREATE ROOM</button>-->
-<!--</div>-->
-<!--</body>-->
-<!--</html>-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8 /">
+    <title>Manager homepage</title>
+    <script></script>
+</head>
+<body>
+<nav th:replace = "~{fragments :: manager-nav}"></nav>
+<h1>HOMEPAGE FOR MANAGER</h1>
+<th:block>
+<table class="table table-striped">
+<thead>
+    <tr>
+    <th>ROOM NB</th>
+    <th>ROOM ATTENDANT</th>
+    <th>ROOM OCCUPANCY</th>
+    <th>CLEANING TASK</th>
+    <th>CLEANING STATUS</th>
+    <th>NOTES</th>
+</tr>
+</thead>
+    <tr th:each = "room : ${rooms}">
+        <td th:text="${room.roomNumber}"></td>
+        <td>IN PROGRESS</td>
+        <td>IN PROGRESS</td>
+        <td>IN PROGRESS</td>
+        <td>IN PROGRESS</td>
+        <td>IN PROGRESS</td>
+    </tr>
+</table>
+</th:block>
+<div>
+<button type="submit">CREATE ROOM</button>
+</div>
+</body>
+</html>

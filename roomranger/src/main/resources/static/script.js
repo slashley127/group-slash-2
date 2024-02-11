@@ -1,5 +1,5 @@
-////DOM elements
-//function renderLeaveRequestForm(){
-//    const leaveRequestForm=document.getElementById("LeaveRequestForm");
-//    console.log("Hello");
-//}
+//DOM elements
+function renderLeaveRequestForm(){
+    const leaveRequestForm=document.getElementById("LeaveRequestForm");
+    console.log("Hello");
+}

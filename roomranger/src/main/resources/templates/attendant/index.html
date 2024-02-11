@@ -1,36 +1,36 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org/">-->
-<!--<head th:replace="fragments :: head"></head>-->
-<!--<body class="container">-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
 
-<!--&lt;!&ndash;<header th:replace="fragments :: header"></header>&ndash;&gt;-->
-<!--<h2 th:text="${title}">Room Ranger</h2>-->
+<!--<header th:replace="fragments :: header"></header>-->
+<h2 th:text="${title}">Room Ranger</h2>
 
-<!--<table class="table table-striped">-->
-<!--    <thead>-->
-<!--    <tr>-->
-<!--        <th>Number</th>-->
-<!--        <th>Type</th>-->
-<!--        <th>Guest</th>-->
-<!--        <th>Check In Date</th>-->
-<!--        <th>Check Out Date</th>-->
-<!--        <th>Status</th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tr th:each="room : ${rooms}">-->
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Number</th>
+        <th>Type</th>
+        <th>Guest</th>
+        <th>Check In Date</th>
+        <th>Check Out Date</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tr th:each="room : ${rooms}">
 
-<!--        <td th:text="${room.roomNumber}">-->
-<!--&lt;!&ndash;            <a th:href="'/events/detail?eventId=' + ${event.id}" th:text="${event.name}"></a>&ndash;&gt;-->
-<!--        </td>-->
-<!--        <td th:text="${room.roomType.displayName != null ? room.roomType.displayName : null}"></td>-->
-<!--        <td th:text="${room.guest}"></td>-->
-<!--        <td th:text="${room.checkinDate}"></td>-->
-<!--        <td th:text="${room.checkoutDate}"></td>-->
-<!--&lt;!&ndash;        <td th:text="${room.available ? 'Yes' : 'No' }"></td>&ndash;&gt;-->
-<!--&lt;!&ndash;        <td th:text="${room.status.displayName != null ? room.status.displayName : null}"></td>&ndash;&gt;-->
-<!--    </tr>-->
+        <td th:text="${room.roomNumber}">
+<!--            <a th:href="'/events/detail?eventId=' + ${event.id}" th:text="${event.name}"></a>-->
+        </td>
+        <td th:text="${room.roomType.displayName != null ? room.roomType.displayName : null}"></td>
+        <td th:text="${room.guest}"></td>
+        <td th:text="${room.checkinDate}"></td>
+        <td th:text="${room.checkoutDate}"></td>
+<!--        <td th:text="${room.available ? 'Yes' : 'No' }"></td>-->
+<!--        <td th:text="${room.status.displayName != null ? room.status.displayName : null}"></td>-->
+    </tr>
 
-<!--</table>-->
+</table>
 
-<!--</body>-->
-<!--</html>-->
+</body>
+</html>
