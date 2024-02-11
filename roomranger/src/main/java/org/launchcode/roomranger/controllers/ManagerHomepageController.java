@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.launchcode.roomranger.data.AssignedRoomRepository;
 import org.launchcode.roomranger.data.RoomAttendantRepository;
 import org.launchcode.roomranger.data.RoomRepository;
+import org.launchcode.roomranger.exception.NotFoundException;
 import org.launchcode.roomranger.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,7 @@ import java.util.Optional;
         private RoomAttendantRepository roomAttendantRepository;
 
         @GetMapping()
-        public List<AssignedRoom> getAllAssignedRooms(){
+        public List<AssignedRoom> getAllAssignedRooms() {
             return (List<AssignedRoom>) assignedRoomRepository.findAll();
         }
 
@@ -41,133 +42,71 @@ import java.util.Optional;
 //
 //        @PutMapping("/{id}")
 
-    @GetMapping("/tasks")
-    public Map<String, String> getTasks() {
-        Map<String, String> tasks = new HashMap<>();
-        for (Task task : Task.values()) {
-            tasks.put(task.name(), task.getDisplayName());
-        }
-        return tasks;
-    }
-    @GetMapping("/tasks/{id}")
-    public String getTask(@PathVariable int id) {
-        return assignedRoomRepository.findById(id).get().getTask().getDisplayName();
-    }
-
-    @GetMapping("/statuses")
-    public Map<String, String> getStatuses() {
-        Map<String, String> statuses = new HashMap<>();
-        for (Status status : Status.values()) {
-            statuses.put(status.name(), status.getDisplayName());
-        }
-        return statuses;
-    }
-    @GetMapping("/statuses/{id}")
-    public String getStatus(@PathVariable int id) {
-        return assignedRoomRepository.findById(id).get().getStatus().getDisplayName();
-    }
-
-
-
-    @PostMapping(value = "/assignroomform")
-    public ResponseEntity<AssignedRoom> assignRoom( @RequestBody AssignedRoom newAssignedRoom) {
-        AssignedRoom savedRoom = assignedRoomRepository.save(newAssignedRoom);
-        return new ResponseEntity<>(savedRoom, HttpStatus.OK);
-
+        @GetMapping("/tasks")
+        public Map<String, String> getTasks() {
+            Map<String, String> tasks = new HashMap<>();
+            for (Task task : Task.values()) {
+                tasks.put(task.name(), task.getDisplayName());
+            }
+            return tasks;
         }
 
+        @GetMapping("/tasks/{id}")
+        public String getTask(@PathVariable int id) {
+            return assignedRoomRepository.findById(id).get().getTask().getDisplayName();
+        }
 
+        @GetMapping("/statuses")
+        public Map<String, String> getStatuses() {
+            Map<String, String> statuses = new HashMap<>();
+            for (Status status : Status.values()) {
+                statuses.put(status.name(), status.getDisplayName());
+            }
+            return statuses;
+        }
+
+        @GetMapping("/statuses/{id}")
+        public String getStatus(@PathVariable int id) {
+            return assignedRoomRepository.findById(id).get().getStatus().getDisplayName();
+        }
+
+        @DeleteMapping("assignedroom/{id}")
+        public String deleteAssignedRoom(@PathVariable int id) {
+            if (!assignedRoomRepository.existsById(id)) {
+                throw new NotFoundException("Assignment with id " + id);
+            }
+            roomRepository.deleteById(id);
+            return "Assigned with Id " + id + "has been deleted successfully!";
         }
 
 
+        @PostMapping(value = "/create")
+        public ResponseEntity<AssignedRoom> createAssignedRoom(@RequestBody @Valid AssignedRoom assignedRoom) {
+            System.err.println("********************");
+            AssignedRoom _assignedRoom = assignedRoomRepository.save(
+                    new AssignedRoom(
+                            assignedRoom.getRoom(),
+                            assignedRoom.getGuest(),
+                            assignedRoom.getNumberOfGuests(),
+                            assignedRoom.getStatus(),
+                            assignedRoom.getCheckIn(),
+                            assignedRoom.getCheckOut(),
+                            assignedRoom.getTask(),
+                            assignedRoom.getNote())
+            );
+            System.err.println("Assigned Room: " + _assignedRoom.toString());
 
+            return new ResponseEntity<>(_assignedRoom, HttpStatus.CREATED);
 
+        }
 
+        public ResponseEntity<Room> updateRoom(@RequestBody AssignedRoom assignedRoom) {
+            System.err.println("********************");
 
+            Room _room = roomRepository.save(assignedRoom.getRoom());
+            System.err.println("Room: " + _room.toString());
 
+            return new ResponseEntity<>(_room, HttpStatus.CREATED);
 
-//package org.launchcode.roomranger.controllers;
-//import jakarta.servlet.http.HttpSession;
-//import jakarta.validation.Valid;
-//import org.launchcode.roomranger.data.AssignedRoomRepository;
-//import org.launchcode.roomranger.data.RoomAttendantRepository;
-//import org.launchcode.roomranger.data.RoomRepository;
-//import org.launchcode.roomranger.models.Task;
-//import org.launchcode.roomranger.models.AssignedRoom;
-//import org.launchcode.roomranger.models.Status;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.Model;
-//import org.springframework.validation.Errors;
-//import org.springframework.web.bind.annotation.*;
-//
-////@RestController
-////@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
-//@Controller
-//@RequestMapping("manager")
-//public class ManagerHomepageController {
-//
-//    @Autowired
-//    private RoomAttendantRepository roomAttendantRepository;
-//
-//    @Autowired
-//    private RoomRepository roomRepository;
-//
-//    @Autowired
-//    private AssignedRoomRepository roomAssignedRepository;
-//
-//    @GetMapping
-//    public String renderManagerHomepage(Model model) {
-//        Iterable<AssignedRoom> assignedRooms = roomAssignedRepository.findAll();
-//        model.addAttribute("assignedRoom", assignedRooms);
-//        return "manager/index";
-//    }
-//
-//    @GetMapping("roomattendantlist")
-//    public String renderListOfRoomAttendants(Model model) {
-//        return "manager/roomattendantlist";
-//    }
-//
-//    @GetMapping("roomslist")
-//    public String renderListOfRooms(Model model) {
-//        model.addAttribute("rooms", roomRepository.findAll());
-//        return "manager/roomslist";
-//    }
-//
-//
-//    @GetMapping("assignroom")
-//    public String renderAssignRoomForm(Model model) {
-//        model.addAttribute(new AssignedRoom());
-//        model.addAttribute("rooms", roomRepository.findAll());
-//        model.addAttribute("status", Status.values());
-//        model.addAttribute("task", Task.values());
-//        return "manager/assignroom";
-//    }
-//
-//    @PostMapping("assignroom")
-//    public String processAssigningForm(@ModelAttribute("roomAssigned") @Valid AssignedRoom AssignedRoom, Errors errors, Model model) {
-//        if (errors.hasErrors()) {
-//            model.addAttribute("rooms", roomRepository.findAll());;
-//            model.addAttribute("status", Status.values());
-//            model.addAttribute("task", Task.values());
-//            return "manager/assignroom";
-//        }
-//        roomAssignedRepository.save(AssignedRoom);
-//        return "redirect:/manager";
-//    }
-//
-//    @GetMapping("/delete")
-//    public String displayDeleteForm(Model model, HttpSession session) {
-//        model.addAttribute("assignedRoom", roomAssignedRepository.findAll());
-//        return "manager/delete";
-//    }
-//
-//    @PostMapping("/delete")
-//    public String processDeleteForm(@RequestParam(required = false) int[] assignedRoomId) {
-//        for(int id : assignedRoomId) {
-//            roomAssignedRepository.deleteById(id);
-//        }
-//        return "redirect:/manager";
-//    }
-//
-//}
+        }
+    }

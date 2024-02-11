@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Entity
 public class AssignedRoom extends AbstractEntity {
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "room_id")
 //    @Valid
     private Room room;
