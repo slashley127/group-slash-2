@@ -67,8 +67,6 @@ return (
                             <Link className='btn btn-outline-primary mx-2' to={`assignedrooms/editassignedroom/${assignedRoom.id}`}>Edit</Link>
                              {/* <Link className='btn btn-danger mx-2' onClick={()=> deleteRoom(assignedRoom.id)}>Delete</Link> */}
                            </td>
-
-                           {/* to do tomorrow: link buttons to pages and implement logic */}
                        </tr>
                        ))}
                    </tbody>
