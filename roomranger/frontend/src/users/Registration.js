@@ -13,7 +13,6 @@ export default function Registration() {
     firstName: "",
     lastName: "",
     email: "",
-    dob: "",
     password: "",
     confirmPassword: "",
   });
@@ -23,7 +22,13 @@ export default function Registration() {
   };
 
   const onInputChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
+    if (name === 'username' && value.length < 3) {
+      setError('Username must be at least 3 characters long.');
+    } else if ((name === 'firstName' || name === 'lastName') && value.length < 2) {
+      setError(`${name.charAt(0).toUpperCase() + name.slice(1)} must be at least 2 characters long.`);
+    }
   };
 
   const onRegistrationSubmit = async (e) => {
@@ -49,7 +54,7 @@ export default function Registration() {
     }
   };
 
-  const { username, firstName, lastName, email, dob, password, confirmPassword } = user;
+  const { username, firstName, lastName, email, password, confirmPassword } = user;
 
   return (
     <div className="container mt-5">
@@ -113,20 +118,7 @@ export default function Registration() {
             required
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="dob" className="form-label">
-            Date of Birth
-          </label>
-          <input
-            type="date"
-            className="form-control"
-            id="dob"
-            name="dob"
-            value={dob}
-            onChange={onInputChange}
-            required
-          />
-        </div>
+        
         <div className="mb-3">
           <label htmlFor="password" className="form-label">
             Password
@@ -140,6 +132,13 @@ export default function Registration() {
             onChange={onInputChange}
             required
           />
+          <button
+              className="btn btn-outline-secondary"
+              type="button"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? "Hide" : "Show"}
+            </button>
         </div>
         <div className="mb-3">
           <label htmlFor="confirmPassword" className="form-label">
@@ -154,6 +153,13 @@ export default function Registration() {
             onChange={onInputChange}
             required
           />
+          <button
+              className="btn btn-outline-secondary"
+              type="button"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? "Hide" : "Show"}
+            </button>
         </div>
        
         <button type="submit" className="btn btn-primary">

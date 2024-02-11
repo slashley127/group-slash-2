@@ -3,7 +3,6 @@ import { Dropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Homepage.css'; 
 
-
 const HomePage = () => {
   const [selectedRole, setSelectedRole] = useState('');
 
@@ -44,12 +43,11 @@ const HomePage = () => {
       </div>
 
       <footer className="home-page-footer">
+        
+        <Link to="/about" >About us</Link>
         © 2024 RoomRanger. All Rights Reserved.
       </footer>
     </div>
   );
 };
-
-
 export default HomePage;
- 

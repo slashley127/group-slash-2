@@ -2,6 +2,7 @@ package org.launchcode.roomranger.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -13,15 +14,16 @@ public class User {
     private Integer id;
 
 
-
+    @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters")
     private String username;
 
     @NotBlank(message = "First name is required")
+    @Size(min = 2, max = 40, message = "First name must be between 2 and 40 characters")
     private String firstName;
 
     @NotBlank(message = "Last name is required")
     private String lastName;
-    private String dob;
+
 
     private String email;
 
@@ -88,13 +90,6 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getDob() {
-        return dob;
-    }
-
-    public void setDob(String dob) {
-        this.dob = dob;
-    }
 
     public String getConfirmPassword() {
         return confirmPassword;
