@@ -2,11 +2,10 @@ package org.launchcode.roomranger.controllers;
 
 import jakarta.validation.Valid;
 import org.launchcode.roomranger.data.CommentRepository;
+import org.launchcode.roomranger.data.RoomAttendantRepository;
 import org.launchcode.roomranger.exception.NotFoundException;
 import org.launchcode.roomranger.data.RoomRepository;
-import org.launchcode.roomranger.models.Comment;
-import org.launchcode.roomranger.models.Room;
-import org.launchcode.roomranger.models.Type;
+import org.launchcode.roomranger.models.*;
 import org.launchcode.roomranger.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -30,7 +29,9 @@ public class RoomsController {
     @Autowired
     private RoomService roomService;
     @Autowired
-    CommentRepository commentRepository;
+    private CommentRepository commentRepository;
+    @Autowired
+    private RoomAttendantRepository roomAttendantRepository;
 
     @PostMapping("/room")
     public ResponseEntity<?> addRoom(@RequestBody @Valid Room newRoom){
@@ -67,13 +68,13 @@ public class RoomsController {
         return roomRepository.findById(id).get().getRoomType().getDisplayName();
     }
 
-    @GetMapping("room/{id}")
+    @GetMapping("/room/{id}")
     public Room getRoomById(@PathVariable int id){
         return  roomRepository.findById(id)
                 .orElseThrow(()->new NotFoundException("room with id " + id));
     }
 
-    @PutMapping("room/{id}")
+    @PutMapping("/room/{id}")
     public Room updateRoom(@RequestBody @Valid Room newRoom,@PathVariable int id){
          return roomRepository.findById(id)
                 .map(room -> {
@@ -83,7 +84,7 @@ public class RoomsController {
                     return roomRepository.save(room);
                 }).orElseThrow(()->new NotFoundException("room with id " + id));
     }
-    @DeleteMapping("room/{id}")
+    @DeleteMapping("/room/{id}")
     public String deleteRoom(@PathVariable int id){
         if (!roomRepository.existsById(id)){
             throw new NotFoundException("room with id " + id);
@@ -92,13 +93,28 @@ public class RoomsController {
         return "Room with room Id " + id + " has been deleted successfully!";
     }
 
-    @PostMapping("room/comment")
-    public String addComment(@RequestParam int roomId, @ModelAttribute @Valid Comment newComment){
-        Optional<Room> result = roomRepository.findById(roomId);
-        Room room = result.get();
-        newComment.setRoom(room);
-        newComment.setCreatedDate(LocalDate.now());
-        commentRepository.save(newComment);
-        return "redirect:/rooms";
+//    @PostMapping("/room/comment")
+//    public String addComment(@RequestParam int roomId, @ModelAttribute @Valid Comment newComment){
+//        Optional<Room> result = roomRepository.findById(roomId);
+//        Room room = result.get();
+//        newComment.setRoom(room);
+//        newComment.setCreatedDate(LocalDate.now());
+//        commentRepository.save(newComment);
+//        return "redirect:/rooms";
+//    }
+
+//    @GetMapping("/attendant{id}")
+//    public Room getRoomByAttendant(@PathVariable int id){
+//        return  roomRepository.findByAttendantId(id)
+//                .orElseThrow(()->new NotFoundException("room with id " + id));
+//    }
+
+    @GetMapping("/status")
+    public Map<String, String> getStatus() {
+        Map<String, String> statusList = new HashMap<>();
+        for (Status status : Status.values()) {
+            statusList.put(status.name(), status.getDisplayName());
+        }
+        return statusList;
     }
 }

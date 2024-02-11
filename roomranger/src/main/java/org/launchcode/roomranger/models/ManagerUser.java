@@ -25,4 +25,3 @@ public class ManagerUser extends User{
 
 
 }
-

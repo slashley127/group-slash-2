@@ -48,7 +48,7 @@ export default function ViewRooms() {
                             </ul>
                         </div>
                     </div>
-                    <Link className='btn btn-primary my-2' to={'/rooms'}>Back to Home</Link>
+                    <Link className='btn btn-primary my-2' to={'/landing/rooms'}>Back to Home</Link>
                 </div>
             </div>
         </div>
