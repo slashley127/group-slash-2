@@ -30,42 +30,6 @@ export default function Profile() {
   
 
   return (
-//     <div className="container">
-//     <div class="d-flex align-items-center justify-content-center">
-//       <div className="col-md-10 offset-md-1  rounded p-4 mt-2 shadow">
-//         <h2 className="text-center m-2">Add New Attendant</h2>
-//            <div className="col-md-6 mb-3 align-center ">
-//               <label htmlFor="Name" className="form-label"> FIRST NAME
-//               </label>
-//               <input
-//                 type={"text"}
-//                 className="text-center"
-//                 name="firstName"
-//                 value={firstName}
-//               ></input>
-//            </div>
-//             <div className="col-md-6 mb-3">
-//               <label htmlFor="Name" className="form-label">
-//                 LAST NAME
-//               </label>
-//               <input
-//                 type={"text"}
-//                 className="form-control"
-//                 name="lastName"
-//                 value={lastName}
-              
-//               ></input>
-//             </div>
-//             </div>
-
-//         </div>
-//         </div>
-        
-
-
-
-
-//   )
 <div className="list">
 <div className='container'>
 <div className='row'>
@@ -76,7 +40,7 @@ export default function Profile() {
             <div className='card-header'>
                 <ul className='list-group list-group-flush mt-4'>
                 <li className=' list-group-item text-center h-75'>
-                        <b> ID: </b>
+                        <b> Employee ID: </b>
                         {attendant.id}
                     </li>
                     <li className='list-group-item text-center mt-3'>
@@ -88,6 +52,10 @@ export default function Profile() {
                         {attendant.lastName}
                     </li>
                     <li className='list-group-item text-center mt-3'>
+                        <b> Pronoun: </b>
+                        {attendant.pronoun}
+                    </li>
+                    <li className='list-group-item text-center mt-3'>
                         <b> Email: </b>
                         {attendant.email}
                     </li>
@@ -95,17 +63,19 @@ export default function Profile() {
                         <b> Phone Number: </b>
                         {attendant.phoneNumber}
                     </li>
-                    {/* <li className='list-group-item text-center'>
-                        <b> Pronoun: </b>
-                        {attendant.pronoun}
-                    </li> */}
+                    <li className='list-group-item text-center mt-3'>
+                        <b> Schedule: </b>
+                        {attendant.workingDays}
+                    </li>
                     <li className='list-group-item text-center mt-3'>
                         <b> Username </b>
                         {attendant.username}
                     </li>
-
-
-                </ul>
+                    <li className='list-group-item text-center mt-3'>
+                        <b> Password </b>
+                        {attendant.password}
+                    </li>
+               </ul>
             </div>
         </div>
         <Link className='btn btn-primary my-2' to={'/'}>Back to Home</Link>

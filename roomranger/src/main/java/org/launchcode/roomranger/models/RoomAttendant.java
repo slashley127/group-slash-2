@@ -54,7 +54,7 @@ public class RoomAttendant  extends AbstractEntity{
 //        return profilePic;
 //    }
 
-//    public void setProfilePic(String profilePic) {
+    //    public void setProfilePic(String profilePic) {
 //        this.profilePic = profilePic;
 //    }
     public String getFirstName() {return firstName;}

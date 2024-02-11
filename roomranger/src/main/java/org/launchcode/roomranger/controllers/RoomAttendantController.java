@@ -5,6 +5,8 @@ import org.launchcode.roomranger.data.ManagerRepository;
 import org.launchcode.roomranger.data.RoomAttendantRepository;
 import org.launchcode.roomranger.exception.NotFoundException;
 import org.launchcode.roomranger.exception.UserNotFoundException;
+import org.launchcode.roomranger.models.Type;
+import org.launchcode.roomranger.models.WorkingDays;
 import org.launchcode.roomranger.service.RoomService;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
@@ -17,7 +19,9 @@ import org.springframework.validation.Errors;
 import org.launchcode.roomranger.models.RoomAttendant;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -42,7 +46,7 @@ public class RoomAttendantController {
     @GetMapping("update/{id}")
     RoomAttendant getUserById(@PathVariable int id){
         return roomAttendantRepository.findById(id);
-                //.orElseThrow(()->new NotFoundException("attendant with id " + id));
+//                .orElseThrow(()->new NotFoundException("attendant with id " + id));
     }
 
      @PostMapping("/add")
@@ -90,6 +94,16 @@ public class RoomAttendantController {
             roomAttendantRepository.delete(roomAttendant);
             //return "User with the id " + id + " has been successfully deleted.";
         }
+
+
+    @GetMapping("/workingDays")
+    public Map<String, String> getDays() {
+        Map<String, String> days = new HashMap<>();
+        for (WorkingDays workingDays : WorkingDays.values()) {
+           days.put(workingDays.name(), workingDays.getDisplayName());
+        }
+        return days;
+    }
     }
 
 

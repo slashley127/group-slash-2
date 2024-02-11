@@ -3,16 +3,18 @@ import './LoginPage.css';
 import { FaCircleUser, FaLock   } from "react-icons/fa6";
 import ManagerHomePage from '../ManagerHomePage';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../security/AuthContext';
 
 
 
 const LoginComponent = () => {
 
-const navigate=useNavigate();
+    const navigate=useNavigate();
     const[username,setUsername]=useState('');
     const[password,setPassword]=useState('');
     const[showSuccessMessage, setShowSuccessMessage]=useState(false);
     const[showErrorMessage, setShowErrorMessage]=useState(false);
+    const authContext=useAuth()
    
      function handleUsernameChange(e){
       // console.log(e.target.value);
@@ -24,15 +26,14 @@ const navigate=useNavigate();
     }
 
     function handleSubmitLogin(){
-      if(username==='samata' && password==='karka'){
-      setShowSuccessMessage(true);
+      if(authContext.login(username,password)){
       setShowErrorMessage(false)
       navigate('/login/ManagerHomePage')
+      
     
     }else{
       setShowErrorMessage(true)
-      setShowSuccessMessage(false)
-    }
+      }
   }
    
   return(
@@ -40,7 +41,7 @@ const navigate=useNavigate();
     <div className='design'>
     <div className='wrapper'>
     {showErrorMessage && <div className='errorMessage'> Authenticated Failed. Please check your credentials.</div>}
-        {showSuccessMessage && <div className='successMessage'> Authenticated Successfully.</div>}
+        {/* {showSuccessMessage && <div className='successMessage'> Authenticated Successfully.</div>} */}
     <form>
         <h1> Login </h1>
         <div className='input-box'>
