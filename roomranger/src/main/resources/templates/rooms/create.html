@@ -1,33 +1,33 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments::head"></head>
-<body class="container">
-<h2 th:text="${title}">Room Ranger</h2>
-<form method="post" th:object="${room}" >
-    <div class="mb-3">
-        <label> Room Number
-            <input th:field="*{roomNumber}">
-        </label>
-    </div>
-    <div class="mb-3">
-        <label> Room Type
-            <select th:field="*{roomType}">
-                <option th:each="roomType: ${types}"
-                        th:value="${roomType}"
-                        th:text="${roomType.displayName}">
-                </option>
-            </select>
-        </label>
-    </div>
-    <div class="mb-3 form-check">
-        <label> Is Available
-            <input type="checkbox" th:field="*{available}"/>
-        </label>
-    </div>
-    <div class="mb-3">
-        <input type="submit" value="Add Room">
-    </div>
-</form>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head th:replace="fragments::head"></head>-->
+<!--<body class="container">-->
+<!--<h2 th:text="${title}">Room Ranger</h2>-->
+<!--<form method="post" th:object="${room}" >-->
+<!--    <div class="mb-3">-->
+<!--        <label> Room Number-->
+<!--            <input th:field="*{roomNumber}">-->
+<!--        </label>-->
+<!--    </div>-->
+<!--    <div class="mb-3">-->
+<!--        <label> Room Type-->
+<!--            <select th:field="*{roomType}">-->
+<!--                <option th:each="roomType: ${types}"-->
+<!--                        th:value="${roomType}"-->
+<!--                        th:text="${roomType.displayName}">-->
+<!--                </option>-->
+<!--            </select>-->
+<!--        </label>-->
+<!--    </div>-->
+<!--    <div class="mb-3 form-check">-->
+<!--        <label> Is Available-->
+<!--            <input type="checkbox" th:field="*{available}"/>-->
+<!--        </label>-->
+<!--    </div>-->
+<!--    <div class="mb-3">-->
+<!--        <input type="submit" value="Add Room">-->
+<!--    </div>-->
+<!--</form>-->
 
-</body>
-</html>
+<!--</body>-->
+<!--</html>-->

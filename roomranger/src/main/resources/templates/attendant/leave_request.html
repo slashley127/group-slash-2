@@ -1,94 +1,94 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8 /">
-    <!--boostrap CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    crossorigin="anonymous">
-    <!--boostrap Icons CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!--FontAswesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Leave Request Form</title>
-</head>
-<body>
-<div class="container mt-5 m-lg-auto p-5 shadow">
-    <section class = "leave-request">
-        <header class="text-center mb-5">
-            <i class="bi bi-person-fill display-1 text-primary" style="font-size: 10rem"></i>
-            <h1 class="display-1">Leave Request Form</h1>
-        </header>
-<!--Form-->
-        <form id="LeaveRequestForm">
-<!--            Name-->
-            <div class="row mb-3">
-                <label class="form-label">Name</label>
-                <div class="col">
-                    <input
-                            type="text"
-                            class="form-control"
-                            placeholder="First Name"
-                    id="FirstName"/>
-                </div>
-                <div class="col">
-                    <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Last Name"
-                    id="LastName"/>
-                </div>
-            </div>
-<!--            Employee ID remaining vacation days-->
-            <div class="row mb-3">
-                <div class="col">
-                    <label class="form-label">Employee ID</label>
-                    <input type="number" class="form-control"
-                    id="employeeId"
-                    placeholder="Your Employee ID"/>
-                </div>
-                <div class="col">
-                    <label class="form-label">Remaining leave days</label>
-                    <input type="number" class="form-control"
-                    id="RemainingDays"
-                    placeholder="Your remaining days of vacation"/>
-                </div>
-            </div>
-<!--            Start End Date-->
-            <div class="row mb-3">
-                <div class="col">
-                    <label class="form-label">Start date<small class="text-muted">
-                        (incl. 1st day)</small>
-                    </label>
-                    <input type="date"
-                            class="form-control"
-                           id="StartDate"/>
-                </div>
-                <div class="col">
-                    <label class="form-label">End date<small class="text-muted">
-                        (incl. last day)</small>
-                    </label>
-                    <input type="date"
-                           class="form-control"
-                           id="EndDate"/>
-                </div>
-            </div>
-<!--            Leave Reason TEXT-->
-            <div class="row mb-3">
-                <label class="form-label">Leave Reason</label>
-                <div>
-                    <input
-                            type="text"
-                            class="form-control"
-                            id="LeaveReason"/>
-                </div>
-            </div>
-            <button type="submit"
-            class="btn btn-primary w-100 shadow-sm">Submit
-            </button>
-        </form>
-    </section>
-</div>
-<script type="text/javascript" th:src="@{/script.js}"></script>
-</body>
-</html>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org/">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8 /">-->
+<!--    &lt;!&ndash;boostrap CDN &ndash;&gt;-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"-->
+<!--    rel="stylesheet"-->
+<!--    crossorigin="anonymous">-->
+<!--    &lt;!&ndash;boostrap Icons CDN &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">-->
+<!--    &lt;!&ndash;FontAswesome CDN &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />-->
+<!--    <title>Leave Request Form</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container mt-5 m-lg-auto p-5 shadow">-->
+<!--    <section class = "leave-request">-->
+<!--        <header class="text-center mb-5">-->
+<!--            <i class="bi bi-person-fill display-1 text-primary" style="font-size: 10rem"></i>-->
+<!--            <h1 class="display-1">Leave Request Form</h1>-->
+<!--        </header>-->
+<!--&lt;!&ndash;Form&ndash;&gt;-->
+<!--        <form id="LeaveRequestForm">-->
+<!--&lt;!&ndash;            Name&ndash;&gt;-->
+<!--            <div class="row mb-3">-->
+<!--                <label class="form-label">Name</label>-->
+<!--                <div class="col">-->
+<!--                    <input-->
+<!--                            type="text"-->
+<!--                            class="form-control"-->
+<!--                            placeholder="First Name"-->
+<!--                    id="FirstName"/>-->
+<!--                </div>-->
+<!--                <div class="col">-->
+<!--                    <input-->
+<!--                            type="text"-->
+<!--                            class="form-control"-->
+<!--                            placeholder="Last Name"-->
+<!--                    id="LastName"/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--&lt;!&ndash;            Employee ID remaining vacation days&ndash;&gt;-->
+<!--            <div class="row mb-3">-->
+<!--                <div class="col">-->
+<!--                    <label class="form-label">Employee ID</label>-->
+<!--                    <input type="number" class="form-control"-->
+<!--                    id="employeeId"-->
+<!--                    placeholder="Your Employee ID"/>-->
+<!--                </div>-->
+<!--                <div class="col">-->
+<!--                    <label class="form-label">Remaining leave days</label>-->
+<!--                    <input type="number" class="form-control"-->
+<!--                    id="RemainingDays"-->
+<!--                    placeholder="Your remaining days of vacation"/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--&lt;!&ndash;            Start End Date&ndash;&gt;-->
+<!--            <div class="row mb-3">-->
+<!--                <div class="col">-->
+<!--                    <label class="form-label">Start date<small class="text-muted">-->
+<!--                        (incl. 1st day)</small>-->
+<!--                    </label>-->
+<!--                    <input type="date"-->
+<!--                            class="form-control"-->
+<!--                           id="StartDate"/>-->
+<!--                </div>-->
+<!--                <div class="col">-->
+<!--                    <label class="form-label">End date<small class="text-muted">-->
+<!--                        (incl. last day)</small>-->
+<!--                    </label>-->
+<!--                    <input type="date"-->
+<!--                           class="form-control"-->
+<!--                           id="EndDate"/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--&lt;!&ndash;            Leave Reason TEXT&ndash;&gt;-->
+<!--            <div class="row mb-3">-->
+<!--                <label class="form-label">Leave Reason</label>-->
+<!--                <div>-->
+<!--                    <input-->
+<!--                            type="text"-->
+<!--                            class="form-control"-->
+<!--                            id="LeaveReason"/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <button type="submit"-->
+<!--            class="btn btn-primary w-100 shadow-sm">Submit-->
+<!--            </button>-->
+<!--        </form>-->
+<!--    </section>-->
+<!--</div>-->
+<!--<script type="text/javascript" th:src="@{/script.js}"></script>-->
+<!--</body>-->
+<!--</html>-->
