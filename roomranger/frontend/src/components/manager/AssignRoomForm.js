@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export default function AssignRoom() {
     let navigate = useNavigate()
-    const [roomNumbers, setRoomNumbers] = useState([])
+    const [rooms, setRooms] = useState([])
     // const [roomAttendants, setRoomAttendants] = useState([])
     const [tasks, setTasks] = useState([])
     const [statuses, setStatuses] = useState([])
@@ -23,21 +23,45 @@ export default function AssignRoom() {
 
     const [assignedRoomError, setAssignedRoomError] = useState("");
 
-    const {room, roomAttendant, guest, numberOfGuests, checkIn, checkOut, task, notes, status}=assignedRoom
+    const {
+        room,
+        roomAttendant,
+        guest,
+        numberOfGuests,
+        checkIn,
+        checkOut,
+        task,
+        notes,
+        status
+    } = assignedRoom
+
     useEffect(() => {
         fetchTasks();
         fetchStatuses();
-        fetchRoomNumbers();
+        fetchRooms();
     }, [])
 
-    // useEffect(() => {
-    //     fetchRoomAttendants();
-    // }, [])
+    useEffect(() => {
+        console.log("Assigned Room: ", assignedRoom);
+    }, [assignedRoom]);
+
 
     const onInputChange = (e) => {
-        const {name, value} = e.target;
+        const { name, value } = e.target;
+        if (name === "room") {
+          setAssignedRoom({
+            ...assignedRoom,
+            room: {
+              id: JSON.parse(value).id,
+              roomNumber: JSON.parse(value).roomNumber,
+              roomType: JSON.parse(value).roomType,
+              available: false,
+            },
+          });
+          return;
+        }
         setAssignedRoom({ ...assignedRoom, [name]: value });
-    }
+      };
 
     const fetchTasks = async () => {
         const tasksResponse = await axios.get('http://localhost:8080/assignedrooms/tasks')
@@ -51,16 +75,15 @@ export default function AssignRoom() {
         setStatuses(statusesArray)
     }
 
-    const fetchRoomNumbers = async () => {
+    const fetchRooms = async () => {
         try {
-            const roomNumbersResponse = await axios.get('http://localhost:8080/rooms')
-            const roomNumbersArray = Object.entries(roomNumbersResponse.data);
-            setRoomNumbers(roomNumbersArray)
-            console.log('Room Number fetched', roomNumbersArray);
+          const roomsResponse = await axios.get("http://localhost:8080/rooms");
+          const roomsArray = Object.entries(roomsResponse.data);
+          setRooms(roomsArray);
         } catch (error) {
-            console.error('Error fetching room numbers', error);
+          console.error("Error fetching room numbers", error);
         }
-    }
+      };
 
     // const fetchRoomAttendants = async () => {
     //     const roomAttendantsResponse = await axios.get('http://localhost:8080/manager/roomattendant')
@@ -74,17 +97,17 @@ export default function AssignRoom() {
 
     const onFormSubmit = async (e) => {
         e.preventDefault();
+        console.log("Assigned Room:", assignedRoom);
         try {
-            const response = await axios.post(
-                "http://localhost:8080/assignedrooms/assignroomform",
-                JSON.stringify(assignedRoom),
-                {
-                  headers: {
-                    'Access-Control-Allow-Origin': '*',
-                    'Content-Type': 'application/json',
-                  },
-                }
-              );
+          const response = await axios.post(
+            "http://localhost:8080/assignedrooms/create",
+            JSON.stringify(assignedRoom),
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
           if (response && response.data) {
             navigate("/assignedrooms");
           } else {
@@ -106,22 +129,27 @@ export default function AssignRoom() {
                     <form onSubmit={(e) => onFormSubmit(e)}>
                         <div className='mb-3'>
                             <label htmlFor="RoomNumber" className='form-label'>
-                                Room Number
-                            </label>
-                            <select
-                                className="form-control"
-                                name="room"
-                                value={room}
-                                onChange={(e) => onInputChange(e)}
-                            >
-                                <option value="" disabled>Select room</option>
-                                {roomNumbers.map((roomNumber) => (
-                                    <option key={roomNumber[1].id} value={roomNumber[1].roomNumber}>
-                                        {roomNumber[1].roomNumber}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
+                            Room Number
+              </label>
+              <select
+                className="form-control"
+                name="room"
+                value={room}
+                onChange={(e) => onInputChange(e)}
+              >
+                <option value="" disabled>
+                  Select room number
+                </option>
+                {rooms.map((room) => (
+                  <option
+                    key={`roomOption${room[1].id}`}
+                    value={JSON.stringify(room[1])}
+                  >
+                    {room[1].roomNumber}
+                  </option>
+                ))}
+              </select>
+            </div>
                         <div className='mb-3'>
                             <label htmlFor="roomAttendant" className='form-label'>
                                 Room Attendant

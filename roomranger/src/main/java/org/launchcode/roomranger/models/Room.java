@@ -1,12 +1,11 @@
 package org.launchcode.roomranger.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,7 +14,8 @@ import java.util.List;
 @Entity
 public class Room extends AbstractEntity{
 
-    @OneToOne(mappedBy = "room")
+    @OneToOne(mappedBy = "room", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private AssignedRoom assignedRoom;
 
     @Size(min = 4,max = 4, message = "Please give a 4 digits number for Room number!")

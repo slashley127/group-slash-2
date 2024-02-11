@@ -24,6 +24,12 @@ export default function HomeManager() {
        }
 
 
+    // const deleteRoom = async (id) => {
+    //     await axios.delete('http://localhost:8080/assignedrooms/${id}')
+    //     loadAssignedRooms();
+    // }
+
+
 return (
        <div className='container'>
            <div className='py=4'>
@@ -58,8 +64,8 @@ return (
                            <td>{statuses[assignedRoom.status]}</td>
                            <td>
                            {/* <Link className='btn btn-primary mx-2' to={`assignedrooms/viewassignedroom/${assignedRoom.id}`}>View</Link>
-                            <Link className='btn btn-outline-primary mx-2' to={`assignedrooms/editassignedroom/${assignedRoom.id}`}>Edit</Link>
-                             <button className='btn btn-danger mx-2' onClick={()=> deleteRoom(assignedRoom.id)}>Delete</button> */}
+                            <Link className='btn btn-outline-primary mx-2' to={`assignedrooms/editassignedroom/${assignedRoom.id}`}>Edit</Link> */}
+                             {/* <button className='btn btn-danger mx-2' onClick={()=> deleteRoom(assignedRoom.id)}>Delete</button> */}
                            </td>
 
                            {/* to do tomorrow: link buttons to pages and implement logic */}
