@@ -22,6 +22,7 @@ public class User {
     private String firstName;
 
     @NotBlank(message = "Last name is required")
+    @Size(min = 2, max = 40, message = "Last name must be between 2 and 40 characters")
     private String lastName;
 
 
