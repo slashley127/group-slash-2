@@ -64,14 +64,13 @@ return (
                            <td>{statuses[assignedRoom.status]}</td>
                            <td>
                            {/* <Link className='btn btn-primary mx-2' to={`assignedrooms/viewassignedroom/${assignedRoom.id}`}>View</Link> */}
-                            <Link className='btn btn-outline-primary mx-2' to={`assignedrooms/editassignedroom/${assignedRoom.id}`}>Edit</Link>
+                            <Link className='btn btn-outline-primary mx-2' to={`/editassignedroom/${assignedRoom.id}`}>Edit</Link>
                              {/* <Link className='btn btn-danger mx-2' onClick={()=> deleteRoom(assignedRoom.id)}>Delete</Link> */}
                            </td>
                        </tr>
                        ))}
                    </tbody>
                </table>
-
 
            </div>
 
