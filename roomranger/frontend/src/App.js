@@ -8,6 +8,7 @@ import AddRoom from './components/rooms/AddRoom';
 import EditRoom from './components/rooms/EditRoom';
 import ViewRoom from './components/rooms/ViewRoom';
 import AssignRoom from './components/manager/AssignRoomForm';
+import EditAssignedRoom from './components/manager/EditAssignedRoom';
 function App() {
   return (
     <div className="App">
@@ -17,8 +18,9 @@ function App() {
         <Routes>
           {/* give path /addroom to the AddRoom page */}
           <Route exact path="/rooms/addroom" element={<AddRoom />} />
-          <Route exact path="manager" element={<HomeManager />} />
-          <Route exact path="manager/assignroom" element={<AssignRoom />} />
+          <Route exact path="assignedrooms" element={<HomeManager />} />
+          <Route exact path="assignedrooms/assignroomform" element={<AssignRoom />} />
+          <Route exact path="/editassignedroom/:id" element={<EditAssignedRoom/>} />
           <Route exact path="/rooms" element={<Home />} />
           <Route exact path="/rooms/editroom/:id" element={<EditRoom/>} />
           <Route exact path="/rooms/viewroom/:id" element={<ViewRoom/>} />

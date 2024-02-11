@@ -100,13 +100,33 @@ import java.util.Optional;
 
         }
 
-        public ResponseEntity<Room> updateRoom(@RequestBody AssignedRoom assignedRoom) {
-            System.err.println("********************");
+//        public ResponseEntity<Room> updateRoom(@RequestBody AssignedRoom assignedRoom) {
+//            System.err.println("********************");
+//
+//            Room _room = roomRepository.save(assignedRoom.getRoom());
+//            System.err.println("Room: " + _room.toString());
+//
+//            return new ResponseEntity<>(_room, HttpStatus.CREATED);
+//
+//        }
 
-            Room _room = roomRepository.save(assignedRoom.getRoom());
-            System.err.println("Room: " + _room.toString());
-
-            return new ResponseEntity<>(_room, HttpStatus.CREATED);
-
+        @PutMapping("assignedroom/{id}")
+        public AssignedRoom updateAssignedRoom(@RequestBody @Valid AssignedRoom newAssignedRoom, @PathVariable int id){
+            return assignedRoomRepository.findById(id)
+                    .map(assignedRoom -> {
+//                        assignedRoom.setRoomAttendant(newAssignedRoom.getRoomAttendant);
+                        assignedRoom.setRoom(newAssignedRoom.getRoom());
+                        assignedRoom.setGuest(newAssignedRoom.getGuest());
+                        assignedRoom.setNumberOfGuests(newAssignedRoom.getNumberOfGuests());
+                        assignedRoom.setCheckIn(newAssignedRoom.getCheckIn());
+                        assignedRoom.setCheckOut(newAssignedRoom.getCheckOut());
+                        assignedRoom.setTask(newAssignedRoom.getTask());
+                        assignedRoom.setNote(newAssignedRoom.getNote());
+                        assignedRoom.setStatus(newAssignedRoom.getStatus());
+                        return assignedRoomRepository.save(assignedRoom);
+                    }).orElseThrow(()->new NotFoundException("Assigned Room with id " + id));
         }
+
+
+
     }
