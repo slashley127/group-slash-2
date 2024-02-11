@@ -3,12 +3,8 @@ import { Link } from 'react-router-dom';
 
 export default function NavBar() {
     return (
-        <div className='nbar'>
-            <nav class="navbar navbar-expand-sm navbar-dark">
-            <div className='text-left'>
-
-                    <a href='https://roomranger.com' className='navbar-brand '><h2>RoomRanger</h2></a>
-                    </div>
+        <div>
+            <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="#">Home Page</a>
@@ -20,7 +16,7 @@ export default function NavBar() {
                         <a class="nav-link" href="#">Assign Room</a>
                     </li>
                     <li class="nav-item">
-                    <Link class="nav-link active" aria-current="page" to="/attendantListComponent">Room Attendant</Link>
+                        <a class="nav-link" href="#">Room Attendant</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Leave Request</a>

@@ -1,118 +1,44 @@
 package org.launchcode.roomranger.models;
 
-import jakarta.persistence.*;
-import java.util.Set;
+import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 
 @Entity
-public class User {
+public class User extends AbstractEntity {
+       public void setUsername(String username) {
+       this.username = username;
+        }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+        public String getPwHash() {
+            return pwHash;
+        }
 
+        public void setPwHash(String pwHash) {
+            this.pwHash = pwHash;
+        }
+
+    @NotNull
     private String username;
-    private String firstName;
-    private String lastName;
-    private String dob;
 
-    private String email;
+    @NotNull
+    private String pwHash;
+    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    @Column(nullable = false)
-    @Basic(optional = false)
-    private String password;
-
-    private String role; // New field for a single role
-
-    @ElementCollection
-    private Set<String> roles; // Set of roles
-
-    private String confirmPassword;
-
-    public User() {
-        // Default constructor
-    }
+    public User() {}
 
     public User(String username, String password) {
         this.username = username;
-        this.password = password;
+        this.pwHash = encoder.encode(password);
     }
 
-    // Getters and setters...
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public boolean isMatchingPassword(String password) {
+        return encoder.matches(password, pwHash);
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getDob() {
-        return dob;
-    }
-
-    public void setDob(String dob) {
-        this.dob = dob;
-    }
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public Set<String> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<String> roles) {
-        this.roles = roles;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
 }
