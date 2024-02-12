@@ -18,7 +18,7 @@ export default function EditAssignedRoom() {
         checkIn: "",
         checkOut: "",
         task: "",
-        notes: "",
+        note: "",
         status: ""
     })
 
@@ -32,7 +32,7 @@ export default function EditAssignedRoom() {
         checkIn,
         checkOut,
         task,
-        notes,
+        note,
         status
     } = assignedRoom
 
@@ -56,7 +56,7 @@ export default function EditAssignedRoom() {
               available: false,
             },
           });
-          return;
+          return room;
         }
         setAssignedRoom({ ...assignedRoom, [name]: value });
       };
@@ -197,15 +197,15 @@ export default function EditAssignedRoom() {
                             </select>
                         </div>
                         <div className='mb-3'>
-                            <label htmlFor="notes" className='form-label'>
+                            <label htmlFor="note" className='form-label'>
                                 Notes
                             </label>
                             <input
                                 type={"text"}
                                 className="form-control"
                                 placeholder="Notes"
-                                name="notes"
-                                value={notes}
+                                name="note"
+                                value={note}
                                 onChange={(e) => onInputChange(e)}
                             />
                         </div>

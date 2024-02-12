@@ -60,7 +60,7 @@ return (
                            <td>{assignedRoom.checkIn}</td>
                            <td>{assignedRoom.checkOut}</td>
                            <td>{tasks[assignedRoom.task]}</td>
-                           <td>{assignedRoom.notes}</td>
+                           <td>{assignedRoom.note}</td>
                            <td>{statuses[assignedRoom.status]}</td>
                            <td>
                            {/* <Link className='btn btn-primary mx-2' to={`assignedrooms/viewassignedroom/${assignedRoom.id}`}>View</Link> */}

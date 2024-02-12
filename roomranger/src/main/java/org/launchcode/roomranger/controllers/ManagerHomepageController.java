@@ -95,15 +95,15 @@ import java.util.Optional;
 
         }
 
-//        public ResponseEntity<Room> updateRoom(@RequestBody AssignedRoom assignedRoom) {
-//            System.err.println("********************");
-//
-//            Room _room = roomRepository.save(assignedRoom.getRoom());
-//            System.err.println("Room: " + _room.toString());
-//
-//            return new ResponseEntity<>(_room, HttpStatus.CREATED);
-//
-//        }
+        public ResponseEntity<Room> updateRoom(@RequestBody @Valid AssignedRoom assignedRoom) {
+            System.err.println("********************");
+
+            Room _room = roomRepository.save(assignedRoom.getRoom());
+            System.err.println("Room: " + _room.toString());
+
+            return new ResponseEntity<>(_room, HttpStatus.CREATED);
+
+        }
 
 
         @GetMapping("assignedroom/{id}")
