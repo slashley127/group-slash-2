@@ -16,9 +16,9 @@ export default function NavBar() {
                     <li className="nav-item">
                         <Link className="nav-link active" aria-current="page" to="/rooms">Rooms</Link>
                     </li>
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                     <Link className="nav-link active" aria-current="page" to="/assignedrooms/assignroomform">Assign Room</Link>
-                    </li>
+                    </li> */}
                     <li className="nav-item">
                     <Link className="nav-link active" aria-current="page" to="/attendantListComponent">Room Attendant</Link>
                     </li>

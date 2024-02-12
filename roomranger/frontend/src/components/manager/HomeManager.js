@@ -33,6 +33,7 @@ export default function HomeManager() {
 return (
        <div className='container'>
            <div className='py=4'>
+            <Link className='btn btn-primary' to='/assignedrooms/assignroomform'>Assign Room</Link>
                <table className='table border shadow'>
                    <thead>
                        <tr>
