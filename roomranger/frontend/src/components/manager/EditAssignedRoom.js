@@ -201,7 +201,7 @@ export default function EditAssignedRoom() {
                                 Notes
                             </label>
                             <input
-                                type={"text"}
+                                type='text'
                                 className="form-control"
                                 placeholder="Notes"
                                 name="note"

@@ -51,7 +51,7 @@ return (
                    </thead>
                    <tbody>
                        {assignedRooms.map((assignedRoom, index)=>(
-                             <tr>
+                             <tr key={"assignedroom"+index}>
                            <th scope="row" key={index}>{index+1}</th>
                            <td>{assignedRoom.room.roomNumber}</td>
                            <td>{assignedRoom.roomAttendant}</td>
