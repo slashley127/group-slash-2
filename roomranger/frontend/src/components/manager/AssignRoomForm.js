@@ -100,7 +100,7 @@ export default function AssignRoom() {
         console.log("Assigned Room:", assignedRoom);
         try {
           const response = await axios.post(
-            "http://localhost:8080/editassignedroom",
+            "http://localhost:8080/assignedrooms/create",
             JSON.stringify(assignedRoom),
             {
               headers: {

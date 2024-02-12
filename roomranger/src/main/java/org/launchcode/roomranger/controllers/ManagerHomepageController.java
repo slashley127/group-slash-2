@@ -117,7 +117,7 @@ import java.util.Optional;
             return assignedRoomRepository.findById(id)
                     .map(assignedRoom -> {
 //                        assignedRoom.setRoomAttendant(newAssignedRoom.getRoomAttendant);
-//                        assignedRoom.setRoom(newAssignedRoom.getRoom());
+                        assignedRoom.setRoom(newAssignedRoom.getRoom());
                         assignedRoom.setGuest(newAssignedRoom.getGuest());
                         assignedRoom.setNumberOfGuests(newAssignedRoom.getNumberOfGuests());
                         assignedRoom.setCheckIn(newAssignedRoom.getCheckIn());

@@ -96,7 +96,7 @@ export default function EditAssignedRoom() {
     const onFormSubmit = async (e) => {
         e.preventDefault();
         await axios.put(
-            `http://localhost:8080/assignedrooms/assignedroom/${id}`, JSON.stringify(assignedRoom));
+            `http://localhost:8080/assignedrooms/assignedroom/${id}`, assignedRoom);
             navigate("/assignedrooms");
           };
 
