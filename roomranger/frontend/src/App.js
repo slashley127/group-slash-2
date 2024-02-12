@@ -20,7 +20,7 @@ function App() {
           <Route exact path="/rooms/addroom" element={<AddRoom />} />
           <Route exact path="assignedrooms" element={<HomeManager />} />
           <Route exact path="assignedrooms/assignroomform" element={<AssignRoom />} />
-          <Route exact path="/editassignedroom/:id" element={<EditAssignedRoom/>} />
+          <Route exact path="assignedrooms/editassignedroom/:id" element={<EditAssignedRoom/>} />
           <Route exact path="/rooms" element={<Home />} />
           <Route exact path="/rooms/editroom/:id" element={<EditRoom/>} />
           <Route exact path="/rooms/viewroom/:id" element={<ViewRoom/>} />

@@ -35,12 +35,6 @@ import java.util.Optional;
             return (List<AssignedRoom>) assignedRoomRepository.findAll();
         }
 
-//        @GetMapping("/{id}")
-//        Optional<AssignedRoom> getAssignedRoomById(@PathVariable Integer id) {
-//            return assignedRoomRepository.findById(id);
-//        }
-//
-//        @PutMapping("/{id}")
 
         @GetMapping("/tasks")
         public Map<String, String> getTasks() {
@@ -69,6 +63,7 @@ import java.util.Optional;
         public String getStatus(@PathVariable int id) {
             return assignedRoomRepository.findById(id).get().getStatus().getDisplayName();
         }
+
 
         @DeleteMapping("assignedroom/{id}")
         public String deleteAssignedRoom(@PathVariable int id) {
@@ -110,12 +105,19 @@ import java.util.Optional;
 //
 //        }
 
+
+        @GetMapping("assignedroom/{id}")
+        public AssignedRoom getAssignedRoomById(@PathVariable int id) {
+        return assignedRoomRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("assigned room with id " + id));
+        }
+
         @PutMapping("assignedroom/{id}")
         public AssignedRoom updateAssignedRoom(@RequestBody @Valid AssignedRoom newAssignedRoom, @PathVariable int id){
             return assignedRoomRepository.findById(id)
                     .map(assignedRoom -> {
 //                        assignedRoom.setRoomAttendant(newAssignedRoom.getRoomAttendant);
-                        assignedRoom.setRoom(newAssignedRoom.getRoom());
+//                        assignedRoom.setRoom(newAssignedRoom.getRoom());
                         assignedRoom.setGuest(newAssignedRoom.getGuest());
                         assignedRoom.setNumberOfGuests(newAssignedRoom.getNumberOfGuests());
                         assignedRoom.setCheckIn(newAssignedRoom.getCheckIn());

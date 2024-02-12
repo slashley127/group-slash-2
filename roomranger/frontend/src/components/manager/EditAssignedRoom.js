@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export default function EditAssignedRoom() {
     let navigate = useNavigate()
-    const {id} = useParams
+    const {id} = useParams()
     const [rooms, setRooms] = useState([])
     // const [roomAttendants, setRoomAttendants] = useState([])
     const [tasks, setTasks] = useState([])
@@ -40,11 +40,8 @@ export default function EditAssignedRoom() {
         fetchTasks();
         fetchStatuses();
         fetchRooms();
+        loadAssignedRoom();
     }, [])
-
-    useEffect(() => {
-        console.log("Assigned Room: ", assignedRoom);
-    }, [assignedRoom]);
 
 
     const onInputChange = (e) => {
@@ -92,27 +89,22 @@ export default function EditAssignedRoom() {
     //     setRoomAttendants(roomAttendantsArray)
     // }
 
-useEffect(()=>{
-    loadAssignedRoom();
-}, [])
 
 
 
-
+//REVIEW NEEDED
     const onFormSubmit = async (e) => {
         e.preventDefault();
-        console.log("Assigned Room:", assignedRoom);
-        // try {
-          const response = await axios.put(
-            `http://localhost:8080/assignedrooms/assignedroom/{id}`, JSON.stringify(assignedRoom));
-            navigate("/");
+        await axios.put(
+            `http://localhost:8080/assignedrooms/assignedroom/${id}`, JSON.stringify(assignedRoom));
+            navigate("/assignedrooms");
           };
 
           const loadAssignedRoom = async () => {
-            const result = await axios.get(`http://localhost:8080/assignedrooms/assignedroom/{id}`)
+            const result = await axios.get(`http://localhost:8080/assignedrooms/assignedroom/${id}`)
             setAssignedRoom(result.data)
           }
-
+//REVIEW NEEDED
 
     return (
         <div className='container'>
@@ -232,7 +224,7 @@ useEffect(()=>{
                             </select>
                         </div>
                         <button type='submit' className='btn btn-outline-primary'>Submit</button>
-                        <Link className='btn btn-outline-danger mx-2' to="/manager">Cancel</Link>
+                        <Link className='btn btn-outline-danger mx-2' to="/assignedrooms">Cancel</Link>
                     </form>
                 </div>
             </div>
