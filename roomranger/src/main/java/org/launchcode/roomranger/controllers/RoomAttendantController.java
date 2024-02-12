@@ -49,12 +49,12 @@ public class RoomAttendantController {
 //                .orElseThrow(()->new NotFoundException("attendant with id " + id));
     }
 
-     @PostMapping("/add")
-      RoomAttendant addRoomAttendant( @RequestBody @Valid RoomAttendant newRoomAttendant) {
-         System.out.println("Testing");
+    @PostMapping("/add")
+    RoomAttendant addRoomAttendant( @RequestBody @Valid RoomAttendant newRoomAttendant) {
+        System.out.println("Testing");
 
-      return roomAttendantRepository.save(newRoomAttendant);
-     }
+        return roomAttendantRepository.save(newRoomAttendant);
+    }
 
 
 
@@ -75,9 +75,9 @@ public class RoomAttendantController {
 
         //redirectAttributes.addFlashAttribute("message", "The user has been saved successfully.");
         return roomAttendantRepository.save(updatedroomAttendant);
-                //.orElseThrow(()-> new UserNotFoundException(id));
+        //.orElseThrow(()-> new UserNotFoundException(id));
 
-}
+    }
 
     @GetMapping("profile/{id}")
     public RoomAttendant getProfile(@PathVariable int id) {
@@ -85,26 +85,26 @@ public class RoomAttendantController {
     }
 
 
-        @GetMapping("/delete/{id}")
-        public void deleteUser(@PathVariable int id) {
-                    RoomAttendant roomAttendant = roomAttendantRepository.findById(id);
-            if (!roomAttendantRepository.existsById(id)) {
-                throw new UserNotFoundException(id);
-            }
-            roomAttendantRepository.delete(roomAttendant);
-            //return "User with the id " + id + " has been successfully deleted.";
+    @GetMapping("/delete/{id}")
+    public void deleteUser(@PathVariable int id) {
+        RoomAttendant roomAttendant = roomAttendantRepository.findById(id);
+        if (!roomAttendantRepository.existsById(id)) {
+            throw new UserNotFoundException(id);
         }
+        roomAttendantRepository.delete(roomAttendant);
+        //return "User with the id " + id + " has been successfully deleted.";
+    }
 
 
     @GetMapping("/workingDays")
     public Map<String, String> getDays() {
         Map<String, String> days = new HashMap<>();
         for (WorkingDays workingDays : WorkingDays.values()) {
-           days.put(workingDays.name(), workingDays.getDisplayName());
+            days.put(workingDays.name(), workingDays.getDisplayName());
         }
         return days;
     }
-    }
+}
 
 
     

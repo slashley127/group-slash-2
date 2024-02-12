@@ -14,7 +14,7 @@ public class RoomAttendant  extends AbstractEntity{
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(insertable=false, updatable=false)
     private int id;
 

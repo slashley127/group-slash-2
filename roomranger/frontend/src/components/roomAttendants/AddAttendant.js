@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AttendantListComponent from "./AttendantListComponent";
 import './Attendant.css';
+import { click } from "@testing-library/user-event/dist/click";
 
 export default function AddAttendant() {
 
@@ -18,16 +19,18 @@ export default function AddAttendant() {
     username: '',
     password: '',
     notes: '',
-    workingDays: []
+    workingDays: [],
+    confirmPassword:""
   });
   const [attendantError, setAttendantError] = useState("");
 
-  const { id,firstName, lastName, email, phoneNumber, pronoun, username, password,notes, workingDays} = attendant;
+  const { id,firstName, lastName, email, phoneNumber, pronoun, username, password,notes, workingDays,confirmPassword} = attendant;
 
   // Handle changes to form inputs
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-
+    // const {password,confirmPassword}=this.state  
+  
     if (type === 'checkbox') {
       // Update state for multi-checkbox inputs
       setAttendant(prevFormData => ({
@@ -48,12 +51,16 @@ export default function AddAttendant() {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (attendant.password !== attendant.confirmPassword) {
+      alert("Password and confirm password do not match.");
+      return;
+    }
     // Convert workingDays array to a comma-separated string
     const preparedData = {
       ...attendant,
       workingDays: attendant.workingDays.join(',') // Convert array to string
     };
-    console.log('Submitting formm workingdays:', preparedData.workingDays);
+    console.log('Submitting form workingdays:', preparedData.workingDays);
     console.log('Submitting form data:', preparedData);
 
     try{
@@ -167,7 +174,7 @@ export default function AddAttendant() {
                     className="form-control"
                     placeholder="Password"
                     name="password"
-                    //value={password}
+                    value={password}
                     onChange={(e) => handleChange(e)}
                   ></input>
                 </div>
@@ -181,8 +188,8 @@ export default function AddAttendant() {
                     type={"password"}
                     className="form-control"
                     placeholder="Verify Password"
-                    name="password"
-                    // value={password}
+                    name="confirmPassword"
+                    value={confirmPassword}
                     onChange={(e) => handleChange(e)}
                   ></input>
              </div>

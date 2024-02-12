@@ -4,16 +4,19 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
-public class User {
+public class User  {
+
+    public int getId() {
+        return id;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     private String username;
     private String firstName;
     private String lastName;
-    private String dob;
 
     private String email;
 
@@ -39,11 +42,9 @@ public class User {
 
     // Getters and setters...
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
+
+    public void setId(int id) {
         this.id = id;
     }
     public String getEmail() {
@@ -53,6 +54,7 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
     public String getUsername() {
         return username;
     }
@@ -85,13 +87,7 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getDob() {
-        return dob;
-    }
 
-    public void setDob(String dob) {
-        this.dob = dob;
-    }
     public String getRole() {
         return role;
     }

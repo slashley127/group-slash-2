@@ -16,15 +16,20 @@ export default function Update() {
     password:"",
     notes:"",
     pronoun:'',
-    workingDays:[]
+    workingDays:[],
+    confirmPassword:""
 });
   // const [attendantError, setAttendantError] = useState("");
  
 
-  const { firstName, lastName, email, phoneNumber, pronoun, username, password,notes,workingDays } = attendants;
+  const { firstName, lastName, email, phoneNumber, pronoun, username, password,notes,workingDays,confirmPassword } = attendants;
 
   const onInputChange = (e) => {
     const { name, value, type, checked } = e.target;
+    if (attendants.password !== attendants.confirmPassword) {
+      alert("Old and new passwords cannot be same. Please try something else. ");
+      return;
+    }
     setAttendants(prevFormData => ({
       ...prevFormData,
       workingDays: checked
@@ -161,7 +166,7 @@ useEffect(()=> {
                 className="form-control"
                
                 name="password"
-                // value={password}
+                value={password}
                 onChange={(e) => onInputChange(e)}
               ></input>
           </div>

@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface ManagerRepository extends CrudRepository<Manager, Integer> {
-    //List<Manager> findbyId();
+//    List<Manager> findbyId();
 
 }
