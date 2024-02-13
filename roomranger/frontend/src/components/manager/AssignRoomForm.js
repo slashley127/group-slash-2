@@ -62,6 +62,11 @@ export default function AssignRoom() {
           id: JSON.parse(value).id,
           firstName: JSON.parse(value).firstName,
           lastName: JSON.parse(value).lastName,
+          username: JSON.parse(value).username,
+          password: JSON.parse(value).password,
+          phoneNumber: JSON.parse(value).phoneNumber,
+          email: JSON.parse(value).email,
+          notes: JSON.parse(value).notes,
         },
       });
       return;

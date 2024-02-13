@@ -32,21 +32,21 @@ public class RoomAttendant  extends AbstractEntity{
     private String password;
     @ManyToOne
     private Manager manager;
-    @OneToOne(cascade = CascadeType.ALL)
-    private RoomAttendantUser roomAttendantUser;
-    private String pronoun;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    private RoomAttendantUser roomAttendantUser;
+//    private String pronoun;
     @Size(max=10)
     private String phoneNumber;
 
-    public void setWorkingDays(String workingDays) {
-        this.workingDays = workingDays;
-    }
-
-    public String getWorkingDays() {
-        return workingDays;
-    }
-
-    private String workingDays ;
+//    public void setWorkingDays(String workingDays) {
+//        this.workingDays = workingDays;
+//    }
+//
+//    public String getWorkingDays() {
+//        return workingDays;
+//    }
+//
+//    private String workingDays ;
     @Column(unique = true)
     private String email;
     private String notes;
@@ -105,32 +105,31 @@ public class RoomAttendant  extends AbstractEntity{
     public void setEmail(String email) {
         this.email = email;
     }
-    public Manager getManager() {return manager;}
-
-    public void setManager(Manager manager) {this.manager = manager;}
-
-    public RoomAttendantUser getRoomAttendantUser() {return roomAttendantUser;}
-
-    public void setRoomAttendantUser(RoomAttendantUser roomAttendantUser) {this.roomAttendantUser = roomAttendantUser;}
-
-    public String getPronoun() {return pronoun;}
-
-    public void setPronoun(String pronoun) {this.pronoun = pronoun;}
+//    public Manager getManager() {return manager;}
+//
+//    public void setManager(Manager manager) {this.manager = manager;}
+//
+//    public RoomAttendantUser getRoomAttendantUser() {return roomAttendantUser;}
+//
+//    public void setRoomAttendantUser(RoomAttendantUser roomAttendantUser) {this.roomAttendantUser = roomAttendantUser;}
+//
+//    public String getPronoun() {return pronoun;}
+//
+//    public void setPronoun(String pronoun) {this.pronoun = pronoun;}
 
 
     public RoomAttendant() {
 
     }
-    public RoomAttendant (  String firstName, String lastName, String email, String phoneNumber, String workingDays, String username, String password, RoomAttendantUser roomAttendantUser, String notes) {
-        super();
+    public RoomAttendant ( String firstName, String lastName, String email, String phoneNumber, String username, String password, String notes) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email= email;
         this.phoneNumber= phoneNumber;
-        this.workingDays = workingDays;
+//        this.workingDays = workingDays;
         this.username= username;
         this.password=password;
-        this.roomAttendantUser=roomAttendantUser;
+//        this.roomAttendantUser=roomAttendantUser;
         this.notes=notes;
     }
 
