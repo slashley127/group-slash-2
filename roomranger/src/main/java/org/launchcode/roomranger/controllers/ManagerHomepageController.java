@@ -65,16 +65,16 @@ import java.util.Optional;
         }
 
 
-        @DeleteMapping("assignedroom/{id}")
-        public String deleteAssignedRoom(@PathVariable int id) {
-            if (!assignedRoomRepository.existsById(id)) {
-                throw new NotFoundException("Assignment with id " + id);
-            }
-            roomRepository.deleteById(id);
-            return "Assigned with Id " + id + "has been deleted successfully!";
-        }
+//        @DeleteMapping("assignedroom/{id}")
+//        public String deleteAssignedRoom(@PathVariable int id) {
+//            if (!assignedRoomRepository.existsById(id)) {
+//                throw new NotFoundException("Assignment with id " + id);
+//            }
+//            roomRepository.deleteById(id);
+//            return "Assigned with Id " + id + "has been deleted successfully!";
+//        }
 
- @GetMapping("assignedroom/{id}")
+        @GetMapping("assignedroom/{id}")
         public AssignedRoom getAssignedRoomById(@PathVariable int id) {
         return assignedRoomRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("assigned room with id " + id));
@@ -84,7 +84,7 @@ import java.util.Optional;
         public AssignedRoom updateAssignedRoom(@RequestBody @Valid AssignedRoom newAssignedRoom, @PathVariable int id){
             return assignedRoomRepository.findById(id)
                     .map(assignedRoom -> {
-//                        assignedRoom.setRoomAttendant(newAssignedRoom.getRoomAttendant);
+                        assignedRoom.setRoomAttendant(newAssignedRoom.getRoomAttendant());
                         assignedRoom.setRoom(newAssignedRoom.getRoom());
                         assignedRoom.setGuest(newAssignedRoom.getGuest());
                         assignedRoom.setNumberOfGuests(newAssignedRoom.getNumberOfGuests());
@@ -103,6 +103,7 @@ import java.util.Optional;
             AssignedRoom _assignedRoom = assignedRoomRepository.save(
                     new AssignedRoom(
                             assignedRoom.getRoom(),
+                            assignedRoom.getRoomAttendant(),
                             assignedRoom.getGuest(),
                             assignedRoom.getNumberOfGuests(),
                             assignedRoom.getStatus(),

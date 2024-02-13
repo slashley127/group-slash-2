@@ -17,9 +17,9 @@ public class RoomAttendant  extends AbstractEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(insertable=false, updatable=false)
     private int id;
-//
-//    @OneToOne(mappedBy = "roomAttendant")
-//    private AssignedRoom assignedRoom;
+
+    @OneToMany(mappedBy = "roomAttendant")
+    private List<AssignedRoom> assignedRooms;
 
     @NotBlank(message = "First name is required")
     @Column(length = 30)
@@ -67,9 +67,11 @@ public class RoomAttendant  extends AbstractEntity{
     public String getLastName() {return lastName;}
 
     public void setLastName(String lastName) {this.lastName = lastName;}
+
     public void setId(int id) {
         this.id = id;
     }
+
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }

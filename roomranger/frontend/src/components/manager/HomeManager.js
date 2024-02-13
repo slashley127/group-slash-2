@@ -55,7 +55,7 @@ return (
                              <tr key={"assignedroom"+index}>
                            <th scope="row" key={index}>{index+1}</th>
                            <td>{assignedRoom.room.roomNumber}</td>
-                           <td>{assignedRoom.roomAttendant}</td>
+                           <td>{assignedRoom.roomAttendant.firstName}</td>
                            <td>{assignedRoom.guest}</td>
                            <td>{assignedRoom.numberOfGuests}</td>
                            <td>{assignedRoom.checkIn}</td>
