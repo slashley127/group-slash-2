@@ -41,18 +41,20 @@ h1 {
 /* Style for Dropdown Items */
 .dropdown-item {
   color: Black;
+  padding: 10px;
 }
 
 /* Center the Dropdown */
 .dropdown {
   display: flex;
+  align-items: center;
   justify-content: center;
   text-align: center;
-  margin-bottom: 20px; /* Add margin bottom to create space for the links */
+  margin-bottom: 20px; 
 }
 
 .dropdown-toggle {
-  font-size: 2em; /* Increase font size */
-  font-weight: bold; /* Make text bold */
+  font-size: 2em; 
+  font-weight: bold; 
   text-align: center;
 }

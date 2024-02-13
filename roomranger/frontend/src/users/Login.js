@@ -47,7 +47,7 @@ const navigate=useNavigate();
           <FaCircleUser className='icon'/>
         </div>
         <div className='input-box'>
-          <input type='password' name='password'placeholder='Password' onChange={handlePasswordchange} value={password} required />
+          <input type='password' name='panpm ssword'placeholder='Password' onChange={handlePasswordchange} value={password} required />
           < FaLock className='icon'/> 
         </div>
         <div className='remember-forgot'>

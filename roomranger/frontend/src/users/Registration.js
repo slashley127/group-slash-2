@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import './Registration.css'; 
 
 export default function Registration() {
   let navigate = useNavigate();
@@ -40,7 +41,7 @@ export default function Registration() {
       return;
     }
 
-      try {
+    try {
       const response = await axios.post("http://localhost:8080/user", user);
       setSuccessMessage(response.data);
       navigate("/login");
@@ -57,117 +58,63 @@ export default function Registration() {
   const { username, firstName, lastName, email, password, confirmPassword } = user;
 
   return (
-    <div className="container mt-5">
-    <h2>Registration Form</h2>
-    <form onSubmit={onRegistrationSubmit}>
-      {error && <div className="alert alert-danger">{error}</div>}
-      {successMessage && <div className="alert alert-success">{successMessage}</div>}
-      <div className="mb-3">
-        <label htmlFor="firstName" className="form-label">
-            First Name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="firstName"
-            name="firstName"
-            value={firstName}
-            onChange={onInputChange}
-            required
-          />
+    <div className="container mt-5 registration-form">      
+      <h2>Registration Form</h2>
+      <form onSubmit={onRegistrationSubmit}>
+        {error && <div className="alert alert-danger">{error}</div>}
+        {successMessage && <div className="alert alert-success">{successMessage}</div>}
+        <div className="row">
+          <div className="col-md-6">
+            <div className="mb-3">
+              <label htmlFor="firstName" className="form-label">First Name</label>
+              <input type="text" className="form-control" id="firstName" name="firstName" value={firstName} onChange={onInputChange} required />
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="mb-3">
+              <label htmlFor="lastName" className="form-label">Last Name</label>
+              <input type="text" className="form-control" id="lastName" name="lastName" value={lastName} onChange={onInputChange} required />
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-6">
+            <div className="mb-3">
+              <label htmlFor="username" className="form-label">Username</label>
+              <input type="text" className="form-control" id="username" name="username" value={username} onChange={onInputChange} required />
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">Email</label>
+              <input type="email" className="form-control" id="email" name="email" value={email} onChange={onInputChange} required />
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-6">
+            <div className="mb-3">
+              <label htmlFor="password" className="form-label">Password</label>
+              <input type={showPassword ? "text" : "password"} className="form-control" id="password" name="password" value={password} onChange={onInputChange} required />
+              <button className="btn btn-outline-success" type="button" onClick={togglePasswordVisibility}>
+                {showPassword ? "Hide" : "Show"}
+              </button>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="mb-3">
+              <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
+              <input type={showPassword ? "text" : "password"} className="form-control" id="confirmPassword" name="confirmPassword" value={confirmPassword} onChange={onInputChange} required />
+              <button className="btn btn-outline-success" type="button" onClick={togglePasswordVisibility}>
+                {showPassword ? "Hide" : "Show"}
+              </button>
+            </div>
+          </div>
         </div>
         <div className="mb-3">
-          <label htmlFor="lastName" className="form-label">
-            Last Name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="lastName"
-            name="lastName"
-            value={lastName}
-            onChange={onInputChange}
-            required
-          />
+          <button type="submit" className="btn btn-success">Register</button>
+          <Link className="btn btn-danger" to="/">Cancel</Link>
         </div>
-        <div className="mb-3">
-          <label htmlFor="username" className="form-label">
-            Username
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="username"
-            name="username"
-            value={username}
-            onChange={onInputChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            name="email"
-            value={email}
-            onChange={onInputChange}
-            required
-          />
-        </div>
-        
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">
-            Password
-          </label>
-          <input
-            type={showPassword ? "text" : "password"}
-            className="form-control"
-            id="password"
-            name="password"
-            value={password}
-            onChange={onInputChange}
-            required
-          />
-          <button
-              className="btn btn-outline-secondary"
-              type="button"
-              onClick={togglePasswordVisibility}
-            >
-              {showPassword ? "Hide" : "Show"}
-            </button>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="confirmPassword" className="form-label">
-            Confirm Password
-          </label>
-          <input
-            type={showPassword ? "text" : "password"}
-            className="form-control"
-            id="confirmPassword"
-            name="confirmPassword"
-            value={confirmPassword}
-            onChange={onInputChange}
-            required
-          />
-          <button
-              className="btn btn-outline-secondary"
-              type="button"
-              onClick={togglePasswordVisibility}
-            >
-              {showPassword ? "Hide" : "Show"}
-            </button>
-        </div>
-       
-        <button type="submit" className="btn btn-primary">
-          Register
-        </button>
-        <Link className="btn btn-outline-danger mx-2" to="/">
-          Cancel
-        </Link>
       </form>
     </div>
   );
