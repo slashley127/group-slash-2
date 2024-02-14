@@ -8,7 +8,7 @@ export default function AddRoom() {
     const [room, setRoom] = useState({
         roomNumber: "",
         roomType: "",
-        available: false
+        available: true
     });
     const [roomError, setRoomError] = useState("");
 
@@ -26,6 +26,7 @@ export default function AddRoom() {
         const typesResponse = await axios.get('http://localhost:8080/rooms/types');
         const typesArray = Object.entries(typesResponse.data);
         setTypes(typesArray);
+        // console.log(types);
     };
 
     //form submit event handler
@@ -33,9 +34,10 @@ export default function AddRoom() {
         e.preventDefault();
         try {
             await axios.post("http://localhost:8080/rooms/room", room);
-            navigate("/rooms");  //navigate to the rooms home page
+            navigate("/landing/rooms");  //navigate to the rooms home page
         }
         catch (error) {
+            console.log(error.response.data)
             setRoomError(error.response.data.roomNumber);  //get error message from Room table roomNumber
         }
     }
@@ -84,7 +86,7 @@ export default function AddRoom() {
                             </label>
                         </div>
                         <button type='submit' className='btn btn-outline-primary'>Submit</button>
-                        <Link className='btn btn-outline-danger mx-2' to='/rooms'>Cancel</Link>
+                        <Link className='btn btn-outline-danger mx-2' to='/landing/rooms'>Cancel</Link>
                     </form>
                 </div>
             </div>

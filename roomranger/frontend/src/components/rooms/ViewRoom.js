@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 export default function ViewRooms() {
     const [room, setRoom] = useState({
@@ -10,6 +11,24 @@ export default function ViewRooms() {
     });
     const { id } = useParams();
     const [type, setType] = useState([]);
+
+    const [comment, setComment] = useState({
+        text: "",
+        assignedRoom: "",
+        user: "",
+
+    });
+    const submitComment = async (e) => {
+
+    }
+    const addComment = (value) => {
+        const commentCopy = { ...comment };
+        commentCopy.text = value;
+        setComment(commentCopy);
+    }
+    useEffect(() => {
+        console.log(comment);
+    }, [comment]);
 
     useEffect(() => {
         fetchTypes();
@@ -48,8 +67,14 @@ export default function ViewRooms() {
                             </ul>
                         </div>
                     </div>
-                    <Link className='btn btn-primary my-2' to={'/rooms'}>Back to Home</Link>
+                    <Link className='btn btn-primary my-2' to={'/landing/rooms'}>Back to Home</Link>
                 </div>
+            </div>
+            <div className='mt-5'>
+                <textarea style={{ width: "100%", borderRadius: "0.25em" }}
+                    onChange={(e) => addComment(e.target.value)}>
+                </textarea>
+                <Button onClick={() => submitComment()}>Post Comment</Button>
             </div>
         </div>
     )

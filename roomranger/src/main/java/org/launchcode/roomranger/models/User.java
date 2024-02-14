@@ -8,7 +8,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     private String username;
     private String firstName;
@@ -39,11 +39,11 @@ public class User {
 
     // Getters and setters...
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
     public String getEmail() {

@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 
 
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,8 @@ public class RoomAttendant  extends AbstractEntity{
     private String pronoun;
     @Size(max=10)
     private String phoneNumber;
+    @OneToMany(mappedBy = "roomAttendant")
+    private List<LeaveRequest> leaveList = new ArrayList<>();
 
     public void setWorkingDays(String workingDays) {
         this.workingDays = workingDays;
@@ -47,6 +50,7 @@ public class RoomAttendant  extends AbstractEntity{
     @Column(unique = true)
     private String email;
     private String notes;
+    private int remainingDays = 20;
 
 //    private String profilePic;
 
@@ -116,7 +120,12 @@ public class RoomAttendant  extends AbstractEntity{
     public RoomAttendant() {
 
     }
-    public RoomAttendant (  String firstName, String lastName, String email, String phoneNumber, String workingDays, String username, String password, RoomAttendantUser roomAttendantUser, String notes) {
+
+    public RoomAttendant(int id) {
+        this.id = id;
+    }
+
+    public RoomAttendant (String firstName, String lastName, String email, String phoneNumber, String workingDays, String username, String password, RoomAttendantUser roomAttendantUser, String notes) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
@@ -130,6 +139,13 @@ public class RoomAttendant  extends AbstractEntity{
     }
 
 
+    public int getRemainingDays() {
+        return remainingDays;
+    }
+
+    public void setRemainingDays(int remainingDays) {
+        this.remainingDays = remainingDays;
+    }
 }
 
 

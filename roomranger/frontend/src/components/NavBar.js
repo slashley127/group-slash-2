@@ -1,32 +1,33 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 export default function NavBar() {
     return (
         <div className='nbar'>
-            <nav class="navbar navbar-expand-sm navbar-dark">
-            <div className='text-left'>
-
-                    <a href='https://roomranger.com' className='navbar-brand '><h2>RoomRanger</h2></a>
-                    </div>
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home Page</a>
+            <nav className="navbar navbar-expand-sm navbar-dark bg-primary">
+                <div className='text-left'>
+                    <a href='https://localhost:3000/landing' className='navbar-brand '><h2>RoomRanger</h2></a>
+                </div>
+                <ul className="navbar-nav">
+                    <li className="nav-item">
+                        <Link className="nav-link" aria-current="page" to="/landing">Home Page</Link >
                     </li>
-                    <li class="nav-item">
-                        <Link class="nav-link active" aria-current="page" to="/rooms">Rooms</Link>
+                    <li className="nav-item">
+                        <Link className="nav-link" aria-current="page" to="/landing/rooms">Rooms</Link>
+                        {/* <Link className="nav-link" aria-current="page" to="/attendant">Rooms</Link> */}
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Assign Room</a>
+                    <li className="nav-item">
+                        <a className="nav-link" href="#">Assign Room</a>
                     </li>
-                    <li class="nav-item">
-                    <Link class="nav-link active" aria-current="page" to="/attendantListComponent">Room Attendant</Link>
+                    <li className="nav-item">
+                        <Link className="nav-link" aria-current="page" to="/landing/attendants">Room Attendant</Link>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Leave Request</a>
+                    <li className="nav-item">
+                        <Link className="nav-link" aria-current="page" to="/landing/leave">Leave Request</Link>
                     </li>
                 </ul>
             </nav>
+            <Outlet />
         </div>
     );
 }
