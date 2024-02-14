@@ -27,7 +27,7 @@ const navigate=useNavigate();
       if(username==='samata' && password==='karka'){
       setShowSuccessMessage(true);
       setShowErrorMessage(false)
-      navigate('/login/ManagerHomePage')
+      navigate('/landing')
     
     }else{
       setShowErrorMessage(true)
