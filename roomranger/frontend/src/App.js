@@ -26,7 +26,7 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={toggleTheme}>Toggle Theme</button>
+      <button onClick={toggleTheme}>Dark/Light</button>
       <Router>
         <Container fluid>
           <Row>
