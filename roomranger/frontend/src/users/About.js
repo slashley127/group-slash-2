@@ -4,7 +4,7 @@ import './About.css';
 const authors = [
   {
     name: "Samata Karka",
-    imageUrl: "/images/Sonal.jpeg",
+    imageUrl: "/images/cat.jpeg",
     descriptionOfFeatures: "In Progress",
     bio: "In Progress",
     linkedInUrl: "in progress",
@@ -12,7 +12,7 @@ const authors = [
   },
   {
     name: "Francesca",
-    imageUrl: "/images/Sonal.jpeg",
+    imageUrl: "/images/cat.jpeg",
     descriptionOfFeatures: "In Progress",
     bio: "In Progress",
     linkedInUrl: "in progress",
@@ -21,7 +21,7 @@ const authors = [
   },
   {
     name: "Luna Liu",
-    imageUrl: "/images/Sonal.jpeg",
+    imageUrl: "/images/cat.jpeg",
     descriptionOfFeatures: "In Progress",
     bio: "In Progress",
     linkedInUrl: "in progress",

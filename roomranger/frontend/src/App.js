@@ -9,6 +9,7 @@ import AddRoom from "./components/rooms/AddRoom";
 import EditRoom from "./components/rooms/EditRoom";
 import ViewRoom from "./components/rooms/ViewRoom";
 import Manager from "./components/rooms/Manager";
+import RoomAttendantHomepage from "./components/roomAttendant/RoomAttendantHomepage.js";
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
@@ -39,6 +40,8 @@ function App() {
                 <Route exact path="/rooms/editRoom" element={<EditRoom />} />
                 <Route exact path="/rooms/viewRoom" element={<ViewRoom />} />
                 <Route exact path="/rooms/manager" element={<Manager />} />
+                <Route exact path="/roomAttendant/roomAttendantHomepage" element={<RoomAttendantHomepage />} />
+
                 </Routes>
             </Col>
             <Col md={6}>
