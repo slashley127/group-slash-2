@@ -49,7 +49,7 @@ export default function AssignRoom() {
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === "room" && name === "roomAttendant") {
+    if (name === "room" || name === "roomAttendant") {
       setAssignedRoom({
         ...assignedRoom,
         room: {

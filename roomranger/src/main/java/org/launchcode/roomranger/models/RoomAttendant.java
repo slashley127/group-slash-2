@@ -18,8 +18,8 @@ public class RoomAttendant  extends AbstractEntity{
     @Column(insertable=false, updatable=false)
     private int id;
 
-    @OneToMany(mappedBy = "roomAttendant")
-    private List<AssignedRoom> assignedRooms;
+    @OneToOne(mappedBy = "roomAttendant", cascade = CascadeType.ALL)
+    private AssignedRoom assignedRoom;
 
     @NotBlank(message = "First name is required")
     @Column(length = 30)

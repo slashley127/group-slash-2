@@ -10,7 +10,7 @@ public class AssignedRoom extends AbstractEntity {
 //    @Valid
     private Room room;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "room_attendant_id")
 //    @Valid
     private RoomAttendant roomAttendant;
