@@ -102,7 +102,7 @@ export default function AssignRoom() {
   const statusColors = {
     'NOT_STARTED': 'red',
     'IN_PROGRESS': 'blue',
-    'SERVICE_REFUSED' : 'black',
+    'SERVICE_REFUSED': 'black',
     'READY': 'green',
     'INSPECTED': 'magenta'
   };
@@ -172,7 +172,7 @@ export default function AssignRoom() {
                 <option value="" disabled>
                   Select room number
                 </option>
-                {rooms.map((room) => (
+                {rooms.filter(room => room[1].available).map((room) => (
                   <option
                     key={`roomOption${room[1].id}`}
                     value={room[1].roomNumber}
