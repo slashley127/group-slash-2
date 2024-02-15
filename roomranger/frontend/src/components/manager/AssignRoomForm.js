@@ -49,7 +49,7 @@ export default function AssignRoom() {
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === "room" || name === "roomAttendant") {
+    if (name === "room") {
       setAssignedRoom({
         ...assignedRoom,
         room: {
@@ -58,7 +58,23 @@ export default function AssignRoom() {
           roomType: JSON.parse(value).roomType,
           available: false,
         },
-        roomAttendant: {
+        // roomAttendant: {
+        //   id: JSON.parse(value).id,
+        //   firstName: JSON.parse(value).firstName,
+        //   lastName: JSON.parse(value).lastName,
+        //   username: JSON.parse(value).username,
+        //   password: JSON.parse(value).password,
+        //   phoneNumber: JSON.parse(value).phoneNumber,
+        //   email: JSON.parse(value).email,
+        //   notes: JSON.parse(value).notes,
+        // },
+      });
+      return;
+    }
+    if (name === "roomAttendant") {
+      setAssignedRoom({
+        ...assignedRoom,
+           roomAttendant: {
           id: JSON.parse(value).id,
           firstName: JSON.parse(value).firstName,
           lastName: JSON.parse(value).lastName,
