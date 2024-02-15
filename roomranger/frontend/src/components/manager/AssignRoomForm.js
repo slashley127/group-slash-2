@@ -49,32 +49,10 @@ export default function AssignRoom() {
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === "room") {
-      setAssignedRoom({
-        ...assignedRoom,
-        room: {
-          id: JSON.parse(value).id,
-          roomNumber: JSON.parse(value).roomNumber,
-          roomType: JSON.parse(value).roomType,
-          available: false,
-        },
-        // roomAttendant: {
-        //   id: JSON.parse(value).id,
-        //   firstName: JSON.parse(value).firstName,
-        //   lastName: JSON.parse(value).lastName,
-        //   username: JSON.parse(value).username,
-        //   password: JSON.parse(value).password,
-        //   phoneNumber: JSON.parse(value).phoneNumber,
-        //   email: JSON.parse(value).email,
-        //   notes: JSON.parse(value).notes,
-        // },
-      });
-      return;
-    }
     if (name === "roomAttendant") {
       setAssignedRoom({
         ...assignedRoom,
-           roomAttendant: {
+        roomAttendant: {
           id: JSON.parse(value).id,
           firstName: JSON.parse(value).firstName,
           lastName: JSON.parse(value).lastName,
@@ -89,6 +67,19 @@ export default function AssignRoom() {
     }
     setAssignedRoom({ ...assignedRoom, [name]: value });
   };
+
+  const onRoomNumberChange = (roomNumber) => {
+    const room = rooms.filter((room) => room[1].roomNumber === roomNumber)[0][1]
+    setAssignedRoom({
+      ...assignedRoom,
+      room: {
+        id: room.id,
+        roomNumber: room.roomNumber,
+        roomType: room.roomType,
+        available: false,
+      },
+    })
+  }
 
   const fetchTasks = async () => {
     const tasksResponse = await axios.get('http://localhost:8080/assignedrooms/tasks')
@@ -161,8 +152,8 @@ export default function AssignRoom() {
               <select
                 className="form-control"
                 name="room"
-                value={room}
-                onChange={(e) => onInputChange(e)}
+                value={room.roomNumber}
+                onChange={(e) => onRoomNumberChange(e.target.value)}
               >
                 <option value="" disabled>
                   Select room number
@@ -170,7 +161,7 @@ export default function AssignRoom() {
                 {rooms.map((room) => (
                   <option
                     key={`roomOption${room[1].id}`}
-                    value={JSON.stringify(room[1])}
+                    value={room[1].roomNumber}
                   >
                     {room[1].roomNumber}
                   </option>

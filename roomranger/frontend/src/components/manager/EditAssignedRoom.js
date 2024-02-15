@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 
 export default function EditAssignedRoom() {
     let navigate = useNavigate()
-    const {id} = useParams()
+    const { id } = useParams()
     const [rooms, setRooms] = useState([])
-    // const [roomAttendants, setRoomAttendants] = useState([])
+    const [roomAttendants, setRoomAttendants] = useState([])
     const [tasks, setTasks] = useState([])
     const [statuses, setStatuses] = useState([])
     const [assignedRoom, setAssignedRoom] = useState({
@@ -40,6 +40,7 @@ export default function EditAssignedRoom() {
         fetchTasks();
         fetchStatuses();
         fetchRooms();
+        fetchRoomAttendants();
         loadAssignedRoom();
     }, [])
 
@@ -47,19 +48,35 @@ export default function EditAssignedRoom() {
     const onInputChange = (e) => {
         const { name, value } = e.target;
         if (name === "room") {
-          setAssignedRoom({
-            ...assignedRoom,
-            room: {
-              id: JSON.parse(value).id,
-              roomNumber: JSON.parse(value).roomNumber,
-              roomType: JSON.parse(value).roomType,
-              available: false,
-            },
-          });
-          return room;
+            setAssignedRoom({
+                ...assignedRoom,
+                room: {
+                    id: JSON.parse(value).id,
+                    roomNumber: JSON.parse(value).roomNumber,
+                    roomType: JSON.parse(value).roomType,
+                    available: false,
+                },
+            });
+            return room;
+        }
+        if (name === "roomAttendant") {
+            setAssignedRoom({
+                ...assignedRoom,
+                roomAttendant: {
+                    id: JSON.parse(value).id,
+                    firstName: JSON.parse(value).firstName,
+                    lastName: JSON.parse(value).lastName,
+                    username: JSON.parse(value).username,
+                    password: JSON.parse(value).password,
+                    phoneNumber: JSON.parse(value).phoneNumber,
+                    email: JSON.parse(value).email,
+                    notes: JSON.parse(value).notes,
+                },
+            });
+            return;
         }
         setAssignedRoom({ ...assignedRoom, [name]: value });
-      };
+    };
 
     const fetchTasks = async () => {
         const tasksResponse = await axios.get(`http://localhost:8080/assignedrooms/tasks`)
@@ -75,36 +92,39 @@ export default function EditAssignedRoom() {
 
     const fetchRooms = async () => {
         try {
-          const roomsResponse = await axios.get(`http://localhost:8080/rooms`);
-          const roomsArray = Object.entries(roomsResponse.data);
-          setRooms(roomsArray);
+            const roomsResponse = await axios.get(`http://localhost:8080/rooms`);
+            const roomsArray = Object.entries(roomsResponse.data);
+            setRooms(roomsArray);
         } catch (error) {
-          console.error("Error fetching room numbers", error);
+            console.error("Error fetching room numbers", error);
         }
-      };
+    };
 
-    // const fetchRoomAttendants = async () => {
-    //     const roomAttendantsResponse = await axios.get('http://localhost:8080/manager/roomattendant')
-    //     const roomAttendantsArray = Object.entries(roomAttendantsResponse.data);
-    //     setRoomAttendants(roomAttendantsArray)
-    // }
+    const fetchRoomAttendants = async () => {
+        try {
+          const roomAttendantsResponse = await axios.get("http://localhost:8080/roomAttendant");
+          const roomAttendantsArray = Object.entries(roomAttendantsResponse.data);
+          setRoomAttendants(roomAttendantsArray);
+        } catch (error) {
+          console.error("Error fetching room attendants", error);
+        }
+      }
 
 
 
-
-//REVIEW NEEDED
+    //REVIEW NEEDED
     const onFormSubmit = async (e) => {
         e.preventDefault();
         await axios.put(
             `http://localhost:8080/assignedrooms/assignedroom/${id}`, assignedRoom);
-            navigate("/assignedrooms");
-          };
+        navigate("/assignedrooms");
+    };
 
-          const loadAssignedRoom = async () => {
-            const result = await axios.get(`http://localhost:8080/assignedrooms/assignedroom/${id}`)
-            setAssignedRoom(result.data)
-          }
-//REVIEW NEEDED
+    const loadAssignedRoom = async () => {
+        const result = await axios.get(`http://localhost:8080/assignedrooms/assignedroom/${id}`)
+        setAssignedRoom(result.data)
+    }
+    //REVIEW NEEDED
 
     return (
         <div className='container'>
@@ -114,22 +134,32 @@ export default function EditAssignedRoom() {
                     <form onSubmit={(e) => onFormSubmit(e)}>
                         <div className='mb-3'>
                             <label htmlFor="RoomNumber" className='form-label'>
-                            Room Number: {assignedRoom.room.roomNumber}
-              </label>
-            </div>
-                        <div className='mb-3'>
-                            <label htmlFor="roomAttendant" className='form-label'>
-                                Room Attendant
+                                Room Number: {assignedRoom.room.roomNumber}
                             </label>
-                            <input
-                                type={"text"}
-                                className="form-control"
-                                placeholder="Choose room attendant"
-                                name="roomAttendant"
-                                value={roomAttendant}
-                                onChange={(e) => onInputChange(e)}
-                            />
                         </div>
+                        <div className='mb-3'>
+              <label htmlFor="firstName" className='form-label'>
+                Room Attendant
+              </label>
+              <select
+                className="form-control"
+                name="roomAttendant"
+                value={roomAttendant}
+                onChange={(e) => onInputChange(e)}
+              >
+                <option value="" disabled>
+                  Select room attendant
+                </option>
+                {roomAttendants.map((roomAttendant) => (
+                  <option
+                    key={`roomAttendantOption${roomAttendant[1].id}`}
+                    value={JSON.stringify(roomAttendant[1])}
+                  >
+                    {roomAttendant[1].firstName}
+                  </option>
+                ))}
+              </select>
+            </div>
                         <div className='mb-3'>
                             <label htmlFor="guest" className='form-label'>
                                 Guest
@@ -230,4 +260,4 @@ export default function EditAssignedRoom() {
             </div>
         </div>
     );
-                                }
+}
