@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
+import { format } from 'date-fns';
 
 export default function HomeManager() {
 
@@ -64,8 +65,8 @@ export default function HomeManager() {
                                 <td>{assignedRoom.roomAttendant.firstName}</td>
                                 <td>{assignedRoom.guest}</td>
                                 <td>{assignedRoom.numberOfGuests}</td>
-                                <td>{assignedRoom.checkIn}</td>
-                                <td>{assignedRoom.checkOut}</td>
+                                <td>{format(new Date(assignedRoom.checkIn), 'MMM dd, yyyy')}</td>
+                                <td>{format(new Date(assignedRoom.checkOut), 'MMM dd, yyyy')}</td>
                                 <td>{tasks[assignedRoom.task]}</td>
                                 <td>{assignedRoom.note}</td>
                                 <td style={{ color: statusColors[assignedRoom.status] }}>{statuses[assignedRoom.status]}</td>
