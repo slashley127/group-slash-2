@@ -13,12 +13,12 @@ export default function AssignRoom() {
     room: null,
     roomAttendant: null,
     guest: "",
-    numberOfGuests: 0,
+    numberOfGuests: 1,
     checkIn: "",
     checkOut: "",
     task: "",
     note: "",
-    status: ""
+    status: "NOT_STARTED"
   })
 
   const [assignedRoomError, setAssignedRoomError] = useState("");
@@ -86,14 +86,26 @@ export default function AssignRoom() {
   const fetchTasks = async () => {
     const tasksResponse = await axios.get('http://localhost:8080/assignedrooms/tasks')
     const tasksArray = Object.entries(tasksResponse.data);
+    const tasksOrder = ['STAY_OVER', 'STAY_OVER_FULL_LINEN', 'CHECK_OUT', 'TOUCH_UP'];
+    tasksArray.sort((a, b) => tasksOrder.indexOf(a[0]) - tasksOrder.indexOf(b[0]));
     setTasks(tasksArray)
   }
 
   const fetchStatuses = async () => {
     const statusesResponse = await axios.get('http://localhost:8080/assignedrooms/statuses')
     const statusesArray = Object.entries(statusesResponse.data);
+    const statusOrder = ['NOT_STARTED', 'IN_PROGRESS', 'SERVICE_REFUSED', 'READY', 'INSPECTED'];
+
+    statusesArray.sort((a, b) => statusOrder.indexOf(a[0]) - statusOrder.indexOf(b[0]));
     setStatuses(statusesArray)
   }
+  const statusColors = {
+    'NOT_STARTED': 'red',
+    'IN_PROGRESS': 'blue',
+    'SERVICE_REFUSED' : 'black',
+    'READY': 'green',
+    'INSPECTED': 'magenta'
+  };
 
   const fetchRooms = async () => {
     try {
@@ -217,6 +229,7 @@ export default function AssignRoom() {
                 name="numberOfGuests"
                 value={numberOfGuests}
                 onChange={(e) => onInputChange(e)}
+                min="1"
               />
             </div>
             <div className='mb-3'>
@@ -282,7 +295,7 @@ export default function AssignRoom() {
                 onChange={(e) => onInputChange(e)}>
                 <option value="" disabled>Select cleaning status</option>
                 {statuses.map(([name, displayName]) => (
-                  <option key={name} value={name}>{displayName}</option>
+                  <option key={name} value={name} style={{ color: statusColors[name] }}>{displayName}</option>
                 ))}
               </select>
             </div>

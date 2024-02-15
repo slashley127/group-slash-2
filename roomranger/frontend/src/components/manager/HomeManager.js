@@ -23,7 +23,13 @@ export default function HomeManager() {
         setAssignedRooms(result.data);
     }
 
-
+    const statusColors = {
+        'NOT_STARTED': 'red',
+        'IN_PROGRESS': 'blue',
+        'SERVICE_REFUSED' : 'black',
+        'READY': 'green',
+        'INSPECTED': 'magenta'
+      };
     // const deleteRoom = async (id) => {
     //     await axios.delete('http://localhost:8080/assignedrooms/${id}')
     //     loadAssignedRooms();
@@ -62,7 +68,7 @@ export default function HomeManager() {
                                 <td>{assignedRoom.checkOut}</td>
                                 <td>{tasks[assignedRoom.task]}</td>
                                 <td>{assignedRoom.note}</td>
-                                <td>{statuses[assignedRoom.status]}</td>
+                                <td style={{ color: statusColors[assignedRoom.status] }}>{statuses[assignedRoom.status]}</td>
                                 <td>
                                     {/* <Link className='btn btn-primary mx-2' to={`assignedrooms/viewassignedroom/${assignedRoom.id}`}>View</Link> */}
                                     <Link className='btn btn-outline-primary mx-2' to={`/assignedrooms/editassignedroom/${assignedRoom.id}`}>Edit</Link>

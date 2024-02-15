@@ -80,18 +80,29 @@ export default function EditAssignedRoom() {
         })
       }
 
-    const fetchTasks = async () => {
-        const tasksResponse = await axios.get(`http://localhost:8080/assignedrooms/tasks`)
+      const fetchTasks = async () => {
+        const tasksResponse = await axios.get('http://localhost:8080/assignedrooms/tasks')
         const tasksArray = Object.entries(tasksResponse.data);
+        const tasksOrder = ['STAY_OVER', 'STAY_OVER_FULL_LINEN', 'CHECK_OUT', 'TOUCH_UP'];
+        tasksArray.sort((a, b) => tasksOrder.indexOf(a[0]) - tasksOrder.indexOf(b[0]));
         setTasks(tasksArray)
-    }
+      }
 
-    const fetchStatuses = async () => {
-        const statusesResponse = await axios.get(`http://localhost:8080/assignedrooms/statuses`)
+      const fetchStatuses = async () => {
+        const statusesResponse = await axios.get('http://localhost:8080/assignedrooms/statuses')
         const statusesArray = Object.entries(statusesResponse.data);
+        const statusOrder = ['NOT_STARTED', 'IN_PROGRESS', 'SERVICE_REFUSED', 'READY', 'INSPECTED'];
+    
+        statusesArray.sort((a, b) => statusOrder.indexOf(a[0]) - statusOrder.indexOf(b[0]));
         setStatuses(statusesArray)
-    }
-
+      }
+      const statusColors = {
+        'NOT_STARTED': 'red',
+        'IN_PROGRESS': 'blue',
+        'SERVICE_REFUSED' : 'black',
+        'READY': 'green',
+        'INSPECTED': 'magenta'
+      };
     const fetchRooms = async () => {
         try {
             const roomsResponse = await axios.get(`http://localhost:8080/rooms`);
