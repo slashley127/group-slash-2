@@ -1,15 +1,11 @@
 package org.launchcode.roomranger.data;
 
 import org.launchcode.roomranger.models.User;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
+public interface UserRepository extends JpaRepository<User, Integer> {
 
-@Repository
-public interface UserRepository extends CrudRepository<User, Integer> {
-
-    User findByUsername(String username);
+       boolean existsByUsername(String username);
 
 
 }
