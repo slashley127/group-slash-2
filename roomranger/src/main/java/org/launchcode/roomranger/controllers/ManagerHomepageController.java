@@ -113,8 +113,8 @@ import java.util.Optional;
                             assignedRoom.getNote())
             );
             System.err.println("Assigned Room: " + _assignedRoom.toString());
-            Room _room = roomRepository.save(assignedRoom.getRoom());
-            RoomAttendant _roomAttendant = roomAttendantRepository.save(assignedRoom.getRoomAttendant());
+//            Room _room = roomRepository.save(assignedRoom.getRoom());
+//            RoomAttendant _roomAttendant = roomAttendantRepository.save(assignedRoom.getRoomAttendant());
             return new ResponseEntity<>(_assignedRoom, HttpStatus.CREATED);
 
         }
