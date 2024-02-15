@@ -10,8 +10,8 @@ export default function AssignRoom() {
   const [tasks, setTasks] = useState([])
   const [statuses, setStatuses] = useState([])
   const [assignedRoom, setAssignedRoom] = useState({
-    room: "",
-    roomAttendant: "",
+    room: null,
+    roomAttendant: null,
     guest: "",
     numberOfGuests: 0,
     checkIn: "",
@@ -49,22 +49,6 @@ export default function AssignRoom() {
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
-    // if (name === "roomAttendant") {
-    //   setAssignedRoom({
-    //     ...assignedRoom,
-    //     roomAttendant: {
-    //       id: JSON.parse(value).id,
-    //       firstName: JSON.parse(value).firstName,
-    //       lastName: JSON.parse(value).lastName,
-    //       username: JSON.parse(value).username,
-    //       password: JSON.parse(value).password,
-    //       phoneNumber: JSON.parse(value).phoneNumber,
-    //       email: JSON.parse(value).email,
-    //       notes: JSON.parse(value).notes,
-    //     },
-    //   });
-    //   return;
-    // }
     setAssignedRoom({ ...assignedRoom, [name]: value });
   };
 
@@ -80,7 +64,6 @@ export default function AssignRoom() {
       },
     })
   }
-
 
   const onRoomAttendantNameChange = (firstName) => {
     const roomAttendant = roomAttendants.filter((roomAttendant) => roomAttendant[1].firstName === firstName)[0][1]
@@ -171,7 +154,7 @@ export default function AssignRoom() {
               <select
                 className="form-control"
                 name="room"
-                value={room.roomNumber}
+                value={room?.roomNumber || ""}
                 onChange={(e) => onRoomNumberChange(e.target.value)}
               >
                 <option value="" disabled>
@@ -194,7 +177,7 @@ export default function AssignRoom() {
               <select
                 className="form-control"
                 name="roomAttendant"
-                value={roomAttendant.firstName}
+                value={roomAttendant?.firstName || ""}
                 onChange={(e) => onRoomAttendantNameChange(e.target.value)}
               >
                 <option value="" disabled>
