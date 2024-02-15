@@ -138,7 +138,7 @@ export default function AssignRoom() {
     try {
       const response = await axios.post(
         "http://localhost:8080/assignedrooms/create",
-        JSON.stringify(assignedRoom),
+        assignedRoom,
         {
           headers: {
             "Content-Type": "application/json",

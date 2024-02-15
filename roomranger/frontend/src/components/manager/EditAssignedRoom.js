@@ -47,36 +47,38 @@ export default function EditAssignedRoom() {
 
     const onInputChange = (e) => {
         const { name, value } = e.target;
-        if (name === "room") {
-            setAssignedRoom({
-                ...assignedRoom,
-                room: {
-                    id: JSON.parse(value).id,
-                    roomNumber: JSON.parse(value).roomNumber,
-                    roomType: JSON.parse(value).roomType,
-                    available: false,
-                },
-            });
-            return room;
-        }
-        if (name === "roomAttendant") {
-            setAssignedRoom({
-                ...assignedRoom,
-                roomAttendant: {
-                    id: JSON.parse(value).id,
-                    firstName: JSON.parse(value).firstName,
-                    lastName: JSON.parse(value).lastName,
-                    username: JSON.parse(value).username,
-                    password: JSON.parse(value).password,
-                    phoneNumber: JSON.parse(value).phoneNumber,
-                    email: JSON.parse(value).email,
-                    notes: JSON.parse(value).notes,
-                },
-            });
-            return;
-        }
         setAssignedRoom({ ...assignedRoom, [name]: value });
-    };
+      };
+    
+      const onRoomNumberChange = (roomNumber) => {
+        const room = rooms.filter((room) => room[1].roomNumber === roomNumber)[0][1]
+        setAssignedRoom({
+          ...assignedRoom,
+          room: {
+            id: room.id,
+            roomNumber: room.roomNumber,
+            roomType: room.roomType,
+            available: false,
+          },
+        })
+      }
+
+      const onRoomAttendantNameChange = (firstName) => {
+        const roomAttendant = roomAttendants.filter((roomAttendant) => roomAttendant[1].firstName === firstName)[0][1]
+        setAssignedRoom({
+          ...assignedRoom,
+          roomAttendant: {
+            id: roomAttendant.id,
+            firstName: roomAttendant.firstName,
+            lastName: roomAttendant.lastName,
+            username: roomAttendant.username,
+            password: roomAttendant.password,
+            phoneNumber: roomAttendant.phoneNumber,
+            email: roomAttendant.email,
+            notes: roomAttendant.notes,
+          },
+        })
+      }
 
     const fetchTasks = async () => {
         const tasksResponse = await axios.get(`http://localhost:8080/assignedrooms/tasks`)
@@ -144,8 +146,8 @@ export default function EditAssignedRoom() {
               <select
                 className="form-control"
                 name="roomAttendant"
-                value={roomAttendant}
-                onChange={(e) => onInputChange(e)}
+                value={roomAttendant.firstName}
+                onChange={(e) => onRoomAttendantNameChange(e.target.value)}
               >
                 <option value="" disabled>
                   Select room attendant
@@ -153,7 +155,7 @@ export default function EditAssignedRoom() {
                 {roomAttendants.map((roomAttendant) => (
                   <option
                     key={`roomAttendantOption${roomAttendant[1].id}`}
-                    value={JSON.stringify(roomAttendant[1])}
+                    value={roomAttendant[1].firstName}
                   >
                     {roomAttendant[1].firstName}
                   </option>
