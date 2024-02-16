@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './LoginPage.css';
 import { FaCircleUser, FaLock   } from "react-icons/fa6";
-import ManagerHomePage from '../ManagerHomePage';
+//import ManagerHomePage from '../ManagerHomePage';
 import { useNavigate } from 'react-router-dom';
 
 
