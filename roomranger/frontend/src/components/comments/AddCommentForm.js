@@ -51,10 +51,10 @@ export default function AddCommentForm({ assignRoomId }) {
   return (
     <div>
       <div className='mt-5'>
-        <textarea style={{ width: "100%", borderRadius: "0.5em" }}
+        <textarea style={{ width: "100%", borderRadius: "0.5em" }} value={text}
           onChange={(e) => addComment(e.target.value)}>
         </textarea>
-        <Button variant="outline-secondary" onClick={() => submitComment()}>Post Comment</Button>
+        <Button variant="outline-primary" onClick={() => submitComment()} disabled={!text}>Post Comment</Button>
       </div>
       <div className="mt-5">
         <h2>Comments</h2>
