@@ -20,21 +20,17 @@ import LoginPage from './components/loginPage/LoginPage';
 import ErrorComponent from './components/ErrorComponent';
 
 import RouteHome from './components/Route';
-// import HomeRoom from './components/rooms/HomeRoom';
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import AddRoom from './components/rooms/AddRoom';
-// import EditRoom from './components/rooms/EditRoom';
-// import ViewRoom from './components/rooms/ViewRoom';
-// // import HomeAttendant from './components/attendantRolePage/HomeAttendant';
+ import HomeRoom from './components/rooms/HomeRoom';
+ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+ import AddRoom from './components/rooms/AddRoom';
+ import EditRoom from './components/rooms/EditRoom';
+ import ViewRoom from './components/rooms/ViewRoom';
+ // import HomeAttendant from './components/attendantRolePage/HomeAttendant';
 // import LeaveList from './components/leaveRequest/LeaveList';
 import LeaveForm from './components/leaveRequest/LeaveForm';
 import LeaveList from './components/leaveRequest/LeaveList';
 import EditRequest from './components/leaveRequest/EditRequest';
 //import AssignRoom from './components/manager/AssignRoom';
-// import Login from './components/users/Login';
-// import Home from './components/pages/Home';
-// import Register from './components/users/Register';
-// import HomeNav from './components/layout/Navbar';
 
 
 function App() {
@@ -50,7 +46,6 @@ function App() {
            </Route> */}
           {/* </Route> */}
           <Route path='/' element={<RouteHome />}>
-            {/* <Route index element={<Register />} /> */}
             <Route path='login' element={<LoginPage />} />
           </Route>
           <Route path="/landing" element={<NavBar />}>
