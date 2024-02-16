@@ -24,7 +24,6 @@ public class User {
     @Size(min = 2, max = 40, message = "Last name must be between 2 and 40 characters")
     private String lastName;
 
-
     private String email;
 
     @Column(nullable = false)
@@ -89,6 +88,7 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
 
 
     public String getConfirmPassword() {
