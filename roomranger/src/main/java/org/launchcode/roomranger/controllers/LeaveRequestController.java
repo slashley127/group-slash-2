@@ -44,9 +44,10 @@ public class LeaveRequestController {
         int remainingDays = newLeave.getRoomAttendant().getRemainingDays();
         if (remainingDays < newLeave.getDuration() || remainingDays <= 0)
             throw new RuntimeException("You do not have sufficient leave balance");
-//        int remainingDays = newLeave.getRemainingDays() - duration;
-//        newLeave.setRemainingDays(remainingDays);
-        newLeave.setStatus("PENDING");
+        if (newLeave.getStartDate().isAfter(newLeave.getEndDate())){
+            throw new RuntimeException("Your End Date is After Start Date!");
+        }
+        newLeave.setStatus("Pending");
         newLeave.setSubmittedDate(LocalDate.now());
         return leaveRequestRepository.save(newLeave);
     }
@@ -55,7 +56,7 @@ public class LeaveRequestController {
     public ResponseEntity<?> approveLeaveRequest(@PathVariable int id) {
         LeaveRequest leaveRequest = leaveRequestRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Leave Request with id " + id));
-        if (leaveRequest.getStatus().equals("APPROVED") || leaveRequest.getStatus().equals("REJECTED")) {
+        if (leaveRequest.getStatus().equals("Approved") || leaveRequest.getStatus().equals("Rejected")) {
             throw new RuntimeException("The leave request has been processed!");
         }
         int remainingDays = leaveRequest.getRoomAttendant().getRemainingDays();
@@ -63,7 +64,7 @@ public class LeaveRequestController {
             throw new RuntimeException("You do not have sufficient leave balance");
         }
         leaveRequest.getRoomAttendant().setRemainingDays(remainingDays - leaveRequest.getDuration());
-        leaveRequest.setStatus("APPROVED");
+        leaveRequest.setStatus("Approved");
         leaveRequestRepository.save(leaveRequest);
         return ResponseEntity.ok().build();
     }
@@ -72,10 +73,10 @@ public class LeaveRequestController {
     public ResponseEntity<?> rejectLeaveRequest(@PathVariable int id) {
         LeaveRequest leaveRequest = leaveRequestRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Leave Request with id " + id));
-        if (leaveRequest.getStatus().equals("APPROVED") || leaveRequest.getStatus().equals("REJECTED")) {
+        if (leaveRequest.getStatus().equals("Approved") || leaveRequest.getStatus().equals("Rejected")) {
             throw new RuntimeException("The leave request has been processed!");
         }
-        leaveRequest.setStatus("REJECTED");
+        leaveRequest.setStatus("Rejected");
         leaveRequestRepository.save(leaveRequest);
         return ResponseEntity.ok().build();
     }

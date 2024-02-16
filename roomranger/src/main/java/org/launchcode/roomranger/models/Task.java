@@ -1,6 +1,6 @@
 package org.launchcode.roomranger.models;
 
-public enum CleaningTask {
+public enum Task {
     CHECKOUT("Check-out Cleaning"),
     STAYOVER("Stay-over Cleaning"),
     //Conducted periodically to address areas that may not be cleaned during regular cleanings.
@@ -13,7 +13,7 @@ public enum CleaningTask {
     COVID("COVID-19 Cleaning Protocols");
     private final String displayName;
 
-    CleaningTask(String displayName) {
+    Task(String displayName) {
         this.displayName = displayName;
     }
 

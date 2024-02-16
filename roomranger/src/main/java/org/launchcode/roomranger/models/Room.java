@@ -1,8 +1,6 @@
 package org.launchcode.roomranger.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -35,8 +33,8 @@ public class Room extends AbstractEntity{
 //    private int numberOfGuests;
 //    private LocalDate checkinDate;
 //    private LocalDate checkoutDate;
-//    @OneToMany(mappedBy = "room")
-//    private List<Comment> comments = new ArrayList<>();
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Comment> comments = new ArrayList<>();
 
     public Room() {
     }
@@ -63,10 +61,11 @@ public class Room extends AbstractEntity{
         this.roomNumber = roomNumber;
     }
 
-    public Room(String roomNumber, Type roomType, boolean available) {
+    public Room(String roomNumber, Type roomType, boolean available, List<Comment> comments) {
         this.roomNumber = roomNumber;
         this.roomType = roomType;
         this.available = available;
+        this.comments = comments;
     }
 
     public String getRoomNumber() {
@@ -166,13 +165,13 @@ public class Room extends AbstractEntity{
 //        this.checkoutDate = checkoutDate;
 //    }
 //
-//    public List<Comment> getComments() {
-//        return comments;
-//    }
-//
-//    public void setComments(List<Comment> comments) {
-//        this.comments = comments;
-//    }
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     @Override
     public String toString() {

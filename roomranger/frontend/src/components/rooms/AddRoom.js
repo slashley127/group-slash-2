@@ -33,7 +33,8 @@ export default function AddRoom() {
     const onFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post("http://localhost:8080/rooms/room", room);
+            const response = await axios.post("http://localhost:8080/rooms/room", room);
+            // console.log("~~~~~~" + response.data.propertyName)
             navigate("/landing/rooms");  //navigate to the rooms home page
         }
         catch (error) {
@@ -66,7 +67,7 @@ export default function AddRoom() {
                             <label htmlFor='RoomType' className='form-label'>
                                 Room Type
                             </label>
-                            <select name='roomType' value={room.roomType} onChange={onInputChange}>
+                            <select name='roomType' value={room.roomType} onChange={onInputChange} required>
                                 <option value="" disabled>Select a type</option>
                                 {/* destructuring assignment  */}
                                 {types.map(([name, displayName]) => (

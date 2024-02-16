@@ -35,28 +35,7 @@ export default function LeaveForm({firstname = "Luna", lastname = "Liu"}) {
         // const{remainingDays, duration} = leaveRequest;
         // setLeaveRequest({...leaveRequest,remainingDays: remainingDays - duration});
     }
-    // const calculateRemainingDays = () =>{
-    //     const{startDate,endDate,remainingDays} = leaveRequest;
-    //     const totalWorkDays = differenceInDays(endDate,startDate) + 1;
-    //     const totalWeekendDays = Array.from({length: totalWorkDays}).filter((_,index) =>{
-    //         const currentDate = addDays(startDate,index);
-    //         return isWeekend(currentDate);
-    //     }).length;
-    //     const totalHolidays = Array.from({ length: totalWorkDays }).filter((_, index) => {
-    //         const currentDate = addDays(startDate, index);
-    //         return isHoliday(currentDate); // 假设你有一个判断日期是否是节假日的函数
-    //     }).length;
-    //     const totalWorkDaysExcludeWeekendsAndHolidays = totalWorkDays - totalWeekendDays - totalHolidays;
-    //      remainingDays = remainingDays - totalWorkDaysExcludeWeekendsAndHolidays;
-    //      return remainingDays;
-    // }
-    // function getSubmissionTimeStamp(){
-    //     this.today = new Date();
-    //     const date = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
-    //     const time = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
-    //     const dateTime = `${data} / ${time}`;
-    //     return dateTime;
-    // }
+  
     const onInputChange =(e)=>{
         const{name,value} = e.target;
         console.log("^^^^", name, value, typeof value);
@@ -131,7 +110,7 @@ export default function LeaveForm({firstname = "Luna", lastname = "Liu"}) {
                                 className="form-control"
                                 name="startDate"
                                 value={leaveRequest.startDate}
-                                onChange={onInputChange} />
+                                onChange={onInputChange} required/>
                         </div>
                         <div className="col">
                             <label className="form-label">End date<small className="text-muted">
@@ -141,7 +120,7 @@ export default function LeaveForm({firstname = "Luna", lastname = "Liu"}) {
                                 className="form-control"
                                 name="endDate"
                                 value={leaveRequest.endDate}
-                                onChange={onInputChange} />
+                                onChange={onInputChange} required/>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -152,7 +131,7 @@ export default function LeaveForm({firstname = "Luna", lastname = "Liu"}) {
                                 className="form-control"
                                 name="reason" 
                                 value={leaveRequest.reason}
-                                onChange={onInputChange}/>
+                                onChange={onInputChange} required/>
                         </div>
                     </div>
                     <button type='submit' className='btn btn-outline-primary'>Submit</button>

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Link, UNSAFE_LocationContext, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function LeaveList() {
   const [leaveList, setLeaveList] = useState([]);
@@ -28,7 +28,7 @@ export default function LeaveList() {
   //for manager to approve leave request
   const approve = async (id) => {
     try {
-       await axios.put(`http://localhost:8080/leave/${id}/approve`);
+      await axios.put(`http://localhost:8080/leave/${id}/approve`);
       alert("You have approved this leave request!")
       setRefreshId(Symbol());
       console.log(refreshId);
@@ -49,13 +49,13 @@ export default function LeaveList() {
     }
 
   }
-  function getStatusColor(status) {
+  const getStatusColor = (status) => {
     switch (status) {
-      case 'APPROVED':
+      case 'Approved':
         return 'green';
-      case 'PENDING':
+      case 'Pending':
         return 'orange';
-      case 'REJECTED':
+      case 'Rejected':
         return 'red';
       default:
         return 'black';
@@ -91,7 +91,7 @@ export default function LeaveList() {
                   <td>{leaveRequest.endDate}</td>
                   <td>{leaveRequest.duration}</td>
                   <td>{leaveRequest.reason}</td>
-                  <td style={{ color: getStatusColor(leaveRequest.status) }}>{leaveRequest.status}</td>
+                  <td style={{ backgroundColor: getStatusColor(leaveRequest.status) }}>{leaveRequest.status}</td>
                   <td>
                     <button className='btn btn-primary mx-2' onClick={() => approve(leaveRequest.id)}>Approve</button>
                     <button className='btn btn-danger mx-2' onClick={() => reject(leaveRequest.id)}>Reject</button>

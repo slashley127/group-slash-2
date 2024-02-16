@@ -1,21 +1,25 @@
 package org.launchcode.roomranger.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
-public class Comment extends AbstractEntity{
+public class Comment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @JsonIgnore
     @ManyToOne
     private Room room;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User createdBy;
 
-    private LocalDate createdDate;
+    private LocalDateTime createdDate;
     @Column(columnDefinition = "TEXT")
     private String text;
 
@@ -25,6 +29,14 @@ public class Comment extends AbstractEntity{
         this.room = room;
         this.createdBy = createdBy;
         this.text = text;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Comment(String text) {
@@ -47,11 +59,11 @@ public class Comment extends AbstractEntity{
         this.createdBy = createdBy;
     }
 
-    public LocalDate getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(LocalDate createdDate) {
+    public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
 

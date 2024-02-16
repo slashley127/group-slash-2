@@ -63,7 +63,7 @@ public class RoomAttendantController {
         updatedroomAttendant.setPronoun(newRoomAttendant.getPronoun());
         updatedroomAttendant.setPhoneNumber(newRoomAttendant.getPhoneNumber());
         updatedroomAttendant.setEmail(newRoomAttendant.getEmail());
-        updatedroomAttendant.setWorkingDays(newRoomAttendant.getWorkingDays());
+//        updatedroomAttendant.setWorkingDays(newRoomAttendant.getWorkingDays());
         updatedroomAttendant.setUsername(newRoomAttendant.getUsername());
         updatedroomAttendant.setPassword(newRoomAttendant.getPassword());
         updatedroomAttendant.setNotes(newRoomAttendant.getNotes());

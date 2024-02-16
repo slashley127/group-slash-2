@@ -1,6 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import AddCommentForm from '../comments/AddCommentForm';
+import CommentList from '../comments/CommentList';
+import { Button } from 'react-bootstrap';
 
 export default function EditRoom() {
     let navigate = useNavigate();
@@ -96,6 +99,8 @@ export default function EditRoom() {
                     </form>
                 </div>
             </div>
+            <CommentList roomId={room.id} />
+            <AddCommentForm roomId={room.id} />
         </div>
     )
 }

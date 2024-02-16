@@ -28,39 +28,28 @@ public class RoomAttendant  extends AbstractEntity{
     private String username;
     @Column(unique = true, length = 15)
     private String password;
-    @ManyToOne
-    private Manager manager;
-    @OneToOne(cascade = CascadeType.ALL)
-    private RoomAttendantUser roomAttendantUser;
+//    @ManyToOne
+//    private Manager manager;
     private String pronoun;
     @Size(max=10)
     private String phoneNumber;
     @OneToMany(mappedBy = "roomAttendant")
     private List<LeaveRequest> leaveList = new ArrayList<>();
 
-    public void setWorkingDays(String workingDays) {
-        this.workingDays = workingDays;
-    }
+//    public void setWorkingDays(String workingDays) {
+//        this.workingDays = workingDays;
+//    }
 
-    public String getWorkingDays() {
-        return workingDays;
-    }
+//    public String getWorkingDays() {
+//        return workingDays;
+//    }
 
-    private String workingDays ;
+//    private String workingDays ;
     @Column(unique = true)
     private String email;
     private String notes;
     private int remainingDays = 20;
 
-//    private String profilePic;
-
-//    public String getProfilePic() {
-//        return profilePic;
-//    }
-
-//    public void setProfilePic(String profilePic) {
-//        this.profilePic = profilePic;
-//    }
     public String getFirstName() {return firstName;}
 
     public void setFirstName(String firstName) {this.firstName = firstName;}
@@ -104,13 +93,9 @@ public class RoomAttendant  extends AbstractEntity{
     public void setEmail(String email) {
         this.email = email;
     }
-    public Manager getManager() {return manager;}
-
-    public void setManager(Manager manager) {this.manager = manager;}
-
-    public RoomAttendantUser getRoomAttendantUser() {return roomAttendantUser;}
-
-    public void setRoomAttendantUser(RoomAttendantUser roomAttendantUser) {this.roomAttendantUser = roomAttendantUser;}
+//    public Manager getManager() {return manager;}
+//
+//    public void setManager(Manager manager) {this.manager = manager;}
 
     public String getPronoun() {return pronoun;}
 
@@ -125,16 +110,15 @@ public class RoomAttendant  extends AbstractEntity{
         this.id = id;
     }
 
-    public RoomAttendant (String firstName, String lastName, String email, String phoneNumber, String workingDays, String username, String password, RoomAttendantUser roomAttendantUser, String notes) {
+    public RoomAttendant (String firstName, String lastName, String email, String phoneNumber, String username, String password,String notes) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email= email;
         this.phoneNumber= phoneNumber;
-        this.workingDays = workingDays;
+//        this.workingDays = workingDays;
         this.username= username;
         this.password=password;
-        this.roomAttendantUser=roomAttendantUser;
         this.notes=notes;
     }
 

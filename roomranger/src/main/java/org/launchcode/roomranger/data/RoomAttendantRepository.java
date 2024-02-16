@@ -14,7 +14,7 @@ import java.util.Optional;
 @Repository
 public interface RoomAttendantRepository extends CrudRepository<RoomAttendant, Integer> {
     @NotNull List<RoomAttendant> findAll();
-    List<RoomAttendant> findAllByManager(Manager manager);
+//    List<RoomAttendant> findAllByManager(Manager manager);
     RoomAttendant findById(int id);
 
 }

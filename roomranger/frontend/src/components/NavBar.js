@@ -17,9 +17,6 @@ export default function NavBar() {
                         {/* <Link className="nav-link" aria-current="page" to="/attendant">Rooms</Link> */}
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Assign Room</a>
-                    </li>
-                    <li className="nav-item">
                         <Link className="nav-link" aria-current="page" to="/landing/attendants">Room Attendant</Link>
                     </li>
                     <li className="nav-item">

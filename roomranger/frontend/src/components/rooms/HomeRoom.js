@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams} from 'react-router-dom';
 
 export default function HomeRoom() {
   const [rooms, setRooms] = useState([]);
@@ -17,14 +17,14 @@ export default function HomeRoom() {
     setTypes(typesResponse.data);
     // console.log(typesResponse.data);
     const roomsResponse = await axios.get("http://localhost:8080/rooms")
+    console.log("******" ,roomsResponse.data)
     setRooms(roomsResponse.data);
   }
 
   const deletRoom = async(id) =>{
    
     const response = await axios.delete(`http://localhost:8080/rooms/room/${id}`);
-    alert (response.data);
-    // alert(`Room with room ID ${id} has been deleted successfully!`)
+    alert (response.data); // alert(`Room with number '' has been deleted successfully!`)
     loadRooms();
   }
 
