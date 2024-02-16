@@ -1,11 +1,11 @@
 package org.launchcode.roomranger.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,6 +13,10 @@ import java.util.List;
 
 @Entity
 public class Room extends AbstractEntity{
+
+    @OneToOne(mappedBy = "room", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private AssignedRoom assignedRoom;
 
     @Size(min = 4,max = 4, message = "Please give a 4 digits number for Room number!")
     @NotBlank(message = "Give a Room Number!")
@@ -37,7 +41,6 @@ public class Room extends AbstractEntity{
 //    private LocalDate checkoutDate;
 //    @OneToMany(mappedBy = "room")
 //    private List<Comment> comments = new ArrayList<>();
-
     public Room() {
     }
 
@@ -59,6 +62,7 @@ public class Room extends AbstractEntity{
 //        this.comments = comments;
 //    }
 
+
     public Room(String roomNumber) {
         this.roomNumber = roomNumber;
     }
@@ -68,6 +72,14 @@ public class Room extends AbstractEntity{
         this.roomType = roomType;
         this.available = available;
     }
+
+//    public AssignedRoom getAssignedRoom() {
+//        return assignedRoom;
+//    }
+//
+//    public void setAssignedRoom(AssignedRoom assignedRoom) {
+//        this.assignedRoom = assignedRoom;
+//    }
 
     public String getRoomNumber() {
         return roomNumber;
@@ -178,4 +190,5 @@ public class Room extends AbstractEntity{
     public String toString() {
         return roomNumber;
     }
+
 }

@@ -1,6 +1,6 @@
 package org.launchcode.roomranger.data;
 
-import org.jetbrains.annotations.NotNull;
+import jakarta.validation.constraints.NotNull;
 import org.launchcode.roomranger.models.Manager;
 import org.launchcode.roomranger.models.RoomAttendant;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,7 +13,8 @@ import java.util.Optional;
 
 @Repository
 public interface RoomAttendantRepository extends CrudRepository<RoomAttendant, Integer> {
-    @NotNull List<RoomAttendant> findAll();
+    @NotNull
+    List<RoomAttendant> findAll();
     List<RoomAttendant> findAllByManager(Manager manager);
     RoomAttendant findById(int id);
 

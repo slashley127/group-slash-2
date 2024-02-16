@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<meta charset="UTF-8 /">
+<head th:replace="fragments :: head"></head>
+<nav th:replace = "~{fragments :: manager-nav}"></nav>
+</head>
+<body class = "container">
+
+<main>
+    <h1>DELETE ASSIGNED ROOMS</h1>
+<form action="/manager/delete" method="post">
+    <table class="table table-striped">
+        <tr th:each="assignedRoom : ${assignedRoom}">
+            <td>
+            <label>
+                <input type="checkbox" name="assignedRoomId" th:value="${assignedRoom.id}" />
+                    <span th:text="${assignedRoom.room.roomNumber} + ' |'"></span>
+                    <span th:text="${assignedRoom.guest} + ' |'"></span>
+                    <span th:text="${assignedRoom.status.displayName} + ' |'"></span>
+                    <span th:text="${assignedRoom.task.displayName} + ' |'"></span>
+            </label>
+            </td>
+        </tr>
+    </table>
+    <button class="delete" type="submit">Delete Assigned Room</button>
+</form>
+</main>
+</body>
+</html>
