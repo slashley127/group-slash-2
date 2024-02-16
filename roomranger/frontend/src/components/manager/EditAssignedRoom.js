@@ -135,7 +135,6 @@ export default function EditAssignedRoom() {
     };
 
     const loadAssignedRoom = async () => {
-      console.log("~~~~~****",id)
         const result = await axios.get(`http://localhost:8080/assignedrooms/assignedroom/${id}`)
         setAssignedRoom(result.data)
     }
@@ -273,7 +272,6 @@ export default function EditAssignedRoom() {
                     </form>
                 </div>
             </div>
-            {/* <CommentList assignedRoomId={assignedRoom.room.id} /> */}
             <AddCommentForm assignRoomId={id} />
         </div>
     );

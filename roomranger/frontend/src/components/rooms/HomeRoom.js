@@ -17,7 +17,7 @@ export default function HomeRoom() {
     setTypes(typesResponse.data);
     // console.log(typesResponse.data);
     const roomsResponse = await axios.get("http://localhost:8080/rooms")
-    console.log("******" ,roomsResponse.data)
+    // console.log("******" ,roomsResponse.data)
     setRooms(roomsResponse.data);
   }
 
@@ -53,9 +53,9 @@ export default function HomeRoom() {
                   <td>{types[room.roomType]}</td>
                   <td>{room.available ? "Yes" : "No"}</td>
                   <td>
-                    <Link className='btn btn-primary mx-2' to={`/landing/rooms/viewroom/${room.id}`}>View</Link>
+                    <Link className='btn btn-outline-success mx-2' to={`/landing/rooms/viewroom/${room.id}`}>View</Link>
                     <Link className='btn btn-outline-primary mx-2' to={`/landing/rooms/editroom/${room.id}`}>Edit</Link>
-                    <button className='btn btn-danger mx-2' onClick={()=> deletRoom(room.id)}>Delete</button>
+                    <button className='btn btn-outline-danger mx-2' onClick={()=> deletRoom(room.id)}>Delete</button>
                   </td>
                 </tr>
               ))

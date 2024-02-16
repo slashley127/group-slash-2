@@ -93,8 +93,8 @@ export default function LeaveList() {
                   <td>{leaveRequest.reason}</td>
                   <td style={{ backgroundColor: getStatusColor(leaveRequest.status) }}>{leaveRequest.status}</td>
                   <td>
-                    <button className='btn btn-primary mx-2' onClick={() => approve(leaveRequest.id)}>Approve</button>
-                    <button className='btn btn-danger mx-2' onClick={() => reject(leaveRequest.id)}>Reject</button>
+                    <button className='btn btn-outline-primary mx-2' onClick={() => approve(leaveRequest.id)}>Approve</button>
+                    <button className='btn btn-outline-danger mx-2' onClick={() => reject(leaveRequest.id)}>Reject</button>
                     {/* <Link className='btn btn-outline-primary mx-2' to={`/landing/leave/edit/${leaveRequest.id}`}>Edit</Link> */}
                   </td>
                 </tr>
