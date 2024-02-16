@@ -1,6 +1,8 @@
 package org.launchcode.roomranger.models;
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class AssignedRoom extends AbstractEntity {
@@ -10,30 +12,31 @@ public class AssignedRoom extends AbstractEntity {
 //    @Valid
     private Room room;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "room_attendant_id")
+    @ManyToOne
 //    @Valid
     private RoomAttendant roomAttendant;
 
-    //    @Size(min = 2, max = 30, message = "Name of Guest must be 2-30 characters long")
+//    @Size(min = 2, max = 30, message = "Name of Guest must be 2-30 characters long")
     private String guest;
 
-    //    @Min(value = 1, message = "Number of Guests must be between 1-5")
+//    @Min(value = 1, message = "Number of Guests must be between 1-5")
 //    @Max(value = 5, message = "Number of Guests must be between 1-5")
     private int numberOfGuests;
 
-    //    @NotNull(message = "Status is Required")
+//    @NotNull(message = "Status is Required")
     private Status status;
 
-    //    @NotNull(message = "CheckIn Date is Required")
+//    @NotNull(message = "CheckIn Date is Required")
     private LocalDate checkIn;
 
-    //    @NotNull(message = "CheckOut Date is Required")
+//    @NotNull(message = "CheckOut Date is Required")
     private LocalDate checkOut;
 
-    //    @NotNull(message = "Task is Required")
+//    @NotNull(message = "Task is Required")
     private Task task;
     private String note;
+    @OneToMany(mappedBy = "assignedRoom")
+    private List<Comment> comments = new ArrayList<>();
 
     public AssignedRoom() {
         this.room = room;

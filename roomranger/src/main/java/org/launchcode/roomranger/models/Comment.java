@@ -14,7 +14,7 @@ public class Comment {
 
     @JsonIgnore
     @ManyToOne
-    private Room room;
+    private AssignedRoom assignedRoom;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User createdBy;
@@ -25,8 +25,8 @@ public class Comment {
 
     public Comment() {
     }
-    public Comment(Room room, User createdBy, String text) {
-        this.room = room;
+    public Comment(AssignedRoom assignedRoom, User createdBy, String text) {
+        this.assignedRoom = assignedRoom;
         this.createdBy = createdBy;
         this.text = text;
     }
@@ -43,12 +43,12 @@ public class Comment {
         this.text = text;
     }
 
-    public Room getRoom() {
-        return room;
+    public AssignedRoom getAssignedRoom() {
+        return assignedRoom;
     }
 
-    public void setRoom(Room room) {
-        this.room = room;
+    public void setAssignedRoom(AssignedRoom assignedRoom) {
+        this.assignedRoom = assignedRoom;
     }
 
     public User getCreatedBy() {

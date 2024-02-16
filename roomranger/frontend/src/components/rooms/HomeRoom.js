@@ -5,7 +5,7 @@ import { Link, useParams} from 'react-router-dom';
 export default function HomeRoom() {
   const [rooms, setRooms] = useState([]);
   const [types, setTypes] = useState({});
-  const {id} = useParams();
+  // const {id} = useParams();
 
   useEffect(() => {
     loadRooms();

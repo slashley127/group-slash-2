@@ -31,7 +31,7 @@ export default function Profile() {
 
   return (
 //     <div className="container">
-//     <div class="d-flex align-items-center justify-content-center">
+//     <div className="d-flex align-items-center justify-content-center">
 //       <div className="col-md-10 offset-md-1  rounded p-4 mt-2 shadow">
 //         <h2 className="text-center m-2">Add New Attendant</h2>
 //            <div className="col-md-6 mb-3 align-center ">

@@ -6,19 +6,20 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AddRoom from './components/rooms/AddRoom';
 import EditRoom from './components/rooms/EditRoom';
 import ViewRoom from './components/rooms/ViewRoom';
+import AssignRoom from './components/manager/AssignRoomForm';
+import EditAssignedRoom from './components/manager/EditAssignedRoom';
 import AttendantListComponent from './components/roomAttendants/AttendantListComponent';
 import AddAttendant from './components/roomAttendants/AddAttendant';
 import Update from './components/roomAttendants/Update';
 import Profile from './components/roomAttendants/Profile';
 import { Footer } from './components/Footer';
 import LoginPage from './components/loginPage/LoginPage';
-import Homepage from './components/manager/Homepage';
+import HomeManager from './components/manager/HomeManager';
 import ErrorComponent from './components/ErrorComponent';
 import RouteHome from './components/Route';
 import LeaveForm from './components/leaveRequest/LeaveForm';
 import LeaveList from './components/leaveRequest/LeaveList';
 import EditRequest from './components/leaveRequest/EditRequest';
-import AssignRoom from './components/manager/AssignRoom';
 // import Login from './components/users/Login';
 // import Home from './components/pages/Home';
 // import Register from './components/users/Register';
@@ -41,9 +42,12 @@ function App() {
             {/* <Route index element={<Register />} /> */}
             <Route path='login' element={<LoginPage />} />
           </Route>
-          <Route path="/landing" element={<NavBar />}>
-            <Route path="" element={<Homepage />} />
-            <Route path="assignroom" element={<AssignRoom />} />
+          <Route path="/landing" element={<NavBar />} > 
+            {/* <Route path='assignedrooms' element={<RouteHome />}> */}
+              <Route index element={<HomeManager />} />
+              <Route path="assignroomform" element={<AssignRoom />} />
+              <Route exact path="editassignedroom/:id" element={<EditAssignedRoom />} />
+            {/* </Route> */}
             <Route path="rooms" element={<RouteHome />}>
               <Route index element={<HomeRoom />} />
               <Route path="addroom" element={<AddRoom />} />
@@ -68,7 +72,9 @@ function App() {
         </Routes>
         <Footer />
       </Router>
+      {/* <Footer/> */}
     </div>
+
   );
 }
 

@@ -4,13 +4,13 @@ import java.time.LocalDateTime;
 
 public class CommentDto {
     private Integer id;
-    private int roomId;
+    private int assignRoomId;
     private String text;
     private String user;
     private LocalDateTime createdDate;
 
-    public CommentDto(int roomId, String text, String user) {
-        this.roomId = roomId;
+    public CommentDto(int assignRoomId, String text, String user) {
+        this.assignRoomId = assignRoomId;
         this.text = text;
         this.user = user;
     }
@@ -31,12 +31,12 @@ public class CommentDto {
         this.createdDate = createdDate;
     }
 
-    public int getRoomId() {
-        return roomId;
+    public int getAssignRoomId() {
+        return assignRoomId;
     }
 
-    public void setRoomId(int roomId) {
-        this.roomId = roomId;
+    public void setAssignRoomId(int assignRoomId) {
+        this.assignRoomId = assignRoomId;
     }
 
     public String getText() {
@@ -58,7 +58,7 @@ public class CommentDto {
     @Override
     public String toString() {
         return "CommentDto{" +
-                "roomId=" + roomId +
+                "assignRoomId=" + assignRoomId +
                 ", text='" + text + '\'' +
                 ", user='" + user + '\'' +
                 '}';

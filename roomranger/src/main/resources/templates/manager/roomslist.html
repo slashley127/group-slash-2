@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 <!--<!DOCTYPE html>-->
 <!--<html lang="en" xmlns:th="//www.thymeleaf.org/">-->
@@ -25,3 +26,33 @@
 <!--</th:block>-->
 <!--</body>-->
 <!--</html>-->
+=======
+<!DOCTYPE html>
+<html lang="en" xmlns:th="//www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <head th:replace="fragments :: head"></head>
+    <nav th:replace = "~{fragments :: manager-nav}"></nav>
+    <title>List of Rooms</title>
+</head>
+<body class="container">
+<h1>ROOM LIST</h1>
+<th:block>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ROOM NB</th>
+            <th>ROOM AVAILABILITY</th>
+            <th>ROOM TYPE</th>
+        </tr>
+        </thead>
+        <tr th:each = "room : ${rooms}">
+            <td th:text="${room.roomNumber}"></td>
+            <td th:text="${room.roomOccupancy}"></td>
+            <td th:text="${room.roomType}"></td>
+        </tr>
+    </table>
+</th:block>
+</body>
+</html>
+>>>>>>> 0c2a6c3 (started validation)

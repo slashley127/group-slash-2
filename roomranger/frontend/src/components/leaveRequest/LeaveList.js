@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 export default function LeaveList() {
   const [leaveList, setLeaveList] = useState([]);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [refreshId, setRefreshId] = useState(Symbol()); // This is used to render the list after approve or reject
 
   useEffect(() => {
@@ -95,7 +95,7 @@ export default function LeaveList() {
                   <td>
                     <button className='btn btn-primary mx-2' onClick={() => approve(leaveRequest.id)}>Approve</button>
                     <button className='btn btn-danger mx-2' onClick={() => reject(leaveRequest.id)}>Reject</button>
-                    <Link className='btn btn-outline-primary mx-2' to={`/landing/leave/edit/${leaveRequest.id}`}>Edit</Link>
+                    {/* <Link className='btn btn-outline-primary mx-2' to={`/landing/leave/edit/${leaveRequest.id}`}>Edit</Link> */}
                   </td>
                 </tr>
               ))

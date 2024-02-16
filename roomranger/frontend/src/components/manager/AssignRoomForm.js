@@ -10,15 +10,15 @@ export default function AssignRoom() {
   const [tasks, setTasks] = useState([])
   const [statuses, setStatuses] = useState([])
   const [assignedRoom, setAssignedRoom] = useState({
-    room: "",
-    roomAttendant: "",
+    room: null,
+    roomAttendant: null,
     guest: "",
-    numberOfGuests: 0,
+    numberOfGuests: 1,
     checkIn: "",
     checkOut: "",
     task: "",
     note: "",
-    status: ""
+    status: "NOT_STARTED"
   })
 
   const [assignedRoomError, setAssignedRoomError] = useState("");
@@ -42,93 +42,70 @@ export default function AssignRoom() {
     fetchRoomAttendants();
   }, [])
 
-//   useEffect(() => {
-//     console.log("Assigned Room: ", assignedRoom);
-//   }, [assignedRoom]);
+  useEffect(() => {
+    console.log("Assigned Room: ", assignedRoom);
+  }, [assignedRoom]);
 
 
-//   const onInputChange = (e) => {
-//     const { name, value } = e.target;
-//     if (name === "room" || name === "roomAttendant") {
-//       setAssignedRoom({
-//         ...assignedRoom,
-//         room: {
-//           id: JSON.parse(value).id,
-//           roomNumber: JSON.parse(value).roomNumber,
-//           roomType: JSON.parse(value).roomType,
-//           available: false,
-//         },
-//         roomAttendant: {
-//           id: JSON.parse(value).id,
-//           firstName: JSON.parse(value).firstName,
-//           lastName: JSON.parse(value).lastName,
-//           username: JSON.parse(value).username,
-//           password: JSON.parse(value).password,
-//           phoneNumber: JSON.parse(value).phoneNumber,
-//           email: JSON.parse(value).email,
-//           notes: JSON.parse(value).notes,
-//         },
-//       });
-//       return;
-//     }
-//     setAssignedRoom({ ...assignedRoom, [name]: value });
-//   };
-
-// const onInputChange = async (e) => {
-//     const { name, value } = e.target;
-
-//     if (name === "room" || name === "roomAttendant") {
-//         // Parse the value
-//         const parsedValue = JSON.parse(value);
-
-//         // Retrieve the corresponding entity from the server
-//         try {
-//             const response = await axios.get(`http://localhost:8080/roomAttendant/${parsedValue.id}`);
-//             const roomAttendantEntity = response.data;
-
-//             // Update the state with the retrieved entity
-//             setAssignedRoom({
-//                 ...assignedRoom,
-//                 [name]: roomAttendantEntity,
-//             });
-//         } catch (error) {
-//             console.error("Error fetching room attendant entity:", error);
-//         }
-//     } else {
-//         setAssignedRoom({ ...assignedRoom, [name]: value });
-//     }
-// };
-
-
-const onInputChange = (e) => {
+  const onInputChange = (e) => {
     const { name, value } = e.target;
+    setAssignedRoom({ ...assignedRoom, [name]: value });
+  };
 
-    if (name === "room" || name === "roomAttendant") {
-        // Parse the value to extract the ID
-        const parsedValue = JSON.parse(value);
-        const attendantId = parsedValue.id;
+  const onRoomNumberChange = (roomNumber) => {
+    const room = rooms.filter((room) => room[1].roomNumber === roomNumber)[0][1]
+    setAssignedRoom({
+      ...assignedRoom,
+      room: {
+        id: room.id,
+        roomNumber: room.roomNumber,
+        roomType: room.roomType,
+        available: false,
+      },
+    })
+  }
 
-        setAssignedRoom({
-            ...assignedRoom,
-            [name]: attendantId, // Set only the ID
-        });
-    } else {
-        setAssignedRoom({ ...assignedRoom, [name]: value });
-    }
-};
+  const onRoomAttendantNameChange = (firstName) => {
+    const roomAttendant = roomAttendants.filter((roomAttendant) => roomAttendant[1].firstName === firstName)[0][1]
+    setAssignedRoom({
+      ...assignedRoom,
+      roomAttendant: {
+        id: roomAttendant.id,
+        firstName: roomAttendant.firstName,
+        lastName: roomAttendant.lastName,
+        username: roomAttendant.username,
+        password: roomAttendant.password,
+        phoneNumber: roomAttendant.phoneNumber,
+        email: roomAttendant.email,
+        notes: roomAttendant.notes,
+      },
+    })
+  }
 
 
   const fetchTasks = async () => {
     const tasksResponse = await axios.get('http://localhost:8080/assignedrooms/tasks')
     const tasksArray = Object.entries(tasksResponse.data);
+    const tasksOrder = ['STAY_OVER', 'STAY_OVER_FULL_LINEN', 'CHECK_OUT', 'TOUCH_UP'];
+    tasksArray.sort((a, b) => tasksOrder.indexOf(a[0]) - tasksOrder.indexOf(b[0]));
     setTasks(tasksArray)
   }
 
   const fetchStatuses = async () => {
     const statusesResponse = await axios.get('http://localhost:8080/assignedrooms/statuses')
     const statusesArray = Object.entries(statusesResponse.data);
+    const statusOrder = ['NOT_STARTED', 'IN_PROGRESS', 'SERVICE_REFUSED', 'READY', 'INSPECTED'];
+
+    statusesArray.sort((a, b) => statusOrder.indexOf(a[0]) - statusOrder.indexOf(b[0]));
     setStatuses(statusesArray)
   }
+  const statusColors = {
+    'NOT_STARTED': 'red',
+    'IN_PROGRESS': 'blue',
+    'SERVICE_REFUSED': 'black',
+    'READY': 'green',
+    'INSPECTED': 'magenta'
+  };
 
   const fetchRooms = async () => {
     try {
@@ -156,7 +133,7 @@ const onInputChange = (e) => {
     try {
       const response = await axios.post(
         "http://localhost:8080/assignedrooms/create",
-        JSON.stringify(assignedRoom),
+        assignedRoom,
         {
           headers: {
             "Content-Type": "application/json",
@@ -164,7 +141,7 @@ const onInputChange = (e) => {
         }
       );
       if (response && response.data) {
-        navigate("/assignedrooms");
+        navigate("/landing");
       } else {
         console.error("Unexpected response format:", response);
       }
@@ -189,16 +166,16 @@ const onInputChange = (e) => {
               <select
                 className="form-control"
                 name="room"
-                value={room}
-                onChange={(e) => onInputChange(e)}
+                value={room?.roomNumber || ""}
+                onChange={(e) => onRoomNumberChange(e.target.value)}
               >
                 <option value="" disabled>
                   Select room number
                 </option>
-                {rooms.map((room) => (
+                {rooms.filter(room => room[1].available).map((room) => (
                   <option
                     key={`roomOption${room[1].id}`}
-                    value={JSON.stringify(room[1])}
+                    value={room[1].roomNumber}
                   >
                     {room[1].roomNumber}
                   </option>
@@ -212,8 +189,8 @@ const onInputChange = (e) => {
               <select
                 className="form-control"
                 name="roomAttendant"
-                value={roomAttendant}
-                onChange={(e) => onInputChange(e)}
+                value={roomAttendant?.firstName || ""}
+                onChange={(e) => onRoomAttendantNameChange(e.target.value)}
               >
                 <option value="" disabled>
                   Select room attendant
@@ -221,7 +198,7 @@ const onInputChange = (e) => {
                 {roomAttendants.map((roomAttendant) => (
                   <option
                     key={`roomAttendantOption${roomAttendant[1].id}`}
-                    value={JSON.stringify(roomAttendant[1])}
+                    value={roomAttendant[1].firstName}
                   >
                     {roomAttendant[1].firstName}
                   </option>
@@ -252,6 +229,7 @@ const onInputChange = (e) => {
                 name="numberOfGuests"
                 value={numberOfGuests}
                 onChange={(e) => onInputChange(e)}
+                min="1"
               />
             </div>
             <div className='mb-3'>
@@ -317,12 +295,12 @@ const onInputChange = (e) => {
                 onChange={(e) => onInputChange(e)}>
                 <option value="" disabled>Select cleaning status</option>
                 {statuses.map(([name, displayName]) => (
-                  <option key={name} value={name}>{displayName}</option>
+                  <option key={name} value={name} style={{ color: statusColors[name] }}>{displayName}</option>
                 ))}
               </select>
             </div>
             <button type='submit' className='btn btn-outline-primary'>Submit</button>
-            <Link className='btn btn-outline-danger mx-2' to="/manager">Cancel</Link>
+            <Link className='btn btn-outline-danger mx-2' to="/landing">Cancel</Link>
           </form>
         </div>
       </div>

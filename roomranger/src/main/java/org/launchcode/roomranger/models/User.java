@@ -2,7 +2,7 @@ package org.launchcode.roomranger.models;
 
 import jakarta.persistence.*;
 import java.util.Set;
-
+//CHANGED LONG ID TO INT ID
 @Entity
 public class User {
 

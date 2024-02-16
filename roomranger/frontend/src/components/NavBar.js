@@ -6,7 +6,7 @@ export default function NavBar() {
         <div className='nbar'>
             <nav className="navbar navbar-expand-sm navbar-dark bg-primary">
                 <div className='text-left'>
-                    <a href='https://localhost:3000/landing' className='navbar-brand '><h2>RoomRanger</h2></a>
+                    <a href='roomranger.com' className='navbar-brand '><h2>RoomRanger</h2></a>
                 </div>
                 <ul className="navbar-nav">
                     <li className="nav-item">

@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.launchcode.roomranger.models.RoomAttendant;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -60,7 +59,7 @@ public class RoomAttendantController {
 
         updatedroomAttendant.setFirstName(newRoomAttendant.getFirstName());
         updatedroomAttendant.setFirstName(newRoomAttendant.getLastName());
-        updatedroomAttendant.setPronoun(newRoomAttendant.getPronoun());
+//        updatedroomAttendant.setPronoun(newRoomAttendant.getPronoun());
         updatedroomAttendant.setPhoneNumber(newRoomAttendant.getPhoneNumber());
         updatedroomAttendant.setEmail(newRoomAttendant.getEmail());
 //        updatedroomAttendant.setWorkingDays(newRoomAttendant.getWorkingDays());

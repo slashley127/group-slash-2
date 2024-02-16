@@ -1,37 +1,42 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org/">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8 /">-->
-<!--    <title>Manager homepage</title>-->
-<!--    <script></script>-->
-<!--</head>-->
-<!--<body>-->
-<!--<nav th:replace = "~{fragments :: manager-nav}"></nav>-->
-<!--<h1>HOMEPAGE FOR MANAGER</h1>-->
-<!--<th:block>-->
-<!--<table class="table table-striped">-->
-<!--<thead>-->
-<!--    <tr>-->
-<!--    <th>ROOM NB</th>-->
-<!--    <th>ROOM ATTENDANT</th>-->
-<!--    <th>ROOM OCCUPANCY</th>-->
-<!--    <th>CLEANING TASK</th>-->
-<!--    <th>CLEANING STATUS</th>-->
-<!--    <th>NOTES</th>-->
-<!--</tr>-->
-<!--</thead>-->
-<!--    <tr th:each = "room : ${rooms}">-->
-<!--        <td th:text="${room.roomNumber}"></td>-->
-<!--        <td>IN PROGRESS</td>-->
-<!--        <td>IN PROGRESS</td>-->
-<!--        <td>IN PROGRESS</td>-->
-<!--        <td>IN PROGRESS</td>-->
-<!--        <td>IN PROGRESS</td>-->
-<!--    </tr>-->
-<!--</table>-->
-<!--</th:block>-->
-<!--<div>-->
-<!--<button type="submit">CREATE ROOM</button>-->
-<!--</div>-->
-<!--</body>-->
-<!--</html>-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<meta charset="UTF-8 /">
+<head>
+    <nav th:replace = "~{fragments :: manager-nav}"></nav>
+    <title>Manager homepage</title>
+</head>
+
+<body class="container">
+<h1>HOMEPAGE FOR MANAGER</h1>
+<p th:unless="${assignedRoom} and ${assignedRoom.size()}">No rooms assigned!</p>
+
+<th:block th:if="${assignedRoom} and ${assignedRoom.size()}">
+<table class="table table-striped">
+<thead>
+    <tr>
+    <th>ROOM NB</th>
+    <th>ROOM ATTENDANT</th>
+    <th>GUEST</th>
+    <th>NUMBER OF GUESTS</th>
+    <th>CHECKIN</th>
+    <th>CHECKOUT</th>
+    <th>CLEANING TASK</th>
+    <th>NOTES</th>
+    <th>STATUS</th>
+</tr>
+</thead>
+    <tr th:each = "assignedRoom : ${assignedRoom}">
+        <td th:text="${assignedRoom.room.roomNumber}"></td>
+        <td>IN PROGRESS</td>
+        <td th:text="${assignedRoom.guest}"></td>
+        <td th:text="${assignedRoom.numberOfGuests}"></td>
+        <td th:text="${assignedRoom.checkIn}"></td>
+        <td th:text="${assignedRoom.checkOut}"></td>
+        <td th:text="${assignedRoom.task?.displayName}"></td>
+        <td th:text="${assignedRoom.note}"></td>
+        <td th:text="${assignedRoom.status.displayName}"></td>
+    </tr>
+</table>
+</th:block>
+</body>
+</html>

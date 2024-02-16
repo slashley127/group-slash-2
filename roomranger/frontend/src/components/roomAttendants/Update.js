@@ -180,11 +180,11 @@ useEffect(()=> {
                 onChange={(e) => onInputChange(e)}
               ></input>
           </div>
-          <div class="form-group mb-3">
+          <div className="form-group mb-3">
               <label for="notes"><h6>NOTES</h6></label>
-              <textarea class="form-control" id="notes" rows="3"></textarea>
+              <textarea className="form-control" id="notes" rows="3"></textarea>
           </div>
-<div class="text-center">
+<div className="text-center">
           <button type='submit' className='btn btn-outline-primary align-center my-4'>Submit</button>
          
           <Link className='btn btn-outline-danger mx-2 align-center my-4' to='/landing/attendants'>Cancel</Link>

@@ -19,6 +19,9 @@ public class RoomAttendant  extends AbstractEntity{
     @Column(insertable=false, updatable=false)
     private int id;
 
+    @OneToMany(mappedBy = "roomAttendant")
+    private List<AssignedRoom> assignedRoom = new ArrayList<>();
+
     @NotBlank(message = "First name is required")
     @Column(length = 30)
     private String firstName;
@@ -28,23 +31,23 @@ public class RoomAttendant  extends AbstractEntity{
     private String username;
     @Column(unique = true, length = 15)
     private String password;
-//    @ManyToOne
-//    private Manager manager;
-    private String pronoun;
+    @ManyToOne
+    private Manager manager;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    private RoomAttendantUser roomAttendantUser;
+//    private String pronoun;
     @Size(max=10)
     private String phoneNumber;
-    @OneToMany(mappedBy = "roomAttendant")
-    private List<LeaveRequest> leaveList = new ArrayList<>();
 
 //    public void setWorkingDays(String workingDays) {
 //        this.workingDays = workingDays;
 //    }
-
+//
 //    public String getWorkingDays() {
 //        return workingDays;
 //    }
 
-//    private String workingDays ;
+    private String workingDays ;
     @Column(unique = true)
     private String email;
     private String notes;
@@ -57,9 +60,11 @@ public class RoomAttendant  extends AbstractEntity{
     public String getLastName() {return lastName;}
 
     public void setLastName(String lastName) {this.lastName = lastName;}
+
     public void setId(int id) {
         this.id = id;
     }
+
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
@@ -96,10 +101,14 @@ public class RoomAttendant  extends AbstractEntity{
 //    public Manager getManager() {return manager;}
 //
 //    public void setManager(Manager manager) {this.manager = manager;}
-
-    public String getPronoun() {return pronoun;}
-
-    public void setPronoun(String pronoun) {this.pronoun = pronoun;}
+//
+//    public RoomAttendantUser getRoomAttendantUser() {return roomAttendantUser;}
+//
+//    public void setRoomAttendantUser(RoomAttendantUser roomAttendantUser) {this.roomAttendantUser = roomAttendantUser;}
+//
+//    public String getPronoun() {return pronoun;}
+//
+//    public void setPronoun(String pronoun) {this.pronoun = pronoun;}
 
 
     public RoomAttendant() {

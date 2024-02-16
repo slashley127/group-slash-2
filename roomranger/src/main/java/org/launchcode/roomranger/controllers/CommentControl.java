@@ -1,9 +1,11 @@
 package org.launchcode.roomranger.controllers;
 
 import jakarta.validation.Valid;
+import org.launchcode.roomranger.data.AssignedRoomRepository;
 import org.launchcode.roomranger.data.CommentRepository;
 import org.launchcode.roomranger.data.RoomRepository;
 import org.launchcode.roomranger.exception.NotFoundException;
+import org.launchcode.roomranger.models.AssignedRoom;
 import org.launchcode.roomranger.models.Comment;
 import org.launchcode.roomranger.models.Dto.CommentDto;
 import org.launchcode.roomranger.models.Room;
@@ -27,7 +29,7 @@ public class CommentControl {
     private CommentRepository commentRepository;
 
     @Autowired
-    private RoomRepository roomRepository;
+    private AssignedRoomRepository assignedRoomRepository;
 
 //    @GetMapping("/room/{id}")
 //    public ResponseEntity<List<Comment>> getCommentsByRoomId(@PathVariable int id) {
@@ -51,9 +53,10 @@ public class CommentControl {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Comment>> getCommentsByRoom(@RequestParam int roomId) {
-        List<Comment> comments = commentService.getCommentsByRoomId(roomId);
+    public ResponseEntity<List<Comment>> getCommentsByRoom(@RequestParam int assignedRoomId) {
+        List<Comment> comments = commentService.getCommentsByAssignedRoomId(assignedRoomId);
         return ResponseEntity.ok(comments);
     }
+
 
 }
