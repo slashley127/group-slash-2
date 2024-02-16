@@ -37,13 +37,13 @@ const HomePage = () => {
                   <Link to="/registration" className="dropdown-link">Registration</Link>
                 </Dropdown.Item>
                 <Dropdown.Item>
-                  <Link to="/login" className="dropdown-link">Login</Link>
+                  <Link to="/loginPage" className="dropdown-link">Login</Link>
                 </Dropdown.Item>
               </>
             )}
             {(selectedRole === 'RoomAttendant') && (
               <Dropdown.Item>
-                <Link to="/login" className="dropdown-link">Login</Link>
+                <Link to="/loginPage" className="dropdown-link">Login</Link>
               </Dropdown.Item>
             )}
           </Dropdown.Menu>
@@ -52,7 +52,7 @@ const HomePage = () => {
 
       <footer className="home-page-footer">
         <Link to="/about" >About us</Link>
-        © 2024 RoomRanger. All Rights Reserved.
+        All Rights reserved 2024 @WomenThatCode
       </footer>
     </div>
   );
