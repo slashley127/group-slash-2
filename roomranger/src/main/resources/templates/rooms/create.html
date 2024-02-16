@@ -1,33 +1,78 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
-<!--<head th:replace="fragments::head"></head>-->
-<!--<body class="container">-->
-<!--<h2 th:text="${title}">Room Ranger</h2>-->
-<!--<form method="post" th:object="${room}" >-->
-<!--    <div class="mb-3">-->
-<!--        <label> Room Number-->
-<!--            <input th:field="*{roomNumber}">-->
-<!--        </label>-->
-<!--    </div>-->
-<!--    <div class="mb-3">-->
-<!--        <label> Room Type-->
-<!--            <select th:field="*{roomType}">-->
-<!--                <option th:each="roomType: ${types}"-->
-<!--                        th:value="${roomType}"-->
-<!--                        th:text="${roomType.displayName}">-->
-<!--                </option>-->
-<!--            </select>-->
-<!--        </label>-->
-<!--    </div>-->
-<!--    <div class="mb-3 form-check">-->
-<!--        <label> Is Available-->
-<!--            <input type="checkbox" th:field="*{available}"/>-->
-<!--        </label>-->
-<!--    </div>-->
-<!--    <div class="mb-3">-->
-<!--        <input type="submit" value="Add Room">-->
-<!--    </div>-->
-<!--</form>-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head"></head>
+<body>
+<h2 th:text="${title}">Room Ranger</h2>
+<form method="post">
+    <div>
+        <label> Room Number
+            <input th:field="${room.roomNumber}">
+        </label>
+    </div>
+    <div>
+        <label> Room Type
+            <select th:field="${room.roomType}">
+                <option th:each="roomType: ${types}"
+                        th:value="${roomType}"
+                        th:text="${roomType.displayName}">
+                </option>
+            </select>
+        </label>
+    </div>
+    <div>
+        <label> Room Attendant
+            <input th:field="${room.roomAttendantAssigned}">
+        </label>
+    </div>
+    <div>
+        <label> Occupancy
+            <select th:field="${room.roomOccupancy}">
+                <option th:each="roomOccupancy: ${occupancy}"
+                        th:value="${roomOccupancy}"
+                        th:text="${roomOccupancy.displayName}"
+                        ></option>
+            </select>
+        </label>
+    </div>
+    <div>
+        <label> Cleaning Task
+            <input th:field="${room.cleaningTask}">
+        </label>
+    </div>
+    <div>
+        <label> Room Status
+            <select th:field="${room.status}">
+                <option th:each="roomStatus: ${status}"
+                        th:value="${roomStatus}"
+                        th:text="${roomStatus.displayName}"
+                ></option>
+            </select>
+        </label>
+    </div>
+    <div>
+        <label> Guest Name
+            <input th:field="${room.guest}">
+        </label>
+    </div>
+    <div>
+        <label> Number Of Guest
+            <input th:field="${room.numberOfGuests}">
+        </label>
+    </div>
+    <div>
+        <label> Check In Date
+            <input type="date" th:field="${room.checkinDate}">
+        </label>
+    </div>
+    <div>
+        <label> Check Out Date
+            <input type="date" th:field="${room.checkoutDate}">
+        </label>
+    </div>
+    <div>
+        <input type="submit" value="Create Room">
+    </div>
+</form>
 
-<!--</body>-->
-<!--</html>-->
+</body>
+</html>

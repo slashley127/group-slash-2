@@ -1,40 +1,82 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="//www.thymeleaf.org/">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8"/>-->
-<!--    <title></title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<nav th:replace = "~{fragments :: manager-nav}"></nav>-->
-<!--<h1>ASSIGN ROOMS</h1>-->
-<!--<form action="/manager/assignroom" method="POST">-->
-<!--    <div class="form-item">-->
-<!--        <div>-->
-<!--       <label>Room Number</label>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--        <label>Room Attendant</label>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--        <label>Room Type</label>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--        <label>Guest</label>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--        <label>Check In</label>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--        <label>Check Out</label>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <label>Cleaning task</label>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--        <label>Notes</label>-->
-<!--    </div>-->
-<!--    </div>-->
-<!--    <input type="submit" value="Assign Room">-->
-<!--</form>-->
-<!--</body>-->
-<!--</html>-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="//www.thymeleaf.org/">
+
+    <meta charset="UTF-8"/>
+    <head th:replace="fragments :: head"></head>
+    <nav th:replace = "~{fragments :: manager-nav}"></nav>
+    <title>Assign Room</title>
+</head>
+<body class="container">
+
+<main>
+<h1>ASSIGN ROOMS</h1>
+<form action="assignroom" method="post">
+    <div class="form-item">
+        <div>
+            <label>Room Number
+            </label>
+            <select th:field="${assignedRoom.room.roomNumber}">
+                <option th:each="room : ${rooms}"
+                        th:value="${room.roomNumber}"
+                        th:text="${room.roomNumber} + ' | ' + ${room.roomType != null ? room.roomType.displayName : 'Unknown'}">
+                </option>
+            </select>
+        </div>
+        <div>
+        <label>Room Attendant</label>
+        </div>
+        <div>
+        <label th:for="guestName">Guest Name</label>
+            <input type="text" th:field="${assignedRoom.guest}">
+            <p class="error" th:errors="${assignedRoom.guest}"></p>
+        </div>
+        <div>
+           <label th:for="guestNumber">Number of Guests</label>
+            <input type="number" th:field="${assignedRoom.numberOfGuests}">
+            <p class="error" th:errors="${assignedRoom.numberOfGuests}"></p>
+        </div>
+        <div>
+        <label th:for="checkIn">Check In
+        <input type="date" th:field="${assignedRoom.checkIn}">
+            <p class="error" th:errors="${assignedRoom.checkIn}"></p>
+        </label>
+        </div>
+        <div>
+        <label th:for="checkOut">Check Out
+        <input type="date" th:field="${assignedRoom.checkOut}">
+            <p class="error" th:errors="${assignedRoom.checkOut}"></p>
+        </label>
+        </div>
+        <div>
+            <label th:for="task">Cleaning Task
+            </label>
+            <select th:field="${assignedRoom.task}">
+                <option value =""></option>
+                <option th:each = "task : ${task}"
+                    th:value = "${task}"
+                    th:text = "${task.displayName}">
+                </option>
+            </select>
+            <p class="error" th:errors="${assignedRoom.task}"></p>
+        </div>
+        <div>
+                <label th:for="status">Status
+                </label>
+                <select th:field="${assignedRoom.status}">
+                    <option th:each = "status : ${status}"
+                            th:value = "${status}"
+                            th:text = "${status.displayName}">
+                    </option>
+                </select>
+            <p class="error" th:errors="${assignedRoom.status}"></p>
+        </div>
+        <div>
+        <label th:for="note">Notes</label>
+            <input type="text" th:field="${assignedRoom.note}">
+    </div>
+    </div>
+    <input type="submit" value="Assign Room">
+</form>
+</main>
+</body>
+</html>

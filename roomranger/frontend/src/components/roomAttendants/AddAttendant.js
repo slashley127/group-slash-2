@@ -154,11 +154,11 @@ export default function AddAttendant() {
                 onChange={(e) => onInputChange(e)}
               ></input>
           </div>
-          <div class="form-group align-center">
+          <div className="form-group align-center">
               <label for="notes" className="col-md-9 mb-3 ">
                 {/* NOTES */}
                 </label>
-              <textarea class="form-control w-50 p-2 " id="notes" rows="3" placeholder="Notes"></textarea>
+              <textarea className="form-control w-50 p-2 " id="notes" rows="3" placeholder="Notes"></textarea>
           </div>
           </div>
           <div>
