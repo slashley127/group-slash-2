@@ -37,13 +37,13 @@ const HomePage = () => {
                   <Link to="/registration" className="dropdown-link">Registration</Link>
                 </Dropdown.Item>
                 <Dropdown.Item>
-                  <Link to="/loginPage" className="dropdown-link">Login</Link>
+                  <Link to="/login" className="dropdown-link">Login</Link>
                 </Dropdown.Item>
               </>
             )}
             {(selectedRole === 'RoomAttendant') && (
               <Dropdown.Item>
-                <Link to="/loginPage" className="dropdown-link">Login</Link>
+                <Link to="/login" className="dropdown-link">Login</Link>
               </Dropdown.Item>
             )}
           </Dropdown.Menu>

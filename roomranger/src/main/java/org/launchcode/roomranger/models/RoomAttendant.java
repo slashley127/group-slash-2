@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 
 
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,21 +46,13 @@ public class RoomAttendant  extends AbstractEntity{
 //    public String getWorkingDays() {
 //        return workingDays;
 //    }
-//
-//    private String workingDays ;
+
+    private String workingDays ;
     @Column(unique = true)
     private String email;
     private String notes;
+    private int remainingDays = 20;
 
-//    private String profilePic;
-
-//    public String getProfilePic() {
-//        return profilePic;
-//    }
-
-//    public void setProfilePic(String profilePic) {
-//        this.profilePic = profilePic;
-//    }
     public String getFirstName() {return firstName;}
 
     public void setFirstName(String firstName) {this.firstName = firstName;}
@@ -121,7 +114,13 @@ public class RoomAttendant  extends AbstractEntity{
     public RoomAttendant() {
 
     }
-    public RoomAttendant ( String firstName, String lastName, String email, String phoneNumber, String username, String password, String notes) {
+
+    public RoomAttendant(int id) {
+        this.id = id;
+    }
+
+    public RoomAttendant (String firstName, String lastName, String email, String phoneNumber, String username, String password,String notes) {
+        super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email= email;
@@ -129,11 +128,17 @@ public class RoomAttendant  extends AbstractEntity{
 //        this.workingDays = workingDays;
         this.username= username;
         this.password=password;
-//        this.roomAttendantUser=roomAttendantUser;
         this.notes=notes;
     }
 
 
+    public int getRemainingDays() {
+        return remainingDays;
+    }
+
+    public void setRemainingDays(int remainingDays) {
+        this.remainingDays = remainingDays;
+    }
 }
 
 

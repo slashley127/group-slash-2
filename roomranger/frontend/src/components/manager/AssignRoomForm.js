@@ -141,7 +141,7 @@ export default function AssignRoom() {
         }
       );
       if (response && response.data) {
-        navigate("/assignedrooms");
+        navigate("/landing");
       } else {
         console.error("Unexpected response format:", response);
       }
@@ -300,7 +300,7 @@ export default function AssignRoom() {
               </select>
             </div>
             <button type='submit' className='btn btn-outline-primary'>Submit</button>
-            <Link className='btn btn-outline-danger mx-2' to="/manager">Cancel</Link>
+            <Link className='btn btn-outline-danger mx-2' to="/landing">Cancel</Link>
           </form>
         </div>
       </div>
