@@ -34,7 +34,7 @@ useEffect(()=> {
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios.put(`http://localhost:8080/roomAttendant/update/${id}`, attendants);
-    navigate("/")};
+    navigate("/landing/attendants")};
 
 
     const loadAttendants = async (e) => {
@@ -187,7 +187,7 @@ useEffect(()=> {
 <div className="text-center">
           <button type='submit' className='btn btn-outline-primary align-center my-4'>Submit</button>
          
-          <Link className='btn btn-outline-danger mx-2 align-center my-4' to='/'>Cancel</Link>
+          <Link className='btn btn-outline-danger mx-2 align-center my-4' to='/landing/attendants'>Cancel</Link>
           </div >
           </form>
         </div>

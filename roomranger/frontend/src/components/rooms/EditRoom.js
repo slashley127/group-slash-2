@@ -9,7 +9,7 @@ export default function EditRoom() {
     const [room, setRoom] = useState({
         roomNumber: "",
         roomType: "",
-        available: false
+        available: true
     });
 
     useEffect(() => {
@@ -19,6 +19,8 @@ export default function EditRoom() {
     // room input handler
     const onInputChange = (e) => {
         const { name, value, type, checked } = e.target;
+        // const name = e.target.name;
+        console.log(e.target);
         const updatedValue = type === 'checkbox' ? checked : value;
         setRoom({ ...room, [name]: updatedValue });
     }
@@ -28,6 +30,13 @@ export default function EditRoom() {
         const typesArray = Object.entries(typesResponse.data);
         setTypes(typesArray);
     };
+    // const fetchTypes = () => {
+    //     const promise = axios.get('http://localhost:8080/rooms/types');
+    //     promise.then((typesResponse) => {
+    //         const typesArray = Object.entries(typesResponse.data);
+    //         setTypes(typesArray);
+    //     })
+    // }
     //fetch room
     const loadRoom = async () => {
         const result = await axios.get(`http://localhost:8080/rooms/room/${id}`)
@@ -38,7 +47,7 @@ export default function EditRoom() {
     const onFormSubmit = async (e) => {
         e.preventDefault();
         await axios.put(`http://localhost:8080/rooms/room/${id}`, room);
-        navigate("/rooms");  //navigate to the rooms home page
+        navigate("/landing/rooms");  //navigate to the rooms home page
     }
 
     return (
@@ -83,7 +92,7 @@ export default function EditRoom() {
                             </label>
                         </div>
                         <button type='submit' className='btn btn-outline-primary'>Submit</button>
-                        <Link className='btn btn-outline-danger mx-2' to='/rooms'>Cancel</Link>
+                        <Link className='btn btn-outline-danger mx-2' to='/landing/rooms'>Cancel</Link>
                     </form>
                 </div>
             </div>

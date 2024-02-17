@@ -13,8 +13,8 @@ import java.util.List;
 public class Manager extends AbstractEntity{
     private String firstName;
     private String lastName;
-    @OneToMany(mappedBy = "manager")
-    private List<RoomAttendant> roomAttendants = new ArrayList<>();
+//    @OneToMany(mappedBy = "manager")
+//    private List<RoomAttendant> roomAttendants = new ArrayList<>();
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @NotNull
 //    private ManagerUser managerUser;
@@ -26,7 +26,7 @@ public class Manager extends AbstractEntity{
     public Manager(String firstName, String lastName, List<RoomAttendant> roomAttendants) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.roomAttendants = roomAttendants;
+//        this.roomAttendants = roomAttendants;
 //        this.managerUser = managerUser;
 //        this.rooms = rooms;
     }
@@ -47,13 +47,13 @@ public class Manager extends AbstractEntity{
         this.lastName = lastName;
     }
 
-    public List<RoomAttendant> getRoomAttendants() {
-        return roomAttendants;
-    }
-
-    public void setRoomAttendants(List<RoomAttendant> roomAttendants) {
-        this.roomAttendants = roomAttendants;
-    }
+//    public List<RoomAttendant> getRoomAttendants() {
+//        return roomAttendants;
+//    }
+//
+//    public void setRoomAttendants(List<RoomAttendant> roomAttendants) {
+//        this.roomAttendants = roomAttendants;
+//    }
 
 //    public ManagerUser getManagerUser() {
 //        return managerUser;

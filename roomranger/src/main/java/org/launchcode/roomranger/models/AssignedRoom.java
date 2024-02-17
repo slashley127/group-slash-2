@@ -1,6 +1,8 @@
 package org.launchcode.roomranger.models;
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class AssignedRoom extends AbstractEntity {
@@ -33,6 +35,8 @@ public class AssignedRoom extends AbstractEntity {
 //    @NotNull(message = "Task is Required")
     private Task task;
     private String note;
+    @OneToMany(mappedBy = "assignedRoom")
+    private List<Comment> comments = new ArrayList<>();
 
     public AssignedRoom() {
         this.room = room;
