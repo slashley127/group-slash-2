@@ -6,7 +6,7 @@ export default function NavBar() {
         <div className='nbar'>
             <nav className="navbar navbar-expand-sm navbar-dark bg-primary">
                 <div className='text-left'>
-                    <a href='roomranger.com' className='navbar-brand '><h2>RoomRanger</h2></a>
+                    <a href='/landing' className='navbar-brand '><h2>RoomRanger</h2></a>
                 </div>
                 <ul className="navbar-nav">
                     <li className="nav-item">
@@ -14,13 +14,15 @@ export default function NavBar() {
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" aria-current="page" to="/landing/rooms">Rooms</Link>
-                        {/* <Link className="nav-link" aria-current="page" to="/attendant">Rooms</Link> */}
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" aria-current="page" to="/landing/attendants">Room Attendant</Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" aria-current="page" to="/landing/leave">Leave Request</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className="nav-link" aria-current="page" to="/landing/roomattendant">Home Attendant</Link>
                     </li>
                 </ul>
             </nav>

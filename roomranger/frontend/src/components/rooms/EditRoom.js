@@ -30,13 +30,7 @@ export default function EditRoom() {
         const typesArray = Object.entries(typesResponse.data);
         setTypes(typesArray);
     };
-    // const fetchTypes = () => {
-    //     const promise = axios.get('http://localhost:8080/rooms/types');
-    //     promise.then((typesResponse) => {
-    //         const typesArray = Object.entries(typesResponse.data);
-    //         setTypes(typesArray);
-    //     })
-    // }
+
     //fetch room
     const loadRoom = async () => {
         const result = await axios.get(`http://localhost:8080/rooms/room/${id}`)
@@ -46,8 +40,12 @@ export default function EditRoom() {
     //form submit event handler
     const onFormSubmit = async (e) => {
         e.preventDefault();
-        await axios.put(`http://localhost:8080/rooms/room/${id}`, room);
-        navigate("/landing/rooms");  //navigate to the rooms home page
+        try {
+            await axios.put(`http://localhost:8080/rooms/room/${id}`, room);
+            navigate("/landing/rooms");  //navigate to the rooms home page
+        } catch (error) {
+            alert(error.response.data.message);
+        }
     }
 
     return (
@@ -60,13 +58,6 @@ export default function EditRoom() {
                             <label htmlFor='RoomNumber' className='form-label'>
                                 Room Number : {room.roomNumber}
                             </label>
-                            {/* make room Number unable to be modified */}
-                            {/*  <input type='text' */}
-                            {/*      className='form-control' */}
-                            {/*      placeholder='Enter the room number' */}
-                            {/*      name='roomNumber' */}
-                            {/*      value={room.roomNumber} */}
-                            {/*      onChange={onInputChange} /> */}
                         </div>
                         <div className='mb-3'>
                             <label htmlFor='RoomType' className='form-label'>

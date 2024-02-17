@@ -20,34 +20,34 @@ import RouteHome from './components/Route';
 import LeaveForm from './components/leaveRequest/LeaveForm';
 import LeaveList from './components/leaveRequest/LeaveList';
 import EditRequest from './components/leaveRequest/EditRequest';
-// import Login from './components/users/Login';
-// import Home from './components/pages/Home';
-// import Register from './components/users/Register';
-// import HomeNav from './components/layout/Navbar';
-
+import HomeAttendant from './components/attendantRolePage/HomeAttendant';
+import UpdateStatus from './components/attendantRolePage/UpdateStatus';
+import { useState, useEffect } from 'react';
 
 function App() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    document.body.className = isDarkMode ? 'dark-theme' : 'light-theme';
+  }, [isDarkMode]);
+
+  const toggleTheme = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  };
   return (
     <div className="App">
+      <button onClick={toggleTheme}>Dark/Light</button>
       <Router>
         <Routes>
-          {/* <Route element={<HomeNav />}> */}
-          {/* <Route element={<RouteHome />}>
-              <Route path='/' element={<Home />} />
-              <Route path='login' element={<LoginPage />} />
-              <Route path='register' element={<Register />} /> 
-           </Route> */}
-          {/* </Route> */}
           <Route path='/' element={<RouteHome />}>
-            {/* <Route index element={<Register />} /> */}
+            {/* <Route index element={<Home />} />
+            <Route path="/registration" element={<Registration />} /> */}
             <Route path='login' element={<LoginPage />} />
           </Route>
-          <Route path="/landing" element={<NavBar />} > 
-            {/* <Route path='assignedrooms' element={<RouteHome />}> */}
-              <Route index element={<HomeManager />} />
-              <Route path="assignroomform" element={<AssignRoom />} />
-              <Route exact path="editassignedroom/:id" element={<EditAssignedRoom />} />
-            {/* </Route> */}
+          <Route path="/landing" element={<NavBar />} >
+            <Route index element={<HomeManager />} />
+            <Route path="assignroomform" element={<AssignRoom />} />
+            <Route exact path="editassignedroom/:id" element={<EditAssignedRoom />} />
             <Route path="rooms" element={<RouteHome />}>
               <Route index element={<HomeRoom />} />
               <Route path="addroom" element={<AddRoom />} />
@@ -66,13 +66,15 @@ function App() {
               <Route path="edit/:id" element={<EditRequest />} />
               <Route path="form" element={<LeaveForm />} />
             </Route>
+            <Route path="roomattendant" element={<RouteHome />} >
+              <Route index element={<HomeAttendant />} />
+              <Route path="assignedroom/:id" element={<UpdateStatus />} />
+            </Route>
           </Route>
-          {/* <Route exact path="/attendant" element={<HomeAttendant />} />  */}
 
         </Routes>
         <Footer />
       </Router>
-      {/* <Footer/> */}
     </div>
 
   );
