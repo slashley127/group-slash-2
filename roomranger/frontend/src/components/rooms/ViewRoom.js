@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom';
 
 export default function ViewRooms() {
     const [room, setRoom] = useState({
@@ -11,12 +11,13 @@ export default function ViewRooms() {
     const { id } = useParams();
     const [type, setType] = useState([]);
 
+
     useEffect(() => {
-        fetchTypes();
+        fetchType();
         loadRoom();
     })
 
-    const fetchTypes = async () => {
+    const fetchType = async () => {
         const typeResponse = await axios.get(`http://localhost:8080/rooms/type/${id}`);
         setType(typeResponse.data);
     };
@@ -31,7 +32,6 @@ export default function ViewRooms() {
                     <h2 className='text-center m-4'>Room Details</h2>
                     <div className='card'>
                         <div className='card-header'>
-                            Details of Room id : {room.id}
                             <ul className='list-group list-group-flush'>
                                 <li className='list-group-item'>
                                     <b> Room Number: </b>
@@ -48,7 +48,7 @@ export default function ViewRooms() {
                             </ul>
                         </div>
                     </div>
-                    <Link className='btn btn-primary my-2' to={'/rooms'}>Back to Home</Link>
+                    <Link className='btn btn-primary my-2' to={'/landing/rooms'}>Back to Home</Link>
                 </div>
             </div>
         </div>

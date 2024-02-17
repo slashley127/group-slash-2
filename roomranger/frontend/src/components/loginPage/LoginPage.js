@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './LoginPage.css';
 import { FaCircleUser, FaLock   } from "react-icons/fa6";
-import ManagerHomePage from '../ManagerHomePage';
+// import ManagerHomePage from '../ManagerHomePage';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -27,7 +27,7 @@ const navigate=useNavigate();
       if(username==='samata' && password==='karka'){
       setShowSuccessMessage(true);
       setShowErrorMessage(false)
-      navigate('/login/ManagerHomePage')
+      navigate('/landing')
     
     }else{
       setShowErrorMessage(true)
