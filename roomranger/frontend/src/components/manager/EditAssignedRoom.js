@@ -2,8 +2,6 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import AddCommentForm from '../comments/AddCommentForm';
-import CommentList from '../comments/CommentList';
 
 export default function EditAssignedRoom() {
     let navigate = useNavigate()
@@ -45,6 +43,7 @@ export default function EditAssignedRoom() {
         fetchRoomAttendants();
         loadAssignedRoom();
     }, [])
+
 
     const onInputChange = (e) => {
         const { name, value } = e.target;
@@ -131,7 +130,7 @@ export default function EditAssignedRoom() {
         e.preventDefault();
         await axios.put(
             `http://localhost:8080/assignedrooms/assignedroom/${id}`, assignedRoom);
-        navigate("/landing");
+        navigate("/assignedrooms");
     };
 
     const loadAssignedRoom = async () => {
@@ -268,11 +267,10 @@ export default function EditAssignedRoom() {
                             </select>
                         </div>
                         <button type='submit' className='btn btn-outline-primary'>Submit</button>
-                        <Link className='btn btn-outline-danger mx-2' to="/landing">Cancel</Link>
+                        <Link className='btn btn-outline-danger mx-2' to="/assignedrooms">Cancel</Link>
                     </form>
                 </div>
             </div>
-            <AddCommentForm assignRoomId={id} />
         </div>
     );
 }

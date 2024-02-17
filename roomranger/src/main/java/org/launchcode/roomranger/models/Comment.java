@@ -1,54 +1,42 @@
 package org.launchcode.roomranger.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
-public class Comment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @JsonIgnore
+public class Comment extends AbstractEntity{
     @ManyToOne
-    private AssignedRoom assignedRoom;
+    private Room room;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User createdBy;
 
-    private LocalDateTime createdDate;
+    private LocalDate createdDate;
     @Column(columnDefinition = "TEXT")
     private String text;
 
     public Comment() {
     }
-    public Comment(AssignedRoom assignedRoom, User createdBy, String text) {
-        this.assignedRoom = assignedRoom;
+    public Comment(Room room, User createdBy, String text) {
+        this.room = room;
         this.createdBy = createdBy;
         this.text = text;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Comment(String text) {
         this.text = text;
     }
 
-    public AssignedRoom getAssignedRoom() {
-        return assignedRoom;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setAssignedRoom(AssignedRoom assignedRoom) {
-        this.assignedRoom = assignedRoom;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     public User getCreatedBy() {
@@ -59,11 +47,11 @@ public class Comment {
         this.createdBy = createdBy;
     }
 
-    public LocalDateTime getCreatedDate() {
+    public LocalDate getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(LocalDateTime createdDate) {
+    public void setCreatedDate(LocalDate createdDate) {
         this.createdDate = createdDate;
     }
 

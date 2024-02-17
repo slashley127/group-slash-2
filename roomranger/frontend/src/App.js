@@ -1,29 +1,30 @@
 import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import Home from "./pages/Home.js";
+import NavBar from './components/NavBar';
+import HomeRoom from './components/rooms/HomeRoom';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Registration from "./users/Registration";
-import LoginPage from "./components/loginPage/LoginPage";
-import About from "./users/About";
 import AddRoom from "./components/rooms/AddRoom";
 import EditRoom from "./components/rooms/EditRoom";
 import ViewRoom from "./components/rooms/ViewRoom";
-import HomeRoom from "./components/rooms/HomeRoom";
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-
-import NavBar from './components/NavBar';
+import AssignRoom from './components/manager/AssignRoomForm';
+import EditAssignedRoom from './components/manager/EditAssignedRoom';
 import AttendantListComponent from './components/roomAttendants/AttendantListComponent';
 import AddAttendant from './components/roomAttendants/AddAttendant';
 import Update from './components/roomAttendants/Update';
 import Profile from './components/roomAttendants/Profile';
+import { Footer } from './components/Footer';
+import LoginPage from "./components/loginPage/LoginPage";
 import HomeManager from './components/manager/HomeManager';
+import ErrorComponent from './components/ErrorComponent';
+import RouteHome from './components/Route';
 import LeaveForm from './components/leaveRequest/LeaveForm';
 import LeaveList from './components/leaveRequest/LeaveList';
 import EditRequest from './components/leaveRequest/EditRequest';
-import AssignRoom from './components/manager/AssignRoomForm';
-import EditAssignedRoom from './components/manager/EditAssignedRoom';
-
+import Home from "./components/Home";
+import Registration from "./components/Registration";
+import About from "./components/About";
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -41,11 +42,11 @@ function App() {
       <Router>
         <NavBar />
         <Routes>
-          <Route exact path="/registration" element={<Registration />} />
-          <Route exact path="/loginPage" element={<LoginPage />} />
-          <Route exact path="/about" element={<About />} /> 
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/rooms/addRoom" element={<AddRoom />} />
+        <Route exact path="/" element={<Home />} />
+          <Route exact path="/register" element={<Registration />} />
+          <Route exact path="/login" element={<LoginPage />} />
+          <Route exact path="/about" element={<About />} />  
+           <Route exact path="/rooms/addRoom" element={<AddRoom />} />
           <Route exact path="/rooms/editRoom/:id" element={<EditRoom />} />
           <Route exact path="/rooms/viewRoom" element={<ViewRoom />} />
           <Route exact path="/rooms/HomeRoom" element={<HomeRoom />} />

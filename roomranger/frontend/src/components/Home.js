@@ -34,7 +34,7 @@ const HomePage = () => {
             {(selectedRole === 'Manager') && (
               <>
                 <Dropdown.Item>
-                  <Link to="/registration" className="dropdown-link">Registration</Link>
+                  <Link to="/register" className="dropdown-link">Registration</Link>
                 </Dropdown.Item>
                 <Dropdown.Item>
                   <Link to="/login" className="dropdown-link">Login</Link>

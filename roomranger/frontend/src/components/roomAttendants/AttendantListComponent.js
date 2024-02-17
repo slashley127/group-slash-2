@@ -61,15 +61,15 @@ export default function AttendantListComponent() {
                 <td>{roomAttendant.firstName}{' '}{roomAttendant.lastName}</td>
                 <td>{roomAttendant.email}</td>
                 <td >{roomAttendant.notes}</td>
-                <td align='center'><Link className="btn btn-outline-success mx-2" to={`/landing/attendants/profile/${roomAttendant.id}`}>View</Link>
-        <Link className="btn btn-outline-primary mx-2 "to={`/landing/attendants/update/${roomAttendant.id}`} >EDIT</Link>        
+                <td align='center'><Link className="btn btn-outline-success mx-2" to={`/profile/${roomAttendant.id}`}>View</Link>
+        <Link className="btn btn-outline-primary mx-2 "to={`/update/${roomAttendant.id}`} >EDIT</Link>        
         <button className="btn btn-outline-danger mx-2" onClick={()=> deleteAttendant(roomAttendant.id)}>Delete</button>
                 </td>
               </tr>
          ))}
             </tbody>
       </table>
-      <Link className="btn btn-outline-success my-2 my-sm-0" to='/landing/attendants/add'>Add New Attendant</Link>
+      <Link className="btn btn-outline-success my-2 my-sm-0" to='/add'>Add New Attendant</Link>
 
       
       {/* </div> */}

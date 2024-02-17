@@ -29,7 +29,7 @@ export default function AddAttendant() {
     e.preventDefault();
     try{
     await axios.post("http://localhost:8080/roomAttendant/add", attendant);
-    navigate("/landing/attendants")}
+    navigate("/")}
     catch (error) {
       setAttendantError(error.response.data.roomAttendant); 
     }
@@ -163,7 +163,7 @@ export default function AddAttendant() {
           </div>
           <div>
           <button type='submit' className='btn btn-outline-success align-center my-4'>Submit</button>
-          <Link className='btn btn-outline-danger mx-2 align-center my-6' to='/landing/attendants' >Cancel</Link>
+          <Link className='btn btn-outline-danger mx-2 align-center my-6' to='/' >Cancel</Link>
           <button type="reset" className='btn btn-outline-primary align-center my-6'> Reset</button>
           </div>
           </form>

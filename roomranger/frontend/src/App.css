@@ -10,29 +10,26 @@
 }
 
 .footer {
- position: relative;
- /* position:absolute; */
-left:0;
-bottom:0;
-right:0;
+ position: absolute;
+ bottom: 0;
  width:100%;
  height: 50px;
- /* background-color: rgb(236, 229, 229); */
+ background-color: rgb(236, 229, 229);
  text-align: center;
  color: white;
 }
 
 .nbar{
-  /* background-color: darkblue; */
+  background-color: darkblue;
 }
 
 
 
-.App {
+/* .App {
   text-align: center;
 }
 
-/* .App-logo {
+.App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -65,4 +62,4 @@ right:0;
   to {
     transform: rotate(360deg);
   }
-}  */
+} */

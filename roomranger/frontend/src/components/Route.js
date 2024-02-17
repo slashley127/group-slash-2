@@ -6,6 +6,6 @@ export default function Route() {
         <div>
             {/* <h1>This is the Outlet Layout Page</h1> */}
             <Outlet />
-        </div>
-    );
+        </div>
+    );
 }

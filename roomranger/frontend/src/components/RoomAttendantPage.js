@@ -1,4 +1,5 @@
 import React from 'react'
+import LoginComponent from './loginPage/LoginPage'
 
 const RoomAttendantPage = () => {
   return (

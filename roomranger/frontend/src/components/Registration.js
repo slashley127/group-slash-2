@@ -44,7 +44,7 @@ export default function Registration() {
     try {
       const response = await axios.post("http://localhost:8080/user", user);
       setSuccessMessage(response.data);
-      navigate("/Login");
+      navigate("/login");
     } catch (error) {
       if (error.response && error.response.status === 400) {
         setError(error.response.data);

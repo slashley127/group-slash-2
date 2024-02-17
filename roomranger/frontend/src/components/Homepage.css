@@ -1,3 +1,8 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
 .home-page-container {
   background-color: DarkSlateGray;
   min-height: 100vh;
@@ -10,7 +15,6 @@
 .home-page-content {
   flex-grow: 1;
 }
-
 
 .home-page-footer {
   background-color: #333333;
@@ -53,5 +57,4 @@ h1 {
   font-size: 2em;
   font-weight: bold;
   text-align: center;
-  margin-top: 20px; /* Add margin to the top of the dropdown toggle */
 }

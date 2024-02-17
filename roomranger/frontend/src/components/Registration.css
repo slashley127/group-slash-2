@@ -1,22 +1,19 @@
 .registration-form {
-  width: 50%;
-  padding: 50px;
+  width: 90%; /* Adjust width as needed */
+  max-width: 400px; /* Optional: Set a maximum width for smaller screens */
+  padding: 20px; /* Reduce padding */
   border: 2px solid green;
   border-radius: 10px;
-  margin: 200px;
+  margin: 0 auto; /* Center the form horizontally */
   background-color: lightseagreen;
 }
 
 .registration-form h2 {
-  margin-top: -30px;
+  margin-top: 0; /* Remove negative margin */
   color: brown;
 }
 
-.form-label {
-  font-weight: bold;
-}
-
 .btn {
-  margin-top: 20px;
-  margin-left: 50px !important;
+  margin-top: 10px;
+  margin-left: 0; /* Remove left margin */
 }
