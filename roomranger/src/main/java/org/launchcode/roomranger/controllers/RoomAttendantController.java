@@ -3,26 +3,14 @@ package org.launchcode.roomranger.controllers;
 import jakarta.validation.Valid;
 import org.launchcode.roomranger.data.ManagerRepository;
 import org.launchcode.roomranger.data.RoomAttendantRepository;
-import org.launchcode.roomranger.exception.NotFoundException;
 import org.launchcode.roomranger.exception.UserNotFoundException;
-import org.launchcode.roomranger.models.Type;
-import org.launchcode.roomranger.models.WorkingDays;
+import org.launchcode.roomranger.models.*;
 import org.launchcode.roomranger.service.RoomService;
-import org.springframework.data.crossstore.ChangeSetPersister;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.launchcode.roomranger.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
-import org.launchcode.roomranger.models.RoomAttendant;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
@@ -39,49 +27,73 @@ public class RoomAttendantController {
 
 
     @GetMapping()
-    public List<RoomAttendant> displayAllRoomAttendants() {
-        return roomAttendantRepository.findAll();
+    public List<RoomAttendantDTO> displayAllRoomAttendants() {
+        return getRoomAttendantDTOList(roomAttendantRepository.findAll());
     }
 
+
+
     @GetMapping("update/{id}")
-    RoomAttendant getUserById(@PathVariable int id){
-        return roomAttendantRepository.findById(id);
+    RoomAttendantDTO getUserById(@PathVariable int id){
+        return getRoomAttendantDTO(roomAttendantRepository.findById(id));
 //                .orElseThrow(()->new NotFoundException("attendant with id " + id));
     }
 
-     @PostMapping("/add")
-      RoomAttendant addRoomAttendant( @RequestBody @Valid RoomAttendant newRoomAttendant) {
-         System.out.println("Testing");
 
-      return roomAttendantRepository.save(newRoomAttendant);
+    @PostMapping("/add")
+    RoomAttendantDTO addRoomAttendant( @RequestBody @Valid RoomAttendantDTO roomAttendantDTO) {
+        RoomAttendant roomAttendantEntity = getRoomAttendantEntity(roomAttendantDTO);
+        User userEntity = getUserEntity(roomAttendantDTO);
+        userEntity.setRole("roomAttendant");
+        userRepository.save(userEntity);
+        roomAttendantEntity.setUser(userEntity);
+        //TODO: Save Manager if needed
+        roomAttendantRepository.save(roomAttendantEntity);
+        roomAttendantDTO.setId(roomAttendantEntity.getId());
+        roomAttendantDTO.setUserId(userEntity.getId());
+
+      return roomAttendantDTO;
      }
 
+    private User getUserEntity(RoomAttendantDTO roomAttendantDTO) {
+        User userEntity = new User();
+        userEntity.setPassword(roomAttendantDTO.getPassword());
+        userEntity.setUsername(roomAttendantDTO.getUsername());
+        return userEntity;
+    }
+
+    private RoomAttendant getRoomAttendantEntity(RoomAttendantDTO roomAttendantDTO) {
+        RoomAttendant roomAttendantEntity = new RoomAttendant();
+        roomAttendantEntity.setEmail(roomAttendantDTO.getEmail());
+        roomAttendantEntity.setFirstName(roomAttendantDTO.getFirstName());
+        roomAttendantEntity.setNotes(roomAttendantDTO.getNotes());
+        roomAttendantEntity.setLastName(roomAttendantDTO.getLastName());
+        roomAttendantEntity.setPhoneNumber(roomAttendantDTO.getPhoneNumber());
+        roomAttendantEntity.setPronoun(roomAttendantDTO.getPronoun());
+        roomAttendantEntity.setWorkingDays(getWorkingDaysStringFromList(roomAttendantDTO.getWorkingDays()));
+        return roomAttendantEntity;
+    }
 
 
     @PutMapping("/update/{id}")
-    public RoomAttendant updateForm(@RequestBody RoomAttendant  newRoomAttendant, @PathVariable int id) {
+    public RoomAttendantDTO updateForm(@RequestBody RoomAttendantDTO  roomAttendantDTO, @PathVariable int id) {
         RoomAttendant updatedroomAttendant = roomAttendantRepository.findById(id);
+        
+        populateRoomAttendantEntity(updatedroomAttendant,roomAttendantDTO);
 
-        updatedroomAttendant.setFirstName(newRoomAttendant.getFirstName());
-        updatedroomAttendant.setFirstName(newRoomAttendant.getLastName());
-        updatedroomAttendant.setPronoun(newRoomAttendant.getPronoun());
-        updatedroomAttendant.setPhoneNumber(newRoomAttendant.getPhoneNumber());
-        updatedroomAttendant.setEmail(newRoomAttendant.getEmail());
-        updatedroomAttendant.setWorkingDays(newRoomAttendant.getWorkingDays());
-        updatedroomAttendant.setUsername(newRoomAttendant.getUsername());
-        updatedroomAttendant.setPassword(newRoomAttendant.getPassword());
-        updatedroomAttendant.setNotes(newRoomAttendant.getNotes());
+        roomAttendantRepository.save(updatedroomAttendant);
         System.out.println("Successfully saved entity");
 
-        //redirectAttributes.addFlashAttribute("message", "The user has been saved successfully.");
-        return roomAttendantRepository.save(updatedroomAttendant);
-                //.orElseThrow(()-> new UserNotFoundException(id));
+
+        return roomAttendantDTO;
+
 
 }
 
+
     @GetMapping("profile/{id}")
-    public RoomAttendant getProfile(@PathVariable int id) {
-        return roomAttendantRepository.findById(id);
+    public RoomAttendantDTO getProfile(@PathVariable int id) {
+        return getRoomAttendantDTO(roomAttendantRepository.findById(id));
     }
 
 
@@ -104,6 +116,75 @@ public class RoomAttendantController {
         }
         return days;
     }
+
+    private List<RoomAttendantDTO> getRoomAttendantDTOList(List<RoomAttendant> roomAttendantEntityList) {
+        List<RoomAttendantDTO> roomAttendantDTOList = new ArrayList<RoomAttendantDTO>();
+        for (RoomAttendant roomAttendantEntity: roomAttendantEntityList){
+            RoomAttendantDTO roomAttendantDTO =  getRoomAttendantDTO(roomAttendantEntity);
+            roomAttendantDTOList.add(roomAttendantDTO);
+
+        }
+        return roomAttendantDTOList;
+    }
+    private RoomAttendantDTO getRoomAttendantDTO(RoomAttendant roomAttendantEntity) {
+        RoomAttendantDTO roomAttendantDTO = new RoomAttendantDTO();
+        roomAttendantDTO.setId(roomAttendantEntity.getId());
+        roomAttendantDTO.setEmail(roomAttendantEntity.getEmail());
+        roomAttendantDTO.setFirstName(roomAttendantEntity.getFirstName());
+        roomAttendantDTO.setNotes(roomAttendantEntity.getNotes());
+        roomAttendantDTO.setLastName(roomAttendantEntity.getLastName());
+        if(roomAttendantEntity.getUser()!=null){
+            roomAttendantDTO.setPassword(roomAttendantEntity.getUser().getPassword());
+            roomAttendantDTO.setUsername(roomAttendantEntity.getUser().getUsername());
+            roomAttendantDTO.setUserId(roomAttendantEntity.getUser().getId());
+            roomAttendantDTO.setRole(roomAttendantEntity.getUser().getRole());
+        }
+        roomAttendantDTO.setPhoneNumber(roomAttendantEntity.getPhoneNumber());
+        roomAttendantDTO.setPronoun(roomAttendantEntity.getPronoun());
+        roomAttendantDTO.setWorkingDays(getWorkingDaysListFromString(roomAttendantEntity.getWorkingDays()));
+        if(roomAttendantEntity.getManager()!=null){
+            roomAttendantDTO.setManagerFirstName(roomAttendantEntity.getManager().getFirstName());
+            roomAttendantDTO.setManagerLastName(roomAttendantEntity.getManager().getLastName());
+            roomAttendantDTO.setManagerId(roomAttendantEntity.getManager().getId());
+        }
+
+
+        return roomAttendantDTO;
+    }
+
+    private void populateRoomAttendantEntity(RoomAttendant roomAttendantEntity, RoomAttendantDTO roomAttendantDTO) {
+
+
+        roomAttendantEntity.setEmail(roomAttendantDTO.getEmail());
+        roomAttendantEntity.setFirstName(roomAttendantDTO.getFirstName());
+        roomAttendantEntity.setNotes(roomAttendantDTO.getNotes());
+        roomAttendantEntity.setLastName(roomAttendantDTO.getLastName());
+        roomAttendantEntity.setPhoneNumber(roomAttendantDTO.getPhoneNumber());
+        roomAttendantEntity.setPronoun(roomAttendantDTO.getPronoun());
+        String workingDays = getWorkingDaysStringFromList(roomAttendantDTO.getWorkingDays());
+        roomAttendantEntity.setWorkingDays(workingDays);
+
+    }
+
+    private String getWorkingDaysStringFromList(List<String> workingDays){
+        //workingDays is stored as comma separated string in database
+        //workingDayList is sent as a list to UI
+        //This method is used before saving workingDays to Database
+        String workingDaysString = "";
+        for (String workingDay:workingDays){
+            workingDaysString = workingDaysString+workingDay +",";
+        }
+        return  workingDaysString;
+    }
+
+    private List<String> getWorkingDaysListFromString(String workingDaysString){
+        //workingDays is stored as comma separated string in database
+        //workingDayList is sent as a list to UI
+        //This method is used before sending the response to UI
+        List<String> workingDaysList = Arrays.asList(workingDaysString.split(","));
+        return  workingDaysList;
+    }
+
     }
 
 

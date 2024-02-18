@@ -48,20 +48,12 @@ export default function AddAttendant() {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Convert workingDays array to a comma-separated string
-    const preparedData = {
-      ...attendant,
-      workingDays: attendant.workingDays.join(',') // Convert array to string
-    };
-    console.log('Submitting formm workingdays:', preparedData.workingDays);
-    console.log('Submitting form data:', preparedData);
-
     try{
-      await axios.post("http://localhost:8080/roomAttendant/add", preparedData);
-      navigate("/attendantListComponent")}
-      catch (error) {
-        setAttendantError(error.response.data.roomAttendant); 
-      }
+    await axios.post("http://localhost:8080/roomAttendant/add", attendant);
+    navigate("/attendantListComponent")}
+    catch (error) {
+      setAttendantError(error.response.data.roomAttendant); 
+    }
   };
 
 
@@ -191,7 +183,7 @@ export default function AddAttendant() {
                   <label htmlFor="notes" className="form-label ">
                     {/* NOTES */}
                   </label>
-                  <textarea class="form-control h-100 " id="notes" name="notes" placeholder="Notes"></textarea>
+                  <textarea class="form-control h-100 " id="notes" name="notes" placeholder="Notes"  onChange={(e) => handleChange(e)}></textarea>
                 </div>
                 </div >
                 <div className="container" >

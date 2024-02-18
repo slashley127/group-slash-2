@@ -23,15 +23,25 @@ export default function Update() {
 
   const { firstName, lastName, email, phoneNumber, pronoun, username, password,notes,workingDays } = attendants;
 
-  const onInputChange = (e) => {
+  const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setAttendants(prevFormData => ({
-      ...prevFormData,
-      workingDays: checked
-        ? [...prevFormData.workingDays, value]
-        : prevFormData.workingDays.filter(day => day !== value),
-    }));
-  }
+
+    if (type === 'checkbox') {
+      // Update state for multi-checkbox inputs
+      setAttendants(prevFormData => ({
+        ...prevFormData,
+        workingDays: checked
+          ? [...prevFormData.workingDays, value]
+          : prevFormData.workingDays.filter(day => day !== value),
+      }));
+    } else {
+      // Update state for other input types
+      setAttendants({
+        ...attendants,
+        [name]: type === 'radio' ? value : e.target.value,
+      });
+    }
+  };
 const{id}=useParams();
 
 useEffect(()=> {
@@ -61,9 +71,9 @@ useEffect(()=> {
           <div >
             
             <label htmlFor="Pronoun" className="form-label "><h5>Pronoun:  </h5></label>
-             <input type="radio" id="he/him" name="pronoun" value={attendants.pronoun} onChange={onInputChange} />He/Him
-             <input type="radio" id="she/her" name="pronoun" value={attendants.pronoun} onChange={onInputChange} />She/Her
-             <input type="radio" id="they/them" name="pronoun" value={attendants.pronoun} onChange={onInputChange} />They/Them
+             <input type="radio" id="he/him" name="pronoun" value={attendants.pronoun}  onChange={(e) => handleChange(e)} />He/Him
+             <input type="radio" id="she/her" name="pronoun" value={attendants.pronoun}  onChange={(e) => handleChange(e)} />She/Her
+             <input type="radio" id="they/them" name="pronoun" value={attendants.pronoun}  onChange={(e) => handleChange(e)} />They/Them
             </div>
             <div className="row">
               <div className="col-md-6 mb-3">
@@ -75,8 +85,8 @@ useEffect(()=> {
                 className="form-control"
               
                 name="firstName"
-                value={firstName}
-                onChange={(e) => onInputChange(e)}
+                defaultValue={firstName}
+                onChange={(e) => handleChange(e)}
               ></input>
             </div>
             <div className="col-md-6 mb-3">
@@ -88,8 +98,8 @@ useEffect(()=> {
                 className="form-control"
              
                 name="lastName"               
-                value={lastName}
-                onChange={(e) => onInputChange(e)}
+                defaultValue={lastName}
+                onChange={(e) => handleChange(e)}
               ></input>
             </div>
             </div>
@@ -104,8 +114,8 @@ useEffect(()=> {
                 className="form-control"
               
                 name="email"
-                value={email}
-                onChange={(e) => onInputChange(e)}
+                defaultValue={email}
+                onChange={(e) => handleChange(e)}
               ></input>
             </div>
             <div className="col-md-4">
@@ -117,8 +127,8 @@ useEffect(()=> {
                 className="form-control"
            
                 name="phoneNumber"
-                value={phoneNumber}
-                onChange={(e) => onInputChange(e)}
+                defaultValue={phoneNumber}
+                onChange={(e) => handleChange(e)}
               ></input>
             </div>
             </div>
@@ -133,8 +143,8 @@ useEffect(()=> {
                 className="form-control"
               
                 name="username"
-                value= {username}
-                onChange={(e) => onInputChange(e)}
+                defaultValue= {username}
+                onChange={(e) => handleChange(e)}
               ></input>
           </div>
           <div className="col-md-6">
@@ -146,8 +156,8 @@ useEffect(()=> {
                 className="form-control"
                 
                 name="password"
-                value={password}
-                onChange={(e) => onInputChange(e)}
+                defaultValue={password}
+                onChange={(e) => handleChange(e)}
               ></input>
           </div>
           </div>
@@ -162,7 +172,7 @@ useEffect(()=> {
                
                 name="password"
                 // value={password}
-                onChange={(e) => onInputChange(e)}
+                onChange={(e) => handleChange(e)}
               ></input>
           </div>
           <div className="col-md-6 mb-4">
@@ -181,9 +191,9 @@ useEffect(()=> {
                         className="checkbox-inline"
                         id={day}
                         name="workingDays"
-                        value={attendants.workingDays}
+                        value={day}
                         checked={attendants.workingDays.includes(day)}
-                        onChange={onInputChange}
+                        onChange={(e) => handleChange(e)}
                       />
                       <label className="form-check-label" htmlFor={day}>{day}</label>
                     </div>

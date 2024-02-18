@@ -10,30 +10,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class RoomAttendant  extends AbstractEntity{
+public class RoomAttendant extends AbstractEntity{
 
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(insertable=false, updatable=false)
-    private int id;
+
 
     @NotBlank(message = "First name is required")
     @Column(length = 30)
     private String firstName;
     @NotBlank(message = "Last name is required")
     private String lastName;
-    @Column(unique = true, length = 15)
-    private String username;
-    @Column(unique = true, length = 15)
-    private String password;
+
     @ManyToOne
     private Manager manager;
+
     @OneToOne(cascade = CascadeType.ALL)
-    private RoomAttendantUser roomAttendantUser;
+    @JoinColumn(name = "user_id")
+    private User user;
     private String pronoun;
     @Size(max=10)
     private String phoneNumber;
+
+    private String workingDays ;
+    @Column(unique = true)
+    private String email;
+    private String notes;
+
 
     public void setWorkingDays(String workingDays) {
         this.workingDays = workingDays;
@@ -43,20 +45,8 @@ public class RoomAttendant  extends AbstractEntity{
         return workingDays;
     }
 
-    private String workingDays ;
-    @Column(unique = true)
-    private String email;
-    private String notes;
 
-//    private String profilePic;
 
-//    public String getProfilePic() {
-//        return profilePic;
-//    }
-
-    //    public void setProfilePic(String profilePic) {
-//        this.profilePic = profilePic;
-//    }
     public String getFirstName() {return firstName;}
 
     public void setFirstName(String firstName) {this.firstName = firstName;}
@@ -64,27 +54,12 @@ public class RoomAttendant  extends AbstractEntity{
     public String getLastName() {return lastName;}
 
     public void setLastName(String lastName) {this.lastName = lastName;}
-    public void setId(int id) {
-        this.id = id;
-    }
+
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    public int getId() {
-        return id;
-    }
-    public String getUsername() {
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
+
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -104,30 +79,20 @@ public class RoomAttendant  extends AbstractEntity{
 
     public void setManager(Manager manager) {this.manager = manager;}
 
-    public RoomAttendantUser getRoomAttendantUser() {return roomAttendantUser;}
 
-    public void setRoomAttendantUser(RoomAttendantUser roomAttendantUser) {this.roomAttendantUser = roomAttendantUser;}
 
     public String getPronoun() {return pronoun;}
 
     public void setPronoun(String pronoun) {this.pronoun = pronoun;}
 
-
-    public RoomAttendant() {
-
+    public User getUser() {
+        return user;
     }
-    public RoomAttendant (  String firstName, String lastName, String email, String phoneNumber, String workingDays, String username, String password, RoomAttendantUser roomAttendantUser, String notes) {
-        super();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email= email;
-        this.phoneNumber= phoneNumber;
-        this.workingDays = workingDays;
-        this.username= username;
-        this.password=password;
-        this.roomAttendantUser=roomAttendantUser;
-        this.notes=notes;
+
+    public void setUser(User user) {
+        this.user = user;
     }
+
 
 
 }
