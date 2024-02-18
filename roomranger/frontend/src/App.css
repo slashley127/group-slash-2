@@ -21,8 +21,8 @@
  color: white;
 }
 
-.nbar{
-  /* background-color: darkblue;
+ /*.nbar{
+  background-color: darkblue;
 }  */
 .App{
   text-align:center;
@@ -78,7 +78,7 @@
   transform: translateY(-50%);
   margin-left: 10px; /* Adjust as needed */
   color: #fff; /* Text color */
-}}
+}
 /* .App-logo {
   height: 40vmin;
   pointer-events: none;
