@@ -52,8 +52,7 @@ const HomePage = () => {
 
       <footer className="home-page-footer">
         <Link to="/about" >About us</Link>
-        All Rights reserved 2024 @WomenThatCode
-      </footer>
+        </footer>
     </div>
   );
 };

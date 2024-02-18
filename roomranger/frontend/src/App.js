@@ -38,32 +38,58 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={toggleTheme}>Dark/Light</button>
+      <div className="mode-toggle" onClick={toggleTheme}>
+        <div className={`slider ${isDarkMode ? 'dark' : 'light'}`} />
+      </div>
       <Router>
         <NavBar />
         <Routes>
-        <Route exact path="/" element={<Home />} />
-          <Route exact path="/register" element={<Registration />} />
-          <Route exact path="/login" element={<LoginPage />} />
-          <Route exact path="/about" element={<About />} />  
-           <Route exact path="/rooms/addRoom" element={<AddRoom />} />
-          <Route exact path="/rooms/editRoom/:id" element={<EditRoom />} />
-          <Route exact path="/rooms/viewRoom" element={<ViewRoom />} />
-          <Route exact path="/rooms/HomeRoom" element={<HomeRoom />} />
-          <Route exact path="/attendantListComponent" element={<AttendantListComponent />} />
-          <Route exact path="/addAttendant" element={<AddAttendant />} />
-          <Route exact path="/update/:id" element={<Update />} />
-          <Route exact path="/profile/:id" element={<Profile />} />
-          <Route exact path="/assignedrooms" element={<HomeManager />} />
-          <Route exact path="/assignedrooms/assignroomform" element={<AssignRoom />} />
-          <Route exact path="/assignedrooms/editassignedroom/:id" element={<EditAssignedRoom />} />
-          <Route exact path="/leaveform" element={<LeaveForm />} />
-          <Route exact path="/leavelist" element={<LeaveList />} />
-          <Route exact path="/editrequest" element={<EditRequest />} />
+                  {/* <Route element={<HomeNav />}> */}
+                  {/* <Route element={<RouteHome />}>
+                      <Route path='/' element={<Home />} />
+                      <Route path='login' element={<LoginPage />} />
+                      <Route path='register' element={<Register />} />
+                   </Route> */}
+                  {/* </Route> */}
+                  <Route path='/' element={<RouteHome />}>
+                    <Route index element={<Home />} />
+                    <Route path='Register' element={<Registration />} />
+                    <Route path='About' element={<About />} />
+                    <Route path='login' element={<LoginPage />} />
+                  </Route>
+                  <Route path="/landing" element={<NavBar />} >
+                    {/* <Route path='assignedrooms' element={<RouteHome />}> */}
+                      <Route index element={<HomeManager />} />
+                      <Route path="assignroomform" element={<AssignRoom />} />
+                      <Route exact path="editassignedroom/:id" element={<EditAssignedRoom />} />
+                    {/* </Route> */}
+                    <Route path="rooms" element={<RouteHome />}>
+                      <Route index element={<HomeRoom />} />
+                      <Route path="addroom" element={<AddRoom />} />
+                      <Route path="editroom/:id" element={<EditRoom />} />
+                      <Route path="viewroom/:id" element={<ViewRoom />} />
+                    </Route>
+                    <Route path="attendants" element={<RouteHome />}>
+                      <Route index element={<AttendantListComponent />} />
+                      <Route path="add" element={<AddAttendant />} />
+                      <Route path="update/:id" element={<Update />} />
+                      <Route path="profile/:id" element={<Profile />} />
+                      <Route exact path="*" element={<ErrorComponent />} />
+                    </Route>
+                    <Route path="leave" element={<RouteHome />} >
+                      <Route index element={<LeaveList />} />
+                      <Route path="edit/:id" element={<EditRequest />} />
+                      <Route path="form" element={<LeaveForm />} />
+                    </Route>
+                  </Route>
+                  {/* <Route exact path="/attendant" element={<HomeAttendant />} />  */}
+
         </Routes>
+        <Footer />
       </Router>
+       {/* <Footer/> */}
     </div>
-  );
+      );
 }
 
 export default App;
