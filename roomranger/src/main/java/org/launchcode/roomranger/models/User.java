@@ -11,7 +11,6 @@ public class User {
     private int id;
 
 
-
     private String username;
 
 
@@ -25,7 +24,7 @@ public class User {
 
     private String password;
 
-    private String confirmPassword;
+    //private String confirmPassword;
 
     public User() {
         // Default constructor
@@ -45,6 +44,7 @@ public class User {
     public void setId(int id) {
         this.id = id;
     }
+
     public String getEmail() {
         return email;
     }
@@ -52,6 +52,7 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
     public String getUsername() {
         return username;
     }
@@ -85,12 +86,12 @@ public class User {
     }
 
 
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
 }
+//    public String getConfirmPassword() {
+//        return confirmPassword;
+//    }
+//
+//    public void setConfirmPassword(String confirmPassword) {
+//        this.confirmPassword = confirmPassword;
+//    }
+//}
