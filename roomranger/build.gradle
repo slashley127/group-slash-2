@@ -46,6 +46,7 @@ dependencies {
 	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.12.5'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 
+
 }
 
 tasks.named('test') {
