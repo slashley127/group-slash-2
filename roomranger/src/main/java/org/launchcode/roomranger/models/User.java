@@ -43,7 +43,6 @@ public class User implements UserDetails {
     @Basic(optional = false)
     private String password;
 
-    private String confirmPassword;
 
     public User() {
         // Default constructor
@@ -63,6 +62,7 @@ public class User implements UserDetails {
     public void setId(Integer id) {
         this.id = id;
     }
+
     public String getEmail() {
         return email;
     }
@@ -70,6 +70,7 @@ public class User implements UserDetails {
     public void setEmail(String email) {
         this.email = email;
     }
+
     public String getUsername() {
         return username;
     }
@@ -100,12 +101,13 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of( new SimpleGrantedAuthority(role.name()));
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -127,15 +129,6 @@ public class User implements UserDetails {
     }
 
 
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
-
     public Role getRole() {
         return role;
     }
@@ -143,4 +136,5 @@ public class User implements UserDetails {
     public void setRole(Role role) {
         this.role = role;
     }
+
 }

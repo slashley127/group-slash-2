@@ -28,7 +28,7 @@ public class AuthorizationController {
             if (roles.contains("manager")) {
                 // Managers can create tasks
                 return true;
-            } else if (roles.contains("roomattendant")) {
+            } else if (roles.contains("roomAttendant")) {
                 // Room attendants can view tasks, update status, and apply for leave
                 return true;
             } else {
