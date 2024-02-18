@@ -40,9 +40,9 @@ public class RegistrationController {
 
 
         // Check if confirmPassword matches password
-        if (!newUser.getPassword().equals(newUser.getConfirmPassword())) {
-            return new ResponseEntity<>("Password and confirm password do not match.", HttpStatus.BAD_REQUEST);
-        }
+//        if (!newUser.getPassword().equals(newUser.getConfirmPassword())) {
+//            return new ResponseEntity<>("Password and confirm password do not match.", HttpStatus.BAD_REQUEST);
+//        }
 
         // Save the new user if all checks pass
         userRepository.save(newUser);
