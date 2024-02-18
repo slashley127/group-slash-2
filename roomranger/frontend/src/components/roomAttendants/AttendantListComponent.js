@@ -3,13 +3,20 @@ import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import NavBar from '../NavBar';
 import './Attendant.css';
+import { useAuth } from '../security/AuthContext';
+
+
 export default function AttendantListComponent() {
 
  const [attendants,setAttendants]=useState([]) ;
+ const [days, setDays] = useState({});
+ //const authContext=useAuth() 
+ //const username=authContext.username
+
     const { id } = useParams();
    
     useEffect(()=> {
-       loadAttendants();},
+       loadAttendants();}, 
     []
   );
     const loadAttendants=async()=>{
@@ -24,14 +31,6 @@ export default function AttendantListComponent() {
   return (
     <div className='list'> 
     <div className='container'>
-      
-      {/* <nav className="navbar navbar-danger bg-info"> */}
-         {/* <a className="navbar-brand center">ROOM RANGERS</a> */}
-             {/* <form className="form-inline"> */}
-                  {/* <input className="form-control mr-sm-2" type="" */}
-               {/* <Link className="btn btn-outline-success my-2 my-sm-0" to='/add'>Add New Attendant</Link> */}
-             
-      {/* </nav> */}
       <div className='py-8'>
       <h2 className='text-center'> Room Attendants List</h2></div>
       <form>
@@ -43,10 +42,10 @@ export default function AttendantListComponent() {
       <thead>
       <tr>
       <th scope='col' className='text-center'>#</th>
-      <th scope='col' className='text-center'> ID </th>
-      <th scope='col' className='text-center'> NAME </th>
-      <th scope='col' className='text-center'> EMAIL </th>
-      <th scope='col' className='col-md-4 text-center'> NOTES </th>
+      <th scope='col' className='text-center'> EMP ID </th>
+      <th scope='col' className='col-md-2 text-center'> NAME </th>
+      <th scope='col' className='col-md-4 text-center'> EMAIL </th>
+      <th scope='col' className='col-md-2 text-center'> SCHEDULE </th>
       <th scope='col' className=' col-md-3 text-center'> ACTION </th>
       </tr>
       </thead>
@@ -60,7 +59,8 @@ export default function AttendantListComponent() {
                 <td>{roomAttendant.id}</td>
                 <td>{roomAttendant.firstName}{' '}{roomAttendant.lastName}</td>
                 <td>{roomAttendant.email}</td>
-                <td >{roomAttendant.notes}</td>
+                {/* <td >{roomAttendant.notes}</td> */}
+                <td>{roomAttendant.workingDays}</td>
                 <td align='center'><Link className="btn btn-outline-success mx-2" to={`/landing/attendants/profile/${roomAttendant.id}`}>View</Link>
         <Link className="btn btn-outline-primary mx-2 "to={`/landing/attendants/update/${roomAttendant.id}`} >EDIT</Link>        
         <button className="btn btn-outline-danger mx-2" onClick={()=> deleteAttendant(roomAttendant.id)}>Delete</button>
@@ -70,9 +70,6 @@ export default function AttendantListComponent() {
             </tbody>
       </table>
       <Link className="btn btn-outline-success my-2 my-sm-0" to='/landing/attendants/add'>Add New Attendant</Link>
-
-      
-      {/* </div> */}
       </form>
       </div>
       
