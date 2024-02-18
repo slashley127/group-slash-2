@@ -40,6 +40,7 @@ function App() {
     <div className="App">
       <div className="mode-toggle" onClick={toggleTheme}>
         <div className={`slider ${isDarkMode ? 'dark' : 'light'}`} />
+         <span className="mode-text">{isDarkMode ? 'Light' : 'Dark'}</span>
       </div>
       <Router>
         <NavBar />

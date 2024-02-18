@@ -4,8 +4,7 @@ html, body, #root {
 }
 
 .home-page-container {
-  background-color: DarkSlateGray;
-  min-height: 100vh;
+   min-height: 100vh;
   width: 100vw;
   padding: 20px;
   display: flex;
