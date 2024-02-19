@@ -1,51 +1,55 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 
 export default function HomeManager() {
-
-    const [assignedRooms, setAssignedRooms] = useState([])
+    const [assignedRooms, setAssignedRooms] = useState([]);
     const [statuses, setStatuses] = useState({});
     const [tasks, setTasks] = useState({});
     const { id } = useParams();
-
+    const navigate = useNavigate();
 
     useEffect(() => {
         loadAssignedRooms();
     }, []);
 
-     //Setting JWT in the HTTP Request Header under Authorization field
-     const jwt = localStorage.getItem('jwt');
+    // Setting JWT in the HTTP Request Header under Authorization field
+    const jwt = localStorage.getItem('jwt');
 
-     const authAxios = axios.create({
-         baseURL: "http://localhost:8080",
-         headers: {
-           Authorization: `Bearer ${jwt}`
-         }
-       });
+    const authAxios = axios.create({
+        baseURL: "http://localhost:8080",
+        headers: {
+            Authorization: `Bearer ${jwt}`
+        }
+    });
 
     const loadAssignedRooms = async () => {
-        const statusesResponse = await authAxios.get('/assignedrooms/statuses');
-        setStatuses(statusesResponse.data);
-        const tasksResponse = await authAxios.get('/assignedrooms/tasks');
-        setTasks(tasksResponse.data);
-        const result = await authAxios.get("/assignedrooms")
-        setAssignedRooms(result.data);
+        try {
+            const statusesResponse = await authAxios.get('/assignedrooms/statuses');
+            setStatuses(statusesResponse.data);
+            const tasksResponse = await authAxios.get('/assignedrooms/tasks');
+            setTasks(tasksResponse.data);
+            const result = await authAxios.get("/assignedrooms");
+            setAssignedRooms(result.data);
+        } catch (error) {
+            if (error.response && error.response.status === 403) {
+                // 403 error - Unauthorized, navigate to login page
+                navigate('/login');
+            } else {
+                // Handle other errors
+                console.error('Error:', error);
+            }
+        }
     }
 
     const statusColors = {
         'NOT_STARTED': 'red',
         'IN_PROGRESS': 'blue',
-        'SERVICE_REFUSED' : 'black',
+        'SERVICE_REFUSED': 'black',
         'READY': 'green',
         'INSPECTED': 'magenta'
-      };
-    // const deleteRoom = async (id) => {
-    //     await axios.delete('http://localhost:8080/assignedrooms/${id}')
-    //     loadAssignedRooms();
-    // }
-
+    };
 
     return (
         <div className='container'>
@@ -81,17 +85,13 @@ export default function HomeManager() {
                                 <td>{assignedRoom.note}</td>
                                 <td style={{ color: statusColors[assignedRoom.status] }}>{statuses[assignedRoom.status]}</td>
                                 <td>
-                                    {/* <Link className='btn btn-primary mx-2' to={`assignedrooms/viewassignedroom/${assignedRoom.id}`}>View</Link> */}
                                     <Link className='btn btn-outline-primary mx-2' to={`/landing/editassignedroom/${assignedRoom.id}`}>Edit</Link>
-                                    {/* <Link className='btn btn-danger mx-2' onClick={()=> deleteRoom(assignedRoom.id)}>Delete</Link> */}
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
-
             </div>
-
         </div>
-    )
+    );
 }

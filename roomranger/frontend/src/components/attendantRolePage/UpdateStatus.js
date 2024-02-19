@@ -23,19 +23,52 @@ export default function UpdateStatus() {
    });
 
     const loadAssignedRoom = async () => {
-        const response = await authAxios.get(`/assignedrooms/assignedroom/${id}`);
-        setAssignedRoom(response.data);
+        try {
+            const response = await authAxios.get(`/assignedrooms/assignedroom/${id}`);
+            setAssignedRoom(response.data);
+        } catch (error) {
+            if (error.response && error.response.status === 403) {
+                // 403 error - Unauthorized, navigate to login page
+                navigate('/login');
+            } else {
+                // Handle other errors
+                console.error('Error:', error);
+            }
+        }
+        
     }
 
     const loadStatuses = async () => {
-        const response = await authAxios.get("/assignedrooms/statuses");
-        const statusesArray = Object.entries(response.data);
-        setStatuses(statusesArray);
+        try {
+            const response = await authAxios.get("/assignedrooms/statuses");
+            const statusesArray = Object.entries(response.data);
+            setStatuses(statusesArray);
+        } catch (error) {
+            if (error.response && error.response.status === 403) {
+                // 403 error - Unauthorized, navigate to login page
+                navigate('/login');
+            } else {
+                // Handle other errors
+                console.error('Error:', error);
+            }
+        }
+        
     }
 
     const loadTask = async () => {
-        const response = await authAxios.get(`/assignedrooms/tasks/${id}`);
-        setTask(response.data);
+        try {
+            const response = await authAxios.get(`/assignedrooms/tasks/${id}`);
+            setTask(response.data);
+        } catch (error) {
+            if (error.response && error.response.status === 403) {
+                // 403 error - Unauthorized, navigate to login page
+                navigate('/login');
+            } else {
+                // Handle other errors
+                console.error('Error:', error);
+            }
+        }
+        
     }
 
     useEffect(() => {

@@ -84,11 +84,11 @@ export default function AssignRoom() {
   const jwt = localStorage.getItem('jwt');
 
   const authAxios = axios.create({
-      baseURL: "http://localhost:8080",
-      headers: {
-        Authorization: `Bearer ${jwt}`
-      }
-    });
+    baseURL: "http://localhost:8080",
+    headers: {
+      Authorization: `Bearer ${jwt}`
+    }
+  });
 
 
   const fetchTasks = async () => {
@@ -154,9 +154,16 @@ export default function AssignRoom() {
         console.error("Unexpected response format:", response);
       }
     } catch (error) {
-      console.error("Error submitting the form:", error);
-      console.log("Error response data:", error.response?.data);
-      setAssignedRoomError(error.response?.data || "An error occurred");
+      if (error.response && error.response.status === 403) {
+        // 403 error - Unauthorized, navigate to login page
+        navigate('/login');
+      } else {
+        // Handle other errors
+        console.error("Error submitting the form:", error);
+        console.log("Error response data:", error.response?.data);
+        setAssignedRoomError(error.response?.data || "An error occurred");
+      }
+
     }
   };
 

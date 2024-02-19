@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import NavBar from '../NavBar';
 import './Attendant.css';
 import { useAuth } from '../security/AuthContext';
@@ -10,6 +10,7 @@ export default function AttendantListComponent() {
 
   const [attendants, setAttendants] = useState([]);
   const [days, setDays] = useState({});
+  const navigate = useNavigate();
   //const authContext=useAuth() 
   //const username=authContext.username
 
@@ -35,7 +36,13 @@ export default function AttendantListComponent() {
       const attendantsResponse = await authAxios.get("/roomAttendant");
       setAttendants(attendantsResponse.data);
     } catch (error) {
-      console.error("Error loading attendants:", error);
+      if (error.response && error.response.status === 403) {
+        // 403 error - Unauthorized, navigate to login page
+        navigate('/login');
+      } else {
+        console.error("Error loading attendants:", error);
+      }
+
       // Handle error (e.g., by showing a message to the user)
     }
   };
@@ -45,7 +52,12 @@ export default function AttendantListComponent() {
       await authAxios.get(`/roomAttendant/delete/${id}`);
       loadAttendants(); // Refresh the list after deletion
     } catch (error) {
-      console.error("Error deleting attendant:", error);
+      if (error.response && error.response.status === 403) {
+        // 403 error - Unauthorized, navigate to login page
+        navigate('/login');
+      } else {
+        console.error("Error deleting attendant:", error);
+      }
       // Handle error (e.g., by showing a message to the user)
     }
   };

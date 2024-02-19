@@ -21,9 +21,9 @@ export default function AddRoom() {
     const authAxios = axios.create({
         baseURL: "http://localhost:8080",
         headers: {
-          Authorization: `Bearer ${jwt}`
+            Authorization: `Bearer ${jwt}`
         }
-      });
+    });
     // room input handler
     const onInputChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -32,10 +32,21 @@ export default function AddRoom() {
     }
     // get the types
     const fetchTypes = async () => {
-        const typesResponse = await authAxios.get('/rooms/types');
-        const typesArray = Object.entries(typesResponse.data);
-        setTypes(typesArray);
-        // console.log(types);
+        try {
+            const typesResponse = await authAxios.get('/rooms/types');
+            const typesArray = Object.entries(typesResponse.data);
+            setTypes(typesArray);
+            // console.log(types);
+        } catch (error) {
+            if (error.response && error.response.status === 403) {
+                // 403 error - Unauthorized, navigate to login page
+                navigate('/login');
+            } else {
+                // Handle other errors
+                console.error('Error:', error);
+            }
+        }
+
     };
 
     //form submit event handler
@@ -47,8 +58,14 @@ export default function AddRoom() {
             navigate("/landing/rooms");  //navigate to the rooms home page
         }
         catch (error) {
-            console.log(error.response.data)
-            setRoomError(error.response.data.roomNumber);  //get error message from Room table roomNumber
+            if (error.response && error.response.status === 403) {
+                // 403 error - Unauthorized, navigate to login page
+                navigate('/login');
+            } else {
+                console.log(error.response.data)
+                setRoomError(error.response.data.roomNumber);  //get error message from Room table roomNumber
+            }
+
         }
     }
 

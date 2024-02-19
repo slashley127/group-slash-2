@@ -25,19 +25,30 @@ export default function Profile() {
     useEffect(() => {
         loadAttendant();
     }, [id]);
-    
+
     const jwt = localStorage.getItem('jwt'); // Retrieve the JWT token from local storage
 
     const authAxios = axios.create({
-      baseURL: "http://localhost:8080",
-      headers: {
-        Authorization: `Bearer ${jwt}`
-      }
+        baseURL: "http://localhost:8080",
+        headers: {
+            Authorization: `Bearer ${jwt}`
+        }
     });
 
     const loadAttendant = async () => {
-        const result = await authAxios.get(`/roomAttendant/profile/${id}`);
-        setAttendant(result.data)
+        try {
+            const result = await authAxios.get(`/roomAttendant/profile/${id}`);
+            setAttendant(result.data)
+        } catch (error) {
+            if (error.response && error.response.status === 403) {
+                // 403 error - Unauthorized, navigate to login page
+                navigate('/login');
+            } else {
+                console.error("Error viewing attendant:", error);
+            }
+            // Handle error (e.g., by showing a message to the user)
+        }
+
     };
 
 

@@ -6,7 +6,7 @@ import './Attendant.css';
 
 export default function AddAttendant() {
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [attendant, setAttendant] = useState({
     id: '',
@@ -22,7 +22,7 @@ export default function AddAttendant() {
   });
   const [attendantError, setAttendantError] = useState("");
 
-  const { id,firstName, lastName, email, phoneNumber, pronoun, username, password,notes, workingDays} = attendant;
+  const { id, firstName, lastName, email, phoneNumber, pronoun, username, password, notes, workingDays } = attendant;
 
   // Handle changes to form inputs
   const handleChange = (e) => {
@@ -47,20 +47,27 @@ export default function AddAttendant() {
 
   const jwt = localStorage.getItem('jwt'); // Retrieve the JWT token from local storage
 
-const authAxios = axios.create({
-  baseURL: "http://localhost:8080",
-  headers: {
-    Authorization: `Bearer ${jwt}`
-  }
-});
+  const authAxios = axios.create({
+    baseURL: "http://localhost:8080",
+    headers: {
+      Authorization: `Bearer ${jwt}`
+    }
+  });
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try{
-    await authAxios.post('/roomAttendant/add', attendant);
-    navigate("/landing/attendants")}
+    try {
+      await authAxios.post('/roomAttendant/add', attendant);
+      navigate("/landing/attendants")
+    }
     catch (error) {
-      setAttendantError(error.response.data.roomAttendant); 
+      if (error.response && error.response.status === 403) {
+        // 403 error - Unauthorized, navigate to login page
+        navigate('/login');
+      } else {
+        setAttendantError(error.response.data.roomAttendant);
+      }
+
     }
   };
 
@@ -74,13 +81,13 @@ const authAxios = axios.create({
             <h2 className="text-center m-2">Add New Attendant</h2>
 
             <form onSubmit={handleSubmit}>
-            <div >
-            
-            <label htmlFor="Pronoun" className="form-label "><h5>Pronoun:  </h5></label>
-             <input type="radio"  id="he/him" name="pronoun" value="He/Him" onChange={handleChange} />He/Him
-             <input type="radio" id="she/her" name="pronoun" value="She/Her" onChange={handleChange} />She/Her
-             <input type="radio" id="they/them" name="pronoun" value="They/Them"onChange={handleChange} />They/Them
-            </div>
+              <div >
+
+                <label htmlFor="Pronoun" className="form-label "><h5>Pronoun:  </h5></label>
+                <input type="radio" id="he/him" name="pronoun" value="He/Him" onChange={handleChange} />He/Him
+                <input type="radio" id="she/her" name="pronoun" value="She/Her" onChange={handleChange} />She/Her
+                <input type="radio" id="they/them" name="pronoun" value="They/Them" onChange={handleChange} />They/Them
+              </div>
               <div className="row">
                 <div className="col-md-6 mb-3">
                   <label htmlFor="Name" className="form-label">
@@ -111,7 +118,7 @@ const authAxios = axios.create({
               </div>
 
               <div className="row">
-                
+
 
 
                 <div className="col-md-6 mb-3">
@@ -172,8 +179,8 @@ const authAxios = axios.create({
                   ></input>
                 </div>
               </div>
-            <div className="row">
-              <div className="col-md-6 mb-3">
+              <div className="row">
+                <div className="col-md-6 mb-3">
                   <label htmlFor="Password" className="form-label">
                     {/* Confirm Password */}
                   </label>
@@ -185,32 +192,32 @@ const authAxios = axios.create({
                     // value={password}
                     onChange={(e) => handleChange(e)}
                   ></input>
-             </div>
-               
+                </div>
+
                 <div className="col-md-6 mb-4">
                   <label htmlFor="notes" className="form-label ">
                     {/* NOTES */}
                   </label>
-                  <textarea class="form-control h-100 " id="notes" name="notes" placeholder="Notes"  onChange={(e) => handleChange(e)}></textarea>
+                  <textarea class="form-control h-100 " id="notes" name="notes" placeholder="Notes" onChange={(e) => handleChange(e)}></textarea>
                 </div>
-                </div >
-                <div className="container" >
-                  <label  htmlFor="workingDays" className="form-label col-md-1 checkbox-inline"><h5>Working Days</h5></label>
-                  {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day) => (
-                    <div className="form-check" key={day}>
-                      <input
-                        type="checkbox"
-                        className="checkbox-inline"
-                        id={day}
-                        name="workingDays"
-                        value={day}
-                        checked={attendant.workingDays.includes(day)}
-                        onChange={handleChange}
-                      />
-                      <label className="form-check-label" htmlFor={day}>{day}</label>
-                    </div>
-                  ))}
-                </div>
+              </div >
+              <div className="container" >
+                <label htmlFor="workingDays" className="form-label col-md-1 checkbox-inline"><h5>Working Days</h5></label>
+                {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day) => (
+                  <div className="form-check" key={day}>
+                    <input
+                      type="checkbox"
+                      className="checkbox-inline"
+                      id={day}
+                      name="workingDays"
+                      value={day}
+                      checked={attendant.workingDays.includes(day)}
+                      onChange={handleChange}
+                    />
+                    <label className="form-check-label" htmlFor={day}>{day}</label>
+                  </div>
+                ))}
+              </div>
               <div>
                 <button type='submit' className='btn btn-outline-success align-center my-4'>Submit</button>
                 <Link className='btn btn-outline-danger mx-2 align-center my-6' to='/landing/attendants' >Cancel</Link>
