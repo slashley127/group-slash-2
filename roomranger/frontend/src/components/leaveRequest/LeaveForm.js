@@ -9,7 +9,7 @@ export default function LeaveForm({firstname = "Luna", lastname = "Liu"}) {
     const[leaveRequest, setLeaveRequest] = useState({
         firstName:"",
         lastName:"",
-        roomAttendant:"",
+        roomAttendant:{},
         // initialDays: 20,
         // duration: 0,
         remainingDays:20,

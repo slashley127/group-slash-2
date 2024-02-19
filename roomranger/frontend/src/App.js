@@ -26,7 +26,7 @@ import Home from './components/hompage/Home';
 import Registration from './components/hompage/Registration';
 import About from './components/About';
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
