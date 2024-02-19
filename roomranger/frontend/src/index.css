@@ -5,10 +5,21 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url(./components/assets/login2.jpg);
+ /* background: url(./components/assets/login2.jpg);*/
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+/* Light Theme Styles */
+body.light-theme {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Dark Theme Styles */
+body.dark-theme {
+  background-color: #333333;
+  color: #ffffff;
 }
