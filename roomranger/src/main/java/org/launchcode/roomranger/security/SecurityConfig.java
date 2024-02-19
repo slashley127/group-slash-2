@@ -4,6 +4,7 @@ package org.launchcode.roomranger.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -37,6 +38,18 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers("/authenticate").permitAll()
+                        .requestMatchers("/manager/**").hasRole("Manager")
+                        .requestMatchers("/roomAttendant/**").hasRole("RoomAttendant")
+                        .requestMatchers(HttpMethod.POST, "/rooms").hasRole("MANAGER")
+                        .requestMatchers(HttpMethod.POST, "/tasks").hasRole("MANAGER")
+                        .requestMatchers(HttpMethod.PUT, "/tasks/**").hasRole("MANAGER")
+                        .requestMatchers(HttpMethod.POST, "/leave-requests").hasRole("MANAGER")
+                        .requestMatchers(HttpMethod.PUT, "/leave-requests/**").hasRole("MANAGER")
+                        // Room Attendant authorization rules
+                        .requestMatchers(HttpMethod.GET, "/tasks").hasRole("ROOMATTENDANT")
+                        .requestMatchers(HttpMethod.PUT, "/tasks/**").hasRole("ROOMATTENDANT")
+                        .requestMatchers(HttpMethod.POST, "/leave-requests").hasRole("ROOMATTENDANT")
+                        .requestMatchers(HttpMethod.PUT, "/leave-requests/**").hasRole("ROOMATTENDANT")
                         .anyRequest().authenticated())
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
