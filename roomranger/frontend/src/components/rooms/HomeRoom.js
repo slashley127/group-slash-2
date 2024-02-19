@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, useParams} from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 export default function HomeRoom() {
   const [rooms, setRooms] = useState([]);
@@ -21,10 +21,10 @@ export default function HomeRoom() {
     setRooms(roomsResponse.data);
   }
 
-  const deletRoom = async(id) =>{
-   
+  const deletRoom = async (id) => {
+
     const response = await axios.delete(`http://localhost:8080/rooms/room/${id}`);
-    alert (response.data); // alert(`Room with number '' has been deleted successfully!`)
+    alert(response.data); // alert(`Room with number '' has been deleted successfully!`)
     loadRooms();
   }
 
@@ -48,14 +48,18 @@ export default function HomeRoom() {
               rooms.map((room, index) => (
                 <tr>
                   <th scope="row" key={index}>{index + 1}</th>
-                  <td>{room.roomNumber}</td>
+                  <td>
+                    <Link to={`/landing/rooms/editroom/${room.id}`}>
+                      {room.roomNumber}
+                    </Link>
+                  </td>
                   {/* types is an object after passing from spring boot */}
                   <td>{types[room.roomType]}</td>
                   <td>{room.available ? "Yes" : "No"}</td>
                   <td>
                     <Link className='btn btn-outline-success mx-2' to={`/landing/rooms/viewroom/${room.id}`}>View</Link>
                     <Link className='btn btn-outline-primary mx-2' to={`/landing/rooms/editroom/${room.id}`}>Edit</Link>
-                    <button className='btn btn-outline-danger mx-2' onClick={()=> deletRoom(room.id)}>Delete</button>
+                    <button className='btn btn-outline-danger mx-2' onClick={() => deletRoom(room.id)}>Delete</button>
                   </td>
                 </tr>
               ))
