@@ -1,21 +1,18 @@
 package org.launchcode.roomranger.models.Dto;
 
+
 public class ManagerDTO {
     private int id;
+    private int userId;
     private String firstName;
-    private String LastName;
-    private int userid;
+    private String lastName;
     private String email;
+    private String username;
+    private String password;
     private String role;
-    private String Username;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    // Getters and setters
+    // Omitted for brevity
 
     public String getFirstName() {
         return firstName;
@@ -26,19 +23,11 @@ public class ManagerDTO {
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public void setLastName(String lastName) {
-        LastName = lastName;
-    }
-
-    public int getUserid() {
-        return userid;
-    }
-
-    public void setUserid(int userid) {
-        this.userid = userid;
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -49,20 +38,12 @@ public class ManagerDTO {
         this.email = email;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
 
     public String getPassword() {
@@ -73,5 +54,27 @@ public class ManagerDTO {
         this.password = password;
     }
 
-    private String password;
+    public void setRole(String manager) {
+    }
+
+    public String getRole() {
+        return null;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 }
+

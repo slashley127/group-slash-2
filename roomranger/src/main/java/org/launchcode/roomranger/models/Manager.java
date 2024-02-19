@@ -3,28 +3,32 @@ package org.launchcode.roomranger.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
-import java.util.List;
-
 @Entity
-public class Manager extends AbstractEntity{
-    @NotBlank(message="First name is required")
-    @Column(length=30)
+public class Manager extends AbstractEntity {
+
+    @NotBlank(message = "First name is required")
+    @Column(length = 30)
     private String firstName;
-    @NotBlank(message="Last name is required")
+
+    @NotBlank(message = "Last name is required")
     private String lastName;
+
+    private String username;
+    private String password;
     private String email;
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="user_id")
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
     private User user;
 
-
-    public Manager(String firstName, String lastName, String email, List<RoomAttendant> roomAttendants,User user) {
+    public Manager(String firstName, String lastName,String email, User user) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-
         this.user = user;
     }
+
+
 
     public String getFirstName() {
         return firstName;
@@ -56,5 +60,21 @@ public class Manager extends AbstractEntity{
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

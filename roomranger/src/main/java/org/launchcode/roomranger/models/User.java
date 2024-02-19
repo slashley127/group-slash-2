@@ -1,9 +1,7 @@
 package org.launchcode.roomranger.models;
 
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
+
 
 @Entity
 public class User extends AbstractEntity{
@@ -18,7 +16,7 @@ public class User extends AbstractEntity{
     @Basic(optional = false)
     private String role;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Manager manager;
 
     public String getUsername() {
@@ -45,7 +43,7 @@ public class User extends AbstractEntity{
         this.role = role;
     }
 
-
-
-
+//    public boolean isManager() {
+//        return this.role.equalsIgnoreCase("manager");
+//    }
 }
