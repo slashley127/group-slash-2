@@ -3,7 +3,7 @@ package org.launchcode.roomranger.controllers;
 import jakarta.validation.Valid;
 import org.launchcode.roomranger.data.CommentRepository;
 import org.launchcode.roomranger.data.RoomAttendantRepository;
-import org.launchcode.roomranger.exception.UserNotAuthorizedException;
+import org.launchcode.roomranger.exception.NotFoundException;
 import org.launchcode.roomranger.data.RoomRepository;
 import org.launchcode.roomranger.models.*;
 import org.launchcode.roomranger.service.RoomService;
@@ -13,9 +13,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
@@ -69,7 +71,7 @@ public class RoomsController {
     @GetMapping("/room/{id}")
     public Room getRoomById(@PathVariable int id){
         return  roomRepository.findById(id)
-                .orElseThrow(()->new UserNotAuthorizedException("room with id " + id));
+                .orElseThrow(()->new NotFoundException("room with id " + id));
     }
 
     @PutMapping("/room/{id}")
@@ -80,12 +82,12 @@ public class RoomsController {
                     room.setRoomType(newRoom.getRoomType());
                     room.setAvailable(newRoom.isAvailable());
                     return roomRepository.save(room);
-                }).orElseThrow(()->new UserNotAuthorizedException("room with id " + id));
+                }).orElseThrow(()->new NotFoundException("room with id " + id));
     }
     @DeleteMapping("/room/{id}")
     public String deleteRoom(@PathVariable int id){
         if (!roomRepository.existsById(id)){
-            throw new UserNotAuthorizedException("room with id " + id);
+            throw new NotFoundException("room with id " + id);
         }
         String roomNumber = roomRepository.findById(id).get().getRoomNumber();
         roomRepository.deleteById(id);

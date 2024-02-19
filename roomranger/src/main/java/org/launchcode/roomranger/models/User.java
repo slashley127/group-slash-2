@@ -1,25 +1,57 @@
 package org.launchcode.roomranger.models;
 
 import jakarta.persistence.*;
-import java.util.Set;
+
 
 @Entity
-public class User extends AbstractEntity{
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
 
-
-
-    @Column(nullable = false)
-    @Basic(optional = false)
     private String username;
-    @Column(nullable = false)
-    @Basic(optional = false)
+
+
+    private String firstName;
+
+
+    private String lastName;
+
+    private String email;
+
+
     private String password;
-    @Column(nullable = false)
-    @Basic(optional = false)
-    private String role;
 
+    //private String confirmPassword;
 
+    public User() {
+        // Default constructor
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    // Getters and setters...
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getUsername() {
         return username;
@@ -37,15 +69,29 @@ public class User extends AbstractEntity{
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
 
 }
+//    public String getConfirmPassword() {
+//        return confirmPassword;
+//    }
+//
+//    public void setConfirmPassword(String confirmPassword) {
+//        this.confirmPassword = confirmPassword;
+//    }
+//}

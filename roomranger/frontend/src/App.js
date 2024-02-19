@@ -1,8 +1,8 @@
 import './App.css';
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './components/NavBar';
 import HomeRoom from './components/rooms/HomeRoom';
-import {BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AddRoom from './components/rooms/AddRoom';
 import EditRoom from './components/rooms/EditRoom';
 import ViewRoom from './components/rooms/ViewRoom';
@@ -20,71 +20,76 @@ import RouteHome from './components/Route';
 import LeaveForm from './components/leaveRequest/LeaveForm';
 import LeaveList from './components/leaveRequest/LeaveList';
 import EditRequest from './components/leaveRequest/EditRequest';
-import  AuthProvider, { useAuth } from './components/security/AuthContext';
-// import Login from './components/users/Login';
-// import Home from './components/pages/Home';
-// import Register from './components/users/Register';
-// import HomeNav from './components/layout/Navbar';
-
-function AuthenticatedRoute({children}){
-  const authContext=useAuth()
-  if(authContext.isAuthenticated)
-    return children
-
-    return <Navigate to={"/login"}/>
-}
-
+import Home from './components/hompage/Home';
+import Registration from './components/hompage/Registration';
+import About from './components/About';
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 function App() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    document.body.className = isDarkMode ? 'dark-theme' : 'light-theme';
+  }, [isDarkMode]);
+
+  const toggleTheme = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  };
+
   return (
-    <div className="App">
-       <AuthProvider>
+    <div className='App'>
+      <div className='mode-toggle' onClick={toggleTheme}>
+        <div className={`slider ${isDarkMode ? 'dark' : 'light'}`} />
+         <span className='mode-text'>{isDarkMode ? 'Light' : 'Dark'}</span>
+      </div>
       <Router>
-        <Routes>
-          {/* <Route element={<HomeNav />}> */}
-          {/* <Route element={<RouteHome />}>
-              <Route path='/' element={<Home />} />
-              <Route path='login' element={<LoginPage />} />
-              <Route path='register' element={<Register />} /> 
-           </Route> */}
-          {/* </Route> */}
-          <Route path='/' element={<RouteHome />}>
-            {/* <Route index element={<Register />} /> */}
-            <Route path='login' element={<LoginPage />} />
-          </Route>
-          <Route path="/landing" element={<NavBar />} > 
-            {/* <Route path='assignedrooms' element={<RouteHome />}> */}
-              <Route index element={<HomeManager />} />
-              <Route path="assignroomform" element={<AssignRoom />} />
-              <Route exact path="editassignedroom/:id" element={<EditAssignedRoom />} />
-            {/* </Route> */}
-            <Route path="rooms" element={<RouteHome />}>
-              <Route index element={<HomeRoom />} />
-              <Route path="addroom" element={<AddRoom />} />
-              <Route path="editroom/:id" element={<EditRoom />} />
-              <Route path="viewroom/:id" element={<ViewRoom />} />
-            </Route>
-            <Route path="attendants" element={<RouteHome />}>
-              <Route index element={<AttendantListComponent />} />
-              <Route path="add" element={<AddAttendant />} />
-              <Route path="update/:id" element={<Update />} />
-              <Route path="profile/:id" element={<Profile />} />
-              <Route exact path="*" element={<ErrorComponent />} />
-            </Route>
-            <Route path="leave" element={<RouteHome />} >
-              <Route index element={<LeaveList />} />
-              <Route path="edit/:id" element={<EditRequest />} />
-              <Route path="form" element={<LeaveForm />} />
-            </Route>
-          </Route>
-          {/* <Route exact path="/attendant" element={<HomeAttendant />} />  */}
+         <Routes>
+                  {/* <Route element={<HomeNav />}> */}
+                  {/* <Route element={<RouteHome />}>
+                      <Route path='/' element={<Home />} />
+                      <Route path='login' element={<LoginPage />} />
+                      <Route path='register' element={<Register />} />
+                   </Route> */}
+                  {/* </Route> */}
+                  {/* <Route path='/' element={<RouteHome />}> */}
+                    <Route path ='/'element={<Home />} />
+                    <Route path='Register' element={<Registration />} />
+                    <Route path='login' element={<LoginPage />} />
+                    <Route path='about' element={<About />} />
+                  {/* </Route> */}
+                  <Route path='/landing' element={<NavBar />} >
+                    {/* <Route path='assignedrooms' element={<RouteHome />}> */}
+                      <Route index element={<HomeManager />} />
+                      <Route path='assignroomform' element={<AssignRoom />} />
+                      <Route exact path='editassignedroom/:id' element={<EditAssignedRoom />} />
+                    {/* </Route> */}
+                    <Route path='rooms' element={<RouteHome />}>
+                      <Route index element={<HomeRoom />} />
+                      <Route path='addroom' element={<AddRoom />} />
+                      <Route path='editroom/:id' element={<EditRoom />} />
+                      <Route path='viewroom/:id' element={<ViewRoom />} />
+                    </Route>
+                    <Route path='attendants' element={<RouteHome />}>
+                      <Route index element={<AttendantListComponent />} />
+                      <Route path='add' element={<AddAttendant />} />
+                      <Route path='update/:id' element={<Update />} />
+                      <Route path='profile/:id' element={<Profile />} />
+                      <Route exact path='*' element={<ErrorComponent />} />
+                    </Route>
+                    <Route path='leave' element={<RouteHome />} >
+                      <Route index element={<LeaveList />} />
+                      <Route path='edit/:id' element={<EditRequest />} />
+                      <Route path='form' element={<LeaveForm />} />
+                    </Route>
+                  </Route>
+                  {/* <Route exact path='/attendant' element={<HomeAttendant />} />  */}
 
         </Routes>
         <Footer />
       </Router>
-      </AuthProvider>
+       {/* <Footer/> */}
     </div>
-
-  );
+      );
 }
 
 export default App;

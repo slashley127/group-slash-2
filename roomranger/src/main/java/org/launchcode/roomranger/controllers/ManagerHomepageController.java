@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import org.launchcode.roomranger.data.AssignedRoomRepository;
 import org.launchcode.roomranger.data.RoomAttendantRepository;
 import org.launchcode.roomranger.data.RoomRepository;
-import org.launchcode.roomranger.exception.UserNotAuthorizedException;
+import org.launchcode.roomranger.exception.NotFoundException;
 import org.launchcode.roomranger.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
-@RestController
+    @RestController
     @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
     @RequestMapping("assignedrooms")
     public class ManagerHomepageController {
@@ -76,7 +77,7 @@ import java.util.Map;
         @GetMapping("assignedroom/{id}")
         public AssignedRoom getAssignedRoomById(@PathVariable int id) {
         return assignedRoomRepository.findById(id)
-                .orElseThrow(() -> new UserNotAuthorizedException("assigned room with id " + id));
+                .orElseThrow(() -> new NotFoundException("assigned room with id " + id));
         }
 
         @PutMapping("assignedroom/{id}")
@@ -93,7 +94,7 @@ import java.util.Map;
                         assignedRoom.setNote(newAssignedRoom.getNote());
                         assignedRoom.setStatus(newAssignedRoom.getStatus());
                         return assignedRoomRepository.save(assignedRoom);
-                    }).orElseThrow(()->new UserNotAuthorizedException("Assigned Room with id " + id));
+                    }).orElseThrow(()->new NotFoundException("Assigned Room with id " + id));
         }
 
         @PostMapping(value = "/create")
