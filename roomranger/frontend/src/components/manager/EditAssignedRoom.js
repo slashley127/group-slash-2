@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import AddCommentForm from '../comments/AddCommentForm';
-import CommentList from '../comments/CommentList';
 
 export default function EditAssignedRoom() {
     let navigate = useNavigate()
