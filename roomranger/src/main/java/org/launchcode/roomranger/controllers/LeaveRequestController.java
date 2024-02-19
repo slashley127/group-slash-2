@@ -6,15 +6,19 @@ import org.launchcode.roomranger.data.RoomAttendantRepository;
 import org.launchcode.roomranger.exception.NotFoundException;
 import org.launchcode.roomranger.models.LeaveRequest;
 import org.launchcode.roomranger.models.Room;
+import org.launchcode.roomranger.models.RoomAttendant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
@@ -38,9 +42,14 @@ public class LeaveRequestController {
     public LeaveRequest submitLeaveRequestForm(@RequestBody LeaveRequest newLeave) {
         LocalDate startDate = newLeave.getStartDate();
         LocalDate endDate = newLeave.getEndDate();
+        //calculate the duration
         int duration = (int) ChronoUnit.DAYS.between(startDate, endDate) + 1;
+        //exclude leave duration according to the working days
+        int workingDayscount = 0;
+//        RoomAttendant roomAttendant = newLeave.getRoomAttendant();
+//        List<DayOfWeek> workingDays = parseWorkingDays(roomAttendant.getWorkingDays());
+//        System.out.println(workingDays);
         newLeave.setDuration(duration);
-//        int remainingDays = (roomAttendantRepository.findById(newLeave.getRoomAttendant().getId())).getRemainingDays();
         int remainingDays = newLeave.getRoomAttendant().getRemainingDays();
         if (remainingDays < newLeave.getDuration() || remainingDays <= 0)
             throw new RuntimeException("You do not have sufficient leave balance");
@@ -50,6 +59,12 @@ public class LeaveRequestController {
         newLeave.setStatus("Pending");
         newLeave.setSubmittedDate(LocalDate.now());
         return leaveRequestRepository.save(newLeave);
+    }
+    //convert String to Array of workingDays
+    private List<DayOfWeek> parseWorkingDays(String workingDays) {
+        return Arrays.stream(workingDays.split("\\s*,\\s*"))
+                .map(day -> DayOfWeek.valueOf(day.toUpperCase()))
+                .collect(Collectors.toList());
     }
 
     @PutMapping("/{id}/approve")

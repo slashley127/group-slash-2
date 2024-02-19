@@ -31,10 +31,11 @@ import  AuthProvider, { useAuth } from './components/security/AuthContext';
 
 function AuthenticatedRoute({children}){
   const authContext=useAuth()
-  if(authContext.isAuthenticated)
+  if(authContext.isAuthenticated){
     return children
-
+  }else{
     return <Navigate to={"/login"}/>
+  }
 }
 
 function App() {
