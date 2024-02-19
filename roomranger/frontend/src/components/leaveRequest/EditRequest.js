@@ -19,8 +19,17 @@ export default function EditRequest() {
     useEffect(()=>{
         loadLeaveRequest();
     },[])
+
+    const jwt = localStorage.getItem('jwt');
+
+    const authAxios = axios.create({
+        baseURL: "http://localhost:8080",
+        headers: {
+          Authorization: `Bearer ${jwt}`
+        }
+      });
     const loadLeaveRequest = async () =>{
-        const response = await axios.get(`http://localhost:8080/leave/${id}/edit`);
+        const response = await authAxios.get(`/leave/${id}/edit`);
         setLeaveRequest(response.data);
     }
  return (

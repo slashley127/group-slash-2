@@ -10,20 +10,27 @@ export default function HomeRoom() {
   useEffect(() => {
     loadRooms();
   }, []) // Empty dependency array means the effect runs once after the initial render
+  const jwt = localStorage.getItem('jwt');
 
+  const authAxios = axios.create({
+        baseURL: "http://localhost:8080",
+        headers: {
+          Authorization: `Bearer ${jwt}`
+        }
+    });
   //Fetch rooms and typeName from backend
   const loadRooms = async () => {
-    const typesResponse = await axios.get('http://localhost:8080/rooms/types');
+    const typesResponse = await authAxios.get('/rooms/types');
     setTypes(typesResponse.data);
     // console.log(typesResponse.data);
-    const roomsResponse = await axios.get("http://localhost:8080/rooms")
+    const roomsResponse = await authAxios.get("/rooms")
     // console.log("******" ,roomsResponse.data)
     setRooms(roomsResponse.data);
   }
 
   const deletRoom = async (id) => {
 
-    const response = await axios.delete(`http://localhost:8080/rooms/room/${id}`);
+    const response = await authAxios.delete(`/rooms/room/${id}`);
     alert(response.data); // alert(`Room with number '' has been deleted successfully!`)
     loadRooms();
   }

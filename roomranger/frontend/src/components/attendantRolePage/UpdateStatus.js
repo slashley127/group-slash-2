@@ -13,19 +13,28 @@ export default function UpdateStatus() {
     const { id } = useParams();
     let navigate = useNavigate();
 
+   const jwt = localStorage.getItem('jwt');
+
+   const authAxios = axios.create({
+        baseURL: "http://localhost:8080",
+        headers: {
+          Authorization: `Bearer ${jwt}`
+        }
+   });
+
     const loadAssignedRoom = async () => {
-        const response = await axios.get(`http://localhost:8080/assignedrooms/assignedroom/${id}`);
+        const response = await authAxios.get(`/assignedrooms/assignedroom/${id}`);
         setAssignedRoom(response.data);
     }
 
     const loadStatuses = async () => {
-        const response = await axios.get("http://localhost:8080/assignedrooms/statuses");
+        const response = await authAxios.get("/assignedrooms/statuses");
         const statusesArray = Object.entries(response.data);
         setStatuses(statusesArray);
     }
 
     const loadTask = async () => {
-        const response = await axios.get(`http://localhost:8080/assignedrooms/tasks/${id}`);
+        const response = await authAxios.get(`/assignedrooms/tasks/${id}`);
         setTask(response.data);
     }
 
@@ -39,10 +48,12 @@ export default function UpdateStatus() {
         const{name, value} = e.target;
         setAssignedRoom({...assignedRoom,[name]:value});
     }
+
+
     const onFormSubmit = async (e) =>{
         e.preventDefault();
         try{
-             await axios.put(`http://localhost:8080/assignedrooms/assignedroom/${id}`,assignedRoom);
+             await authAxios.put(`/assignedrooms/assignedroom/${id}`,assignedRoom);
             navigate("/landing/roomattendant")
         }catch(error){
             alert(error.response.data.message);

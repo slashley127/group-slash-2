@@ -7,13 +7,22 @@ const HomeAttendant = () => {
   const [statuses, setStatuses] = useState({});
   const [tasks, setTasks] = useState({});
 
+  const jwt = localStorage.getItem('jwt');
+
+  const authAxios = axios.create({
+        baseURL: "http://localhost:8080",
+        headers: {
+          Authorization: `Bearer ${jwt}`
+        }
+  });
+
   const loadAssignedRooms = async () => {
-    const statusesResponse = await axios.get('http://localhost:8080/assignedrooms/statuses');
+    const statusesResponse = await authAxios.get('/assignedrooms/statuses');
     setStatuses(statusesResponse.data);
     console.log(statusesResponse.data)
-    const tasksResponse = await axios.get('http://localhost:8080/assignedrooms/tasks');
+    const tasksResponse = await authAxios.get('/assignedrooms/tasks');
     setTasks(tasksResponse.data);
-    const response = await axios.get("http://localhost:8080/assignedrooms")
+    const response = await authAxios.get("/assignedrooms")
     setAssignedRooms(response.data);
   }
 

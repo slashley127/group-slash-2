@@ -15,6 +15,15 @@ export default function AddRoom() {
     useEffect(() => {
         fetchTypes();
     }, [])
+
+    const jwt = localStorage.getItem('jwt');
+
+    const authAxios = axios.create({
+        baseURL: "http://localhost:8080",
+        headers: {
+          Authorization: `Bearer ${jwt}`
+        }
+      });
     // room input handler
     const onInputChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -23,7 +32,7 @@ export default function AddRoom() {
     }
     // get the types
     const fetchTypes = async () => {
-        const typesResponse = await axios.get('http://localhost:8080/rooms/types');
+        const typesResponse = await authAxios.get('/rooms/types');
         const typesArray = Object.entries(typesResponse.data);
         setTypes(typesArray);
         // console.log(types);
@@ -33,7 +42,7 @@ export default function AddRoom() {
     const onFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:8080/rooms/room", room);
+            const response = await authAxios.post("/rooms/room", room);
             // console.log("~~~~~~" + response.data.propertyName)
             navigate("/landing/rooms");  //navigate to the rooms home page
         }

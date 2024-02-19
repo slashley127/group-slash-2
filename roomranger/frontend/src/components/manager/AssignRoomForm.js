@@ -81,10 +81,18 @@ export default function AssignRoom() {
       },
     })
   }
+  const jwt = localStorage.getItem('jwt');
+
+  const authAxios = axios.create({
+      baseURL: "http://localhost:8080",
+      headers: {
+        Authorization: `Bearer ${jwt}`
+      }
+    });
 
 
   const fetchTasks = async () => {
-    const tasksResponse = await axios.get('http://localhost:8080/assignedrooms/tasks')
+    const tasksResponse = await authAxios.get('/assignedrooms/tasks')
     const tasksArray = Object.entries(tasksResponse.data);
     const tasksOrder = ['STAY_OVER', 'STAY_OVER_FULL_LINEN', 'CHECK_OUT', 'TOUCH_UP'];
     tasksArray.sort((a, b) => tasksOrder.indexOf(a[0]) - tasksOrder.indexOf(b[0]));
@@ -92,7 +100,7 @@ export default function AssignRoom() {
   }
 
   const fetchStatuses = async () => {
-    const statusesResponse = await axios.get('http://localhost:8080/assignedrooms/statuses')
+    const statusesResponse = await authAxios.get('/assignedrooms/statuses')
     const statusesArray = Object.entries(statusesResponse.data);
     const statusOrder = ['NOT_STARTED', 'IN_PROGRESS', 'SERVICE_REFUSED', 'READY', 'INSPECTED'];
 
@@ -109,7 +117,7 @@ export default function AssignRoom() {
 
   const fetchRooms = async () => {
     try {
-      const roomsResponse = await axios.get("http://localhost:8080/rooms");
+      const roomsResponse = await authAxios.get("/rooms");
       const roomsArray = Object.entries(roomsResponse.data);
       setRooms(roomsArray);
     } catch (error) {
@@ -119,7 +127,7 @@ export default function AssignRoom() {
 
   const fetchRoomAttendants = async () => {
     try {
-      const roomAttendantsResponse = await axios.get("http://localhost:8080/roomAttendant");
+      const roomAttendantsResponse = await authAxios.get("/roomAttendant");
       const roomAttendantsArray = Object.entries(roomAttendantsResponse.data);
       setRoomAttendants(roomAttendantsArray);
     } catch (error) {
@@ -131,8 +139,8 @@ export default function AssignRoom() {
     e.preventDefault();
     console.log("Assigned Room:", assignedRoom);
     try {
-      const response = await axios.post(
-        "http://localhost:8080/assignedrooms/create",
+      const response = await authAxios.post(
+        "/assignedrooms/create",
         assignedRoom,
         {
           headers: {

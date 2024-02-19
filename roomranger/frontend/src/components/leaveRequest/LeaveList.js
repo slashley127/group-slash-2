@@ -11,9 +11,18 @@ export default function LeaveList() {
     loadRequestList();
   }, [refreshId]);
 
+  const jwt = localStorage.getItem('jwt');
+
+  const authAxios = axios.create({
+        baseURL: "http://localhost:8080",
+        headers: {
+          Authorization: `Bearer ${jwt}`
+        }
+  });
+
   const loadRequestList = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/leave");
+      const response = await authAxios.get("/leave");
       const leaveRequests = response.data.filter(leave => {
         const startDateYear = new Date(leave.startDate).getFullYear();
         const currentYear = new Date().getFullYear();
@@ -28,7 +37,7 @@ export default function LeaveList() {
   //for manager to approve leave request
   const approve = async (id) => {
     try {
-      await axios.put(`http://localhost:8080/leave/${id}/approve`);
+      await authAxios.put(`/leave/${id}/approve`);
       alert("You have approved this leave request!")
       setRefreshId(Symbol());
       console.log(refreshId);
@@ -41,7 +50,7 @@ export default function LeaveList() {
   //for manager to reject leave request
   const reject = async (id) => {
     try {
-      await axios.put(`http://localhost:8080/leave/${id}/reject`);
+      await authAxios.put(`/leave/${id}/reject`);
       alert("You have rejected this leave request!")
       setRefreshId(Symbol());
     } catch (error) {

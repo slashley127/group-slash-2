@@ -80,8 +80,18 @@ export default function EditAssignedRoom() {
         })
       }
 
+      //Setting JWT in the HTTP Request Header under Authorization field
+    const jwt = localStorage.getItem('jwt');
+
+    const authAxios = axios.create({
+        baseURL: "http://localhost:8080",
+        headers: {
+          Authorization: `Bearer ${jwt}`
+        }
+      });
+
       const fetchTasks = async () => {
-        const tasksResponse = await axios.get('http://localhost:8080/assignedrooms/tasks')
+        const tasksResponse = await authAxios.get('/assignedrooms/tasks')
         const tasksArray = Object.entries(tasksResponse.data);
         const tasksOrder = ['STAY_OVER', 'STAY_OVER_FULL_LINEN', 'CHECK_OUT', 'TOUCH_UP'];
         tasksArray.sort((a, b) => tasksOrder.indexOf(a[0]) - tasksOrder.indexOf(b[0]));
@@ -89,7 +99,7 @@ export default function EditAssignedRoom() {
       }
 
       const fetchStatuses = async () => {
-        const statusesResponse = await axios.get('http://localhost:8080/assignedrooms/statuses')
+        const statusesResponse = await authAxios.get('/assignedrooms/statuses')
         const statusesArray = Object.entries(statusesResponse.data);
         const statusOrder = ['NOT_STARTED', 'IN_PROGRESS', 'SERVICE_REFUSED', 'READY', 'INSPECTED'];
     
@@ -105,7 +115,7 @@ export default function EditAssignedRoom() {
       };
     const fetchRooms = async () => {
         try {
-            const roomsResponse = await axios.get(`http://localhost:8080/rooms`);
+            const roomsResponse = await authAxios.get(`/rooms`);
             const roomsArray = Object.entries(roomsResponse.data);
             setRooms(roomsArray);
         } catch (error) {
@@ -115,7 +125,7 @@ export default function EditAssignedRoom() {
 
     const fetchRoomAttendants = async () => {
         try {
-          const roomAttendantsResponse = await axios.get("http://localhost:8080/roomAttendant");
+          const roomAttendantsResponse = await authAxios.get("/roomAttendant");
           const roomAttendantsArray = Object.entries(roomAttendantsResponse.data);
           setRoomAttendants(roomAttendantsArray);
         } catch (error) {
@@ -128,13 +138,13 @@ export default function EditAssignedRoom() {
     //REVIEW NEEDED
     const onFormSubmit = async (e) => {
         e.preventDefault();
-        await axios.put(
-            `http://localhost:8080/assignedrooms/assignedroom/${id}`, assignedRoom);
+        await authAxios.put(
+            `/assignedrooms/assignedroom/${id}`, assignedRoom);
         navigate("/landing");
     };
 
     const loadAssignedRoom = async () => {
-        const result = await axios.get(`http://localhost:8080/assignedrooms/assignedroom/${id}`)
+        const result = await authAxios.get(`/assignedrooms/assignedroom/${id}`)
         setAssignedRoom(result.data)
     }
     //REVIEW NEEDED

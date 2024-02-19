@@ -17,12 +17,21 @@ export default function ViewRooms() {
         loadRoom();
     })
 
+    const jwt = localStorage.getItem('jwt');
+
+    const authAxios = axios.create({
+        baseURL: "http://localhost:8080",
+        headers: {
+          Authorization: `Bearer ${jwt}`
+        }
+    });
+
     const fetchType = async () => {
-        const typeResponse = await axios.get(`http://localhost:8080/rooms/type/${id}`);
+        const typeResponse = await authAxios.get(`/rooms/type/${id}`);
         setType(typeResponse.data);
     };
     const loadRoom = async () => {
-        const result = await axios.get(`http://localhost:8080/rooms/room/${id}`);
+        const result = await authAxios.get(`/rooms/room/${id}`);
         setRoom(result.data)
     }
     return (

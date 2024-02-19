@@ -40,10 +40,19 @@ export default function LeaveForm({firstname = "Luna", lastname = "Liu"}) {
         console.log("^^^^", name, value, typeof value);
         setLeaveRequest({...leaveRequest,[name]:value});
     }
+    const jwt = localStorage.getItem('jwt');
+
+    const authAxios = axios.create({
+        baseURL: "http://localhost:8080",
+        headers: {
+          Authorization: `Bearer ${jwt}`
+        }
+      });
+      
     const onFormSubmit = async(e) =>{
         e.preventDefault();
         try{ 
-            await axios.post("http://localhost:8080/leave/add", leaveRequest);
+            await authAxios.post("/leave/add", leaveRequest);
             navigate("/landing/leave");
             // console.log(leaveRequest);
         }catch(error){

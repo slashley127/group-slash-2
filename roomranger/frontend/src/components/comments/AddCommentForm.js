@@ -15,7 +15,7 @@ export default function AddCommentForm({ assignRoomId }) {
 
   const submitComment = async (e) => {
     try {
-      const response = await axios.post(`http://localhost:8080/comments`, { assignRoomId, text });
+      const response = await authAxios.post(`/comments`, { assignRoomId, text });
       setRefreshId(Symbol());
       console.log("~~before", text);
       setText("");
@@ -24,10 +24,18 @@ export default function AddCommentForm({ assignRoomId }) {
       console.error('Error posting comments:', error);
     }
   }
+  const jwt = localStorage.getItem('jwt');
+
+  const authAxios = axios.create({
+        baseURL: "http://localhost:8080",
+        headers: {
+          Authorization: `Bearer ${jwt}`
+        }
+  });
   //fetch all comments from the assigned room.
   const loadComments = async (e) => {
     try {
-      const response = await axios.get('http://localhost:8080/comments', {
+      const response = await authAxios.get('/comments', {
         params: {
           assignedRoomId: assignRoomId
         }
