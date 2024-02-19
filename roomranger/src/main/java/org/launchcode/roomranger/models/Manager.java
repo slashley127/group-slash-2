@@ -1,34 +1,29 @@
 package org.launchcode.roomranger.models;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Manager extends AbstractEntity{
+    @NotBlank(message="First name is required")
+    @Column(length=30)
     private String firstName;
+    @NotBlank(message="Last name is required")
     private String lastName;
-//    @OneToMany(mappedBy = "manager")
-//    private List<RoomAttendant> roomAttendants = new ArrayList<>();
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @NotNull
-//    private ManagerUser managerUser;
-//    @OneToMany(mappedBy = "managerCreator")
-//    private List<Room> rooms = new ArrayList<>();
-    public Manager() {
-    }
+    private String email;
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="user_id")
+    private User user;
 
-    public Manager(String firstName, String lastName, List<RoomAttendant> roomAttendants) {
+
+    public Manager(String firstName, String lastName, String email, List<RoomAttendant> roomAttendants,User user) {
         this.firstName = firstName;
         this.lastName = lastName;
-//        this.roomAttendants = roomAttendants;
-//        this.managerUser = managerUser;
-//        this.rooms = rooms;
+        this.email = email;
+
+        this.user = user;
     }
 
     public String getFirstName() {
@@ -47,29 +42,19 @@ public class Manager extends AbstractEntity{
         this.lastName = lastName;
     }
 
-//    public List<RoomAttendant> getRoomAttendants() {
-//        return roomAttendants;
-//    }
-//
-//    public void setRoomAttendants(List<RoomAttendant> roomAttendants) {
-//        this.roomAttendants = roomAttendants;
-//    }
+    public String getEmail() {
+        return email;
+    }
 
-//    public ManagerUser getManagerUser() {
-//        return managerUser;
-//    }
-//
-//    public void setManagerUser(ManagerUser managerUser) {
-//        this.managerUser = managerUser;
-//    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-//    public List<Room> getRooms() {
-//        return rooms;
-//    }
-//
-//    public void setRooms(List<Room> rooms) {
-//        this.rooms = rooms;
-//    }
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
-

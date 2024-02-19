@@ -31,7 +31,8 @@ public class RegistrationController {
         if (userRepository.existsByUsername(newUser.getUsername())) {
             return new ResponseEntity<>("Username is already taken. Please choose a different one.", HttpStatus.BAD_REQUEST);
         }
-
+        // Set role to 'manager' for new users
+        newUser.setRole("manager");
         // Check for password complexity
         String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,30}$";
         if (!newUser.getPassword().matches(passwordRegex)) {
