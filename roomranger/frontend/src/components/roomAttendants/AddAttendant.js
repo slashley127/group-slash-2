@@ -45,11 +45,19 @@ export default function AddAttendant() {
     }
   };
 
+  const jwt = localStorage.getItem('jwt'); // Retrieve the JWT token from local storage
+
+const authAxios = axios.create({
+  baseURL: "http://localhost:8080",
+  headers: {
+    Authorization: `Bearer ${jwt}`
+  }
+});
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try{
-    await axios.post("http://localhost:8080/roomAttendant/add", attendant);
+    await authAxios.post('/roomAttendant/add', attendant);
     navigate("/landing/attendants")}
     catch (error) {
       setAttendantError(error.response.data.roomAttendant); 

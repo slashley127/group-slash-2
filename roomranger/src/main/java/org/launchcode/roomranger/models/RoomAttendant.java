@@ -38,7 +38,7 @@ public class RoomAttendant extends AbstractEntity{
 
 
 
-    private int remainingDays;
+    private int remainingDays = 20;
 
 
     public void setWorkingDays(String workingDays) {

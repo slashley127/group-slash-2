@@ -3,9 +3,8 @@ package org.launchcode.roomranger.controllers;
 import jakarta.validation.Valid;
 import org.launchcode.roomranger.data.LeaveRequestRepository;
 import org.launchcode.roomranger.data.RoomAttendantRepository;
-import org.launchcode.roomranger.exception.NotFoundException;
+import org.launchcode.roomranger.exception.UserNotAuthorizedException;
 import org.launchcode.roomranger.models.LeaveRequest;
-import org.launchcode.roomranger.models.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Locale;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
@@ -55,7 +53,7 @@ public class LeaveRequestController {
     @PutMapping("/{id}/approve")
     public ResponseEntity<?> approveLeaveRequest(@PathVariable int id) {
         LeaveRequest leaveRequest = leaveRequestRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Leave Request with id " + id));
+                .orElseThrow(() -> new UserNotAuthorizedException("Leave Request with id " + id));
         if (leaveRequest.getStatus().equals("Approved") || leaveRequest.getStatus().equals("Rejected")) {
             throw new RuntimeException("The leave request has been processed!");
         }
@@ -72,7 +70,7 @@ public class LeaveRequestController {
     @PutMapping("/{id}/reject")
     public ResponseEntity<?> rejectLeaveRequest(@PathVariable int id) {
         LeaveRequest leaveRequest = leaveRequestRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Leave Request with id " + id));
+                .orElseThrow(() -> new UserNotAuthorizedException("Leave Request with id " + id));
         if (leaveRequest.getStatus().equals("Approved") || leaveRequest.getStatus().equals("Rejected")) {
             throw new RuntimeException("The leave request has been processed!");
         }
@@ -89,6 +87,6 @@ public class LeaveRequestController {
                     leaveRequest.setEndDate(newLeaveRequest.getEndDate());
                     leaveRequest.setReason(newLeaveRequest.getReason());
                     return leaveRequestRepository.save(leaveRequest);
-                }).orElseThrow(() -> new NotFoundException("Leave Request with id " + id));
+                }).orElseThrow(() -> new UserNotAuthorizedException("Leave Request with id " + id));
     }
 }

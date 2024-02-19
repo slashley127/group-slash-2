@@ -1,7 +1,9 @@
 package org.launchcode.roomranger.advice;
 
-import org.launchcode.roomranger.exception.NotFoundException;
+import org.launchcode.roomranger.exception.UserNotAuthorizedException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,10 +28,15 @@ public class RoomExceptionHandler {
 
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(NotFoundException.class)
-    public Map<String, String> exceptionHandler(NotFoundException exception) {
+    @ExceptionHandler(UserNotAuthorizedException.class)
+    public Map<String, String> exceptionHandler(UserNotAuthorizedException exception) {
         Map<String, String> errorMap = new HashMap<>();
         errorMap.put("errorMessage", exception.getMessage());
         return errorMap;
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<String> handleAccessDeniedException(AccessDeniedException ex) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ex.getMessage());
     }
 }

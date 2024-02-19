@@ -2,7 +2,7 @@ import './App.css';
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import NavBar from './components/NavBar';
 import HomeRoom from './components/rooms/HomeRoom';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import AddRoom from './components/rooms/AddRoom';
 import EditRoom from './components/rooms/EditRoom';
 import ViewRoom from './components/rooms/ViewRoom';
@@ -20,15 +20,24 @@ import RouteHome from './components/Route';
 import LeaveForm from './components/leaveRequest/LeaveForm';
 import LeaveList from './components/leaveRequest/LeaveList';
 import EditRequest from './components/leaveRequest/EditRequest';
+import  AuthProvider, { useAuth } from './components/security/AuthContext';
 // import Login from './components/users/Login';
 // import Home from './components/pages/Home';
 // import Register from './components/users/Register';
 // import HomeNav from './components/layout/Navbar';
 
+function AuthenticatedRoute({children}){
+  const authContext=useAuth()
+  if(authContext.isAuthenticated)
+    return children
+
+    return <Navigate to={"/login"}/>
+}
 
 function App() {
   return (
     <div className="App">
+       <AuthProvider>
       <Router>
         <Routes>
           {/* <Route element={<HomeNav />}> */}
@@ -72,7 +81,7 @@ function App() {
         </Routes>
         <Footer />
       </Router>
-      {/* <Footer/> */}
+      </AuthProvider>
     </div>
 
   );

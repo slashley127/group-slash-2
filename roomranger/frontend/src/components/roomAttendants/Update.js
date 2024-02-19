@@ -49,14 +49,23 @@ useEffect(()=> {
 []
 );
 
+const jwt = localStorage.getItem('jwt'); // Retrieve the JWT token from local storage
+
+const authAxios = axios.create({
+  baseURL: "http://localhost:8080",
+  headers: {
+    Authorization: `Bearer ${jwt}`
+  }
+});
+
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:8080/roomAttendant/update/${id}`, attendants);
+    await authAxios.put(`/roomAttendant/update/${id}`, attendants);
     navigate("/landing/attendants")};
 
 
     const loadAttendants = async (e) => {
-      const result= await axios.get(`http://localhost:8080/roomAttendant/update/${id}`);
+      const result= await authAxios.get(`/roomAttendant/update/${id}`);
        setAttendants(result.data)};
 
   return (
@@ -179,7 +188,7 @@ useEffect(()=> {
                   <label htmlFor="notes" className="form-label ">
                     {/* NOTES */}
                   </label>
-                  <textarea class="form-control h-100" value={notes} id="notes" name="notes" placeholder="Notes"></textarea>
+                  <textarea class="form-control h-100" defaultValue={notes} id="notes" name="notes" placeholder="Notes" onChange={(e) => handleChange(e)}></textarea>
                 </div>
                 </div>
           <div className="container" >
