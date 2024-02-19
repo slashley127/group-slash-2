@@ -2,7 +2,7 @@ import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './components/NavBar';
 import HomeRoom from './components/rooms/HomeRoom';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
 import AddRoom from './components/rooms/AddRoom';
 import EditRoom from './components/rooms/EditRoom';
 import ViewRoom from './components/rooms/ViewRoom';
@@ -27,6 +27,16 @@ import Registration from './components/hompage/Registration';
 import About from './components/About';
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import  AuthProvider, { useAuth } from './components/security/AuthContext';
+
+function AuthenticatedRoute({children}){
+  const authContext=useAuth()
+  if(authContext.isAuthenticated)
+    return children
+
+    return <Navigate to={"/login"}/>
+}
+
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -40,6 +50,7 @@ function App() {
 
   return (
     <div className='App'>
+      <AuthProvider>
       <div className='mode-toggle' onClick={toggleTheme}>
         <div className={`slider ${isDarkMode ? 'dark' : 'light'}`} />
         <span className='mode-text'>{isDarkMode ? 'Light' : 'Dark'}</span>
@@ -80,6 +91,7 @@ function App() {
         </Routes>
         <Footer />
       </Router>
+      </AuthProvider> 
     </div >
   );
 }
