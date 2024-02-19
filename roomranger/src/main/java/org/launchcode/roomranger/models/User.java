@@ -4,54 +4,20 @@ import jakarta.persistence.*;
 
 
 @Entity
-public class User {
+public class User extends AbstractEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-
+    @Column(nullable = false)
+    @Basic(optional = false)
     private String username;
-
-
-    private String firstName;
-
-
-    private String lastName;
-
-    private String email;
-
-
+    @Column(nullable = false)
+    @Basic(optional = false)
     private String password;
+    @Column(nullable = false)
+    @Basic(optional = false)
+    private String role;
 
-    //private String confirmPassword;
-
-    public User() {
-        // Default constructor
-    }
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    // Getters and setters...
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Manager manager;
 
     public String getUsername() {
         return username;
@@ -69,29 +35,15 @@ public class User {
         this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getRole() {
+        return role;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-
+//    public boolean isManager() {
+//        return this.role.equalsIgnoreCase("manager");
+//    }
 }
-//    public String getConfirmPassword() {
-//        return confirmPassword;
-//    }
-//
-//    public void setConfirmPassword(String confirmPassword) {
-//        this.confirmPassword = confirmPassword;
-//    }
-//}
