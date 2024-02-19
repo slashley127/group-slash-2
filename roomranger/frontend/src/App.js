@@ -36,7 +36,7 @@ function App() {
   };
   return (
     <div className="App">
-      <button onClick={toggleTheme}>Dark/Light</button>
+      {/* <button onClick={toggleTheme}>Dark/Light</button> */}
       <Router>
         <Routes>
           <Route path='/' element={<RouteHome />}>
@@ -67,7 +67,7 @@ function App() {
               <Route path="form" element={<LeaveForm />} />
             </Route>
             <Route path="roomattendant" element={<RouteHome />} >
-              <Route index element={<HomeAttendant />} />
+              <Route index element={<HomeAttendant name={"user1"} />} />
               <Route path="assignedroom/:id" element={<UpdateStatus />} />
             </Route>
           </Route>

@@ -5,7 +5,7 @@ import AddCommentForm from '../comments/AddCommentForm'
 
 export default function UpdateStatus() {
     const [assignedRoom, setAssignedRoom] = useState({
-        room: {},
+        room: {}
     });
     const [statuses, setStatuses] = useState([]);
     const [task, setTask] = useState([]);
@@ -65,6 +65,11 @@ export default function UpdateStatus() {
                             </label>
                         </div>
                         <div className='mb-3'>
+                            <label htmlFor="No. of Guest" className='form-label'>
+                            Number of Guests: {assignedRoom.numberOfGuests}
+                            </label>
+                        </div>
+                        <div className='mb-3'>
                             <label htmlFor="CheckIn" className='form-label'>
                                 CheckIn: {assignedRoom.checkIn}
                             </label>
@@ -101,7 +106,7 @@ export default function UpdateStatus() {
                 </div>
             </div>
             <div>
-            <AddCommentForm assignRoomId={id} />
+            <AddCommentForm assignedRoomId={id} />
             </div>
         </div>
     )

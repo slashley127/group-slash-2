@@ -118,4 +118,11 @@ import java.util.Optional;
             return new ResponseEntity<>(_assignedRoom, HttpStatus.CREATED);
 
         }
+
+        //get all the assigned rooms by the room attendant's first name to test room
+        // attendant homepage, this will be replaced after authorization
+        @GetMapping("attendant{firstName}")
+        public List<AssignedRoom> getAssignedRoomsByRoomAttendant(@PathVariable String firstName){
+            return assignedRoomRepository.findAllByRoomAttendant(roomAttendantRepository.findByFirstName(firstName));
+        }
     }

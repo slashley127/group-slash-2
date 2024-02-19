@@ -17,5 +17,6 @@ public interface RoomAttendantRepository extends CrudRepository<RoomAttendant, I
     List<RoomAttendant> findAll();
     List<RoomAttendant> findAllByManager(Manager manager);
     RoomAttendant findById(int id);
+    RoomAttendant findByFirstName(String firstName);
 
 }

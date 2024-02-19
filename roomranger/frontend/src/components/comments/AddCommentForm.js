@@ -5,7 +5,7 @@ import axios from 'axios';
 import CommentList from './CommentList';
 
 
-export default function AddCommentForm({ assignRoomId }) {
+export default function AddCommentForm({ assignedRoomId }) {
   const [text, setText] = useState("");
   const [comments, setComments] = useState([]);
   const [refreshId, setRefreshId] = useState(Symbol());
@@ -15,7 +15,7 @@ export default function AddCommentForm({ assignRoomId }) {
 
   const submitComment = async (e) => {
     try {
-      const response = await axios.post(`http://localhost:8080/comments`, { assignRoomId, text });
+      const response = await axios.post(`http://localhost:8080/comments`, { assignedRoomId, text });
       setRefreshId(Symbol());
       console.log("~~before", text);
       setText("");
@@ -27,11 +27,7 @@ export default function AddCommentForm({ assignRoomId }) {
   //fetch all comments from the assigned room.
   const loadComments = async (e) => {
     try {
-      const response = await axios.get('http://localhost:8080/comments', {
-        params: {
-          assignedRoomId: assignRoomId
-        }
-      });
+      const response = await axios.get(`http://localhost:8080/comments/${assignedRoomId}`);
       setComments(response.data);
       // console.log("comments", comments)
     } catch (error) {

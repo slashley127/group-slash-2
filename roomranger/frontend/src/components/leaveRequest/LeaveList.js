@@ -17,9 +17,9 @@ export default function LeaveList() {
       const leaveRequests = response.data.filter(leave => {
         const startDateYear = new Date(leave.startDate).getFullYear();
         const currentYear = new Date().getFullYear();
-        return startDateYear === currentYear;
+        return startDateYear === currentYear; //filter for current year
       })
-      setLeaveList(response.data);
+      setLeaveList(leaveRequests);
     } catch (error) {
       console.error('Error fetching leave requests:', error);
     }

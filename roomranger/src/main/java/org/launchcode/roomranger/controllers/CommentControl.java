@@ -52,8 +52,8 @@ public class CommentControl {
         return ResponseEntity.ok(comment);
     }
 
-    @GetMapping()
-    public ResponseEntity<List<Comment>> getCommentsByRoom(@RequestParam int assignedRoomId) {
+    @GetMapping("{assignedRoomId}")
+    public ResponseEntity<List<Comment>> getCommentsByRoom(@PathVariable int assignedRoomId) {
         List<Comment> comments = commentService.getCommentsByAssignedRoomId(assignedRoomId);
         return ResponseEntity.ok(comments);
     }

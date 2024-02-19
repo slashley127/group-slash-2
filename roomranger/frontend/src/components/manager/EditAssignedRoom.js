@@ -271,7 +271,7 @@ export default function EditAssignedRoom() {
                     </form>
                 </div>
             </div>
-            <AddCommentForm assignRoomId={id} />
+            <AddCommentForm assignedRoomId={id} />
         </div>
     );
 }

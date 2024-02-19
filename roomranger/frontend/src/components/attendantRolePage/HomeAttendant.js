@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const HomeAttendant = () => {
+const HomeAttendant = ({name}) => {
   const [assignedRooms, setAssignedRooms] = useState([]);
   const [statuses, setStatuses] = useState({});
   const [tasks, setTasks] = useState({});
@@ -13,14 +13,15 @@ const HomeAttendant = () => {
     console.log(statusesResponse.data)
     const tasksResponse = await axios.get('http://localhost:8080/assignedrooms/tasks');
     setTasks(tasksResponse.data);
-    const response = await axios.get("http://localhost:8080/assignedrooms")
+    const response = await axios.get(`http://localhost:8080/assignedrooms/attendant${name}`)
     setAssignedRooms(response.data);
+    console.log("user1", response.data);
   }
 
   useEffect(() => {
     loadAssignedRooms();
   }, [])
-  
+
   const getStatusColor = (status) => {
     switch (status) {
       case 'NOT_STARTED':
