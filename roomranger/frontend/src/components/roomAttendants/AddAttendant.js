@@ -196,7 +196,7 @@ const authAxios = axios.create({
                 </div >
                 <div className="container" >
                   <label  htmlFor="workingDays" className="form-label col-md-1 checkbox-inline"><h5>Working Days</h5></label>
-                  {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].map((day) => (
+                  {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day) => (
                     <div className="form-check" key={day}>
                       <input
                         type="checkbox"
