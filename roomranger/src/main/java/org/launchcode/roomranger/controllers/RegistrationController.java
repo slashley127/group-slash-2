@@ -1,7 +1,10 @@
 package org.launchcode.roomranger.controllers;
 
 import jakarta.validation.Valid;
+import org.launchcode.roomranger.data.ManagerRepository;
 import org.launchcode.roomranger.data.UserRepository;
+import org.launchcode.roomranger.models.Dto.ManagerDTO;
+import org.launchcode.roomranger.models.Manager;
 import org.launchcode.roomranger.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @CrossOrigin("http://localhost:3000")
 public class RegistrationController {
@@ -18,8 +20,12 @@ public class RegistrationController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ManagerRepository managerRepository;
+
+
     @PostMapping("/user")
-    ResponseEntity<String> newUser(@Valid @RequestBody User newUser, BindingResult bindingResult) {
+    ResponseEntity<String> newUser(@Valid @RequestBody ManagerDTO managerDTO, BindingResult bindingResult) {
         // Check for validation errors
         if (bindingResult.hasErrors()) {
             // Get the first validation error and return an appropriate response
@@ -28,25 +34,31 @@ public class RegistrationController {
         }
 
         // Check for unique username
-        if (userRepository.existsByUsername(newUser.getUsername())) {
+        if (userRepository.existsByUsername(managerDTO.getUsername())) {
             return new ResponseEntity<>("Username is already taken. Please choose a different one.", HttpStatus.BAD_REQUEST);
         }
 
         // Check for password complexity
         String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,30}$";
-        if (!newUser.getPassword().matches(passwordRegex)) {
+        if (!managerDTO.getPassword().matches(passwordRegex)) {
             return new ResponseEntity<>("Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 digit, 1 special character, and be between 8 and 30 characters long.", HttpStatus.BAD_REQUEST);
         }
 
-
-//        // Check if confirmPassword matches password
-//        if (!newUser.getPassword().equals(newUser.getConfirmPassword())) {
-//            return new ResponseEntity<>("Password and confirm password do not match.", HttpStatus.BAD_REQUEST);
-//        }
-
-        // Save the new user if all checks pass
+        // Create and save the user
+        User newUser = new User();
+        newUser.setUsername(managerDTO.getUsername());
+        newUser.setPassword(managerDTO.getPassword());
+        newUser.setRole("manager");
         userRepository.save(newUser);
-        return new ResponseEntity<>("User registered successfully!", HttpStatus.OK);
+
+        // Check if the user is a manager
+        if (newUser.getRole() != null && newUser.getRole().equalsIgnoreCase("manager")) {
+            // Create and save the manager
+            Manager newManager = new Manager(managerDTO.getFirstName(), managerDTO.getLastName(), managerDTO.getEmail(), newUser);
+            managerRepository.save(newManager);
+        }
+
+        return new ResponseEntity<>("Manager registered successfully!", HttpStatus.OK);
     }
 
     @GetMapping("/users")
