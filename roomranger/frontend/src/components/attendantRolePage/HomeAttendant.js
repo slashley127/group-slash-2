@@ -1,26 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate} from 'react-router-dom';
 
 const HomeAttendant = () => {
   const [assignedRooms, setAssignedRooms] = useState([]);
   const [statuses, setStatuses] = useState({});
   const [tasks, setTasks] = useState({});
+  const navigate = useNavigate();
+
+
+  const jwt = localStorage.getItem('jwt');
+
+  const authAxios = axios.create({
+    baseURL: "http://localhost:8080",
+    headers: {
+      Authorization: `Bearer ${jwt}`
+    }
+  });
 
   const loadAssignedRooms = async () => {
-    const statusesResponse = await axios.get('http://localhost:8080/assignedrooms/statuses');
-    setStatuses(statusesResponse.data);
-    console.log(statusesResponse.data)
-    const tasksResponse = await axios.get('http://localhost:8080/assignedrooms/tasks');
-    setTasks(tasksResponse.data);
-    const response = await axios.get("http://localhost:8080/assignedrooms")
-    setAssignedRooms(response.data);
+    try {
+      const statusesResponse = await authAxios.get('/assignedrooms/statuses');
+      setStatuses(statusesResponse.data);
+      console.log(statusesResponse.data)
+      const tasksResponse = await authAxios.get('/assignedrooms/tasks');
+      setTasks(tasksResponse.data);
+      const response = await authAxios.get("/assignedrooms")
+      setAssignedRooms(response.data);
+    } catch (error) {
+      if (error.response && error.response.status === 403) {
+        // 403 error - Unauthorized, navigate to login page
+        navigate('/login');
+      } else {
+        // Handle other errors
+        console.error('Error:', error);
+      }
+    }
+
   }
 
   useEffect(() => {
     loadAssignedRooms();
   }, [])
-  
+
   const getStatusColor = (status) => {
     switch (status) {
       case 'NOT_STARTED':
@@ -59,9 +81,9 @@ const HomeAttendant = () => {
                 <th scope="row" key={index}>{index + 1}</th>
                 <td>
                   <Link to={`/landing/roomattendant/assignedroom/${assignedRoom.id}`}>
-                  {assignedRoom.room.roomNumber}
+                    {assignedRoom.room.roomNumber}
                   </Link>
-                  </td>
+                </td>
                 <td>{assignedRoom.guest}</td>
                 <td>{assignedRoom.checkIn}</td>
                 <td>{assignedRoom.checkOut}</td>

@@ -31,6 +31,15 @@ export default function Registration() {
       setError(`${name.charAt(0).toUpperCase() + name.slice(1)} must be at least 2 characters long.`);
     }
   };
+  
+  const jwt = localStorage.getItem('jwt');
+
+  const authAxios = axios.create({
+        baseURL: "http://localhost:8080",
+        headers: {
+          Authorization: `Bearer ${jwt}`
+        }
+  });
 
   const onRegistrationSubmit = async (e) => {
     e.preventDefault();
@@ -42,7 +51,7 @@ export default function Registration() {
     }
 
     try {
-      const response = await axios.post("http://localhost:8080/user", user);
+      const response = await authAxios.post("/user", user);
       setSuccessMessage(response.data);
       navigate("/login");
     } catch (error) {

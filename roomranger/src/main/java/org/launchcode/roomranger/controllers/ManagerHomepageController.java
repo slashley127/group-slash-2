@@ -84,7 +84,7 @@ import java.util.Optional;
         public AssignedRoom updateAssignedRoom(@RequestBody @Valid AssignedRoom newAssignedRoom, @PathVariable int id){
             return assignedRoomRepository.findById(id)
                     .map(assignedRoom -> {
-                        assignedRoom.setRoomAttendant(newAssignedRoom.getRoomAttendant());
+                        assignedRoom.setRoomAttendant(roomAttendantRepository.findById(newAssignedRoom.getRoomAttendant().getId()));
                         assignedRoom.setRoom(newAssignedRoom.getRoom());
                         assignedRoom.setGuest(newAssignedRoom.getGuest());
                         assignedRoom.setNumberOfGuests(newAssignedRoom.getNumberOfGuests());
@@ -100,10 +100,11 @@ import java.util.Optional;
         @PostMapping(value = "/create")
         public ResponseEntity<AssignedRoom> createAssignedRoom(@RequestBody @Valid AssignedRoom assignedRoom) {
             System.err.println("********************");
+            RoomAttendant roomAttendant = roomAttendantRepository.findById(assignedRoom.getRoomAttendant().getId());
             AssignedRoom _assignedRoom = assignedRoomRepository.save(
                     new AssignedRoom(
                             assignedRoom.getRoom(),
-                            assignedRoom.getRoomAttendant(),
+                            roomAttendant,
                             assignedRoom.getGuest(),
                             assignedRoom.getNumberOfGuests(),
                             assignedRoom.getStatus(),
@@ -114,7 +115,7 @@ import java.util.Optional;
             );
             System.err.println("Assigned Room: " + _assignedRoom.toString());
             Room _room = roomRepository.save(assignedRoom.getRoom());
-            RoomAttendant _roomAttendant = roomAttendantRepository.save(assignedRoom.getRoomAttendant());
+            RoomAttendant _roomAttendant = roomAttendantRepository.save(roomAttendant);
             return new ResponseEntity<>(_assignedRoom, HttpStatus.CREATED);
 
         }

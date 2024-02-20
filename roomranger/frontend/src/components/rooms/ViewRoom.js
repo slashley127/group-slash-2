@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
 export default function ViewRooms() {
     const [room, setRoom] = useState({
@@ -10,6 +10,7 @@ export default function ViewRooms() {
     });
     const { id } = useParams();
     const [type, setType] = useState([]);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -17,13 +18,43 @@ export default function ViewRooms() {
         loadRoom();
     })
 
+    const jwt = localStorage.getItem('jwt');
+
+    const authAxios = axios.create({
+        baseURL: "http://localhost:8080",
+        headers: {
+            Authorization: `Bearer ${jwt}`
+        }
+    });
+
     const fetchType = async () => {
-        const typeResponse = await axios.get(`http://localhost:8080/rooms/type/${id}`);
-        setType(typeResponse.data);
+        try {
+            const typeResponse = await authAxios.get(`/rooms/type/${id}`);
+            setType(typeResponse.data);
+        } catch (error) {
+            if (error.response && error.response.status === 403) {
+                // 403 error - Unauthorized, navigate to login page
+                navigate('/login');
+            } else {
+                // Handle other errors
+                console.error('Error:', error);
+            }
+        }
+
     };
     const loadRoom = async () => {
-        const result = await axios.get(`http://localhost:8080/rooms/room/${id}`);
-        setRoom(result.data)
+        try {
+            const result = await authAxios.get(`/rooms/room/${id}`);
+            setRoom(result.data)
+        } catch (error) {
+            if (error.response && error.response.status === 403) {
+                // 403 error - Unauthorized, navigate to login page
+                navigate('/login');
+            } else {
+                // Handle other errors
+                console.error('Error:', error);
+            }
+        }
     }
     return (
         <div className='container'>

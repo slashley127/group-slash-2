@@ -15,6 +15,15 @@ export default function AddRoom() {
     useEffect(() => {
         fetchTypes();
     }, [])
+
+    const jwt = localStorage.getItem('jwt');
+
+    const authAxios = axios.create({
+        baseURL: "http://localhost:8080",
+        headers: {
+            Authorization: `Bearer ${jwt}`
+        }
+    });
     // room input handler
     const onInputChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -23,23 +32,40 @@ export default function AddRoom() {
     }
     // get the types
     const fetchTypes = async () => {
-        const typesResponse = await axios.get('http://localhost:8080/rooms/types');
-        const typesArray = Object.entries(typesResponse.data);
-        setTypes(typesArray);
-        // console.log(types);
+        try {
+            const typesResponse = await authAxios.get('/rooms/types');
+            const typesArray = Object.entries(typesResponse.data);
+            setTypes(typesArray);
+            // console.log(types);
+        } catch (error) {
+            if (error.response && error.response.status === 403) {
+                // 403 error - Unauthorized, navigate to login page
+                navigate('/login');
+            } else {
+                // Handle other errors
+                console.error('Error:', error);
+            }
+        }
+
     };
 
     //form submit event handler
     const onFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:8080/rooms/room", room);
+            const response = await authAxios.post("/rooms/room", room);
             // console.log("~~~~~~" + response.data.propertyName)
             navigate("/landing/rooms");  //navigate to the rooms home page
         }
         catch (error) {
-            console.log(error.response.data)
-            setRoomError(error.response.data.roomNumber);  //get error message from Room table roomNumber
+            if (error.response && error.response.status === 403) {
+                // 403 error - Unauthorized, navigate to login page
+                navigate('/login');
+            } else {
+                console.log(error.response.data)
+                setRoomError(error.response.data.roomNumber);  //get error message from Room table roomNumber
+            }
+
         }
     }
 
