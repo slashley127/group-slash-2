@@ -21,9 +21,9 @@ export default function EditRoom() {
     const authAxios = axios.create({
         baseURL: "http://localhost:8080",
         headers: {
-          Authorization: `Bearer ${jwt}`
+            Authorization: `Bearer ${jwt}`
         }
-      });
+    });
     // room input handler
     const onInputChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -52,7 +52,12 @@ export default function EditRoom() {
             await authAxios.put(`/rooms/room/${id}`, room);
             navigate("/landing/rooms");  //navigate to the rooms home page
         } catch (error) {
-            alert(error.response.data.message);
+            if (error.response && error.response.status === 403) {
+                // 403 error - Unauthorized, navigate to login page
+                navigate('/login');
+            } else {
+                alert(error.response.data.message);
+            }
         }
     }
 

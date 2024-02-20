@@ -60,13 +60,35 @@ const authAxios = axios.create({
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await authAxios.put(`/roomAttendant/update/${id}`, attendants);
-    navigate("/landing/attendants")};
+    try {
+      await authAxios.put(`/roomAttendant/update/${id}`, attendants);
+      navigate("/landing/attendants")
+  } catch (error) {
+      if (error.response && error.response.status === 403) {
+          // 403 error - Unauthorized, navigate to login page
+          navigate('/login');
+      } else {
+          console.error("Error updating attendant:", error);
+      }
+      // Handle error (e.g., by showing a message to the user)
+  }
+    };
 
 
     const loadAttendants = async (e) => {
-      const result= await authAxios.get(`/roomAttendant/update/${id}`);
-       setAttendants(result.data)};
+      try {
+        const result= await authAxios.get(`/roomAttendant/update/${id}`);
+       setAttendants(result.data)
+    } catch (error) {
+        if (error.response && error.response.status === 403) {
+            // 403 error - Unauthorized, navigate to login page
+            navigate('/login');
+        } else {
+            console.error("Error loading attendant:", error);
+        }
+        // Handle error (e.g., by showing a message to the user)
+    }
+  };
 
   return (
     <div className="add">

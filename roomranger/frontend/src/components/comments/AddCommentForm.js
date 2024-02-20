@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button, Card } from 'react-bootstrap';
 import axios from 'axios';
 import CommentList from './CommentList';
@@ -9,6 +10,7 @@ export default function AddCommentForm({ assignRoomId }) {
   const [text, setText] = useState("");
   const [comments, setComments] = useState([]);
   const [refreshId, setRefreshId] = useState(Symbol());
+  const navigate = useNavigate();
   const addComment = (value) => {
     setText(value);
   }
@@ -21,16 +23,23 @@ export default function AddCommentForm({ assignRoomId }) {
       setText("");
       console.log("~~after", text);
     } catch (error) {
-      console.error('Error posting comments:', error);
+      if (error.response && error.response.status === 403) {
+        // 403 error - Unauthorized, navigate to login page
+        navigate('/login');
+      } else {
+        // Handle other errors
+        console.error('Error posting comments:', error);
+      }
+
     }
   }
   const jwt = localStorage.getItem('jwt');
 
   const authAxios = axios.create({
-        baseURL: "http://localhost:8080",
-        headers: {
-          Authorization: `Bearer ${jwt}`
-        }
+    baseURL: "http://localhost:8080",
+    headers: {
+      Authorization: `Bearer ${jwt}`
+    }
   });
   //fetch all comments from the assigned room.
   const loadComments = async (e) => {
@@ -43,7 +52,14 @@ export default function AddCommentForm({ assignRoomId }) {
       setComments(response.data);
       // console.log("comments", comments)
     } catch (error) {
-      console.log("error", error)
+      if (error.response && error.response.status === 403) {
+        // 403 error - Unauthorized, navigate to login page
+        navigate('/login');
+      } else {
+        // Handle other errors
+        console.log("error", error)
+      }
+
     }
   }
   // This useEffect will run whenever 'text' changes
@@ -61,7 +77,7 @@ export default function AddCommentForm({ assignRoomId }) {
       <div className='mt-5'>
         <textarea style={{ width: "100%", borderRadius: "0.5em" }} value={text}
           onChange={(e) => addComment(e.target.value)}>
-        </textarea> 
+        </textarea>
         <Button variant="outline-primary" onClick={() => submitComment()} disabled={!text}>Post Comment</Button>
       </div>
       <div className="mt-5">

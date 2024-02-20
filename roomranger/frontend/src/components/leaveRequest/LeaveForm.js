@@ -3,8 +3,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-export default function LeaveForm({firstname = "Luna", lastname = "Liu"}) { 
-   
+export default function LeaveForm({ firstname = "Luna", lastname = "Liu" }) {
+
     let navigate = useNavigate();
     const[leaveRequest, setLeaveRequest] = useState({
         firstName:"",
@@ -12,7 +12,7 @@ export default function LeaveForm({firstname = "Luna", lastname = "Liu"}) {
         roomAttendant:{},
         // initialDays: 20,
         // duration: 0,
-        remainingDays:20,
+        remainingDays: 20,
         startDate: "",
         endDate: "",
         // submittedDate: "",
@@ -20,7 +20,7 @@ export default function LeaveForm({firstname = "Luna", lastname = "Liu"}) {
         reason: "",
     });
     const calculateDuration = (startDate, endDate) => {
-        if(!startDate || !endDate) return 0;
+        if (!startDate || !endDate) return 0;
         const start = new Date(startDate);
         const end = new Date(endDate);
         const diffTime = Math.abs(end - start);
@@ -30,37 +30,44 @@ export default function LeaveForm({firstname = "Luna", lastname = "Liu"}) {
         // setLeaveRequest({ ...leaveRequest, duration: diffDays })
         return diffDays;
     }
-    const calculateRemaingDays = () =>{
+    const calculateRemaingDays = () => {
         // const{remainingDays, duration} = leaveRequest;
         // setLeaveRequest({...leaveRequest,remainingDays: remainingDays - duration});
     }
-  
-    const onInputChange =(e)=>{
-        const{name,value} = e.target;
+
+    const onInputChange = (e) => {
+        const { name, value } = e.target;
         console.log("^^^^", name, value, typeof value);
-        setLeaveRequest({...leaveRequest,[name]:value});
+        setLeaveRequest({ ...leaveRequest, [name]: value });
     }
     const jwt = localStorage.getItem('jwt');
 
     const authAxios = axios.create({
         baseURL: "http://localhost:8080",
         headers: {
-          Authorization: `Bearer ${jwt}`
+            Authorization: `Bearer ${jwt}`
         }
-      });
-      
-    const onFormSubmit = async(e) =>{
+    });
+
+    const onFormSubmit = async (e) => {
         e.preventDefault();
-        try{ 
+        try {
             await authAxios.post("/leave/add", leaveRequest);
             navigate("/landing/leave");
             // console.log(leaveRequest);
-        }catch(error){
+        } catch (error) {
             // console.log(error.response.data);
-            alert(error.response.data.message);
+            if (error.response && error.response.status === 403) {
+                // 403 error - Unauthorized, navigate to login page
+                navigate('/login');
+            } else {
+                // Handle other errors
+                alert(error.response.data.message);
+            }
+
         }
     }
-    
+
     return (
         <div className="container mt-5 m-lg-auto p-5 shadow">
             <section className="leave-request">
@@ -76,9 +83,9 @@ export default function LeaveForm({firstname = "Luna", lastname = "Liu"}) {
                                 type="text"
                                 className="form-control"
                                 placeholder="First Name"
-                                name="firstName" 
+                                name="firstName"
                                 value={leaveRequest.firstName}
-                                onChange={onInputChange}/>
+                                onChange={onInputChange} />
                         </div>
                         <div className="col">
                             <input
@@ -118,7 +125,7 @@ export default function LeaveForm({firstname = "Luna", lastname = "Liu"}) {
                                 className="form-control"
                                 name="startDate"
                                 value={leaveRequest.startDate}
-                                onChange={onInputChange} required/>
+                                onChange={onInputChange} required />
                         </div>
                         <div className="col">
                             <label className="form-label">End date<small className="text-muted">
@@ -128,7 +135,7 @@ export default function LeaveForm({firstname = "Luna", lastname = "Liu"}) {
                                 className="form-control"
                                 name="endDate"
                                 value={leaveRequest.endDate}
-                                onChange={onInputChange} required/>
+                                onChange={onInputChange} required />
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -137,9 +144,9 @@ export default function LeaveForm({firstname = "Luna", lastname = "Liu"}) {
                             <textarea
                                 // type="textarea"
                                 className="form-control"
-                                name="reason" 
+                                name="reason"
                                 value={leaveRequest.reason}
-                                onChange={onInputChange} required/>
+                                onChange={onInputChange} required />
                         </div>
                     </div>
                     <button type='submit' className='btn btn-outline-primary'>Submit</button>

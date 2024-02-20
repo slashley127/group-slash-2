@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 export default function LeaveList() {
   const [leaveList, setLeaveList] = useState([]);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [refreshId, setRefreshId] = useState(Symbol()); // This is used to render the list after approve or reject
 
   useEffect(() => {
@@ -14,10 +14,10 @@ export default function LeaveList() {
   const jwt = localStorage.getItem('jwt');
 
   const authAxios = axios.create({
-        baseURL: "http://localhost:8080",
-        headers: {
-          Authorization: `Bearer ${jwt}`
-        }
+    baseURL: "http://localhost:8080",
+    headers: {
+      Authorization: `Bearer ${jwt}`
+    }
   });
 
   const loadRequestList = async () => {
@@ -30,8 +30,15 @@ export default function LeaveList() {
       })
       setLeaveList(response.data);
     } catch (error) {
-      console.error('Error fetching leave requests:', error);
+      if (error.response && error.response.status === 403) {
+        // 403 error - Unauthorized, navigate to login page
+        navigate('/login');
+      } else {
+        // Handle other errors
+        console.error('Error fetching leave requests:', error);
+      }
     }
+
   }
 
   //for manager to approve leave request
@@ -43,7 +50,13 @@ export default function LeaveList() {
       console.log(refreshId);
       // window.location.reload();
     } catch (error) {
-      alert(error.response.data.message);
+      if (error.response && error.response.status === 403) {
+        // 403 error - Unauthorized, navigate to login page
+        navigate('/login');
+      } else {
+        // Handle other errors
+        alert(error.response.data.message);
+      }
     }
 
   }
@@ -54,7 +67,13 @@ export default function LeaveList() {
       alert("You have rejected this leave request!")
       setRefreshId(Symbol());
     } catch (error) {
-      alert(error.response.data.message);
+      if (error.response && error.response.status === 403) {
+        // 403 error - Unauthorized, navigate to login page
+        navigate('/login');
+      } else {
+        // Handle other errors
+        alert(error.response.data.message);
+      }
     }
 
   }
