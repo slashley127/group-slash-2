@@ -46,10 +46,13 @@ public class RegistrationController {
             return new ResponseEntity<>("Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 digit, 1 special character, and be between 8 and 30 characters long.", HttpStatus.BAD_REQUEST);
         }
 
+        // Encode the password before saving
+        String encodedPassword = passwordEncoder.encode(managerDTO.getPassword());
+
         // Create and save the user
         User newUser = new User();
         newUser.setUsername(managerDTO.getUsername());
-        newUser.setPassword(managerDTO.getPassword());
+        newUser.setPassword(encodedPassword); // Set the encoded password
         newUser.setRole("manager");
         userRepository.save(newUser);
 
@@ -62,6 +65,7 @@ public class RegistrationController {
 
         return new ResponseEntity<>("Manager registered successfully!", HttpStatus.OK);
     }
+
     @GetMapping("/users")
     Iterable<User> getAllUsers() {
         return userRepository.findAll();
