@@ -20,7 +20,6 @@ const LoginComponent = () => {
     setPassword(e.target.value);
   }
 
-
   async function handleSubmitLogin(e) {
     e.preventDefault(); // Prevent the form from causing a page reload
 
@@ -38,6 +37,10 @@ const LoginComponent = () => {
         authContext.login(data.jwt, 'true');
         setShowSuccessMessage(true);
         setShowErrorMessage(false);
+
+        // Store the JWT token securely in local storage
+        localStorage.setItem('jwt', data.jwt);
+
         navigate('/landing'); // Navigate to the landing page or dashboard
       } else {
         authContext.login('', 'false');
