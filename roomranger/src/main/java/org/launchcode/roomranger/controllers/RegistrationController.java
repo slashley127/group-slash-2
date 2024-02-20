@@ -6,6 +6,7 @@ import org.launchcode.roomranger.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,9 @@ public class RegistrationController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @PostMapping("/user")
     ResponseEntity<String> newUser(@Valid @RequestBody User newUser, BindingResult bindingResult) {
@@ -43,7 +47,9 @@ public class RegistrationController {
 //        if (!newUser.getPassword().equals(newUser.getConfirmPassword())) {
 //            return new ResponseEntity<>("Password and confirm password do not match.", HttpStatus.BAD_REQUEST);
 //        }
-
+        String encodedPassword = passwordEncoder.encode(newUser.getPassword());
+        newUser.setPassword(encodedPassword);
+        newUser.setRole("manager");
         // Save the new user if all checks pass
         userRepository.save(newUser);
         return new ResponseEntity<>("User registered successfully!", HttpStatus.OK);

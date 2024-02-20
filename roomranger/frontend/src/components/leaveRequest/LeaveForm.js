@@ -52,11 +52,12 @@ export default function LeaveForm({ firstname = "Luna", lastname = "Liu" }) {
     const onFormSubmit = async (e) => {
         e.preventDefault();
         try {
+            console.log("JWT:"+jwt)
             await authAxios.post("/leave/add", leaveRequest);
             navigate("/landing/leave");
             // console.log(leaveRequest);
         } catch (error) {
-            // console.log(error.response.data);
+             console.log(error.response.data);
             if (error.response && error.response.status === 403) {
                 // 403 error - Unauthorized, navigate to login page
                 navigate('/login');

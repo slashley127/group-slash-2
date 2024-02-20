@@ -42,7 +42,7 @@ export default function Profile() {
         } catch (error) {
             if (error.response && error.response.status === 403) {
                 // 403 error - Unauthorized, navigate to login page
-                navigate('/login');
+                navigate('/landing');
             } else {
                 console.error("Error viewing attendant:", error);
             }

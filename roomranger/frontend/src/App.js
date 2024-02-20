@@ -28,6 +28,7 @@ import About from './components/About';
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import  AuthProvider, { useAuth } from './components/security/AuthContext';
+import GroupChatComponent from './components/groupChatPage/GroupChatComponent';
 
 function AuthenticatedRoute({children}){
   const authContext=useAuth()
@@ -86,6 +87,9 @@ function App() {
             <Route path="roomattendant" element={<RouteHome />} >
               <Route index element={<HomeAttendant />} />
               <Route path="assignedroom/:id" element={<UpdateStatus />} />
+            </Route>
+            <Route path="groupchat" element={<RouteHome />} >
+              <Route index element={<GroupChatComponent />} />
             </Route>
           </Route>
         </Routes>
