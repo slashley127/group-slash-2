@@ -40,12 +40,18 @@ public class LeaveRequestController {
         LocalDate endDate = newLeave.getEndDate();
         int duration = (int) ChronoUnit.DAYS.between(startDate, endDate) + 1;
         newLeave.setDuration(duration);
-//        int remainingDays = (roomAttendantRepository.findById(newLeave.getRoomAttendant().getId())).getRemainingDays();
-        int remainingDays = newLeave.getRoomAttendant().getRemainingDays();
+        int remainingDays = (roomAttendantRepository.findById(newLeave.getRoomAttendant().getId())).getRemainingDays();
+//        int remainingDays = roomAttendant.getRemainingDays();
         if (remainingDays < newLeave.getDuration() || remainingDays <= 0)
             throw new RuntimeException("You do not have sufficient leave balance");
         if (newLeave.getStartDate().isAfter(newLeave.getEndDate())){
-            throw new RuntimeException("Your End Date is After Start Date!");
+            throw new RuntimeException("Your End Date is Before Start Date!");
+        }
+        if (newLeave.getStartDate().isBefore(LocalDate.now())){
+            throw new RuntimeException("Your Start Date is Before today's Date!");
+        }
+        if (newLeave.getEndDate().isBefore(LocalDate.now())){
+            throw new RuntimeException("Please choose a future End Date!");
         }
         newLeave.setStatus("Pending");
         newLeave.setSubmittedDate(LocalDate.now());
