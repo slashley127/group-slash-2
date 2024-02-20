@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Card } from 'react-bootstrap';
 import axios from 'axios';
 import CommentList from './CommentList';
+import { useAuth } from '../security/AuthContext';
 
 
 export default function AddCommentForm({ assignRoomId }) {
@@ -14,10 +15,13 @@ export default function AddCommentForm({ assignRoomId }) {
   const addComment = (value) => {
     setText(value);
   }
+  const {username} = useAuth();
+
+  console.log(username)
 
   const submitComment = async (e) => {
     try {
-      const response = await authAxios.post(`/comments`, { assignRoomId, text });
+      const response = await authAxios.post(`/comments`, { assignRoomId, text, createdBy: username });
       setRefreshId(Symbol());
       console.log("~~before", text);
       setText("");

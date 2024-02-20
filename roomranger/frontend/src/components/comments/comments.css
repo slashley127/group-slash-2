@@ -4,3 +4,11 @@
 .comment-user{
     font-weight:lighter;
 }
+.comment-box{
+    width: 300px;
+    height: auto;
+    margin: 20px;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
