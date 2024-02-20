@@ -16,7 +16,12 @@ import org.springframework.web.bind.annotation.*;
 import org.launchcode.roomranger.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin("http://localhost:3000")
@@ -293,6 +298,25 @@ public class RoomAttendantController {
         }
 
 
+    }
+    @GetMapping("/available")
+    public List<RoomAttendantDTO> displayAllAvailableRoomAttendants() {
+        if (isAuthenticatedAndIsManager()) {
+            List<RoomAttendant> roomAttendants = roomAttendantRepository.findAll();
+            DayOfWeek today = LocalDate.now().getDayOfWeek();
+            List<RoomAttendant> filteredRoomAttendants = roomAttendants.stream()
+                    .filter(attendant -> Arrays.asList(attendant.getWorkingDays().split(",")).contains(today.getDisplayName(TextStyle.FULL, Locale.ENGLISH)))
+                    .collect(Collectors.toList());
+            return getRoomAttendantDTOList(filteredRoomAttendants);
+
+        } else {
+            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            String username = "";
+            if (userDetails != null) {
+                username = userDetails.getUsername();
+            }
+            throw new AccessDeniedException("User does not have access to this resource");
+        }
     }
 
 }
