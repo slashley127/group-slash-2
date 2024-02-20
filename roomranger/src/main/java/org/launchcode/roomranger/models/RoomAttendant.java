@@ -107,10 +107,10 @@ public class RoomAttendant  extends AbstractEntity{
     public void setRemainingDays(int remainingDays) {
         this.remainingDays = remainingDays;
     }
-
-    public RoomAttendant() {
+     public RoomAttendant() {
 
     }
+
     public RoomAttendant(int id) {
         this.id = id;
     }
