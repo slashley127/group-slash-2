@@ -36,7 +36,23 @@ public class SecurityConfig {
                 // New way to disable CSRF while adopting the functional style
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers("/authenticate","/user").permitAll()
+                        .requestMatchers("/authenticate","/user","/leave/add","/chat**").permitAll()
+                        .requestMatchers("/leaveForm/").hasRole("user")
+                        .requestMatchers("/manager/**").hasRole("MANAGER")
+                        .requestMatchers("/manager/create-room").hasRole("MANAGER")
+                        .requestMatchers("/manager/assign-room").hasRole("MANAGER")
+                        .requestMatchers("/manager/create-task").hasRole("MANAGER")
+                        .requestMatchers("/manager/update-task").hasRole("MANAGER")
+                        .requestMatchers("/manager/approve-leave").hasRole("MANAGER")
+
+                                // Room Attendant Endpoints
+                           .requestMatchers("/room-attendant/**").hasRole("ROOM_ATTENDANT")
+                           .requestMatchers("/room-attendant/view-task").hasRole("ROOM_ATTENDANT")
+                           .requestMatchers("/room-attendant/update-task-status").hasRole("ROOM_ATTENDANT")
+                           .requestMatchers("/room-attendant/apply-leave").hasRole("ROOM_ATTENDANT")
+
+                                // Common Endpoints
+                                .requestMatchers("/authenticate", "/USER").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
