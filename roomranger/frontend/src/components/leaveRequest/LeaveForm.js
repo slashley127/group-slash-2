@@ -3,8 +3,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-export default function LeaveForm({ firstname = "Luna", lastname = "Liu" }) {
-
+//export default function LeaveForm({ firstname = "Luna", lastname = "Liu" }) {
+    export default function LeaveForm({ user}) {
     let navigate = useNavigate();
     const [leaveRequest, setLeaveRequest] = useState({
         firstName: "",
@@ -77,6 +77,7 @@ export default function LeaveForm({ firstname = "Luna", lastname = "Liu" }) {
                     <h2 className="display-5">Leave Request Form</h2>
                 </header>
                 <form id="LeaveRequestForm" onSubmit={onFormSubmit}>
+                {user && user.roles.includes('manager') && (
                     <div className="row mb-3">
                         <label className="form-label">Name</label>
                         <div className="col">
@@ -98,6 +99,7 @@ export default function LeaveForm({ firstname = "Luna", lastname = "Liu" }) {
                                 onChange={onInputChange} />
                         </div>
                     </div>
+                )}
                     <div className="row mb-3">
                         <div className="col">
                             <label className="form-label">Employee ID</label>

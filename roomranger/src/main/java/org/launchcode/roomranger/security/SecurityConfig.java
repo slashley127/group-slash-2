@@ -36,7 +36,7 @@ public class SecurityConfig {
                 // New way to disable CSRF while adopting the functional style
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers("/authenticate","/user","/leave/add","/chat" ).permitAll()
+                        .requestMatchers("/authenticate","/user").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
