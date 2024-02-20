@@ -117,5 +117,51 @@ import java.util.Optional;
             RoomAttendant _roomAttendant = roomAttendantRepository.save(assignedRoom.getRoomAttendant());
             return new ResponseEntity<>(_assignedRoom, HttpStatus.CREATED);
 
+
+
+
         }
+
+
+
+//        @PutMapping("assignedroom/{id}")
+//        public AssignedRoom updateAssignedRoom(@RequestBody @Valid AssignedRoom newAssignedRoom, @PathVariable int id){
+//            return assignedRoomRepository.findById(id)
+//                    .map(assignedRoom -> {
+//                        assignedRoom.setRoomAttendant(roomAttendantRepository.findById(newAssignedRoom.getRoomAttendant().getId()));
+//                        assignedRoom.setRoom(newAssignedRoom.getRoom());
+//                        assignedRoom.setGuest(newAssignedRoom.getGuest());
+//                        assignedRoom.setNumberOfGuests(newAssignedRoom.getNumberOfGuests());
+//                        assignedRoom.setCheckIn(newAssignedRoom.getCheckIn());
+//                        assignedRoom.setCheckOut(newAssignedRoom.getCheckOut());
+//                        assignedRoom.setTask(newAssignedRoom.getTask());
+//                        assignedRoom.setNote(newAssignedRoom.getNote());
+//                        assignedRoom.setStatus(newAssignedRoom.getStatus());
+//                        return assignedRoomRepository.save(assignedRoom);
+//                    }).orElseThrow(()->new NotFoundException("Assigned Room with id " + id));
+//        }
+//
+//        @PostMapping(value = "/create")
+//        public ResponseEntity<AssignedRoom> createAssignedRoom(@RequestBody @Valid AssignedRoom assignedRoom) {
+//            System.err.println("********************");
+//            RoomAttendant roomAttendant = roomAttendantRepository.findById(assignedRoom.getRoomAttendant().getId());
+//            AssignedRoom _assignedRoom = assignedRoomRepository.save(
+//                    new AssignedRoom(
+//                            assignedRoom.getRoom(),
+//                            roomAttendant,
+//                            assignedRoom.getGuest(),
+//                            assignedRoom.getNumberOfGuests(),
+//                            assignedRoom.getStatus(),
+//                            assignedRoom.getCheckIn(),
+//                            assignedRoom.getCheckOut(),
+//                            assignedRoom.getTask(),
+//                            assignedRoom.getNote())
+//            );
+//            System.err.println("Assigned Room: " + _assignedRoom.toString());
+//            Room _room = roomRepository.save(assignedRoom.getRoom());
+//            RoomAttendant _roomAttendant = roomAttendantRepository.save(roomAttendant);
+//            return new ResponseEntity<>(_assignedRoom, HttpStatus.CREATED);
+//
+//        }
+
     }
