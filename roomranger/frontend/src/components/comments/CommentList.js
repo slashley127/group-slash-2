@@ -8,7 +8,7 @@ const theTime = comment.createdDate.slice(11,16);
 const createdBy = comment.createdBy;
 
   return (
-    <div className="card">
+    <div className="comment-box">
       <div className="comment-text">{comment.text}</div>
       <div className="comment-user">{createdBy}: {theDate} {theTime}</div>
     </div>
