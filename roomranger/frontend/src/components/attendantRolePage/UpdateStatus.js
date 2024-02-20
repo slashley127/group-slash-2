@@ -142,8 +142,14 @@ export default function UpdateStatus() {
                         <button type = "submit"className='btn btn-outline-primary'>Submit</button>
                         <Link className='btn btn-outline-danger mx-2' to='/landing/roomattendant'>Cancel</Link>
                     </form>
+                    {user && user.roles.includes('manager') && (
+                        <div>
+                            {/* Manager-specific content */}
+                            <div className='mb-3'>
+                                {/* Additional manager-specific fields */}
                 </div>
             </div>
+                    )}
             <div>
             <AddCommentForm assignRoomId={id} />
             </div>
