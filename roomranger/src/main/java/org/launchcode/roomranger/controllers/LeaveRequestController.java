@@ -3,13 +3,19 @@ package org.launchcode.roomranger.controllers;
 import jakarta.validation.Valid;
 import org.launchcode.roomranger.data.LeaveRequestRepository;
 import org.launchcode.roomranger.data.RoomAttendantRepository;
+import org.launchcode.roomranger.data.UserRepository;
 import org.launchcode.roomranger.exception.NotFoundException;
 import org.launchcode.roomranger.models.LeaveRequest;
 import org.launchcode.roomranger.models.Room;
 import org.launchcode.roomranger.models.RoomAttendant;
+import org.launchcode.roomranger.models.User;
+import org.launchcode.roomranger.service.RoomAttendantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.DayOfWeek;
@@ -18,6 +24,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -29,17 +36,24 @@ public class LeaveRequestController {
     private LeaveRequestRepository leaveRequestRepository;
     @Autowired
     private RoomAttendantRepository roomAttendantRepository;
+    @Autowired
+    private UserRepository userRepository;
 
+    @Autowired
+    private RoomAttendantService roomAttendantService;
     @GetMapping()
     public List<LeaveRequest> listLeaveRequests() {
+
         Sort sortByStatus = Sort.by(Sort.Order.desc("startDate"));
-//        List<LeaveRequest> list = leaveRequestRepository.findAll(sortByStatus);
-//        System.out.println(list);
+        RoomAttendant roomAttendant = roomAttendantService.getRoomAttendant();
+        List<LeaveRequest> list = roomAttendant.getLeaveRequestList();
+        System.out.println("list: " + list);
         return leaveRequestRepository.findAll(sortByStatus);
     }
 
     @PostMapping("/add")
-    public LeaveRequest submitLeaveRequestForm(@RequestBody LeaveRequest newLeave) {
+    public ResponseEntity<?> submitLeaveRequestForm(@RequestBody LeaveRequest newLeave) {
+        RoomAttendant roomAttendant = roomAttendantService.getRoomAttendant();
         LocalDate startDate = newLeave.getStartDate();
         LocalDate endDate = newLeave.getEndDate();
         //calculate the duration
@@ -50,15 +64,25 @@ public class LeaveRequestController {
 //        List<DayOfWeek> workingDays = parseWorkingDays(roomAttendant.getWorkingDays());
 //        System.out.println(workingDays);
         newLeave.setDuration(duration);
-        int remainingDays = newLeave.getRoomAttendant().getRemainingDays();
+//        int remainingDays = newLeave.getRoomAttendant().getRemainingDays();
+        int remainingDays = roomAttendant.getRemainingDays();
         if (remainingDays < newLeave.getDuration() || remainingDays <= 0)
             throw new RuntimeException("You do not have sufficient leave balance");
         if (newLeave.getStartDate().isAfter(newLeave.getEndDate())){
-            throw new RuntimeException("Your End Date is After Start Date!");
+            throw new RuntimeException("Your End Date is Before Start Date!");
+        }
+        if (newLeave.getStartDate().isBefore(LocalDate.now())){
+            throw new RuntimeException("Your Start Date is Before today's Date!");
+        }
+        if (newLeave.getEndDate().isBefore(LocalDate.now())){
+            throw new RuntimeException("Please choose a future End Date!");
         }
         newLeave.setStatus("Pending");
+        newLeave.setFirstName(roomAttendant.getFirstName());
+        newLeave.setLastName(roomAttendant.getLastName());
+        newLeave.setRoomAttendant(roomAttendant);
         newLeave.setSubmittedDate(LocalDate.now());
-        return leaveRequestRepository.save(newLeave);
+        return new ResponseEntity<>(leaveRequestRepository.save(newLeave), HttpStatus.OK);
     }
     //convert String to Array of workingDays
     private List<DayOfWeek> parseWorkingDays(String workingDays) {

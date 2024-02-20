@@ -43,6 +43,14 @@ public class RoomAttendant  extends AbstractEntity{
     private String email;
     private String notes;
     private int remainingDays = 20;
+    @OneToMany(mappedBy = "roomAttendant")
+    private List<LeaveRequest> leaveRequestList = new ArrayList<>();
+
+    public RoomAttendant() {
+    }
+    public RoomAttendant(int id) {
+        this.id = id;
+    }
 
     public void setWorkingDays(String workingDays) {
         this.workingDays = workingDays;
@@ -106,6 +114,14 @@ public class RoomAttendant  extends AbstractEntity{
 
     public void setRemainingDays(int remainingDays) {
         this.remainingDays = remainingDays;
+    }
+
+    public List<LeaveRequest> getLeaveRequestList() {
+        return leaveRequestList;
+    }
+
+    public void setLeaveRequestList(List<LeaveRequest> leaveRequestList) {
+        this.leaveRequestList = leaveRequestList;
     }
 }
 

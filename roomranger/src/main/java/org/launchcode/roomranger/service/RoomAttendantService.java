@@ -2,19 +2,20 @@ package org.launchcode.roomranger.service;
 
 import org.launchcode.roomranger.data.LeaveRequestRepository;
 import org.launchcode.roomranger.data.RoomAttendantRepository;
-import org.launchcode.roomranger.models.LeaveRequest;
+import org.launchcode.roomranger.data.UserRepository;
 import org.launchcode.roomranger.models.RoomAttendant;
+import org.launchcode.roomranger.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class LeaveRequestService {
-    @Autowired
-    private LeaveRequestRepository leaveRepository;
+public class RoomAttendantService {
     @Autowired
     private RoomAttendantRepository roomAttendantRepository;
+    @Autowired
+    private UserRepository userRepository;
 
 //    public LeaveRequest createLeaveRequest(int roomAttendantId, LeaveRequest newLeave){
 //        RoomAttendant roomAttendant = roomAttendantRepository.findById(roomAttendantId);
@@ -38,5 +39,11 @@ public class LeaveRequestService {
 //        List<LeaveRequest> leaveList = leaveRepository.findAll();
 //        return leaveList;
 //    }
+    public RoomAttendant getRoomAttendant(){
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = userDetails.getUsername();
+        User user = userRepository.findByUsername(username);
+        return roomAttendantRepository.findByUser(user);
+    }
 
 }

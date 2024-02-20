@@ -6,6 +6,7 @@ import org.launchcode.roomranger.data.RoomAttendantRepository;
 import org.launchcode.roomranger.exception.UserNotFoundException;
 import org.launchcode.roomranger.models.*;
 import org.launchcode.roomranger.models.Dto.RoomAttendantDTO;
+import org.launchcode.roomranger.service.RoomAttendantService;
 import org.launchcode.roomranger.service.RoomService;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.GrantedAuthority;
@@ -38,20 +39,21 @@ public class RoomAttendantController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private RoomAttendantService roomAttendantService;
 
 
     @GetMapping()
     public List<RoomAttendantDTO> displayAllRoomAttendants() {
-        if(isAuthenticatedAndIsManager()){
+        if (isAuthenticatedAndIsManager()) {
 
             return getRoomAttendantDTOList(roomAttendantRepository.findAll());
 
-        }
-        else {
+        } else {
             UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            String username ="";
-            if(userDetails!=null){
-                username= userDetails.getUsername();
+            String username = "";
+            if (userDetails != null) {
+                username = userDetails.getUsername();
             }
             throw new AccessDeniedException("User does not have access to this resource");
         }
@@ -60,19 +62,17 @@ public class RoomAttendantController {
     }
 
 
-
     @GetMapping("update/{id}")
-    RoomAttendantDTO getUserById(@PathVariable int id){
-        if(isAuthenticatedAndIsManager()){
+    RoomAttendantDTO getUserById(@PathVariable int id) {
+        if (isAuthenticatedAndIsManager()) {
 
             return getRoomAttendantDTO(roomAttendantRepository.findById(id));
 
-        }
-        else {
+        } else {
             UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            String username ="";
-            if(userDetails!=null){
-                username= userDetails.getUsername();
+            String username = "";
+            if (userDetails != null) {
+                username = userDetails.getUsername();
             }
             throw new AccessDeniedException("User does not have access to this resource");
         }
@@ -80,8 +80,8 @@ public class RoomAttendantController {
 
 
     @PostMapping("/add")
-    RoomAttendantDTO addRoomAttendant( @RequestBody @Valid RoomAttendantDTO roomAttendantDTO) {
-        if(isAuthenticatedAndIsManager()){
+    RoomAttendantDTO addRoomAttendant(@RequestBody @Valid RoomAttendantDTO roomAttendantDTO) {
+        if (isAuthenticatedAndIsManager()) {
 
             RoomAttendant roomAttendantEntity = getRoomAttendantEntity(roomAttendantDTO);
             User userEntity = getUserEntity(roomAttendantDTO);
@@ -95,12 +95,11 @@ public class RoomAttendantController {
 
             return roomAttendantDTO;
 
-        }
-        else {
+        } else {
             UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            String username ="";
-            if(userDetails!=null){
-                username= userDetails.getUsername();
+            String username = "";
+            if (userDetails != null) {
+                username = userDetails.getUsername();
             }
             throw new AccessDeniedException("User does not have access to this resource");
         }
@@ -109,12 +108,12 @@ public class RoomAttendantController {
 
 
     @PutMapping("/update/{id}")
-    public RoomAttendantDTO updateForm(@RequestBody RoomAttendantDTO  roomAttendantDTO, @PathVariable int id) {
-        if(isAuthenticatedAndIsManager()){
+    public RoomAttendantDTO updateForm(@RequestBody RoomAttendantDTO roomAttendantDTO, @PathVariable int id) {
+        if (isAuthenticatedAndIsManager()) {
 
             RoomAttendant updatedroomAttendant = roomAttendantRepository.findById(id);
 
-            populateRoomAttendantEntity(updatedroomAttendant,roomAttendantDTO);
+            populateRoomAttendantEntity(updatedroomAttendant, roomAttendantDTO);
 
             roomAttendantRepository.save(updatedroomAttendant);
             System.out.println("Successfully saved entity");
@@ -122,16 +121,14 @@ public class RoomAttendantController {
 
             return roomAttendantDTO;
 
-        }
-        else {
+        } else {
             UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            String username ="";
-            if(userDetails!=null){
-                username= userDetails.getUsername();
+            String username = "";
+            if (userDetails != null) {
+                username = userDetails.getUsername();
             }
             throw new AccessDeniedException("User does not have access to this resource");
         }
-
 
 
     }
@@ -140,15 +137,14 @@ public class RoomAttendantController {
     @GetMapping("profile/{id}")
     public RoomAttendantDTO getProfile(@PathVariable int id) {
         RoomAttendant roomAttendant = roomAttendantRepository.findById(id);
-        if(isAuthenticatedAndIsManager()){
+        if (isAuthenticatedAndIsManager()) {
             return getRoomAttendantDTO(roomAttendantRepository.findById(id));
 
-        }
-        else {
+        } else {
             UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            String username ="";
-            if(userDetails!=null){
-                username= userDetails.getUsername();
+            String username = "";
+            if (userDetails != null) {
+                username = userDetails.getUsername();
             }
             throw new AccessDeniedException("User does not have access to this resource");
         }
@@ -158,19 +154,18 @@ public class RoomAttendantController {
 
     @GetMapping("/delete/{id}")
     public void deleteUser(@PathVariable int id) {
-        if(isAuthenticatedAndIsManager()){
+        if (isAuthenticatedAndIsManager()) {
             RoomAttendant roomAttendant = roomAttendantRepository.findById(id);
             if (!roomAttendantRepository.existsById(id)) {
                 throw new UserNotFoundException(id);
             }
             roomAttendantRepository.delete(roomAttendant);
 
-        }
-        else {
+        } else {
             UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            String username ="";
-            if(userDetails!=null){
-                username= userDetails.getUsername();
+            String username = "";
+            if (userDetails != null) {
+                username = userDetails.getUsername();
             }
             throw new AccessDeniedException("User does not have access to this resource");
         }
@@ -180,8 +175,8 @@ public class RoomAttendantController {
 
     private List<RoomAttendantDTO> getRoomAttendantDTOList(List<RoomAttendant> roomAttendantEntityList) {
         List<RoomAttendantDTO> roomAttendantDTOList = new ArrayList<RoomAttendantDTO>();
-        for (RoomAttendant roomAttendantEntity: roomAttendantEntityList){
-            RoomAttendantDTO roomAttendantDTO =  getRoomAttendantDTO(roomAttendantEntity);
+        for (RoomAttendant roomAttendantEntity : roomAttendantEntityList) {
+            RoomAttendantDTO roomAttendantDTO = getRoomAttendantDTO(roomAttendantEntity);
             roomAttendantDTOList.add(roomAttendantDTO);
 
         }
@@ -194,7 +189,7 @@ public class RoomAttendantController {
         roomAttendantDTO.setFirstName(roomAttendantEntity.getFirstName());
         roomAttendantDTO.setNotes(roomAttendantEntity.getNotes());
         roomAttendantDTO.setLastName(roomAttendantEntity.getLastName());
-        if(roomAttendantEntity.getUser()!=null){
+        if (roomAttendantEntity.getUser() != null) {
             roomAttendantDTO.setPassword(roomAttendantEntity.getUser().getPassword());
             roomAttendantDTO.setUsername(roomAttendantEntity.getUser().getUsername());
             roomAttendantDTO.setUserId(roomAttendantEntity.getUser().getId());
@@ -203,7 +198,7 @@ public class RoomAttendantController {
         roomAttendantDTO.setPhoneNumber(roomAttendantEntity.getPhoneNumber());
         roomAttendantDTO.setPronoun(roomAttendantEntity.getPronoun());
         roomAttendantDTO.setWorkingDays(getWorkingDaysListFromString(roomAttendantEntity.getWorkingDays()));
-        if(roomAttendantEntity.getManager()!=null){
+        if (roomAttendantEntity.getManager() != null) {
             roomAttendantDTO.setManagerFirstName(roomAttendantEntity.getManager().getFirstName());
             roomAttendantDTO.setManagerLastName(roomAttendantEntity.getManager().getLastName());
             roomAttendantDTO.setManagerId(roomAttendantEntity.getManager().getId());
@@ -227,19 +222,18 @@ public class RoomAttendantController {
 
     }
 
-    private String getWorkingDaysStringFromList(List<String> workingDays){
+    private String getWorkingDaysStringFromList(List<String> workingDays) {
         //workingDays is stored as comma separated string in database
         //workingDayList is sent as a list to UI
         //This method is used before saving workingDays to Database
         String workingDaysString = "";
-        for (String workingDay:workingDays){
-            workingDaysString = workingDaysString+workingDay +",";
+        for (String workingDay : workingDays) {
+            workingDaysString = workingDaysString + workingDay + ",";
         }
-        if(workingDaysString.length()>0){
+        if (workingDaysString.length() > 0) {
             return workingDaysString.substring(0, workingDaysString.length() - 1);
-        }
-        else{
-            return  workingDaysString;
+        } else {
+            return workingDaysString;
         }
 
     }
@@ -265,43 +259,42 @@ public class RoomAttendantController {
     }
 
 
-    private List<String> getWorkingDaysListFromString(String workingDaysString){
+    private List<String> getWorkingDaysListFromString(String workingDaysString) {
         //workingDays is stored as comma separated string in database
         //workingDayList is sent as a list to UI
         //This method is used before sending the response to UI
         List<String> workingDaysList = Arrays.asList(workingDaysString.split(","));
-        return  workingDaysList;
+        return workingDaysList;
     }
 
-    private boolean  isAuthenticatedAndIsManager() {
+    private boolean isAuthenticatedAndIsManager() {
 
-        if(SecurityContextHolder.getContext().getAuthentication()!=null&& SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
+        if (SecurityContextHolder.getContext().getAuthentication() != null && SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
             UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            String role =null;
-            for(GrantedAuthority grantedAuthority:userDetails.getAuthorities()){
+            String role = null;
+            for (GrantedAuthority grantedAuthority : userDetails.getAuthorities()) {
                 //TODO: Only 1 role
                 role = grantedAuthority.getAuthority();
             }
-            if(role!=null && role.equalsIgnoreCase("manager")){
-                return  true;
-            }
-            else {
-                return  false;
+            if (role != null && role.equalsIgnoreCase("manager")) {
+                return true;
+            } else {
+                return false;
             }
 
 
-        }
-        else{
+        } else {
             //TODO: Need to throw 403 http error code if role is other than manager
-            return  false;
+            return false;
         }
 
 
     }
-//Filter the room attendant's list by the working days include today's day
-    @GetMapping("today")
+
+    //Filter the room attendant's list by the working days include today's day
+    @GetMapping("/today")
     public List<RoomAttendant> displayAllRoomAttendantsByWorkingDays() {
-        if(isAuthenticatedAndIsManager()){
+        if (isAuthenticatedAndIsManager()) {
             // Get today's day of the week
             DayOfWeek today = LocalDate.now().getDayOfWeek();
             List<RoomAttendant> roomAttendants = roomAttendantRepository.findAll();
@@ -309,17 +302,20 @@ public class RoomAttendantController {
                     .filter(attendant -> Arrays.asList(attendant.getWorkingDays().split(",")).contains(today.getDisplayName(TextStyle.FULL, Locale.ENGLISH)))
                     .collect(Collectors.toList());
             return filteredRoomAttendants;
-        }
-        else {
+        } else {
             UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            String username ="";
-            if(userDetails!=null){
-                username= userDetails.getUsername();
+            String username = "";
+            if (userDetails != null) {
+                username = userDetails.getUsername();
             }
             throw new AccessDeniedException("User does not have access to this resource");
         }
     }
 
+    @GetMapping("/user/current")
+    public RoomAttendant getRoomAttendantByUsername() {
+        return roomAttendantService.getRoomAttendant();
+    }
 }
 
 
