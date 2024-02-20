@@ -5,6 +5,7 @@ import { useAuth } from './security/AuthContext';
 export default function NavBar() {
     const authContext = useAuth();
     const isAuthenticated = authContext.isAuthenticated
+    const isManager = authContext.isManager
 
     function logout() {
         authContext.logout()
@@ -22,9 +23,10 @@ export default function NavBar() {
                     <li className="nav-item">
                         <Link className="nav-link" aria-current="page" to="/landing/rooms">Rooms</Link>
                     </li>
+                    {isManager &&
                     <li className="nav-item">
-                        <Link className="nav-link" aria-current="page" to="/landing/attendants">Room Attendant</Link>
-                    </li>
+                     <Link className="nav-link" aria-current="page" to="/landing/attendants">Room Attendant</Link>
+                    </li>}
                     <li className="nav-item">
                         <Link className="nav-link" aria-current="page" to="/landing/leave">Leave Request</Link>
                     </li>

@@ -7,6 +7,7 @@ export default function AuthProvider({children}){
 
     const [number,setNumber]=useState(0)
     const[isAuthenticated,setAuthenticated]=useState(false)
+    const[isManager,setManager]=useState(false)
     const[username,setUsername]=useState(null)
     // setInterval=(()=>setNumber(number+1),10000)
 
@@ -20,13 +21,24 @@ export default function AuthProvider({children}){
               localStorage.setItem('username', decodedJwt.sub); 
               localStorage.setItem('roles', decodedJwt.roles);
             }
+            console.log("UserName:"+decodedJwt.sub)
+            console.log("Role:"+decodedJwt.roles)
             setUsername(decodedJwt.sub)
-            setAuthenticated(decodedJwt.roles)
+            setAuthenticated(true)
+            if(decodedJwt.roles==='manager'){
+              setManager(true)
+              console.log("Setting Manager True")
+            }
+            else{
+              setManager(false)
+            }
+            console.log("Printing IsManager:"+isManager)
+            console.log("Printing IsAuthenticated:"+isAuthenticated)
              
         }else{
              setAuthenticated(false)
              setUsername(null)
-            
+             setManager(false)
            }
     }
 
@@ -35,6 +47,8 @@ export default function AuthProvider({children}){
        localStorage.removeItem('username');
        localStorage.removeItem('roles');
        setAuthenticated(false);
+       setManager(false)
+       
        setUsername(null);
     }
 
@@ -54,7 +68,7 @@ export default function AuthProvider({children}){
       }
 
     return(
-        <AuthContext.Provider value={{number,isAuthenticated,login,logout,username}}>
+        <AuthContext.Provider value={{number,isAuthenticated,isManager,login,logout,username}}>
             {children}
         </AuthContext.Provider>
     )

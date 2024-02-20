@@ -37,8 +37,8 @@ export default function AttendantListComponent() {
       setAttendants(attendantsResponse.data);
     } catch (error) {
       if (error.response && error.response.status === 403) {
-        // 403 error - Unauthorized, navigate to login page
-        navigate('/login');
+        // 403 error - Unauthorized, navigate to landing page
+        navigate('/landing');
       } else {
         console.error("Error loading attendants:", error);
       }
@@ -53,8 +53,8 @@ export default function AttendantListComponent() {
       loadAttendants(); // Refresh the list after deletion
     } catch (error) {
       if (error.response && error.response.status === 403) {
-        // 403 error - Unauthorized, navigate to login page
-        navigate('/login');
+        // 403 error - Unauthorized, navigate to landing page
+        navigate('/landing');
       } else {
         console.error("Error deleting attendant:", error);
       }
