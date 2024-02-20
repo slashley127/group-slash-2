@@ -32,14 +32,7 @@ export default function Registration() {
     }
   };
   
-  const jwt = localStorage.getItem('jwt');
-
-  const authAxios = axios.create({
-        baseURL: "http://localhost:8080",
-        headers: {
-          Authorization: `Bearer ${jwt}`
-        }
-  });
+ 
 
   const onRegistrationSubmit = async (e) => {
     e.preventDefault();
@@ -51,7 +44,7 @@ export default function Registration() {
     }
 
     try {
-      const response = await authAxios.post("/user", user);
+      const response = await axios.post("http://localhost:8080/user", user);
       setSuccessMessage(response.data);
       navigate("/login");
     } catch (error) {
