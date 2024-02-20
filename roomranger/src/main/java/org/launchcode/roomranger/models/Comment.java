@@ -15,9 +15,9 @@ public class Comment {
     @JsonIgnore
     @ManyToOne
     private AssignedRoom assignedRoom;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User createdBy;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+    private String createdBy;
 
     private LocalDateTime createdDate;
     @Column(columnDefinition = "TEXT")
@@ -25,7 +25,7 @@ public class Comment {
 
     public Comment() {
     }
-    public Comment(AssignedRoom assignedRoom, User createdBy, String text) {
+    public Comment(AssignedRoom assignedRoom, String createdBy, String text) {
         this.assignedRoom = assignedRoom;
         this.createdBy = createdBy;
         this.text = text;
@@ -51,11 +51,11 @@ public class Comment {
         this.assignedRoom = assignedRoom;
     }
 
-    public User getCreatedBy() {
+    public String getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(User createdBy) {
+    public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
     }
 

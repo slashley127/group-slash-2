@@ -27,6 +27,7 @@ public class CommentService {
         comment.setAssignedRoom(assignedRoom);
         comment.setId(commentDto.getId());
         comment.setText(commentDto.getText());
+        comment.setCreatedBy(commentDto.getCreatedBy());
         if (comment.getId()==null){
             comment.setCreatedDate(LocalDateTime.now());
         }else {

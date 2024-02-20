@@ -6,13 +6,13 @@ public class CommentDto {
     private Integer id;
     private int assignRoomId;
     private String text;
-    private String user;
+    private String createdBy;
     private LocalDateTime createdDate;
 
-    public CommentDto(int assignRoomId, String text, String user) {
+    public CommentDto(int assignRoomId, String text, String createdBy) {
         this.assignRoomId = assignRoomId;
         this.text = text;
-        this.user = user;
+        this.createdBy = createdBy;
     }
 
     public Integer getId() {
@@ -47,12 +47,12 @@ public class CommentDto {
         this.text = text;
     }
 
-    public String getUser() {
-        return user;
+    public String getCreatedBy() {
+        return createdBy;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class CommentDto {
         return "CommentDto{" +
                 "assignRoomId=" + assignRoomId +
                 ", text='" + text + '\'' +
-                ", user='" + user + '\'' +
+                ", createdBy='" + createdBy + '\'' +
                 '}';
     }
 }

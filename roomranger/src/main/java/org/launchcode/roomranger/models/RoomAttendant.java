@@ -52,7 +52,12 @@ public class RoomAttendant  extends AbstractEntity{
         return workingDays;
     }
 
+    public RoomAttendant() {
+    }
 
+    public RoomAttendant(int id) {
+        this.id = id;
+    }
 
     public String getFirstName() {return firstName;}
 

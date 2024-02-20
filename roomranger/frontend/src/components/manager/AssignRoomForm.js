@@ -127,7 +127,7 @@ export default function AssignRoom() {
 
   const fetchRoomAttendants = async () => {
     try {
-      const roomAttendantsResponse = await authAxios.get("/roomAttendant");
+      const roomAttendantsResponse = await authAxios.get("/roomAttendant/available");
       const roomAttendantsArray = Object.entries(roomAttendantsResponse.data);
       setRoomAttendants(roomAttendantsArray);
     } catch (error) {

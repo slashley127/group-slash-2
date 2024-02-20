@@ -3,22 +3,16 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-//export default function LeaveForm({ firstname = "Luna", lastname = "Liu" }) {
-    export default function LeaveForm({ user}) {
+export default function LeaveForm({ firstname = "Luna", lastname = "Liu" }) {
+
     let navigate = useNavigate();
     const [leaveRequest, setLeaveRequest] = useState({
-        firstName: "",
-        lastName: "",
-        roomAttendant: "",
-        // initialDays: 20,
-        // duration: 0,
-        remainingDays: 20,
         startDate: "",
         endDate: "",
-        // submittedDate: "",
-        // status:"Pending",
         reason: "",
     });
+    const [roomAttendant, setRoomAttendant] = useState({});
+    
     const calculateDuration = (startDate, endDate) => {
         if (!startDate || !endDate) return 0;
         const start = new Date(startDate);
@@ -49,11 +43,24 @@ import { Link, useNavigate } from 'react-router-dom';
         }
     });
 
+    const loadRoomAttendant = async () => {
+        try {
+            const response = await authAxios.get(`/roomAttendant/current`)
+            setRoomAttendant(response.data);
+        } catch (error) {
+            // console.log(error.response.data.message)
+        }
+    }
+
     const onFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.log("JWT:"+jwt)
-            await authAxios.post("/leave/add", leaveRequest);
+            await authAxios.post("/leave/add", {
+                ...leaveRequest,
+                firstName: roomAttendant.firstName,
+                lastName: roomAttendant.lastName,
+                roomAttendant: roomAttendant.id
+            });
             navigate("/landing/leave");
             // console.log(leaveRequest);
         } catch (error) {
@@ -69,6 +76,10 @@ import { Link, useNavigate } from 'react-router-dom';
         }
     }
 
+    useEffect(() => {
+        loadRoomAttendant();
+    }, []);
+
     return (
         <div className="container mt-5 m-lg-auto p-5 shadow">
             <section className="leave-request">
@@ -77,46 +88,23 @@ import { Link, useNavigate } from 'react-router-dom';
                     <h2 className="display-5">Leave Request Form</h2>
                 </header>
                 <form id="LeaveRequestForm" onSubmit={onFormSubmit}>
-                {user && user.roles.includes('manager') && (
                     <div className="row mb-3">
                         <label className="form-label">Name</label>
                         <div className="col">
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="First Name"
-                                name="firstName"
-                                value={leaveRequest.firstName}
-                                onChange={onInputChange} />
+                            <label className="form-control">{roomAttendant.firstName}</label>
                         </div>
                         <div className="col">
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Last Name"
-                                name="lastName"
-                                value={leaveRequest.lastName}
-                                onChange={onInputChange} />
+                            <label className="form-control">{roomAttendant.lastName}</label>
                         </div>
                     </div>
-                )}
                     <div className="row mb-3">
                         <div className="col">
-                            <label className="form-label">Employee ID</label>
-                            <input type="number" className="form-control"
-                                name="roomAttendant"
-                                placeholder="Your Employee ID"
-                                value={leaveRequest.roomAttendant}
-                                onChange={onInputChange} />
+                            <label className="form-label">Room Attendant ID</label>
+                            <label className="form-control">{roomAttendant.id}</label>
                         </div>
                         <div className="col">
                             <label className="form-label">Remaining leave days</label>
-                            <label className="form-control">{leaveRequest.remainingDays - calculateDuration(leaveRequest.startDate, leaveRequest.endDate)}</label>
-                            {/* <label className="form-control">{leaveRequest.roomAttendant.remainingDays}</label> */}
-                            {/* <input type="number" className="form-control"
-                                name="remainingDays"
-                                placeholder="Your remaining days of vacation" 
-                                value={leaveRequest.remainingDays} /> */}
+                            <label className="form-control">{roomAttendant.remainingDays - calculateDuration(leaveRequest.startDate, leaveRequest.endDate)}</label>
                         </div>
                     </div>
                     <div className="row mb-3">
