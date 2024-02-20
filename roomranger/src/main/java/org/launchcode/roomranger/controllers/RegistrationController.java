@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @CrossOrigin("http://localhost:3000")
 public class RegistrationController {
@@ -53,11 +54,11 @@ public class RegistrationController {
         User newUser = new User();
         newUser.setUsername(managerDTO.getUsername());
         newUser.setPassword(encodedPassword); // Set the encoded password
-        newUser.setRole("manager");
+        newUser.setRole("manager"); // Set the role as a string
         userRepository.save(newUser);
 
         // Check if the user is a manager
-        if (newUser.getRole() != null && newUser.getRole().equalsIgnoreCase("manager")) {
+        if ("manager".equals(newUser.getRole())) {
             // Create and save the manager
             Manager newManager = new Manager(managerDTO.getFirstName(), managerDTO.getLastName(), managerDTO.getEmail(), newUser);
             managerRepository.save(newManager);

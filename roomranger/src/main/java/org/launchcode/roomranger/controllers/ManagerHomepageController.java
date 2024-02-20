@@ -9,12 +9,12 @@ import org.launchcode.roomranger.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
     @RestController
     @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
@@ -81,6 +81,7 @@ import java.util.Optional;
         }
 
         @PutMapping("assignedroom/{id}")
+        @PreAuthorize("hasAuthority('MANAGER')") // Only managers can update assigned rooms
         public AssignedRoom updateAssignedRoom(@RequestBody @Valid AssignedRoom newAssignedRoom, @PathVariable int id){
             return assignedRoomRepository.findById(id)
                     .map(assignedRoom -> {
@@ -98,6 +99,7 @@ import java.util.Optional;
         }
 
         @PostMapping(value = "/create")
+        @PreAuthorize("hasAuthority('MANAGER')") // Only managers can create assigned rooms
         public ResponseEntity<AssignedRoom> createAssignedRoom(@RequestBody @Valid AssignedRoom assignedRoom) {
             System.err.println("********************");
             RoomAttendant roomAttendant = roomAttendantRepository.findById(assignedRoom.getRoomAttendant().getId());

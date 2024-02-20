@@ -5,16 +5,15 @@ import org.launchcode.roomranger.data.LeaveRequestRepository;
 import org.launchcode.roomranger.data.RoomAttendantRepository;
 import org.launchcode.roomranger.exception.NotFoundException;
 import org.launchcode.roomranger.models.LeaveRequest;
-import org.launchcode.roomranger.models.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Locale;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
@@ -35,7 +34,7 @@ public class LeaveRequestController {
     }
 
     @PostMapping("/add")
-    public LeaveRequest submitLeaveRequestForm(@RequestBody LeaveRequest newLeave) {
+       public LeaveRequest submitLeaveRequestForm(@RequestBody LeaveRequest newLeave) {
         LocalDate startDate = newLeave.getStartDate();
         LocalDate endDate = newLeave.getEndDate();
         int duration = (int) ChronoUnit.DAYS.between(startDate, endDate) + 1;
@@ -53,6 +52,7 @@ public class LeaveRequestController {
     }
 
     @PutMapping("/{id}/approve")
+    @PreAuthorize("hasRole('MANAGER')")
     public ResponseEntity<?> approveLeaveRequest(@PathVariable int id) {
         LeaveRequest leaveRequest = leaveRequestRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Leave Request with id " + id));
@@ -70,6 +70,7 @@ public class LeaveRequestController {
     }
 
     @PutMapping("/{id}/reject")
+    @PreAuthorize("hasRole('MANAGER')")
     public ResponseEntity<?> rejectLeaveRequest(@PathVariable int id) {
         LeaveRequest leaveRequest = leaveRequestRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Leave Request with id " + id));
