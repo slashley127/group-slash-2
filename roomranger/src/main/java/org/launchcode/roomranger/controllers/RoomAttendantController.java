@@ -319,6 +319,14 @@ public class RoomAttendantController {
         }
     }
 
+    @GetMapping("/current")
+    public RoomAttendant getRoomAttendantByUsername() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = userDetails.getUsername();
+        User user = userRepository.findByUsername(username);
+        return roomAttendantRepository.findByUser(user);
+//        return roomAttendantService.getRoomAttendant();
+    }
 }
 
 
