@@ -59,7 +59,7 @@ public class LeaveRequestController {
     }
 
     @PutMapping("/{id}/approve")
-    @PreAuthorize("hasRole(RoleConstants.MANAGER)")
+    @PreAuthorize("hasRole(MANAGER)")
     public ResponseEntity<?> approveLeaveRequest(@PathVariable int id) {
         LeaveRequest leaveRequest = leaveRequestRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Leave Request with id " + id));
@@ -77,7 +77,7 @@ public class LeaveRequestController {
     }
 
     @PutMapping("/{id}/reject")
-    @PreAuthorize("hasRole(RoleConstants.MANAGER)")
+    @PreAuthorize("hasRole(MANAGER)")
     public ResponseEntity<?> rejectLeaveRequest(@PathVariable int id) {
         LeaveRequest leaveRequest = leaveRequestRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Leave Request with id " + id));

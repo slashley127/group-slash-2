@@ -35,7 +35,7 @@ public class RoomsController {
     private RoomAttendantRepository roomAttendantRepository;
 
     @PostMapping("/room")
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasRole('manager')")
     public ResponseEntity<?> addRoom(@RequestBody @Valid Room newRoom){
         String roomNumber = newRoom.getRoomNumber();
         if (roomService.isRoomNumberExists(roomNumber)) {
