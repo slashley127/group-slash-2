@@ -49,7 +49,7 @@ public class RoomAttendantController {
             if(userDetails!=null){
                 username= userDetails.getUsername();
             }
-            throw new AccessDeniedException("User does not have access to this resource");
+            throw new AccessDeniedException("User does not have access to this resource:"+username);
         }
 
 
@@ -275,7 +275,7 @@ public class RoomAttendantController {
             UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             String role =null;
             for(GrantedAuthority grantedAuthority:userDetails.getAuthorities()){
-                //TODO: Only 1 role
+                // Only 1 role
                 role = grantedAuthority.getAuthority();
             }
             if(role!=null && role.equalsIgnoreCase("manager")){

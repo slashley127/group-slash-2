@@ -1,6 +1,6 @@
 package org.launchcode.roomranger.models.Dto;
 
-public class ChatInputMessageDTO {
+public class ChatMessageRequestDTO {
     public String getText() {
         return text;
     }

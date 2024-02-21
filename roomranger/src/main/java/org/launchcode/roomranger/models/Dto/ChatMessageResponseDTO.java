@@ -3,7 +3,7 @@ package org.launchcode.roomranger.models.Dto;
 
 
 
-public class ChatMessageDTO {
+public class ChatMessageResponseDTO {
 
     private String fromName;
     private String text;

@@ -33,14 +33,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                // New way to disable CSRF while adopting the functional style
+                //requests that match the url pattern by pass are sent to controller by passing JWTRequestFilter
+                // JWTRequestFilter is called for all the unmatched paths
+
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers("/authenticate","/user","/leave/add","/chat/**").permitAll()
+                        .requestMatchers("/authenticate","/user","/chat/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
+        //Calling JWTRequest Filter
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

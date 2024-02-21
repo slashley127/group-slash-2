@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import SockJS from 'sockjs-client';
 import { Stomp } from '@stomp/stompjs';
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import './Chat.css';
 
-export default function GroupChatComponent () {
+export default function GroupChatComponent() {
     const [stompClient, setStompClient] = useState(null);
     const [messages, setMessages] = useState([]);
     const [text, setText] = useState('');
@@ -12,10 +13,10 @@ export default function GroupChatComponent () {
 
     const jwt = localStorage.getItem('jwt'); // Retrieve the JWT token from local storage
     const authAxios = axios.create({
-      baseURL: "http://localhost:8080",
-      headers: {
-        Authorization: `Bearer ${jwt}`
-      }
+        baseURL: "http://localhost:8080",
+        headers: {
+            Authorization: `Bearer ${jwt}`
+        }
     });
 
     useEffect(() => {
@@ -50,10 +51,10 @@ export default function GroupChatComponent () {
                     return [...prevMessages, newMessage];
                 });
             });
-            
+
         });
 
-       fetchMessages();
+        fetchMessages();
 
         return () => {
             if (stompClient) {
@@ -67,9 +68,9 @@ export default function GroupChatComponent () {
         e.preventDefault(); // Prevent form submission/reloading the page
         if (stompClient && text) {
             //const message = { fromName: 'userName',token:`${jwt}`, text:text };
-            const message = { token:jwt, text:text };
+            const message = { token: jwt, text: text };
             console.log("Sending message:", message); // Logging the message for inspection
-            stompClient.send("/app/chat.sendMessage", {},JSON.stringify(message));
+            stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(message));
             setText(''); // Clear message input after sending
         }
     };
@@ -82,24 +83,29 @@ export default function GroupChatComponent () {
     };
 
     return (
-        <div>
-            <h2>Group Chat</h2>
-            <div>
-                <input
-                    type="text"
-                    value={text}
-                    onChange={(e) => setText(e.target.value)}
-                    onKeyPress={handleKeyPress}
-                    placeholder="Type your message here..."
-                />
-                <button onClick={sendMessage}>Send</button>
+        <div class="chat-container">
+    <div class="chat-messages" id="messages">
+        {messages.map((msg, index) => (
+            <div key={index} className="message">
+                <b>{msg.fromName}:</b> {msg.text}
             </div>
-            <div>
-                <h3>Messages</h3>
-                {messages.map((msg, index) => (
-                    <div key={index}><b>{msg.fromName}:</b> {msg.text}</div>
-                ))}
-            </div>
-        </div>
+        ))}
+    </div>
+    <div class="chat-input">
+        <input
+            className="form-control"
+            type="text"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Type your message here..."
+            id="chatInput"
+        />
+        <button className="send-button" onClick={sendMessage}>Send</button>
+    </div>
+</div>
+
+    
+    
     );
 };
