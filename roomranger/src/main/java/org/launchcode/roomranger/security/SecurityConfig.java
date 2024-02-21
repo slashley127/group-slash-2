@@ -1,6 +1,5 @@
 package org.launchcode.roomranger.security;
 
-
 import org.launchcode.roomranger.models.RoleConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +23,7 @@ public class SecurityConfig {
     private UserDetailsService userDetailsService;
 
     @Autowired
-    private  JwtRequestFilter jwtRequestFilter;
+    private JwtRequestFilter jwtRequestFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -37,12 +36,13 @@ public class SecurityConfig {
                 // New way to disable CSRF while adopting the functional style
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers("/authenticate","/user","/leave/add","/chat**").permitAll()
-                        .requestMatchers("/leaveForm/").hasRole(RoleConstants.MANAGER)
-                        )
+                        .requestMatchers("/authenticate", "/user", "/leave/add", "/chat**").permitAll()
+                        .requestMatchers("/rooms/room").hasRole(RoleConstants.MANAGER)
+                        .requestMatchers("/leave/add").hasRole(RoleConstants.ROOM_ATTENDANT)
+                        .requestMatchers("/leave/${id}/approve").hasRole(RoleConstants.MANAGER)
+                        .requestMatchers("/leave/${id}/reject").hasRole(RoleConstants.MANAGER)
 
-                                // Common Endpoints
-                                .requestMatchers("/authenticate", "/USER").permitAll()
+                        .requestMatchers("/authenticate", "/USER").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));

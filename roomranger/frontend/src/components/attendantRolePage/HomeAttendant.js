@@ -96,7 +96,7 @@ const HomeAttendant = () => {
                   {/* {assignedRoom.status !== 'INSPECTED' && (
                     <Link className='btn btn-outline-primary' to={`/landing/roomattendant/assignedroom/${assignedRoom.id}`}>Update</Link>
                   )} */}
-                 <Link className={`btn btn-outline-primary ${assignedRoom.status === 'INSPECTED' ? 'disabled' : ''}`} to={`/landing/roomattendant/assignedroom/${assignedRoom.id}`}>Update</Link>
+                  <Link className='btn btn-outline-primary' to={`/landing/roomattendant/assignedroom/${assignedRoom.id}`}>Update</Link >
                 </td>
               </tr>
             ))}

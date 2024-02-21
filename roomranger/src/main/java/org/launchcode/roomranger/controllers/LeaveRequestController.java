@@ -34,6 +34,7 @@ public class LeaveRequestController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasRole(RoleConstants.ROOM_ATTENDANT)")
        public LeaveRequest submitLeaveRequestForm(@RequestBody LeaveRequest newLeave) {
         LocalDate startDate = newLeave.getStartDate();
         LocalDate endDate = newLeave.getEndDate();
@@ -58,7 +59,7 @@ public class LeaveRequestController {
     }
 
     @PutMapping("/{id}/approve")
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasRole(RoleConstants.MANAGER)")
     public ResponseEntity<?> approveLeaveRequest(@PathVariable int id) {
         LeaveRequest leaveRequest = leaveRequestRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Leave Request with id " + id));
@@ -76,7 +77,7 @@ public class LeaveRequestController {
     }
 
     @PutMapping("/{id}/reject")
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasRole(RoleConstants.MANAGER)")
     public ResponseEntity<?> rejectLeaveRequest(@PathVariable int id) {
         LeaveRequest leaveRequest = leaveRequestRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Leave Request with id " + id));
