@@ -87,7 +87,7 @@ export default function UpdateStatus() {
         e.preventDefault();
         try{
              await authAxios.put(`/assignedrooms/assignedroom/${id}`,assignedRoom);
-            navigate("/landing/roomattendant")
+            navigate("/landing")
         }catch(error){
             alert(error.response.data.message);
         }
@@ -140,7 +140,7 @@ export default function UpdateStatus() {
                             </label>
                         </div>
                         <button type = "submit"className='btn btn-outline-primary'>Submit</button>
-                        <Link className='btn btn-outline-danger mx-2' to='/landing/roomattendant'>Cancel</Link>
+                        <Link className='btn btn-outline-danger mx-2' to='/landing'>Cancel</Link>
                     </form>
                 </div>
             </div>

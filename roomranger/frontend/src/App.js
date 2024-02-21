@@ -28,14 +28,15 @@ import About from './components/About';
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import  AuthProvider, { useAuth } from './components/security/AuthContext';
+import Landing from './components/Landing';
 
-function AuthenticatedRoute({children}){
-  const authContext=useAuth()
-  if(authContext.isAuthenticated)
-    return children
+// function AuthenticatedRoute({children}){
+//   const authContext=useAuth()
+//   if(authContext.isAuthenticated)
+//     return children
 
-    return <Navigate to={"/login"}/>
-}
+//     return <Navigate to={"/login"}/>
+// }
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -62,7 +63,7 @@ function App() {
           <Route path='login' element={<LoginPage />} />
           <Route path='about' element={<About />} />
           <Route path='/landing' element={<NavBar />} >
-            <Route index element={<HomeManager />} />
+            <Route index element={<Landing />} />
             <Route path='assignroomform' element={<AssignRoom />} />
             <Route exact path='editassignedroom/:id' element={<EditAssignedRoom />} />
             <Route path='rooms' element={<RouteHome />}>
@@ -83,10 +84,7 @@ function App() {
               <Route path='edit/:id' element={<EditRequest />} />
               <Route path='form' element={<LeaveForm />} />
             </Route>
-            <Route path="roomattendant" element={<RouteHome />} >
-              <Route index element={<HomeAttendant />} />
-              <Route path="assignedroom/:id" element={<UpdateStatus />} />
-            </Route>
+            <Route path="assignedroom/:id" element={<UpdateStatus />} />
           </Route>
         </Routes>
         <Footer />

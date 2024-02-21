@@ -80,7 +80,7 @@ const HomeAttendant = () => {
               <tr>
                 <th scope="row" key={index}>{index + 1}</th>
                 <td>
-                  <Link to={`/landing/roomattendant/assignedroom/${assignedRoom.id}`}>
+                  <Link to={`/landing/assignedroom/${assignedRoom.id}`}>
                     {assignedRoom.room.roomNumber}
                   </Link>
                 </td>
@@ -93,7 +93,7 @@ const HomeAttendant = () => {
                   {/* {assignedRoom.status !== 'INSPECTED' && (
                     <Link className='btn btn-outline-primary' to={`/landing/roomattendant/assignedroom/${assignedRoom.id}`}>Update</Link>
                   )} */}
-                  <Link className='btn btn-outline-primary' to={`/landing/roomattendant/assignedroom/${assignedRoom.id}`}>Update</Link >
+                  <Link className='btn btn-outline-primary' to={`/landing/assignedroom/${assignedRoom.id}`}>Update</Link >
                 </td>
               </tr>
             ))}
