@@ -7,6 +7,7 @@ import AddRoom from './components/rooms/AddRoom';
 import EditRoom from './components/rooms/EditRoom';
 import ViewRoom from './components/rooms/ViewRoom';
 import AssignRoom from './components/manager/AssignRoomForm';
+import TranslatorApi from './components/manager/TranslatorApi';
 import EditAssignedRoom from './components/manager/EditAssignedRoom';
 import AttendantListComponent from './components/roomAttendants/AttendantListComponent';
 import AddAttendant from './components/roomAttendants/AddAttendant';
@@ -64,6 +65,7 @@ function App() {
           <Route path='/landing' element={<NavBar />} >
             <Route index element={<HomeManager />} />
             <Route path='assignroomform' element={<AssignRoom />} />
+            <Route path='translator' element={<TranslatorApi />} />
             <Route exact path='editassignedroom/:id' element={<EditAssignedRoom />} />
             <Route path='rooms' element={<RouteHome />}>
               <Route index element={<HomeRoom />} />
