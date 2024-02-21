@@ -174,7 +174,7 @@ export default function Update() {
                     className="form-control"
 
                     name="username"
-                    defaultValue={username}
+                    value={username}
                     onChange={(e) => handleChange(e)}
                   ></input>
                 </div>
@@ -208,7 +208,7 @@ export default function Update() {
                     className="form-control"
 
                     name="password"
-                    // value={password}
+                    //  value={password}
                     onChange={(e) => handleChange(e)}
                   ></input>
                 </div>

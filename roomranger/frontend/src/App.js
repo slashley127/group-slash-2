@@ -29,6 +29,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import  AuthProvider, { useAuth } from './components/security/AuthContext';
 import GroupChatComponent from './components/groupChatPage/GroupChatComponent';
+import LogoutComponent from './components/LogoutComponent';
 
 function AuthenticatedRoute({children}){
   const authContext=useAuth()
@@ -62,6 +63,7 @@ function App() {
           <Route path='Register' element={<Registration />} />
           <Route path='login' element={<LoginPage />} />
           <Route path='about' element={<About />} />
+          <Route exact path="/logout" element={<LogoutComponent/>} />
           <Route path='/landing' element={<NavBar />} >
             <Route index element={<HomeManager />} />
             <Route path='assignroomform' element={<AssignRoom />} />

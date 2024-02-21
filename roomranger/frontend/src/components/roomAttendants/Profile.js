@@ -101,7 +101,7 @@ export default function Profile() {
                            </ul>
                         </div>
                     </div>
-                    <Link className="btn btn-outline-success my-8 my-sm-8" to={'/'}>Back to Home</Link>
+                    <Link className="btn btn-outline-success my-8 my-sm-8" to={'/landing/attendants'}>Back to Home</Link>
                 </div>
             </div>
             </div>
