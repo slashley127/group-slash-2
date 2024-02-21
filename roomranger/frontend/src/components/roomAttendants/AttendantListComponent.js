@@ -76,10 +76,10 @@ export default function AttendantListComponent() {
             <thead>
               <tr>
                 <th scope='col' className='text-center'>#</th>
-                <th scope='col' className='text-center'> EMP ID </th>
+                <th scope='col' className=' text-center'> EMP ID </th>
                 <th scope='col' className='col-md-2 text-center'> NAME </th>
-                <th scope='col' className='col-md-4 text-center'> EMAIL </th>
-                <th scope='col' className='col-md-2 text-center'> SCHEDULE </th>
+                <th scope='col' className='col-md-3 text-center'> EMAIL </th>
+                <th scope='col' className='col-md-3 text-center'> SCHEDULE </th>
                 <th scope='col' className=' col-md-3 text-center'> ACTION </th>
               </tr>
             </thead>

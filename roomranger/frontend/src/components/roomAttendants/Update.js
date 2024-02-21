@@ -164,7 +164,7 @@ export default function Update() {
                 </div>
               </div>
 
-              <div className="row mb-2">
+              <div className="row mb-1">
                 <div className="col-md-6">
                   <label htmlFor="Username" >
                     <h6>USERNAME</h6>
@@ -178,7 +178,7 @@ export default function Update() {
                     onChange={(e) => handleChange(e)}
                   ></input>
                 </div>
-                <div className="col-md-6">
+                {/* <div className="col-md-6">
                   <label htmlFor="Password">
                     <h6>PASSWORD</h6>
                   </label>
@@ -186,10 +186,16 @@ export default function Update() {
                     type={"password"}
                     className="form-control"
 
-                    name="password"
+                    name="text"
                     defaultValue={password}
                     onChange={(e) => handleChange(e)}
                   ></input>
+                </div> */}
+                <div className="col-md-6 mb-0">
+                  <label htmlFor="notes">
+                    NOTES
+                  </label>
+                  <textarea class="form-control h-100" defaultValue={notes} id="notes" name="notes" placeholder="Notes" onChange={(e) => handleChange(e)}></textarea>
                 </div>
               </div>
               <div className="row">
@@ -206,12 +212,7 @@ export default function Update() {
                     onChange={(e) => handleChange(e)}
                   ></input>
                 </div>
-                <div className="col-md-6 mb-0">
-                  <label htmlFor="notes">
-                    NOTES
-                  </label>
-                  <textarea class="form-control h-100" defaultValue={notes} id="notes" name="notes" placeholder="Notes" onChange={(e) => handleChange(e)}></textarea>
-                </div>
+                
               </div>
               <div className="container" >
                 <label htmlFor="workingDays" ><h5>Working Days</h5></label>
@@ -234,7 +235,7 @@ export default function Update() {
               <div >
                 <button type='submit' className='btn btn-outline-success align-center my-4'>Submit</button>
                 <Link className='btn btn-outline-danger mx-2 align-center my-4' to='/landing/attendants'>Cancel</Link>
-                <button type="reset" className='btn btn-outline-primary align-center my-4'> Reset</button>
+                {/* <button type="reset" className='btn btn-outline-primary align-center my-4'> Reset</button> */}
               </div>
             </form>
           </div>
