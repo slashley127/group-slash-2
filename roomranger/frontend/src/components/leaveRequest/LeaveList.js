@@ -94,7 +94,7 @@ export default function LeaveList() {
     <div className='container' >
       {/* <div className='col-md-10 offset-md-1 border rounded p-4 mt-2 shadow'> */}
       <div className='text-center py-8'>
-        <h2 className='text-light'>Leave Request List</h2>
+        <h2 className='text-primary'>Leave Request List</h2>
         {/* // <table className="table boder">  container mt-5 m-lg-auto p-5 shadow*/}
         <table className='table table-striped shadow'>
           <thead>
@@ -121,15 +121,9 @@ export default function LeaveList() {
                   <td>{leaveRequest.reason}</td>
                   <td style={{ backgroundColor: getStatusColor(leaveRequest.status) }}>{leaveRequest.status}</td>
                   <td>
-                     {/* Render buttons based on user role */}
-                  {userRole === 'manager' && (
-                    <>
                     <button className='btn btn-outline-primary mx-2' onClick={() => approve(leaveRequest.id)}>Approve</button>
                     <button className='btn btn-outline-danger mx-2' onClick={() => reject(leaveRequest.id)}>Reject</button>
                     {/* <Link className='btn btn-outline-primary mx-2' to={`/landing/leave/edit/${leaveRequest.id}`}>Edit</Link> */}
-                  
-                  </>
-                  )}
                   </td>
                 </tr>
               ))

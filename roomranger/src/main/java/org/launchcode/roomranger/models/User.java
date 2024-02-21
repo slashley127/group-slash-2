@@ -41,6 +41,11 @@ public class User extends AbstractEntity {
     }
 
     public void setRole(String role) {
-        this.role = role;
+        // Check if the role is valid before setting it
+        if (role.equals(RoleConstants.MANAGER) || role.equals(RoleConstants.ROOM_ATTENDANT)) {
+            this.role = role;
+        } else {
+            throw new IllegalArgumentException("Invalid role");
+        }
     }
 }

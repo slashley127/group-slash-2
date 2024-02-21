@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function LeaveForm({ firstname = "Luna", lastname = "Liu" }) {
 
     let navigate = useNavigate();
+    const userRole = 'manager';
     const [leaveRequest, setLeaveRequest] = useState({
         startDate: "",
         endDate: "",
