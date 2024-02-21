@@ -17,13 +17,13 @@ export default function AddAttendant() {
     pronoun: '',
     username: '',
     password: '',
+    confirmPassword: '',
     notes: '',
-    workingDays: [],
-    confirmPassword:''
+    workingDays: []
   });
   const [attendantError, setAttendantError] = useState("");
 
-  const { id, firstName, lastName, email, phoneNumber, pronoun, username, password, notes, workingDays,confirmPassword } = attendant;
+  const { id, firstName, lastName, email, phoneNumber, pronoun, username, password,confirmPassword, notes, workingDays } = attendant;
 
   // Handle changes to form inputs
   const handleChange = (e) => {
@@ -58,6 +58,8 @@ export default function AddAttendant() {
   const handleSubmit = async (e) => {
     e.preventDefault();
      if (attendant.password !== attendant.confirmPassword) {
+      console.log("password:"+attendant.password)
+      console.log("confirmpassword:"+attendant.confirmPassword)
           alert("Password and confirm password do not match.");
           return;
         }
@@ -179,22 +181,22 @@ export default function AddAttendant() {
                     className="form-control"
                     placeholder="Password"
                     name="password"
-                    value={password}
+                    //value={password}
                     onChange={(e) => handleChange(e)}
                   ></input>
                 </div>
               </div>
               <div className="row">
                 <div className="col-md-6 mb-0">
-                  <label htmlFor="Password" className="form-label">
+                  <label htmlFor="confirmPassword" className="form-label">
                     {/* Confirm Password */}
                   </label>
                   <input
-                    type={"password"}
+                    type={"confirmPassword"}
                     className="form-control"
                     placeholder="Verify Password"
                     name="confirmPassword"
-                     value={confirmPassword}
+                    // value={password}
                     onChange={(e) => handleChange(e)}
                   ></input>
                 </div>
