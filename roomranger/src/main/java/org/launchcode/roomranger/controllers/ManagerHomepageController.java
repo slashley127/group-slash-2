@@ -65,14 +65,17 @@ import java.util.Optional;
         }
 
 
-//        @DeleteMapping("assignedroom/{id}")
-//        public String deleteAssignedRoom(@PathVariable int id) {
-//            if (!assignedRoomRepository.existsById(id)) {
-//                throw new NotFoundException("Assignment with id " + id);
-//            }
-//            roomRepository.deleteById(id);
-//            return "Assigned with Id " + id + "has been deleted successfully!";
-//        }
+//        *********TO DO:I WANT TO CHANGE THE DELETE BUTTON TO A CHECKOUT BUTTON INSTEAD
+        @DeleteMapping("assignedroom/{id}")
+        public String deleteAssignedRoom(@PathVariable int id) {
+            if (!assignedRoomRepository.existsById(id)) {
+                throw new NotFoundException("Assigned Room " + id);
+            }
+            roomRepository.deleteById(id);
+            return "Assigned Room with Id " + id + "has been deleted successfully!";
+        }
+//        *********TO DO:I WANT TO CHANGE THE DELETE BUTTON TO A CHECKOUT BUTTON INSTEAD
+
 
         @GetMapping("assignedroom/{id}")
         public AssignedRoom getAssignedRoomById(@PathVariable int id) {

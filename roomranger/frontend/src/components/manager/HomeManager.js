@@ -21,7 +21,6 @@ export default function HomeManager() {
         loadAssignedRooms();
     }, []);
 
-    // Setting JWT in the HTTP Request Header under Authorization field
     const jwt = localStorage.getItem('jwt');
 
     const authAxios = axios.create({
@@ -41,14 +40,31 @@ export default function HomeManager() {
             setAssignedRooms(result.data);
         } catch (error) {
             if (error.response && error.response.status === 403) {
-                // 403 error - Unauthorized, navigate to login page
                 navigate('/login');
             } else {
-                // Handle other errors
                 console.error('Error:', error);
             }
         }
     }
+
+//*********TO DO:I WANT TO CHANGE THE DELETE BUTTON TO A CHECKOUT BUTTON INSTEAD
+    const deleteAssignedRoom = async (id) => {
+        try {
+          const response = await authAxios.delete(`/assignedrooms/assignedroom/${id}`);
+          alert(response.data);
+          loadAssignedRooms();
+        } catch (error) {
+          if (error.response && error.response.status === 403) {
+            navigate('/login');
+          } else {
+            console.error('Error:', error);
+          }
+        }
+    
+      }
+//*********TO DO:I WANT TO CHANGE THE DELETE BUTTON TO A CHECKOUT BUTTON INSTEAD
+
+
 
 const roomAttendantFirstNames = [...new Set(assignedRooms.map(room => room.roomAttendant.firstName))];
 
@@ -150,8 +166,9 @@ return (
                         <td style={{ color: statusColors[assignedRoom.status] }}>{statuses[assignedRoom.status]}</td>
                         <td>
                             {/* <Link className='btn btn-primary mx-2' to={`assignedrooms/viewassignedroom/${assignedRoom.id}`}>View</Link> */}
+                            {/* *********TO DO:I WANT TO CHANGE THE DELETE BUTTON TO A CHECKOUT BUTTON INSTEAD */}
                             <Link className='btn btn-outline-primary mx-2' to={`/landing/editassignedroom/${assignedRoom.id}`}>Edit</Link>
-                            {/* <Link className='btn btn-danger mx-2' onClick={()=> deleteRoom(assignedRoom.id)}>Delete</Link> */}
+                            <Link className='btn btn-danger mx-2' onClick={()=> deleteAssignedRoom(assignedRoom.id)}>Delete</Link>
                         </td>
                     </tr>
                 ))}
