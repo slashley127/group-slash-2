@@ -94,7 +94,7 @@ export default function LeaveList() {
     <div className='container' >
       {/* <div className='col-md-10 offset-md-1 border rounded p-4 mt-2 shadow'> */}
       <div className='text-center py-8'>
-        <h2 className='text-light'>Leave Request List</h2>
+        <h2 className='text-primary'>Leave Request List</h2>
         {/* // <table className="table boder">  container mt-5 m-lg-auto p-5 shadow*/}
         <table className='table table-striped shadow'>
           <thead>
