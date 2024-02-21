@@ -63,6 +63,9 @@ const HomeAttendant = () => {
     <div className='container'>
       <div className='py=4'>
         <table className='table table-striped  shadow'>
+          <div>
+          <Link className='btn btn-primary' to='/landing/translator'>Translator</Link>
+          </div>
           <thead>
             <tr>
               <th scope="col">#</th>
