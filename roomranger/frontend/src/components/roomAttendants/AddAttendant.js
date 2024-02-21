@@ -18,11 +18,12 @@ export default function AddAttendant() {
     username: '',
     password: '',
     notes: '',
-    workingDays: []
+    workingDays: [],
+    confirmPassword:''
   });
   const [attendantError, setAttendantError] = useState("");
 
-  const { id, firstName, lastName, email, phoneNumber, pronoun, username, password, notes, workingDays } = attendant;
+  const { id, firstName, lastName, email, phoneNumber, pronoun, username, password, notes, workingDays,confirmPassword } = attendant;
 
   // Handle changes to form inputs
   const handleChange = (e) => {
@@ -178,7 +179,7 @@ export default function AddAttendant() {
                     className="form-control"
                     placeholder="Password"
                     name="password"
-                    //value={password}
+                    value={password}
                     onChange={(e) => handleChange(e)}
                   ></input>
                 </div>
@@ -192,8 +193,8 @@ export default function AddAttendant() {
                     type={"password"}
                     className="form-control"
                     placeholder="Verify Password"
-                    name="password"
-                    // value={password}
+                    name="confirmPassword"
+                     value={confirmPassword}
                     onChange={(e) => handleChange(e)}
                   ></input>
                 </div>
