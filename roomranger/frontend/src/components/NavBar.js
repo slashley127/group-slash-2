@@ -12,34 +12,42 @@ export default function NavBar() {
     }
     return (
         <div className='nbar'>
-            <nav className="navbar navbar-expand-sm navbar-dark bg-primary">
-                <div className='text-left'>
-                    <a href='/landing' className='navbar-brand '><h2>RoomRanger</h2></a>
+            <nav className="navbar navbar-expand-sm navbar-dark">
+                <div className='navbar-nav text-left'>
+                    <a href='/landing'  className='navbar-brand fw-bold'><h2>RoomRanger</h2></a>
                 </div>
+                <div className='collapse navbar-collapse'>
                 <ul className="navbar-nav">
                     <li className="nav-item">
-                        <Link className="nav-link" aria-current="page" to="/landing">Home Page</Link >
+                    { isAuthenticated && <Link className='nav-link fw-bold' aria-current="page" to="/landing">Home Page</Link >}
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" aria-current="page" to="/landing/rooms">Rooms</Link>
+                    { isAuthenticated && <Link className='nav-link fw-bold' aria-current="page" to="/landing/rooms">Rooms</Link>}
                     </li>
                     {isManager &&
                     <li className="nav-item">
-                     <Link className="nav-link" aria-current="page" to="/landing/attendants">Room Attendant</Link>
+                      { isAuthenticated && <Link className='nav-link fw-bold' aria-current="page" to="/landing/attendants">Room Attendant</Link>}
                     </li>}
                     <li className="nav-item">
-                        <Link className="nav-link" aria-current="page" to="/landing/leave">Leave Request</Link>
+                    { isAuthenticated && <Link className='nav-link fw-bold' aria-current="page" to="/landing/leave">Leave Request</Link>}
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" aria-current="page" to="/landing/roomattendant">Home Attendant</Link>
+                    { isAuthenticated &&  <Link className='nav-link fw-bold' aria-current="page" to="/landing/roomattendant">Home Attendant</Link>}
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" aria-current="page" to="/landing/groupchat">Group Chat</Link>
+                    { isAuthenticated && <Link className='nav-link fw-bold' aria-current="page" to="/landing/groupchat">Group Chat</Link>}
                     </li>
-                    <li className='nav-item'>
-                        {isAuthenticated && <Link className='nav-link' to='/login' onClick={logout}><h5>Log Out</h5></Link>}
-                    </li>
-                </ul>
+                    </ul>
+                    </div>
+                    <ul className='navbar-nav'>
+                <li className='nav-item'>
+                    { !isAuthenticated && <Link className='nav-link' to='/login'><h5>Log In</h5></Link>}
+                </li>
+                <li className='nav-item'>
+                    { isAuthenticated && <Link className='nav-link' to='/logout' onClick={logout}><h5>Log Out</h5></Link>}
+                </li>
+              </ul>
+
             </nav>
             <Outlet />
         </div>

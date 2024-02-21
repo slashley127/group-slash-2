@@ -52,62 +52,60 @@ export default function Profile() {
     };
 
 
-    return (
-        <div className="list">
+
+        return (
+            <div className="list">
             <div className='container'>
-                <div className='row'>
-                    <div className='col-md-6 offset-md-3 border rounded p-4 mt-2  shadow'>
-                        <h3 className='text-center m-10 '>
-                            {attendant.firstName} {lastName}</h3>
-                        <div className='card'>
-                            <div className='card-header'>
-                                <ul className='list-group list-group-flush mt-4'>
-                                    <li className=' list-group-item text-center h-75'>
-                                        <b> Employee ID: </b>
-                                        {attendant.id}
-                                    </li>
-                                    <li className='list-group-item text-center mt-3'>
-                                        <b> First Name: </b>
-                                        {attendant.firstName}
-                                    </li>
-                                    <li className='list-group-item text-center mt-3'>
-                                        <b> Last Name: </b>
-                                        {attendant.lastName}
-                                    </li>
-                                    <li className='list-group-item text-center mt-3'>
-                                        <b> Pronoun: </b>
-                                        {attendant.pronoun}
-                                    </li>
-                                    <li className='list-group-item text-center mt-3'>
-                                        <b> Email: </b>
-                                        {attendant.email}
-                                    </li>
-                                    <li className='list-group-item text-center mt-3'>
-                                        <b> Phone Number: </b>
-                                        {attendant.phoneNumber}
-                                    </li>
-                                    <li className='list-group-item text-center mt-3'>
-                                        <b> Schedule: </b>
-                                        {attendant.workingDays && attendant.workingDays.length > 0
-                                            ? attendant.workingDays.join(', ')
-                                            : ''}
-                                    </li>
-                                    <li className='list-group-item text-center mt-3'>
-                                        <b> Username </b>
-                                        {attendant.username}
-                                    </li>
-                                    <li className='list-group-item text-center mt-3'>
-                                        <b> Password </b>
-                                        {attendant.password}
-                                    </li>
-                                </ul>
-                            </div>
+            <div className='row'>
+                <div className='col-md-6 offset-md-3 border rounded p-4 mt-2  shadow'>
+                    <h3 className='text-center m-10 '>
+                        {attendant.firstName} {lastName}</h3>
+                    {/* <div className='card'> */}
+                        <div className='card-header'>
+                            <ul className='list-group list-group-flush mt-4'>
+                            <li className=' list-group-item text-center h-50'>
+                                    <b> Employee ID: </b>
+                                    {attendant.id}
+                                </li>
+                                <li className='list-group-item text-center mt-3'>
+                                    <b> First Name: </b>
+                                    {attendant.firstName}
+                                </li>
+                                <li className='list-group-item text-center mt-3'>
+                                    <b> Last Name: </b>
+                                    {attendant.lastName}
+                                </li>
+                                {/* <li className='list-group-item text-center mt-3'>
+                                    <b> Pronoun: </b>
+                                    {attendant.pronoun}
+                                </li> */}
+                                <li className='list-group-item text-center mt-3'>
+                                    <b> Email: </b>
+                                    {attendant.email}
+                                </li>
+                                <li className='list-group-item text-center mt-3'>
+                                    <b> Phone Number: </b>
+                                    {attendant.phoneNumber}
+                                </li>
+                                <li className='list-group-item text-center mt-3'>
+                                    <b> Schedule: </b>
+                                    {attendant.workingDays && attendant.workingDays.length > 0
+                        ? attendant.workingDays.join(', ')
+                        : ''}
+                                </li>
+                                <li className='list-group-item text-center mt-3'>
+                                    <b> Username </b>
+                                    {attendant.username}
+                                </li>
+
+                           </ul>
                         </div>
-                        <Link className='btn btn-primary my-2' to={'/landing/attendants'}>Back to Home</Link>
                     </div>
+                    <Link className="btn btn-outline-success my-8 my-sm-8" to={'/'}>Back to Home</Link>
                 </div>
             </div>
-        </div>
+            </div>
+            // </div>
 
     )
 

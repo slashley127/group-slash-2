@@ -102,27 +102,26 @@ export default function Update() {
             <form onSubmit={(e) => onSubmit(e)}>
               <div >
 
-                <label htmlFor="Pronoun" className="form-label "><h5>Pronoun:  </h5></label>
+                <label htmlFor="Pronoun"  ><h5>Pronoun:  </h5></label>
                 <input type="radio" id="he/him" name="pronoun" value={attendants.pronoun} onChange={(e) => handleChange(e)} />He/Him
                 <input type="radio" id="she/her" name="pronoun" value={attendants.pronoun} onChange={(e) => handleChange(e)} />She/Her
                 <input type="radio" id="they/them" name="pronoun" value={attendants.pronoun} onChange={(e) => handleChange(e)} />They/Them
               </div>
               <div className="row">
-                <div className="col-md-6 mb-3">
-                  <label htmlFor="Name" className="form-label ">
+                <div className="col-md-6 mb-2 ">
+                  <label htmlFor="Name" >
                     <h6>FIRST NAME</h6>
                   </label>
                   <input
                     type={"text"}
                     className="form-control"
-
                     name="firstName"
                     defaultValue={firstName}
                     onChange={(e) => handleChange(e)}
                   ></input>
                 </div>
-                <div className="col-md-6 mb-3">
-                  <label htmlFor="Name" className="form-label">
+                <div className="col-md-6 mb-2">
+                  <label htmlFor="Name" >
                     <h6>LAST NAME</h6>
                   </label>
                   <input
@@ -135,10 +134,10 @@ export default function Update() {
                   ></input>
                 </div>
               </div>
-              <div className="row mb-3">
+              <div className="row mb-2">
 
                 <div className="col-md-6">
-                  <label htmlFor="Email" className="form-label">
+                  <label htmlFor="Email" >
                     <h6> EMAIL</h6>
                   </label>
                   <input
@@ -151,7 +150,7 @@ export default function Update() {
                   ></input>
                 </div>
                 <div className="col-md-4">
-                  <label htmlFor="PhoneNumber" className="form-label">
+                  <label htmlFor="PhoneNumber" >
                     <h6>PHONE NUMBER</h6>
                   </label>
                   <input
@@ -165,9 +164,9 @@ export default function Update() {
                 </div>
               </div>
 
-              <div className="row mb-3">
+              <div className="row mb-2">
                 <div className="col-md-6">
-                  <label htmlFor="Username" className="form-label">
+                  <label htmlFor="Username" >
                     <h6>USERNAME</h6>
                   </label>
                   <input
@@ -180,7 +179,7 @@ export default function Update() {
                   ></input>
                 </div>
                 <div className="col-md-6">
-                  <label htmlFor="Password" className="form-label">
+                  <label htmlFor="Password">
                     <h6>PASSWORD</h6>
                   </label>
                   <input
@@ -194,8 +193,8 @@ export default function Update() {
                 </div>
               </div>
               <div className="row">
-                <div className="col-md-6 mb-3">
-                  <label htmlFor="Password" className="form-label">
+                <div className="col-md-6 mb-1">
+                  <label htmlFor="Password" >
                     <h6>NEW PASSWORD</h6>
                   </label>
                   <input
@@ -207,16 +206,16 @@ export default function Update() {
                     onChange={(e) => handleChange(e)}
                   ></input>
                 </div>
-                <div className="col-md-6 mb-4">
-                  <label htmlFor="notes" className="form-label ">
-                    {/* NOTES */}
+                <div className="col-md-6 mb-0">
+                  <label htmlFor="notes">
+                    NOTES
                   </label>
                   <textarea class="form-control h-100" defaultValue={notes} id="notes" name="notes" placeholder="Notes" onChange={(e) => handleChange(e)}></textarea>
                 </div>
               </div>
               <div className="container" >
                 <label htmlFor="workingDays" ><h5>Working Days</h5></label>
-                {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].map((day) => (
+                {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday','Saturday','Sunday'].map((day) => (
                   <div className="form-check" key={day}>
                     <input
                       type="checkbox"
@@ -233,9 +232,9 @@ export default function Update() {
               </div>
 
               <div >
-                <button type='submit' className='btn btn-outline-success align-center my-3'>Submit</button>
+                <button type='submit' className='btn btn-outline-success align-center my-4'>Submit</button>
                 <Link className='btn btn-outline-danger mx-2 align-center my-4' to='/landing/attendants'>Cancel</Link>
-                <button type="reset" className='btn btn-outline-primary align-center my-6'> Reset</button>
+                <button type="reset" className='btn btn-outline-primary align-center my-4'> Reset</button>
               </div>
             </form>
           </div>

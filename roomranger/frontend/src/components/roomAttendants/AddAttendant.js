@@ -77,7 +77,7 @@ export default function AddAttendant() {
     <div className="add">
       <div className="container">
         <div className="row">
-          <div className="col-md-20 offset-md-  rounded p-10 mt-2 shadow">
+          <div className="col-md-20 offset-md- rounded p-10 mt-6 shadow">
             <h2 className="text-center m-2">Add New Attendant</h2>
 
             <form onSubmit={handleSubmit}>
@@ -180,7 +180,7 @@ export default function AddAttendant() {
                 </div>
               </div>
               <div className="row">
-                <div className="col-md-6 mb-3">
+                <div className="col-md-6 mb-0">
                   <label htmlFor="Password" className="form-label">
                     {/* Confirm Password */}
                   </label>
@@ -194,7 +194,7 @@ export default function AddAttendant() {
                   ></input>
                 </div>
 
-                <div className="col-md-6 mb-4">
+                <div className="col-md-6 ">
                   <label htmlFor="notes" className="form-label ">
                     {/* NOTES */}
                   </label>
@@ -202,7 +202,7 @@ export default function AddAttendant() {
                 </div>
               </div >
               <div className="container" >
-                <label htmlFor="workingDays" className="form-label col-md-1 checkbox-inline"><h5>Working Days</h5></label>
+                <label htmlFor="workingDays" className="form-label  col-md-8 checkbox-inline"><h5>Working Days</h5></label>
                 {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day) => (
                   <div className="form-check" key={day}>
                     <input
@@ -219,7 +219,7 @@ export default function AddAttendant() {
                 ))}
               </div>
               <div>
-                <button type='submit' className='btn btn-outline-success align-center my-4'>Submit</button>
+                <button type='submit' className='btn btn-outline-success align-center my-6'>Submit</button>
                 <Link className='btn btn-outline-danger mx-2 align-center my-6' to='/landing/attendants' >Cancel</Link>
                 <button type="reset" className='btn btn-outline-primary align-center my-6'> Reset</button>
               </div>
