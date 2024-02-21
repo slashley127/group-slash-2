@@ -78,7 +78,6 @@ public class RoomAttendantController {
     @PostMapping("/add")
     RoomAttendantDTO addRoomAttendant( @RequestBody @Valid RoomAttendantDTO roomAttendantDTO) {
         if(isAuthenticatedAndIsManager()){
-
             RoomAttendant roomAttendantEntity = getRoomAttendantEntity(roomAttendantDTO);
             User userEntity = getUserEntity(roomAttendantDTO);
             userEntity.setRole("roomattendant");
@@ -110,6 +109,8 @@ public class RoomAttendantController {
 
             RoomAttendant updatedroomAttendant = roomAttendantRepository.findById(id);
 
+            populateUserEntity(updatedroomAttendant.getUser(),roomAttendantDTO);
+
             populateRoomAttendantEntity(updatedroomAttendant,roomAttendantDTO);
 
             roomAttendantRepository.save(updatedroomAttendant);
@@ -130,6 +131,12 @@ public class RoomAttendantController {
 
 
 
+    }
+
+    private void populateUserEntity(User user, RoomAttendantDTO roomAttendantDTO) {
+        String encodedPassword = passwordEncoder.encode(roomAttendantDTO.getPassword());
+        user.setPassword(encodedPassword);
+        user.setUsername(roomAttendantDTO.getUsername());
     }
 
 
