@@ -28,7 +28,7 @@ export default function LeaveList() {
         const currentYear = new Date().getFullYear();
         return startDateYear === currentYear;
       })
-      setLeaveList(response.data);
+      setLeaveList(leaveRequests);
     } catch (error) {
       if (error.response && error.response.status === 403) {
         // 403 error - Unauthorized, navigate to login page
