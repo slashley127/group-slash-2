@@ -50,16 +50,6 @@ export default function HomeManager() {
         }
     }
 
-
-
-const statusColors = {
-    'NOT_STARTED': 'red',
-    'IN_PROGRESS': 'blue',
-    'SERVICE_REFUSED': 'black',
-    'READY': 'green',
-    'INSPECTED': 'magenta'
-};
-
 const roomAttendantFirstNames = [...new Set(assignedRooms.map(room => room.roomAttendant.firstName))];
 
 const filteredAssignedRooms = assignedRooms.filter(
