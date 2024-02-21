@@ -39,19 +39,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers("/authenticate","/user","/leave/add","/chat**").permitAll()
                         .requestMatchers("/leaveForm/").hasRole(RoleConstants.MANAGER)
-                        .requestMatchers("/manager/**").hasRole(RoleConstants.MANAGER)
-                        .requestMatchers("/manager/create-room").hasRole(RoleConstants.MANAGER)
-                        .requestMatchers("/manager/assign-room").hasRole(RoleConstants.MANAGER)
-                        .requestMatchers("/manager/create-task").hasRole(RoleConstants.MANAGER)
-                        .requestMatchers("/manager/update-task").hasRole(RoleConstants.MANAGER)
-                        .requestMatchers("/manager/approve-leave").hasRole(RoleConstants.MANAGER)
-                        .requestMatchers("/manager/add-room").hasRole(RoleConstants.MANAGER)
-
-                                // Room Attendant Endpoints
-                           .requestMatchers("/room-attendant/**").hasRole(RoleConstants.ROOM_ATTENDANT)
-                           .requestMatchers("/room-attendant/view-task").hasRole(RoleConstants.ROOM_ATTENDANT)
-                           .requestMatchers("/room-attendant/update-task-status").hasRole(RoleConstants.ROOM_ATTENDANT)
-                           .requestMatchers("/room-attendant/apply-leave").hasRole(RoleConstants.ROOM_ATTENDANT)
+                        )
 
                                 // Common Endpoints
                                 .requestMatchers("/authenticate", "/USER").permitAll()
