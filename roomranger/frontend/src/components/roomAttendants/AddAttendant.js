@@ -56,6 +56,10 @@ export default function AddAttendant() {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+     if (attendant.password !== attendant.confirmPassword) {
+          alert("Password and confirm password do not match.");
+          return;
+        }
     try {
       await authAxios.post('/roomAttendant/add', attendant);
       navigate("/landing/attendants")
@@ -89,7 +93,7 @@ export default function AddAttendant() {
                 <input type="radio" id="they/them" name="pronoun" value="They/Them" onChange={handleChange} />They/Them
               </div>
               <div className="row">
-                <div className="col-md-6 mb-3">
+                <div className="col-md-6 mb-1">
                   <label htmlFor="Name" className="form-label">
                     {/* FIRST NAME */}
                   </label>
@@ -102,7 +106,7 @@ export default function AddAttendant() {
                     onChange={(e) => handleChange(e)}
                   ></input>
                 </div>
-                <div className="col-md-6 mb-3">
+                <div className="col-md-6 mb-1">
                   <label htmlFor="Name" className="form-label">
                     {/* LAST NAME */}
                   </label>
