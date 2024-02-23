@@ -13,10 +13,10 @@ public class User extends AbstractEntity {
     @Basic(optional = false)
     private String password;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @Basic(optional = false)
-
-    private String role;
+    private Role role;
 
     // Getters and setters...
 
@@ -36,16 +36,11 @@ public class User extends AbstractEntity {
         this.password = password;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
-        // Check if the role is valid before setting it
-        if (role.equals(RoleConstants.MANAGER) || role.equals(RoleConstants.ROOM_ATTENDANT)) {
-            this.role = role;
-        } else {
-            throw new IllegalArgumentException("Invalid role");
-        }
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

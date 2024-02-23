@@ -5,6 +5,7 @@ import org.launchcode.roomranger.data.ManagerRepository;
 import org.launchcode.roomranger.data.UserRepository;
 import org.launchcode.roomranger.models.Dto.ManagerDTO;
 import org.launchcode.roomranger.models.Manager;
+import org.launchcode.roomranger.models.Role;
 import org.launchcode.roomranger.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -54,11 +55,11 @@ public class RegistrationController {
         User newUser = new User();
         newUser.setUsername(managerDTO.getUsername());
         newUser.setPassword(encodedPassword); // Set the encoded password
-        newUser.setRole("manager"); // Set the role as a string
+        newUser.setRole(Role.MANAGER); ; // Set the role as a string
         userRepository.save(newUser);
 
         // Check if the user is a manager
-        if ("manager".equals(newUser.getRole())) {
+        if ("manager".equals(newUser.getRole().name())) {
             // Create and save the manager
             Manager newManager = new Manager(managerDTO.getFirstName(), managerDTO.getLastName(), managerDTO.getEmail(), newUser);
             managerRepository.save(newManager);

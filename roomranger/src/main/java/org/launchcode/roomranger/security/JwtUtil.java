@@ -30,6 +30,10 @@ public class JwtUtil {
     public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
+    public String extractRoles(String token) {
+        Claims claims = extractAllClaims(token);
+        return (String) claims.get("roles");
+    }
 
     private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);

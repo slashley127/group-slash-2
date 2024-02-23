@@ -3,24 +3,28 @@ package org.launchcode.roomranger.controllers;
 import jakarta.validation.Valid;
 import org.launchcode.roomranger.data.ManagerRepository;
 import org.launchcode.roomranger.data.RoomAttendantRepository;
+import org.launchcode.roomranger.data.UserRepository;
 import org.launchcode.roomranger.exception.UserNotFoundException;
-import org.launchcode.roomranger.models.*;
 import org.launchcode.roomranger.models.Dto.RoomAttendantDTO;
+import org.launchcode.roomranger.models.Role;
+import org.launchcode.roomranger.models.RoomAttendant;
+import org.launchcode.roomranger.models.User;
 import org.launchcode.roomranger.service.RoomService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.launchcode.roomranger.data.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
-import java.util.*;
-import java.util.stream.Collector;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @RestController
@@ -86,7 +90,7 @@ public class RoomAttendantController {
 
             RoomAttendant roomAttendantEntity = getRoomAttendantEntity(roomAttendantDTO);
             User userEntity = getUserEntity(roomAttendantDTO);
-            userEntity.setRole("roomAttendant");
+            userEntity.setRole(Role.MANAGER);
             userRepository.save(userEntity);
             roomAttendantEntity.setUser(userEntity);
             //TODO: Save Manager if needed
@@ -199,7 +203,7 @@ public class RoomAttendantController {
             roomAttendantDTO.setPassword(roomAttendantEntity.getUser().getPassword());
             roomAttendantDTO.setUsername(roomAttendantEntity.getUser().getUsername());
             roomAttendantDTO.setUserId(roomAttendantEntity.getUser().getId());
-            roomAttendantDTO.setRole(roomAttendantEntity.getUser().getRole());
+            roomAttendantDTO.setRole(roomAttendantEntity.getUser().getRole().name());
         }
         roomAttendantDTO.setPhoneNumber(roomAttendantEntity.getPhoneNumber());
         roomAttendantDTO.setPronoun(roomAttendantEntity.getPronoun());

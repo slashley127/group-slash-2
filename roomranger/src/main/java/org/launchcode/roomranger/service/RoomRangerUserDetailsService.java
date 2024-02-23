@@ -34,7 +34,7 @@ public class RoomRangerUserDetailsService implements UserDetailsService{
 
         // Convert the single role to a SimpleGrantedAuthority object
         System.out.println("User Role:"+user.getRole());
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().name());
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), Collections.singletonList(authority));
     }

@@ -102,7 +102,7 @@ export default function AddRoom() {
                             </select>
                         </div>
                         <div className='mb-3'>
-                            <label hemlFor='Available' >
+                            <label htmlFor='Available' >
                                 Is Available
                                 <input
                                     type="checkbox"

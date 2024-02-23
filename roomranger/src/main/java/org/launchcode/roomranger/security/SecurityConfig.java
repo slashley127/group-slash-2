@@ -1,6 +1,6 @@
 package org.launchcode.roomranger.security;
 
-import org.launchcode.roomranger.models.RoleConstants;
+import org.launchcode.roomranger.models.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,14 +37,12 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers("/authenticate", "/user", "/leave/add", "/chat**").permitAll()
-                        .requestMatchers("/rooms/room").hasRole(RoleConstants.MANAGER)
-                        .requestMatchers("/leave/add").hasRole(RoleConstants.ROOM_ATTENDANT)
-                        .requestMatchers("/leave/${id}/approve").hasRole(RoleConstants.MANAGER)
-                        .requestMatchers("/leave/${id}/reject").hasRole(RoleConstants.MANAGER)
-
-                        .requestMatchers("/authenticate", "/USER").permitAll()
+                        .requestMatchers("/rooms/room").hasRole(Role.MANAGER.name())
+                        .requestMatchers("/leave/add").hasRole(Role.ROOM_ATTENDANT.name())
+                        .requestMatchers("/leave/${id}/approve").hasRole(Role.MANAGER.name())
+                        .requestMatchers("/leave/${id}/reject").hasRole(Role.MANAGER.name())
                         .anyRequest().authenticated())
-                .sessionManagement((session) -> session
+                        .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);

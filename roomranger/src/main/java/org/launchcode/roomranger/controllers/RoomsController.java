@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -35,8 +34,7 @@ public class RoomsController {
     private RoomAttendantRepository roomAttendantRepository;
 
     @PostMapping("/room")
-    @PreAuthorize("hasRole('manager')")
-    public ResponseEntity<?> addRoom(@RequestBody @Valid Room newRoom){
+     public ResponseEntity<?> addRoom(@RequestBody @Valid Room newRoom){
         String roomNumber = newRoom.getRoomNumber();
         if (roomService.isRoomNumberExists(roomNumber)) {
             Map<String, String> errors = new HashMap<>();
@@ -77,8 +75,7 @@ public class RoomsController {
     }
 
     @PutMapping("/room/{id}")
-    @PreAuthorize("hasRole('MANAGER')")
-    public Room updateRoom(@RequestBody @Valid Room newRoom,@PathVariable int id){
+     public Room updateRoom(@RequestBody @Valid Room newRoom,@PathVariable int id){
          return roomRepository.findById(id)
                 .map(room -> {
                     room.setRoomNumber(newRoom.getRoomNumber());
@@ -88,8 +85,7 @@ public class RoomsController {
                 }).orElseThrow(()->new NotFoundException("room with id " + id));
     }
     @DeleteMapping("/room/{id}")
-    @PreAuthorize("hasRole('MANAGER')")
-    public String deleteRoom(@PathVariable int id){
+       public String deleteRoom(@PathVariable int id){
         if (!roomRepository.existsById(id)){
             throw new NotFoundException("room with id " + id);
         }
