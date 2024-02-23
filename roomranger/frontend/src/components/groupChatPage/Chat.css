@@ -1,0 +1,66 @@
+/* Container for the chat, centered horizontally using margin auto */
+.chat-container {
+    width: 50%; /* Adjust width as needed */
+    max-height: 80vh; /* Adjust max height as needed */
+    margin: 50px auto; /* 50px for top and bottom, auto for left and right */
+    padding: 20px; /* Padding inside the container */
+    background: #f7f7f7; /* Lighter background for the chat container */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    border-radius: 8px; /* Rounded corners */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Spacing between items */
+    overflow: hidden; /* Prevents children from overflowing */
+}
+
+/* Styles for the chat message area */
+.chat-messages {
+    overflow-y: auto; /* Enables scrolling for overflow content */
+    flex-grow: 1; /* Allows this area to grow and fill available space */
+    margin-bottom: 20px; /* Space below the messages before the input box */
+}
+
+/* ... Remainder of your styles for .message, .chat-input, .form-control, and buttons ... */
+
+@media (max-width: 768px) {
+    .chat-container {
+        width: 80%; /* A wider container on smaller screens */
+        margin: 20px auto; /* Less vertical space on smaller screens */
+    }
+}
+
+.message {
+    background: #333; /* Dark background for each message */
+    padding: 8px; /* Padding inside each message */
+    border-radius: 4px; /* Rounded corners for messages */
+    margin-bottom: 10px; /* Space between messages */
+}
+
+.chat-input {
+    display: flex;
+    padding: 10px;
+    background: #1a1a1a; /* Slightly lighter than the container for contrast */
+}
+
+.form-control {
+    flex-grow: 1; /* Input field occupies available horizontal space */
+    margin-right: 10px; /* Space between input field and button */
+    padding: 10px;
+    border: 1px solid #555; /* Slightly visible border for the input */
+    background: #222; /* Dark background for the input */
+    color: white; /* White text color for contrast */
+    border-radius: 4px;
+}
+
+.send-button {
+    padding: 10px 20px;
+    background-color: #007bff; /* Bootstrap primary color, adjust if needed */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.send-button:hover {
+    background-color: #0056b3; /* Darker shade for hover effect */
+}
