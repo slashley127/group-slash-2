@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
-export const ChatInput = ({ sendMessage }) => {
+ export const ChatInput = ({ sendMessage }) => {
     const [message, setMessage] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
         sendMessage({ content: message });
         setMessage('');
-    };
+        };
 
     return (
         <form onSubmit={handleSubmit}>
