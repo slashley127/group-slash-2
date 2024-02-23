@@ -2,6 +2,7 @@ package org.launchcode.roomranger.controllers;
 
 import jakarta.validation.Valid;
 import org.launchcode.roomranger.data.CommentRepository;
+import org.launchcode.roomranger.data.RoomAttendantRepository;
 import org.launchcode.roomranger.exception.NotFoundException;
 import org.launchcode.roomranger.data.RoomRepository;
 import org.launchcode.roomranger.models.*;
