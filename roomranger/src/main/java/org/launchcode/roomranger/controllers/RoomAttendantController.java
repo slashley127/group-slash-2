@@ -90,7 +90,7 @@ public class RoomAttendantController {
 
             RoomAttendant roomAttendantEntity = getRoomAttendantEntity(roomAttendantDTO);
             User userEntity = getUserEntity(roomAttendantDTO);
-            userEntity.setRole(Role.MANAGER);
+            userEntity.setRole(Role.ROOM_ATTENDANT);
             userRepository.save(userEntity);
             roomAttendantEntity.setUser(userEntity);
             //TODO: Save Manager if needed

@@ -1,6 +1,5 @@
 package org.launchcode.roomranger.security;
 
-import org.launchcode.roomranger.models.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,11 +35,8 @@ public class SecurityConfig {
                 // New way to disable CSRF while adopting the functional style
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers("/authenticate", "/user", "/leave/add", "/chat**").permitAll()
-                        .requestMatchers("/rooms/room").hasRole(Role.MANAGER.name())
-                        .requestMatchers("/leave/add").hasRole(Role.ROOM_ATTENDANT.name())
-                        .requestMatchers("/leave/${id}/approve").hasRole(Role.MANAGER.name())
-                        .requestMatchers("/leave/${id}/reject").hasRole(Role.MANAGER.name())
+                        .requestMatchers("/authenticate", "/user").permitAll()
+                        .requestMatchers("/rooms/room").hasRole("MANAGER")
                         .anyRequest().authenticated())
                         .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));

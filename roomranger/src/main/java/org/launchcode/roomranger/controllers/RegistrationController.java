@@ -59,7 +59,7 @@ public class RegistrationController {
         userRepository.save(newUser);
 
         // Check if the user is a manager
-        if ("manager".equals(newUser.getRole().name())) {
+        if (Role.MANAGER.equals(newUser.getRole())) {
             // Create and save the manager
             Manager newManager = new Manager(managerDTO.getFirstName(), managerDTO.getLastName(), managerDTO.getEmail(), newUser);
             managerRepository.save(newManager);
