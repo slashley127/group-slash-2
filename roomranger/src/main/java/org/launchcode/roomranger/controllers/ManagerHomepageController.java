@@ -2,7 +2,6 @@ package org.launchcode.roomranger.controllers;
 
 import jakarta.validation.Valid;
 import org.launchcode.roomranger.data.AssignedRoomRepository;
-import org.launchcode.roomranger.data.RoomAttendantRepository;
 import org.launchcode.roomranger.data.RoomRepository;
 import org.launchcode.roomranger.exception.NotFoundException;
 import org.launchcode.roomranger.models.*;
@@ -14,9 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
-    @RestController
+@RestController
     @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
     @RequestMapping("assignedrooms")
     public class ManagerHomepageController {

@@ -2,7 +2,6 @@ package org.launchcode.roomranger.controllers;
 
 import jakarta.validation.Valid;
 import org.launchcode.roomranger.data.ManagerRepository;
-import org.launchcode.roomranger.data.RoomAttendantRepository;
 import org.launchcode.roomranger.exception.UserNotFoundException;
 import org.launchcode.roomranger.models.*;
 import org.launchcode.roomranger.models.Dto.RoomAttendantDTO;
@@ -20,7 +19,6 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.*;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @RestController

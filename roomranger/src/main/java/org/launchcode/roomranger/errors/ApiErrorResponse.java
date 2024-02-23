@@ -1,21 +1,25 @@
-package org.launchcode.roomranger.data;
+package org.launchcode.roomranger.errors;
 
-import jakarta.validation.constraints.NotNull;
-import org.launchcode.roomranger.models.Manager;
-import org.launchcode.roomranger.models.RoomAttendant;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
-//import org.springframework.data.repository.PagingAndSortingRepository;
+public class ApiErrorResponse {
 
-import java.util.List;
-import java.util.Optional;
+    private  String errorCode;
 
-@Repository
-public interface RoomAttendantRepository extends CrudRepository<RoomAttendant, Integer> {
-    @NotNull
-    List<RoomAttendant> findAll();
-    List<RoomAttendant> findAllByManager(Manager manager);
-    RoomAttendant findById(int id);
+    public String getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    private  String message;
 
 }
