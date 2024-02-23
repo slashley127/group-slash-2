@@ -30,16 +30,17 @@
 }
 
 .message {
-    background: #333; /* Dark background for each message */
+    background: #cdc7c7; /* Dark background for each message */
     padding: 8px; /* Padding inside each message */
     border-radius: 4px; /* Rounded corners for messages */
     margin-bottom: 10px; /* Space between messages */
+
 }
 
 .chat-input {
     display: flex;
     padding: 10px;
-    background: #1a1a1a; /* Slightly lighter than the container for contrast */
+    background: #f3f0f0; /* Slightly lighter than the container for contrast */
 }
 
 .form-control {
