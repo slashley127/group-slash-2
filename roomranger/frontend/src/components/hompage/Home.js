@@ -32,15 +32,12 @@ const HomePage = () => {
               </Dropdown.Item>
             )}
             {(selectedRole === 'Manager') && (
-              <>
-                <Dropdown.Item>
-                  <Link to="/register" className="dropdown-link">Registration</Link>
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <Link to="/login" className="dropdown-link">Login</Link>
-                </Dropdown.Item>
-              </>
-            )}
+  <>
+    <Dropdown.Item href="/register" className="dropdown-link">Registration</Dropdown.Item>
+    <Dropdown.Item href="/login" className="dropdown-link">Login</Dropdown.Item>
+  </>
+)}
+
             {(selectedRole === 'RoomAttendant') && (
               <Dropdown.Item>
                 <Link to="/login" className="dropdown-link">Login</Link>
