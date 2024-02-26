@@ -36,8 +36,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers("/authenticate", "/user").permitAll()
-                        .requestMatchers("/admin_only/**").hasAuthority("ADMIN")
-                       .anyRequest().authenticated())
+                        .anyRequest().authenticated())
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -34,6 +35,7 @@ public class RoomsController {
     private RoomAttendantRepository roomAttendantRepository;
 
     @PostMapping("/room")
+    @PreAuthorize("hasRole('MANAGER')")
      public ResponseEntity<?> addRoom(@RequestBody @Valid Room newRoom){
         String roomNumber = newRoom.getRoomNumber();
         if (roomService.isRoomNumberExists(roomNumber)) {
@@ -56,7 +58,7 @@ public class RoomsController {
 //    }
 
     @GetMapping("/types")
-    public Map<String, String> getTypes() {
+        public Map<String, String> getTypes() {
         Map<String, String> types = new HashMap<>();
         for (Type type : Type.values()) {
             types.put(type.name(), type.getDisplayName());
@@ -64,18 +66,18 @@ public class RoomsController {
         return types;
     }
     @GetMapping("/type/{id}")
-    public String getType(@PathVariable int id) {
+       public String getType(@PathVariable int id) {
         return roomRepository.findById(id).get().getRoomType().getDisplayName();
     }
 
     @GetMapping("/room/{id}")
-    public Room getRoomById(@PathVariable int id){
+        public Room getRoomById(@PathVariable int id){
         return  roomRepository.findById(id)
                 .orElseThrow(()->new NotFoundException("room with id " + id));
     }
 
     @PutMapping("/room/{id}")
-     public Room updateRoom(@RequestBody @Valid Room newRoom,@PathVariable int id){
+         public Room updateRoom(@RequestBody @Valid Room newRoom,@PathVariable int id){
          return roomRepository.findById(id)
                 .map(room -> {
                     room.setRoomNumber(newRoom.getRoomNumber());
@@ -101,7 +103,7 @@ public class RoomsController {
 //    }
 
     @GetMapping("/status")
-    public Map<String, String> getStatus() {
+        public Map<String, String> getStatus() {
         Map<String, String> statusList = new HashMap<>();
         for (Status status : Status.values()) {
             statusList.put(status.name(), status.getDisplayName());
