@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import './Registration.css';
+import bcrypt from "bcryptjs";
 
 export default function Registration() {
   let navigate = useNavigate();
@@ -32,15 +33,6 @@ export default function Registration() {
     }
   };
   
-  const jwt = localStorage.getItem('jwt');
-
-  const authAxios = axios.create({
-        baseURL: "http://localhost:8080",
-        headers: {
-          Authorization: `Bearer ${jwt}`
-        }
-  });
-
   const onRegistrationSubmit = async (e) => {
     e.preventDefault();
 
@@ -51,7 +43,9 @@ export default function Registration() {
     }
 
     try {
-      const response = await authAxios.post("/user", user);
+    const hashedPassword = await bcrypt.hash(user.password, 10)
+    const encodedUser = { ...user, password: hashedPassword};
+      const response = await axios.post("http://localhost:8080/user", user);
       setSuccessMessage(response.data);
       navigate("/login");
     } catch (error) {

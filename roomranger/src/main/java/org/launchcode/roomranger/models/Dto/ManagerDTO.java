@@ -1,34 +1,18 @@
-package org.launchcode.roomranger.models;
+package org.launchcode.roomranger.models.Dto;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 
-@Entity
-public class Manager extends AbstractEntity {
-
-    @NotBlank(message = "First name is required")
-    @Column(length = 30)
+public class ManagerDTO {
+    private int id;
+    private int userId;
     private String firstName;
-
-    @NotBlank(message = "Last name is required")
     private String lastName;
-
+    private String email;
     private String username;
     private String password;
-    private String email;
+    private String role;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    public Manager(String firstName, String lastName,String email, User user) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.user = user;
-    }
-
-
+    // Getters and setters
+    // Omitted for brevity
 
     public String getFirstName() {
         return firstName;
@@ -54,14 +38,6 @@ public class Manager extends AbstractEntity {
         this.email = email;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -76,5 +52,28 @@ public class Manager extends AbstractEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setRole(String manager) {
+    }
+
+    public String getRole() {
+        return null;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

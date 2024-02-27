@@ -85,7 +85,7 @@ public class RoomAttendantController {
 
             RoomAttendant roomAttendantEntity = getRoomAttendantEntity(roomAttendantDTO);
             User userEntity = getUserEntity(roomAttendantDTO);
-            userEntity.setRole("roomattendant");
+            userEntity.setRole(Role.ROOM_ATTENDANT);
             userRepository.save(userEntity);
             roomAttendantEntity.setUser(userEntity);
             //TODO: Save Manager if needed
@@ -198,7 +198,7 @@ public class RoomAttendantController {
             roomAttendantDTO.setPassword(roomAttendantEntity.getUser().getPassword());
             roomAttendantDTO.setUsername(roomAttendantEntity.getUser().getUsername());
             roomAttendantDTO.setUserId(roomAttendantEntity.getUser().getId());
-            roomAttendantDTO.setRole(roomAttendantEntity.getUser().getRole());
+            roomAttendantDTO.setRole(roomAttendantEntity.getUser().getRole().name());
         }
         roomAttendantDTO.setPhoneNumber(roomAttendantEntity.getPhoneNumber());
         roomAttendantDTO.setPronoun(roomAttendantEntity.getPronoun());
