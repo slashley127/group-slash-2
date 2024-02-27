@@ -5,7 +5,6 @@ import org.launchcode.roomranger.data.LeaveRequestRepository;
 import org.launchcode.roomranger.data.RoomAttendantRepository;
 import org.launchcode.roomranger.exception.NotFoundException;
 import org.launchcode.roomranger.models.LeaveRequest;
-import org.launchcode.roomranger.models.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Locale;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)

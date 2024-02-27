@@ -31,9 +31,14 @@ export default function NavBar() {
                     <li className="nav-item">
                         <Link className="nav-link" aria-current="page" to="/landing/roomattendant">Home Attendant</Link>
                     </li>
-                    <li className='nav-item'>
-                        {isAuthenticated && <Link className='nav-link' to='/login' onClick={logout}><h5>Log Out</h5></Link>}
+                    <li className="nav-item">
+                    <Link className='nav-link fw-bold' aria-current="page" to="/landing/groupchat">Group Chat</Link>
                     </li>
+                    <ul className='navbar-nav'>
+                    <li className='nav-item'>
+                         <Link className='nav-link' to='/logout' onClick={logout}><h5>Log Out</h5></Link>
+                    </li>
+                    </ul>
                 </ul>
             </nav>
             <Outlet />

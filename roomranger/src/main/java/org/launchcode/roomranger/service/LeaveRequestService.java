@@ -2,12 +2,8 @@ package org.launchcode.roomranger.service;
 
 import org.launchcode.roomranger.data.LeaveRequestRepository;
 import org.launchcode.roomranger.data.RoomAttendantRepository;
-import org.launchcode.roomranger.models.LeaveRequest;
-import org.launchcode.roomranger.models.RoomAttendant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class LeaveRequestService {

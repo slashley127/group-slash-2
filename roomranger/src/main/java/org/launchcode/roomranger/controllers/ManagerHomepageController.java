@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
-    @RestController
+@RestController
     @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
     @RequestMapping("assignedrooms")
     public class ManagerHomepageController {
